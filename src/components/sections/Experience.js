@@ -4,9 +4,10 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 const Experience = () => {
   const experiencesData = [
     {
-      title: 'Swiver - Fron tend Developer',
+      jobTitle: 'Front end Developer',
+      companyName: 'Swiver',
       date: 'Jun 2022 - Apr 2023',
-      description: `As a React JS Developer, I gained hands-on experience in building web applications using React JS.
+      description: `I gained hands-on experience in building web applications using React JS.
       I worked with a team of engineers on the Swiver project, a business management software that helps enterprises with invoicing and stock management.`,
       contributions: [
         'Contributed to various aspects of the application, including implementing responsive components for swiver.io.',
@@ -14,11 +15,6 @@ const Experience = () => {
         'Implemented logic using React JS and TypeScript, enhancing overall functionality and user experience.',
       ],
       skills: ['Bootstrap', 'Git', 'TypeScript', 'React.js', 'Node.js', 'English-Arabic Translation'],
-    },
-    {
-      title: 'Inceptum - Software Developer',
-      date: 'Apr 2023 - Present',
-      skills: ['Angular', 'MongoDB'],
     },
     // Add more experiences as needed
   ];
@@ -32,8 +28,9 @@ const Experience = () => {
             <Col md={6} key={index} className="mb-4">
               <Card>
                 <Card.Body>
-                  <Card.Title>{experience.title}</Card.Title>
+                    <Card.Title>{experience.jobTitle}</Card.Title>
                   <Card.Subtitle className="mb-2 text-muted">{experience.date}</Card.Subtitle>
+                    <Card.Subtitle className="mt-2">{experience.companyName}</Card.Subtitle>
                   <Card.Text>{experience.description}</Card.Text>
                   {experience.contributions && (
                     <>

@@ -25,7 +25,7 @@ const NavigationBar = () => {
 
   return (
     <Navbar bg="dark" variant="dark" expand="md" fixed="top" className="justify-content-between">
-      <Navbar.Brand className="ms-3" href="#about">Mohamed Aziz Ouertatani</Navbar.Brand>
+      <Navbar.Brand className="ms-3 d-sm-none d-md-block d-none d-sm-block" href="#about">Mohamed Aziz Ouertatani</Navbar.Brand>
       <Navbar.Toggle aria-controls="navbar-nav" />
       <Navbar.Collapse id="navbar-nav">
         <Nav className="mr-auto">
@@ -50,7 +50,7 @@ const NavigationBar = () => {
         </Nav>
       </Navbar.Collapse>
       <Nav>
-        <Button variant="outline-light" className="me-3" onClick={handleDownloadResume}>
+        <Button variant="outline-light" className="btn me-3 btn-sm" onClick={handleDownloadResume}>
           My Resume
         </Button>
       </Nav>
