@@ -4,12 +4,31 @@ import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 const Projects = () => {
   const projectsData = [
     {
+      title: 'Portfolio',
+      description: 'A personal portfolio static website to showcase my skills, experiences, and projects.',
+      technologies: ['ReactJS', 'JavaScript', 'Bootstrap'],
+      githubLink: 'https://github.com/mohamedaziz-ouertatani/portfolio',
+      liveDemoLink: 'https://mohamedaziz-ouertatani.github.io/portfolio/',
+    },
+    {
       title: 'EXPRIT Student Portal',
-      description: 'A React app for easy access to academic info. Features include absences, credits, marks, internships, results, and timetable.',
+      description: 'A React app for easy access to academic info. Features include absences, credits, marks, internships, results, and schedules.',
       technologies: ['ReactJS', 'TypeScript', 'Bootstrap'],
       githubLink: 'https://github.com/mohamedaziz-ouertatani/exprit-student-portal',
-      liveDemoLink: 'https://yourusername.github.io/exprit-student-portal',
     },
+    {
+      title: 'The Motherland Game',
+      description: 'A collaborative 1st-year project. Contributed to code in C alongside SDL library. Used GitHub for version control. Designed using Adobe software. Integrated Joystick components with Arduino hardware and software.',
+      technologies: ['C', 'SDL', 'Adobe', 'Arduino'],
+      githubLink: 'https://github.com/mohamedaziz-ouertatani/1A1-Achilles',
+    },
+    {
+      title: 'WASHA Website',
+      description: 'Collaborative 2nd-year project. Contributed to code for creating different UIs using HTML+Bootstrap. Implemented CRUDs for entities using PHP. Created and managed the database using Oracle. Used GitHub and Git for version control.',
+      technologies: ['HTML', 'Bootstrap', 'PHP', 'Oracle'],
+      githubLink: 'https://github.com/2A-22-23/project2223_2a1-2a1_mind-benders',
+    },
+    
   ];
 
   return (
