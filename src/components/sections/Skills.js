@@ -23,6 +23,7 @@ const Skills = () => {
     tools: [
       { name: 'Git & Github', level: 80 },
       { name: 'VS Code', level: 80 },
+      { name: 'Oracle', level: 80 },
       { name: 'Adobe Photoshop', level: 60 },
       { name: 'Adobe Illustrator', level: 60 },
     ],
