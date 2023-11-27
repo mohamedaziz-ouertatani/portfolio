@@ -1,17 +1,18 @@
-import React from 'react';
-import { Navbar, Nav, Button } from 'react-bootstrap';
-import { Link } from 'react-scroll'; // Add this import statement
+import React from "react";
+import { Navbar, Nav, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const NavigationBar = () => {
   const handleDownloadResume = () => {
     // Use a relative path to the PDF file
-    const resumeFilePath = process.env.PUBLIC_URL + '/files/Mohamed_Aziz_Ouertatani_Resume.pdf';
+    const resumeFilePath =
+      process.env.PUBLIC_URL + "/files/Mohamed_Aziz_Ouertatani_Resume.pdf";
 
     // Create a link element
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = resumeFilePath;
-    link.target = '_blank'; // Open in a new tab
-    link.download = 'Mohamed_Aziz_Ouertatani_Resume.pdf'; // Specify the file name
+    link.target = "_blank"; // Open in a new tab
+    link.download = "Mohamed_Aziz_Ouertatani_Resume.pdf"; // Specify the file name
 
     // Append the link to the body
     document.body.appendChild(link);
@@ -24,33 +25,48 @@ const NavigationBar = () => {
   };
 
   return (
-    <Navbar bg="dark" variant="dark" expand="md" fixed="top" className="justify-content-between">
-      <Navbar.Brand className="ms-3 d-sm-none d-md-block d-none d-sm-block" href="#about">Mohamed Aziz Ouertatani</Navbar.Brand>
+    <Navbar
+      bg="dark"
+      variant="dark"
+      expand="md"
+      className="justify-content-between"
+    >
+      <Navbar.Brand
+        as={Link} // Use Link from react-router-dom
+        to="/about"
+        className="ms-3 d-sm-none d-md-block d-none d-sm-block"
+      >
+        Mohamed Aziz Ouertatani
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="navbar-nav" />
       <Navbar.Collapse id="navbar-nav">
         <Nav className="mr-auto">
-          <Link to="about" smooth={true} duration={500} className="nav-link" offset={-70}>
+          <Nav.Link as={Link} to="/about">
             About
-          </Link>
-          <Link to="experience" smooth={true} duration={500} className="nav-link" offset={-70}>
+          </Nav.Link>
+          <Nav.Link as={Link} to="/experience">
             Experience
-          </Link>
-          <Link to="education" smooth={true} duration={500} className="nav-link" offset={-70}>
+          </Nav.Link>
+          <Nav.Link as={Link} to="/education">
             Education
-          </Link>
-          <Link to="skills" smooth={true} duration={500} className="nav-link" offset={-70}>
+          </Nav.Link>
+          <Nav.Link as={Link} to="/skills">
             Skills
-          </Link>
-          <Link to="projects" smooth={true} duration={500} className="nav-link" offset={-70}>
+          </Nav.Link>
+          <Nav.Link as={Link} to="/projects">
             Portfolio
-          </Link>
-          <Link to="contact" smooth={true} duration={500} className="nav-link" offset={-70}>
+          </Nav.Link>
+          <Nav.Link as={Link} to="/contact">
             Contact
-          </Link>
+          </Nav.Link>
         </Nav>
       </Navbar.Collapse>
       <Nav>
-        <Button variant="outline-light" className="btn me-3 btn-sm" onClick={handleDownloadResume}>
+        <Button
+          variant="outline-light"
+          className="btn me-3 btn-sm"
+          onClick={handleDownloadResume}
+        >
           My Resume
         </Button>
       </Nav>
