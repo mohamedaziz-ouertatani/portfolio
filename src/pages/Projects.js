@@ -11,22 +11,28 @@ const Projects = () => {
       <Row>
         {projectsData.map((project, index) => (
           <Col md={6} key={index} className="mb-4">
-            <Link
-              to={`/projects/${project.id}`}
-              key={project.id}
-              className="link-offset-2 link-underline link-underline-opacity-0"
-            >
-              <Card>
-                <Card.Body>
-                  <Card.Title>{project.title}</Card.Title>
-                  <Card.Text>{project.description}</Card.Text>
-                  <Card.Text>
-                    <strong>Technologies:</strong>{" "}
-                    {project.technologies.join(", ")}
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            </Link>
+            <Card>
+              <Card.Body>
+                <Card.Title>{project.title}</Card.Title>
+                <Card.Text>{project.description}</Card.Text>
+                <Card.Text>
+                  <strong>Technologies:</strong>{" "}
+                  {project.technologies.join(", ")}
+                </Card.Text>
+                <Link
+                  to={`/projects/${project.id}`}
+                  key={project.id}
+                  className=""
+                >
+                  <Button variant="outline-primary btn btn-sm">
+                    View Project
+                  </Button>
+                </Link>
+              </Card.Body>
+              {/* <Card.Footer className=""> */}
+
+              {/* </Card.Footer> */}
+            </Card>
           </Col>
         ))}
       </Row>

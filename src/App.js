@@ -33,6 +33,7 @@ function App() {
           toggleDarkMode={toggleDarkMode}
         />
         <Routes>
+          <Route path="/" element={<About />} />
           <Route path="/portfolio" element={<About />} />
           <Route path="/about" element={<About />} />
           <Route path="/experience" element={<Experience />} />
