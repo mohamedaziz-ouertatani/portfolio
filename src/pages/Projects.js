@@ -22,16 +22,13 @@ const Projects = () => {
                 <Link
                   to={`/projects/${project.id}`}
                   key={project.id}
-                  className=""
+                  className="link-offset-2 link-underline link-underline-opacity-0"
                 >
                   <Button variant="outline-primary btn btn-sm">
                     View Project
                   </Button>
                 </Link>
               </Card.Body>
-              {/* <Card.Footer className=""> */}
-
-              {/* </Card.Footer> */}
             </Card>
           </Col>
         ))}

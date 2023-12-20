@@ -12,6 +12,8 @@ const educationData = [
       "IP Essentials",
       "Administration and Security Systems for Unix",
       "Photoshop and Video Editing",
+      "Algorithms and Data Structures",
+      "Programming",
     ],
   },
   // Add more educational experiences as needed

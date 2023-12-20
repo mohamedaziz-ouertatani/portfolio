@@ -1,8 +1,5 @@
 // ProjectData.js
 
-const portfolioImage1 =
-  process.env.PUBLIC_URL + "/assets/images/Portfolio/portfolio.png";
-
 const flockOffImage1 =
   process.env.PUBLIC_URL + "/assets/images/FLOCKOFF/flockoff1.png";
 
@@ -33,32 +30,39 @@ const flockOffImage9 =
 const flockOffImage10 =
   process.env.PUBLIC_URL + "/assets/images/FLOCKOFF/flockoff10.png";
 
-const flockOffImage11 =
-  process.env.PUBLIC_URL + "/assets/images/FLOCKOFF/flockoff11.png";
+const washaImage1 = process.env.PUBLIC_URL + "/assets/images/WASHA/washa1.png";
+const washaImage2 = process.env.PUBLIC_URL + "/assets/images/WASHA/washa2.png";
+const washaImage3 = process.env.PUBLIC_URL + "/assets/images/WASHA/washa3.png";
+const washaImage4 = process.env.PUBLIC_URL + "/assets/images/WASHA/washa4.png";
+const washaImage5 = process.env.PUBLIC_URL + "/assets/images/WASHA/washa5.png";
+const washaImage6 = process.env.PUBLIC_URL + "/assets/images/WASHA/washa6.png";
 
-const flockOffImage12 =
-  process.env.PUBLIC_URL + "/assets/images/FLOCKOFF/flockoff12.png";
+const theMotherlandImage1 =
+  process.env.PUBLIC_URL + "/assets/images/TheMotherLand/motherland1.jpeg";
+const theMotherlandImage2 =
+  process.env.PUBLIC_URL + "/assets/images/TheMotherLand/motherland2.jpg";
+const theMotherlandImage3 =
+  process.env.PUBLIC_URL + "/assets/images/TheMotherLand/motherland3.jpg";
+const theMotherlandImage4 =
+  process.env.PUBLIC_URL + "/assets/images/TheMotherLand/motherland4.jpeg";
 
-const flockOffImage13 =
-  process.env.PUBLIC_URL + "/assets/images/FLOCKOFF/flockoff13.png";
+const shareAndCareImage1 =
+  process.env.PUBLIC_URL + "/assets/images/ShareAndCare/shareandcare1.jpg";
+const shareAndCareImage2 =
+  process.env.PUBLIC_URL + "/assets/images/ShareAndCare/shareandcare2.jpg";
+const shareAndCareImage3 =
+  process.env.PUBLIC_URL + "/assets/images/ShareAndCare/shareandcare3.jpg";
+const shareAndCareImage4 =
+  process.env.PUBLIC_URL + "/assets/images/ShareAndCare/shareandcare4.jpg";
+const shareAndCareImage5 =
+  process.env.PUBLIC_URL + "/assets/images/ShareAndCare/shareandcare5.jpeg";
 
-const flockOffImage14 =
-  process.env.PUBLIC_URL + "/assets/images/FLOCKOFF/flockoff14.png";
-
-const flockOffImage15 =
-  process.env.PUBLIC_URL + "/assets/images/FLOCKOFF/flockoff15.png";
-
-const flockOffImage16 =
-  process.env.PUBLIC_URL + "/assets/images/FLOCKOFF/flockoff16.png";
-
-const flockOffImage17 =
-  process.env.PUBLIC_URL + "/assets/images/FLOCKOFF/flockoff17.png";
 const projectsData = [
   {
     id: "1",
     title: "FLOCK OFF E-Commerce Platform",
     description:
-      "A full-stack e-commerce platform for FLOCK OFF brand, allowing users to browse featured products and add them to a shopping cart. The platform includes backend services for product management, user management, and order processing.",
+      "Developed a MERN-stack e-commerce platform. Users can browse, purchase, and manage products in their shopping cart. Implemented backend services for product and user management, as well as order processing. Admin side features include efficient stock and order management with a user-friendly dashboard.",
     technologies: ["ReactJS", "Node.js", "Express", "MongoDB", "Bootstrap"],
     githubLink: "https://github.com/mohamedaziz-ouertatani/flock-off-ecommerce",
     liveDemoLink: "",
@@ -73,56 +77,77 @@ const projectsData = [
       flockOffImage8,
       flockOffImage9,
       flockOffImage10,
-      flockOffImage11,
-      flockOffImage12,
-      flockOffImage13,
-      flockOffImage14,
-      flockOffImage15,
-      flockOffImage16,
-      flockOffImage17,
     ],
   },
   {
     id: "2",
-    title: "Portfolio",
-    description:
-      "A personal portfolio static website to showcase my skills, experiences, and projects.",
-    technologies: ["ReactJS", "JavaScript", "Bootstrap"],
-    githubLink: "https://github.com/mohamedaziz-ouertatani/portfolio",
-    liveDemoLink: "https://mohamedaziz-ouertatani.github.io/portfolio/",
-    images: [portfolioImage1],
-  },
-  {
-    id: "3",
-    title: "EXPRIT Student Portal",
-    description:
-      "A React app for easy access to academic info. Features include absences, credits, marks, internships, results, and schedules.",
-    technologies: ["ReactJS", "TypeScript", "Bootstrap"],
-    githubLink:
-      "https://github.com/mohamedaziz-ouertatani/exprit-student-portal",
-    liveDemoLink: "",
-    images: [],
-  },
-  {
-    id: "4",
     title: "WASHA Website",
     description:
-      "Collaborative 2nd-year project. Contributed to code for creating different UIs using HTML+Bootstrap. Implemented CRUDs for entities using PHP. Created and managed the database using Oracle. Used GitHub and Git for version control.",
+      "Collaborative website project developed during the 2nd year of my engineering program. My contributions included writing code for various UIs using HTML and Bootstrap. I implemented CRUD operations for entities using PHP and managed the database using Oracle. Version control was handled through GitHub and Git.",
     technologies: ["HTML", "Bootstrap", "PHP", "Oracle"],
     githubLink: "https://github.com/2A-22-23/project2223_2a1-2a1_mind-benders",
     liveDemoLink: "",
-    images: [],
+    images: [
+      washaImage1,
+      washaImage2,
+      washaImage3,
+      washaImage4,
+      washaImage5,
+      washaImage6,
+    ],
   },
   {
-    id: "5",
-    title: "The Motherland Game",
+    id: "3",
+    title: "The Motherland",
     description:
-      "A collaborative 1st-year project. Contributed to code in C alongside SDL library. Used GitHub for version control. Designed using Adobe software. Integrated Joystick components with Arduino hardware and software.",
+      "Collaborative 2D game project during the 1st year. My contributions included writing code in C language alongside with the SDL library for game development. Used GitHub for version control. Designed game elements using Adobe softwares. Integrated Joystick components using Arduino hardware and software.Collaborative 2D game project during the 1st year. My contributions included writing code in C language alongside with the SDL library for game development. Used GitHub for version control. Designed game elements using Adobe softwares. Integrated Joystick components using Arduino hardware and software.",
     technologies: ["C", "SDL", "Adobe", "Arduino"],
     githubLink: "https://github.com/mohamedaziz-ouertatani/1A1-Achilles",
     liveDemoLink: "",
-    images: [],
+    images: [
+      theMotherlandImage1,
+      theMotherlandImage2,
+      theMotherlandImage3,
+      theMotherlandImage4,
+    ],
   },
+  {
+    id: "4",
+    title: "Share and Care",
+    description:
+      "A collaborative academic project in my 2nd-year using Qt and C++. Developed a charity management desktop application, Share and Care. Implemented features like PDF generation, QR encoding and decoding, and statistical analysis tools to enhance the application's functionality.",
+    technologies: ["C++", "Qt", "Arduino"],
+    githubLink: "https://github.com/Projet-CPP/2a1_smart_share_and_care_center",
+    liveDemoLink: "",
+    images: [
+      shareAndCareImage1,
+      shareAndCareImage2,
+      shareAndCareImage3,
+      shareAndCareImage4,
+      shareAndCareImage5,
+    ],
+  },
+  // {
+  //   id: "",
+  //   title: "EXPRIT Student Portal",
+  //   description:
+  //     "A React app for easy access to academic info. Features include absences, credits, marks, internships, results, and schedules.",
+  //   technologies: ["ReactJS", "TypeScript", "Bootstrap"],
+  //   githubLink:
+  //     "https://github.com/mohamedaziz-ouertatani/exprit-student-portal",
+  //   liveDemoLink: "",
+  //   images: [],
+  // },
+  // {
+  //   id: "",
+  //   title: "Portfolio",
+  //   description:
+  //     "A personal portfolio static website to showcase my skills, experiences, and projects.",
+  //   technologies: ["ReactJS", "JavaScript", "Bootstrap"],
+  //   githubLink: "https://github.com/mohamedaziz-ouertatani/portfolio",
+  //   liveDemoLink: "https://mohamedaziz-ouertatani.github.io/portfolio/",
+  //   images: [portfolioImage1],
+  // },
 ];
 
 export { projectsData };
