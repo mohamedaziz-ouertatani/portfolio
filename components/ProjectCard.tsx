@@ -8,7 +8,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <div className="group rounded-lg border border-gray-200 bg-white transition-shadow hover:shadow-xl dark:border-gray-800 dark:bg-gray-900">
+    <div className="group flex h-full flex-col rounded-lg border border-gray-200 bg-white transition-shadow hover:shadow-xl dark:border-gray-800 dark:bg-gray-900">
       {project.images && project.images.length > 0 && (
         <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
           <Image
@@ -20,18 +20,56 @@ export function ProjectCard({ project }: ProjectCardProps) {
           />
         </div>
       )}
-      <div className="p-6">
+      <div className="flex flex-1 flex-col p-6">
         <h3 className="mb-2 text-2xl font-semibold text-gray-900 dark:text-white">
           {project.title}
         </h3>
         {project.role && (
-          <p className="mb-2 text-sm text-primary-600 dark:text-primary-400">
+          <p className="mb-3 text-sm font-medium text-primary-600 dark:text-primary-400">
             {project.role}
           </p>
         )}
-        <p className="mb-4 line-clamp-3 text-gray-700 dark:text-gray-300">
-          {project.description}
-        </p>
+
+        {/* Case Study Structure */}
+        {project.problem && (
+          <div className="mb-3">
+            <h4 className="mb-1 text-sm font-semibold text-gray-900 dark:text-white">
+              Problem
+            </h4>
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              {project.problem}
+            </p>
+          </div>
+        )}
+
+        {project.approach && (
+          <div className="mb-3">
+            <h4 className="mb-1 text-sm font-semibold text-gray-900 dark:text-white">
+              Approach
+            </h4>
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              {project.approach}
+            </p>
+          </div>
+        )}
+
+        {project.result && (
+          <div className="mb-4">
+            <h4 className="mb-1 text-sm font-semibold text-gray-900 dark:text-white">
+              Result
+            </h4>
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              {project.result}
+            </p>
+          </div>
+        )}
+
+        {/* Fallback to description if case study fields are not present */}
+        {!project.problem && !project.approach && !project.result && (
+          <p className="mb-4 text-gray-700 dark:text-gray-300">
+            {project.description}
+          </p>
+        )}
 
         {/* Technologies */}
         <div className="mb-4 flex flex-wrap gap-2">
@@ -46,7 +84,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         {/* Links */}
-        <div className="flex flex-wrap gap-3">
+        <div className="mt-auto flex flex-wrap gap-3">
           {project.githubLink && (
             <a
               href={project.githubLink}
