@@ -6,7 +6,7 @@ import skillsData from '@/lib/skills';
 export const metadata: Metadata = {
   title: 'About - Mohamed Aziz Ouertatani',
   description:
-    'Learn more about Mohamed Aziz Ouertatani - Full Stack Developer, Engineering Student at ESPRIT, and professional Muay Thai fighter.',
+    'Portfolio of Mohamed Aziz Ouertatani — Computer Science Engineering Student specializing in Data Science and Full Stack Development.',
   alternates: {
     canonical: 'https://mohamedaziz-ouertatani.github.io/about',
   },
@@ -20,17 +20,12 @@ export default function About() {
         <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
           <div>
             <h1 className="mb-6 text-4xl font-bold text-gray-900 dark:text-white">
-              A Little About Me
+              About Me
             </h1>
             <div className="space-y-4 text-gray-700 dark:text-gray-300">
               <p>
-                Hello! 👋 I&apos;m Aziz, a passionate web developer. Over the
-                past few years, I&apos;ve been immersed in the world of
-                software development, gaining hands-on experience and honing my
-                skills in creating dynamic and responsive web applications.
-              </p>
-              <p>
-                I&apos;m currently a third year student at{' '}
+                I’m Mohamed Aziz Ouertatani, a Computer Science Engineering
+                student at{' '}
                 <a
                   href="https://esprit.tn/"
                   target="_blank"
@@ -39,22 +34,21 @@ export default function About() {
                 >
                   ESPRIT
                 </a>{' '}
-                pursuing my Bachelor of Engineering in Computer Science
-                specialized in Data Science. I delve into the depths of data
-                science, exploring the intricacies of algorithms and data
-                structures. My passion for technology extends beyond the
-                academic realm. I&apos;m also a professional Muay Thai fighter,
-                bringing discipline and determination into everything I do.
+                specializing in Data Science.
               </p>
               <p>
-                As I look to the future, my goal is to transition from working
-                on projects to making my own projects. I&apos;m driven by the
-                desire to make a meaningful impact in the tech world and create
-                solutions that resonate with users.
+                With hands-on experience in full-stack development and
+                data-driven projects, I focus on building scalable applications
+                and applying machine learning to solve real-world problems.
               </p>
-              <p className="pt-4">
-                When I&apos;m not on the computer, I enjoy going to gym,
-                motorcycling, and gaming 🥊🏍️🎮
+              <p>
+                My goal is to transition from academic projects to impactful
+                professional solutions, combining technical expertise with
+                creativity.
+              </p>
+              <p>
+                Outside of tech, I enjoy Muay Thai, fitness, motorcycling, and
+                gaming — disciplines that fuel my resilience and focus.
               </p>
             </div>
           </div>
@@ -76,15 +70,15 @@ export default function About() {
       {/* Experience Section */}
       <section className="mb-16">
         <h2 className="mb-8 text-3xl font-bold text-gray-900 dark:text-white">
-          Experience
+          Professional Experience
         </h2>
         <div className="space-y-8">
           {experiencesData.map((experience, index) => (
-            <div
+            <article
               key={index}
-              className="rounded-lg border border-gray-200 p-6 dark:border-gray-800"
+              className="rounded-lg border border-gray-200 p-6 shadow-sm dark:border-gray-800"
             >
-              <div className="mb-4">
+              <header className="mb-4">
                 <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
                   {experience.jobTitle}
                 </h3>
@@ -94,36 +88,26 @@ export default function About() {
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   {experience.date}
                 </p>
-              </div>
+              </header>
               <p className="mb-4 text-gray-700 dark:text-gray-300">
                 {experience.description}
               </p>
-              <div className="mb-4">
-                <h4 className="mb-2 font-semibold text-gray-900 dark:text-white">
-                  Key Contributions:
-                </h4>
-                <ul className="list-inside list-disc space-y-1 text-gray-700 dark:text-gray-300">
-                  {experience.contributions.map((contribution, idx) => (
-                    <li key={idx}>{contribution}</li>
-                  ))}
-                </ul>
+              <ul className="list-inside list-disc space-y-1 text-gray-700 dark:text-gray-300">
+                {experience.contributions.map((contribution, idx) => (
+                  <li key={idx}>{contribution}</li>
+                ))}
+              </ul>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {experience.skills.map((skill, idx) => (
+                  <span
+                    key={idx}
+                    className="rounded-full bg-primary-100 px-3 py-1 text-sm text-primary-700 dark:bg-primary-900/20 dark:text-primary-300"
+                  >
+                    {skill}
+                  </span>
+                ))}
               </div>
-              <div>
-                <h4 className="mb-2 font-semibold text-gray-900 dark:text-white">
-                  Skills:
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {experience.skills.map((skill, idx) => (
-                    <span
-                      key={idx}
-                      className="rounded-full bg-primary-100 px-3 py-1 text-sm text-primary-700 dark:bg-primary-900/20 dark:text-primary-300"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
+            </article>
           ))}
         </div>
       </section>
@@ -138,24 +122,14 @@ export default function About() {
             <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
               Languages
             </h3>
-            <div className="space-y-3">
+            <div className="flex flex-wrap gap-2">
               {skillsData.languages.map((skill, idx) => (
-                <div key={idx}>
-                  <div className="mb-1 flex justify-between text-sm">
-                    <span className="text-gray-700 dark:text-gray-300">
-                      {skill.name}
-                    </span>
-                    <span className="text-gray-600 dark:text-gray-400">
-                      {skill.level}%
-                    </span>
-                  </div>
-                  <div className="h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700">
-                    <div
-                      className="h-2 rounded-full bg-primary-600"
-                      style={{ width: `${skill.level}%` }}
-                    />
-                  </div>
-                </div>
+                <span
+                  key={idx}
+                  className="rounded bg-gray-200 px-3 py-1 text-sm dark:bg-gray-700 dark:text-white"
+                >
+                  {skill.name}
+                </span>
               ))}
             </div>
           </div>
@@ -164,24 +138,14 @@ export default function About() {
             <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
               Frameworks & Libraries
             </h3>
-            <div className="space-y-3">
+            <div className="flex flex-wrap gap-2">
               {skillsData.librariesFrameworks.map((skill, idx) => (
-                <div key={idx}>
-                  <div className="mb-1 flex justify-between text-sm">
-                    <span className="text-gray-700 dark:text-gray-300">
-                      {skill.name}
-                    </span>
-                    <span className="text-gray-600 dark:text-gray-400">
-                      {skill.level}%
-                    </span>
-                  </div>
-                  <div className="h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700">
-                    <div
-                      className="h-2 rounded-full bg-primary-600"
-                      style={{ width: `${skill.level}%` }}
-                    />
-                  </div>
-                </div>
+                <span
+                  key={idx}
+                  className="rounded bg-gray-200 px-3 py-1 text-sm dark:bg-gray-700 dark:text-white"
+                >
+                  {skill.name}
+                </span>
               ))}
             </div>
           </div>
@@ -190,24 +154,14 @@ export default function About() {
             <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
               Tools
             </h3>
-            <div className="space-y-3">
+            <div className="flex flex-wrap gap-2">
               {skillsData.tools.map((skill, idx) => (
-                <div key={idx}>
-                  <div className="mb-1 flex justify-between text-sm">
-                    <span className="text-gray-700 dark:text-gray-300">
-                      {skill.name}
-                    </span>
-                    <span className="text-gray-600 dark:text-gray-400">
-                      {skill.level}%
-                    </span>
-                  </div>
-                  <div className="h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700">
-                    <div
-                      className="h-2 rounded-full bg-primary-600"
-                      style={{ width: `${skill.level}%` }}
-                    />
-                  </div>
-                </div>
+                <span
+                  key={idx}
+                  className="rounded bg-gray-200 px-3 py-1 text-sm dark:bg-gray-700 dark:text-white"
+                >
+                  {skill.name}
+                </span>
               ))}
             </div>
           </div>
