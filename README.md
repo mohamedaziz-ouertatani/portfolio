@@ -1,70 +1,175 @@
-# Getting Started with Create React App
+# Mohamed Aziz Ouertatani - Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, performant portfolio built with Next.js 14 (App Router), TypeScript, and Tailwind CSS.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- **Next.js 14 App Router** - Modern React framework with server components
+- **TypeScript** - Type-safe code for better developer experience
+- **Tailwind CSS** - Utility-first CSS framework for rapid UI development
+- **Dark Mode** - Theme toggle with localStorage persistence using next-themes
+- **SEO Optimized** - Meta tags, Open Graph, Twitter Cards, JSON-LD structured data
+- **Accessible** - WCAG compliant with semantic HTML, ARIA labels, and keyboard navigation
+- **Performance** - Image optimization, font loading, and minimal client-side JavaScript
+- **Project Filtering** - Multi-select technology filter for projects
+- **Contact Form** - Client-side validation with serverless API route
+- **Responsive** - Mobile-first design that works on all devices
 
-### `npm start`
+## 📋 Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Node.js 18+ and npm
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Getting Started
 
-### `npm test`
+### Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm install
+```
 
-### `npm run build`
+### Development
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Run the development server:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm run dev
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### `npm run eject`
+### Build
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Build for production:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm run build
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Start Production Server
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+npm start
+```
 
-## Learn More
+### Linting
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm run lint
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Format Code
 
-### Code Splitting
+```bash
+npm run format
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 📁 Project Structure
 
-### Analyzing the Bundle Size
+```
+├── app/                      # Next.js App Router pages
+│   ├── about/               # About page
+│   ├── api/                 # API routes
+│   │   └── contact/         # Contact form handler
+│   ├── contact/             # Contact page
+│   ├── projects/            # Projects page
+│   ├── globals.css          # Global styles
+│   ├── layout.tsx           # Root layout
+│   └── page.tsx             # Home page
+├── components/              # React components
+│   ├── DarkModeToggle.tsx
+│   ├── FilterBar.tsx
+│   ├── Footer.tsx
+│   ├── Header.tsx
+│   ├── ProjectCard.tsx
+│   └── ThemeProvider.tsx
+├── lib/                     # Data and utilities
+│   ├── experiences.ts
+│   ├── projects.ts
+│   └── skills.ts
+├── public/                  # Static assets
+│   ├── cv.pdf
+│   ├── images/
+│   ├── robots.txt
+│   └── sitemap.xml
+└── Configuration files
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🎨 Customization
 
-### Making a Progressive Web App
+### Update Personal Information
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. **Projects**: Edit `lib/projects.ts`
+2. **Experience**: Edit `lib/experiences.ts`
+3. **Skills**: Edit `lib/skills.ts`
+4. **Images**: Add images to `public/images/`
+5. **CV**: Replace `public/cv.pdf` with your resume
 
-### Advanced Configuration
+### Metadata & SEO
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Update metadata in:
+- `app/layout.tsx` - Global metadata
+- Individual page files - Page-specific metadata
 
-### Deployment
+### Styling
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Tailwind configuration: `tailwind.config.ts`
+- Global styles: `app/globals.css`
 
-### `npm run build` fails to minify
+### Analytics
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+To enable Plausible Analytics:
+
+1. Set environment variable:
+```bash
+NEXT_PUBLIC_PLAUSIBLE_DOMAIN=yourdomain.com
+```
+
+2. The script is already integrated in `app/layout.tsx`
+
+### Contact Form Email Integration
+
+The contact form currently logs to console. To integrate with an email service:
+
+1. Install your preferred service (e.g., Resend):
+```bash
+npm install resend
+```
+
+2. Update `app/api/contact/route.ts` with your email service logic
+3. Add API key to environment variables
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+1. Push your code to GitHub
+2. Import project to [Vercel](https://vercel.com)
+3. Deploy with default settings
+
+### Other Platforms
+
+The app can be deployed to any platform that supports Next.js:
+- Netlify
+- AWS Amplify
+- Railway
+- DigitalOcean App Platform
+
+## 📊 Performance
+
+Target Lighthouse Scores:
+- Performance: ≥ 90
+- Accessibility: ≥ 95
+- Best Practices: ≥ 95
+- SEO: ≥ 95
+
+## 📝 License
+
+This project is open source and available under the MIT License.
+
+## 👤 Author
+
+**Mohamed Aziz Ouertatani**
+
+- GitHub: [@mohamedaziz-ouertatani](https://github.com/mohamedaziz-ouertatani)
+- LinkedIn: [mohamed-aziz-ouertatani](https://www.linkedin.com/in/mohamed-aziz-ouertatani)
+- Email: ouertatanimohamedaziz@gmail.com
