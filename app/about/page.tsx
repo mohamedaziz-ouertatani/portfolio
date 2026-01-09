@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: 'About - Mohamed Aziz Ouertatani',
   description:
     'Learn more about Mohamed Aziz Ouertatani - Full Stack Developer, Engineering Student at ESPRIT, and professional Muay Thai fighter.',
+  alternates: {
+    canonical: 'https://mohamedaziz-ouertatani.github.io/about',
+  },
 };
 
 export default function About() {

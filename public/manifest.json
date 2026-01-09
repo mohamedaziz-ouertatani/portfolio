@@ -1,0 +1,22 @@
+{
+  "name": "Mohamed Aziz Ouertatani - Portfolio",
+  "short_name": "MA Portfolio",
+  "description": "Full Stack Developer and Engineering Student portfolio showcasing projects and skills",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon",
+      "purpose": "any maskable"
+    }
+  ]
+}

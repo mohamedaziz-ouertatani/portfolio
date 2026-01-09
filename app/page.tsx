@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: 'Home - Mohamed Aziz Ouertatani',
   description:
     'Full Stack Developer specializing in MERN stack, TypeScript, and modern web technologies. Currently studying Computer Science at ESPRIT.',
+  alternates: {
+    canonical: 'https://mohamedaziz-ouertatani.github.io',
+  },
 };
 
 export default function Home() {
