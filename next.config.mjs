@@ -7,7 +7,7 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/:all*(svg|jpg|png)',
+        source: '/:all*\\.(svg|jpg|jpeg|png|gif|webp|avif)$',
         locale: false,
         headers: [
           {
