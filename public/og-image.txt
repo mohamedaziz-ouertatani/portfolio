@@ -1,0 +1,6 @@
+This is a placeholder for the OG image. In production, you should create a 1200x630px image
+with your branding and portfolio information. You can use tools like Canva, Figma, or code-based
+solutions like @vercel/og to generate dynamic OG images.
+
+For now, the metadata is configured to use /og-image.png, so rename your actual OG image to
+og-image.png and place it in the public folder.
