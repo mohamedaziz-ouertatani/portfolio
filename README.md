@@ -31,6 +31,14 @@ Actual Lighthouse Scores (Desktop):
 
 _Scores measured on production build with Lighthouse CI_
 
+## 🌐 Live Demo
+
+Visit the live portfolio: [https://mohamedaziz-ouertatani.github.io](https://mohamedaziz-ouertatani.github.io)
+
+## 📸 Screenshots
+
+> Add screenshots of your portfolio here to showcase the design and features
+
 ## 🚀 Features
 
 ### Core Features
@@ -96,6 +104,15 @@ _Scores measured on production build with Lighthouse CI_
 
 ### 1. Clone the repository
 
+1. Clone the repository:
+
+```bash
+git clone https://github.com/mohamedaziz-ouertatani/portfolio.git
+cd portfolio
+```
+
+2. Install dependencies:
+
 ```bash
 git clone https://github.com/mohamedaziz-ouertatani/portfolio.git
 cd portfolio
@@ -144,6 +161,14 @@ npm run test:e2e     # Run E2E tests with Playwright
 npm run test:e2e:ui  # Run E2E tests with UI
 npm run check        # Run typecheck + lint
 npm run analyze      # Analyze bundle size
+```
+
+### Bundle Analysis
+
+Analyze bundle size:
+
+```bash
+npm run analyze
 ```
 
 ## 📁 Project Structure
@@ -426,6 +451,38 @@ If you encounter build errors:
 - [x] Responsive design
 - [x] Project filtering
 - [x] Dynamic sitemap and robots.txt
+
+Run Lighthouse locally:
+
+```bash
+npm run build
+npm start
+# Open Chrome DevTools > Lighthouse > Generate report
+```
+
+Or use Lighthouse CI:
+
+```bash
+npm install -g @lhci/cli
+npm run build
+lhci autorun
+```
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
+
+## 🔒 Security
+
+See [SECURITY.md](SECURITY.md) for information on reporting security vulnerabilities.
 
 ## 📝 License
 
