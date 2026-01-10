@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   description:
     'Full Stack Developer and Engineering Student specializing in web development with React, Node.js, and TypeScript. View my portfolio of projects and experience.',
   metadataBase: new URL('https://mohamedaziz-ouertatani.github.io'),
+  manifest: '/manifest.json',
   keywords: [
     'Full Stack Developer',
     'Web Developer',
