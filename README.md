@@ -1,5 +1,15 @@
 # Mohamed Aziz Ouertatani - Portfolio
 
+[![CI](https://github.com/mohamedaziz-ouertatani/portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/mohamedaziz-ouertatani/portfolio/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.4-blue.svg)](https://www.typescriptlang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-14.2-black.svg)](https://nextjs.org/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
+> 🌐 Modern, performant portfolio showcasing projects and experience
+
+[Live Demo](https://mohamedaziz-ouertatani.github.io/portfolio) • [Report Bug](https://github.com/mohamedaziz-ouertatani/portfolio/issues) • [Request Feature](https://github.com/mohamedaziz-ouertatani/portfolio/issues)
+
 A modern, performant portfolio built with Next.js 14 (App Router), TypeScript, and Tailwind CSS.
 
 ## 🚀 Features
@@ -94,6 +104,26 @@ npm run format
 └── Configuration files
 ```
 
+## 📸 Screenshots
+
+> **Note**: Add screenshots of your portfolio here to showcase the design and features.
+> 
+> Recommended sections:
+> - Homepage hero section
+> - Projects showcase
+> - Dark mode comparison
+> - Mobile responsive views
+
+## 🎯 Lighthouse Scores
+
+> **Note**: Run Lighthouse audits and add your actual scores here.
+> 
+> Target scores:
+> - Performance: ≥ 90
+> - Accessibility: ≥ 95
+> - Best Practices: ≥ 95
+> - SEO: ≥ 95
+
 ## 🎨 Customization
 
 ### Update Personal Information
@@ -167,9 +197,47 @@ Target Lighthouse Scores:
 - Best Practices: ≥ 95
 - SEO: ≥ 95
 
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**Build fails with module not found errors**
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+**Dark mode not persisting**
+- Check browser localStorage is enabled
+- Clear browser cache and reload
+
+**Images not loading in production**
+- Ensure images are in the `public` directory
+- Check `next.config.mjs` for correct `basePath` and `assetPrefix`
+
+**TypeScript errors**
+```bash
+npm run typecheck
+```
+
+**Linting errors**
+```bash
+npm run lint -- --fix
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
 ## 📝 License
 
-This project is open source and available under the MIT License.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 👤 Author
 
