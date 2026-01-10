@@ -2,18 +2,23 @@
 
 ## Supported Versions
 
+Currently being supported with security updates:
+
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.x.x   | :white_check_mark: |
+| latest  | :white_check_mark: |
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability, please email ouertatanimohamedaziz@gmail.com with details.
+If you discover a security vulnerability within this project, please send an email to ouertatanimohamedaziz@gmail.com. All security vulnerabilities will be promptly addressed.
 
-Please do not open public issues for security vulnerabilities.
+Please do not open issues for security vulnerabilities.
 
-## Response Time
+### What to Include
 
-- Initial response within 48 hours
-- Updates every 7 days on progress
-- Fix timeline depends on severity
+- Type of vulnerability
+- Steps to reproduce
+- Potential impact
+- Suggested fix (if any)
+
+We will acknowledge your email within 48 hours and provide a more detailed response within 96 hours.

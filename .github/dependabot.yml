@@ -5,8 +5,7 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
+    reviewers:
+      - "mohamedaziz-ouertatani"
     labels:
       - "dependencies"
-    commit-message:
-      prefix: "chore"
-      include: "scope"

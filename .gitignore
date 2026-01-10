@@ -10,7 +10,7 @@
 /coverage
 /playwright-report/
 /test-results/
-/.playwright/
+/playwright/.cache/
 
 # next.js
 /.next/

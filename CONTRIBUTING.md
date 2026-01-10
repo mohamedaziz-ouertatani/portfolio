@@ -1,36 +1,62 @@
 # Contributing to Portfolio
 
-Thank you for your interest in contributing! 
+Thank you for considering contributing to this project! 
 
 ## How to Contribute
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+### Reporting Bugs
 
-## Development Setup
+- Check if the bug has already been reported
+- Use the issue tracker to report bugs
+- Include detailed steps to reproduce
+- Include screenshots if applicable
+
+### Suggesting Enhancements
+
+- Use the issue tracker for feature requests
+- Explain why this enhancement would be useful
+- Provide examples of how it would work
+
+### Pull Requests
+
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Run tests (`npm test`)
+5. Run linting (`npm run lint`)
+6. Commit your changes (`git commit -m 'Add amazing feature'`)
+7. Push to the branch (`git push origin feature/amazing-feature`)
+8. Open a Pull Request
+
+### Development Setup
 
 ```bash
+# Clone your fork
+git clone https://github.com/YOUR_USERNAME/portfolio.git
+
+# Install dependencies
 npm install
+
+# Copy environment variables
+cp .env.example .env.local
+
+# Run development server
 npm run dev
 ```
 
-## Code Style
+### Code Style
 
+- Follow the existing code style
 - Run `npm run format` before committing
-- Run `npm run lint` to check for issues
-- Run `npm run typecheck` to verify TypeScript
-
-## Testing
-
-- Run `npm test` for unit tests
-- Run `npm run test:e2e` for end-to-end tests
-
-## Pull Request Guidelines
-
-- Update documentation for any changed functionality
+- Write meaningful commit messages
 - Add tests for new features
-- Ensure all tests pass
-- Follow existing code style
+
+### Testing
+
+- Write unit tests for components
+- Write E2E tests for critical user flows
+- Ensure all tests pass before submitting PR
+
+## Code of Conduct
+
+Please note that this project follows a Code of Conduct. By participating, you are expected to uphold this code.
