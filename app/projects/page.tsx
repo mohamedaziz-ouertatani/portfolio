@@ -26,9 +26,7 @@ export default function Projects() {
       return projectsData;
     }
     return projectsData.filter((project) =>
-      selectedTechnologies.every((tech) =>
-        project.technologies.includes(tech)
-      )
+      selectedTechnologies.every((tech) => project.technologies.includes(tech))
     );
   }, [selectedTechnologies]);
 

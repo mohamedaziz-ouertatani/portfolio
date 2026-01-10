@@ -1,22 +1,25 @@
 /** @type {import('next').NextConfig} */
+
 const isProd = process.env.NODE_ENV === 'production';
 
 const nextConfig = {
+  // Enable React strict mode (recommended)
   reactStrictMode: true,
-  // Generate a static site (no server) for GitHub Pages
+
+  // Static export for GitHub Pages (no Node server)
   output: 'export',
 
-  // Make next/image compatible with static export
+  // next/image is not compatible with GH Pages unless unoptimized
   images: {
     unoptimized: true,
     formats: ['image/avif', 'image/webp'],
   },
 
-  // Ensure links and assets work under /portfolio on GitHub Pages
+  // Required for GitHub Pages when repo name ≠ username.github.io
   basePath: isProd ? '/portfolio' : '',
   assetPrefix: isProd ? '/portfolio/' : '',
 
-  // Helps with GH Pages routing
+  // Fix routing issues on static hosts
   trailingSlash: true,
 };
 

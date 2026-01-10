@@ -107,6 +107,7 @@ npm run format
 ### Metadata & SEO
 
 Update metadata in:
+
 - `app/layout.tsx` - Global metadata
 - Individual page files - Page-specific metadata
 
@@ -120,6 +121,7 @@ Update metadata in:
 To enable Plausible Analytics:
 
 1. Set environment variable:
+
 ```bash
 NEXT_PUBLIC_PLAUSIBLE_DOMAIN=yourdomain.com
 ```
@@ -131,6 +133,7 @@ NEXT_PUBLIC_PLAUSIBLE_DOMAIN=yourdomain.com
 The contact form currently logs to console. To integrate with an email service:
 
 1. Install your preferred service (e.g., Resend):
+
 ```bash
 npm install resend
 ```
@@ -149,6 +152,7 @@ npm install resend
 ### Other Platforms
 
 The app can be deployed to any platform that supports Next.js:
+
 - Netlify
 - AWS Amplify
 - Railway
@@ -157,6 +161,7 @@ The app can be deployed to any platform that supports Next.js:
 ## 📊 Performance
 
 Target Lighthouse Scores:
+
 - Performance: ≥ 90
 - Accessibility: ≥ 95
 - Best Practices: ≥ 95
