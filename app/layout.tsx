@@ -76,7 +76,7 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'Person',
               name: 'Mohamed Aziz Ouertatani',
-              url: 'https://mohamedaziz-ouertatani.github.io/portfolio',
+              url: 'https://mohamedaziz-ouertatani.github.io/portfolio/',
               jobTitle: 'Full Stack Developer',
               alumniOf: 'ESPRIT',
               sameAs: [
@@ -100,7 +100,7 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'WebSite',
               name: 'Mohamed Aziz Ouertatani Portfolio',
-              url: 'https://mohamedaziz-ouertatani.github.io/portfolio',
+              url: 'https://mohamedaziz-ouertatani.github.io/portfolio/',
               description:
                 'Portfolio of Mohamed Aziz Ouertatani - Full Stack Developer',
               author: {
