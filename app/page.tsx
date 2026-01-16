@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   description:
     'Computer Science Engineering student specializing in Data Science and Full Stack Development. Experienced in React, Next.js, Node.js, TypeScript, and modern web technologies.',
   alternates: {
-    canonical: 'https://mohamedaziz-ouertatani.github.io',
+    canonical: 'https://mohamedaziz-ouertatani.github.io/portfolio/',
   },
 };
 

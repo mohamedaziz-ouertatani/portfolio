@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mohamedaziz-ouertatani.github.io/sitemap.xml
+Sitemap: https://mohamedaziz-ouertatani.github.io/portfolio/sitemap.xml

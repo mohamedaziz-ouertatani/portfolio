@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     'Interactive resume and portfolio of Mohamed Aziz Ouertatani — Data Science Engineering Student and Full Stack Developer.',
   alternates: {
-    canonical: 'https://mohamedaziz-ouertatani.github.io/resume',
+    canonical: 'https://mohamedaziz-ouertatani.github.io/portfolio/resume/',
   },
 };
 

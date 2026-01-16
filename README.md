@@ -9,7 +9,7 @@ A modern, performant portfolio built with Next.js 14 (App Router), TypeScript, a
 
 ## 🌐 Live Demo
 
-Visit the live portfolio: [https://mohamedaziz-ouertatani.github.io](https://mohamedaziz-ouertatani.github.io)
+Visit the live portfolio: [https://mohamedaziz-ouertatani.github.io/portfolio](https://mohamedaziz-ouertatani.github.io/portfolio)
 
 ## 📸 Screenshots
 
@@ -18,24 +18,28 @@ Visit the live portfolio: [https://mohamedaziz-ouertatani.github.io](https://moh
 ## 🚀 Features
 
 ### Core Technologies
-- **Next.js 14 App Router** - Modern React framework with server components and file-based routing
+
+- **Next.js 14 App Router** - Modern React framework with static export for GitHub Pages
 - **TypeScript** - Type-safe code for better developer experience and fewer runtime errors
 - **Tailwind CSS** - Utility-first CSS framework for rapid UI development with custom design system
 
 ### User Experience
+
 - **Dark Mode** - Seamless theme toggle with localStorage persistence using next-themes
 - **Responsive Design** - Mobile-first approach that works flawlessly on all devices and screen sizes
-- **Project Filtering** - Multi-select technology filter for easy project browsing
-- **Contact Form** - Fully functional contact form with Zod validation and serverless API route
-- **PWA Support** - Progressive Web App capabilities for offline access and app-like experience
+- **Project Filtering** - Client-side multi-select technology filter for easy project browsing
+- **Contact Options** - Direct mailto links and optional external form service (Formspree) integration
+- **PWA Support** - Progressive Web App capabilities with offline access
 
 ### Performance & SEO
+
 - **SEO Optimized** - Comprehensive meta tags, Open Graph, Twitter Cards, JSON-LD structured data
-- **Performance** - Image optimization with Next.js Image, font loading optimization, and minimal client-side JavaScript
-- **Sitemap & Robots.txt** - Dynamic sitemap generation and robots.txt for better search engine crawling
+- **Performance** - Optimized images, font loading optimization, and minimal client-side JavaScript
+- **Static Sitemap & Robots.txt** - Pre-generated sitemap.xml and robots.txt for search engine crawling
 - **Lighthouse Scores** - Consistently high performance, accessibility, best practices, and SEO scores
 
 ### Accessibility & Quality
+
 - **Accessible** - WCAG 2.1 AA compliant with semantic HTML, ARIA labels, keyboard navigation, and skip links
 - **Code Quality** - ESLint, Prettier, TypeScript strict mode, and Husky pre-commit hooks
 - **Testing** - Jest unit tests and Playwright E2E tests for critical user flows
@@ -44,6 +48,7 @@ Visit the live portfolio: [https://mohamedaziz-ouertatani.github.io](https://moh
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - **Framework:** Next.js 14 (App Router)
 - **Language:** TypeScript 5.4
 - **Styling:** Tailwind CSS 3.4
@@ -52,11 +57,13 @@ Visit the live portfolio: [https://mohamedaziz-ouertatani.github.io](https://moh
 - **Theme:** next-themes for dark mode
 
 ### Backend & API
-- **API Routes:** Next.js serverless functions
-- **Email Service:** Resend API
-- **Form Validation:** Zod
+
+- **Static Export:** No server-side rendering or API routes
+- **Contact:** Direct mailto links and optional external services (Formspree)
+- **Hosting:** GitHub Pages with static HTML/CSS/JS only
 
 ### Development Tools
+
 - **Package Manager:** npm
 - **Linting:** ESLint with Next.js config
 - **Formatting:** Prettier with Tailwind plugin
@@ -65,6 +72,7 @@ Visit the live portfolio: [https://mohamedaziz-ouertatani.github.io](https://moh
 - **Bundle Analysis:** @next/bundle-analyzer
 
 ### CI/CD & Quality
+
 - **Version Control:** Git & GitHub
 - **CI/CD:** GitHub Actions
 - **Testing:** Automated unit and E2E tests
@@ -75,12 +83,12 @@ Visit the live portfolio: [https://mohamedaziz-ouertatani.github.io](https://moh
 
 Target scores (tested on desktop and mobile):
 
-| Category | Score |
-|----------|-------|
-| ⚡ Performance | ≥ 90 |
-| ♿ Accessibility | ≥ 95 |
-| ✅ Best Practices | ≥ 95 |
-| 🔍 SEO | ≥ 95 |
+| Category          | Score |
+| ----------------- | ----- |
+| ⚡ Performance    | ≥ 90  |
+| ♿ Accessibility  | ≥ 95  |
+| ✅ Best Practices | ≥ 95  |
+| 🔍 SEO            | ≥ 95  |
 
 > Actual scores may vary based on network conditions and device. Run Lighthouse CI locally to verify current scores.
 
@@ -112,13 +120,13 @@ npm install
 cp .env.example .env.local
 ```
 
-4. Update environment variables in `.env.local`:
+4. Update environment variables (optional for analytics):
 
 ```bash
 NEXT_PUBLIC_PLAUSIBLE_DOMAIN=yourdomain.com
-RESEND_API_KEY=your_resend_api_key
-NEXT_PUBLIC_SITE_URL=https://yourdomain.com
 ```
+
+> **Note:** No other environment variables are required. The portfolio is fully static with no backend dependencies.
 
 ### Development
 
@@ -132,17 +140,27 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Build
 
-Build for production:
+Build the static site for production:
 
 ```bash
 npm run build
 ```
 
-### Start Production Server
+This generates a static export in the `out/` directory ready for deployment to GitHub Pages or any static host.
+
+### Local Preview of Production Build
+
+To preview the production build locally, you can use a static file server:
 
 ```bash
-npm start
+# Install a static server (if not already installed)
+npm install -g serve
+
+# Serve the out directory
+serve out
 ```
+
+Then open the URL shown in your terminal (typically http://localhost:3000).
 
 ### Testing
 
@@ -202,16 +220,12 @@ npm run analyze
 ```
 ├── app/                      # Next.js App Router pages
 │   ├── about/               # About page
-│   ├── api/                 # API routes
-│   │   └── contact/         # Contact form handler
-│   ├── contact/             # Contact page
-│   ├── projects/            # Projects page
+│   ├── contact/             # Contact page (static, mailto links)
+│   ├── projects/            # Projects page (client-side filtering)
 │   ├── resume/              # Resume page
 │   ├── globals.css          # Global styles
 │   ├── layout.tsx           # Root layout
-│   ├── page.tsx             # Home page
-│   ├── robots.ts            # Dynamic robots.txt
-│   └── sitemap.ts           # Dynamic sitemap
+│   └── page.tsx             # Home page
 ├── components/              # React components
 │   ├── __tests__/           # Component tests
 │   ├── DarkModeToggle.tsx
@@ -225,13 +239,13 @@ npm run analyze
 ├── lib/                     # Data and utilities
 │   ├── experiences.ts
 │   ├── projects.ts
-│   ├── skills.ts
-│   └── validations.ts       # Zod schemas
+│   └── skills.ts
 ├── public/                  # Static assets
 │   ├── cv.pdf
 │   ├── images/
 │   ├── manifest.json
-│   └── robots.txt
+│   ├── robots.txt           # Static robots.txt
+│   └── sitemap.xml          # Static sitemap
 ├── .github/                 # GitHub configuration
 │   ├── workflows/           # CI/CD workflows
 │   └── dependabot.yml
@@ -273,38 +287,54 @@ NEXT_PUBLIC_PLAUSIBLE_DOMAIN=yourdomain.com
 
 2. The script is already integrated in `app/layout.tsx`
 
-### Contact Form Email Integration
+### Contact Form Options
 
-The contact form uses Resend for email delivery:
+This portfolio uses static hosting on GitHub Pages, so there's no backend or serverless functions. Contact options include:
 
-1. Sign up for [Resend](https://resend.com) and get your API key
+1. **Direct Email (Default):** Uses mailto links to open the user's email client
 
-2. Add your API key to `.env.local`:
+2. **External Form Service (Optional):** You can integrate with external services like Formspree:
+   - Sign up for [Formspree](https://formspree.io)
+   - Get your form endpoint ID
+   - Update the contact page form action with your Formspree endpoint
+   - This keeps the site fully static while adding form functionality
 
-```bash
-RESEND_API_KEY=your_api_key_here
-```
-
-3. The email logic is already implemented in `app/api/contact/route.ts`
-
-4. Update the email template and recipient in the route handler as needed
+No API keys or backend configuration needed for the default setup!
 
 ## 🚀 Deployment
 
-### Vercel (Recommended)
+### GitHub Pages (Default)
 
-1. Push your code to GitHub
-2. Import project to [Vercel](https://vercel.com)
-3. Deploy with default settings
+This portfolio is configured for GitHub Pages deployment:
 
-### Other Platforms
+1. The repository is set up with GitHub Actions workflow (`.github/workflows/deploy.yml`)
+2. Push to the `main` branch automatically triggers a build and deployment
+3. The site is deployed to: `https://mohamedaziz-ouertatani.github.io/portfolio/`
 
-The app can be deployed to any platform that supports Next.js:
+**Manual Deployment:**
 
-- Netlify
-- AWS Amplify
-- Railway
-- DigitalOcean App Platform
+```bash
+# Build the static site
+npm run build
+
+# The output is in the `out/` directory
+# Commit and push to deploy via GitHub Actions
+```
+
+**Configuration:**
+
+- `next.config.mjs` is pre-configured with `output: 'export'` for static export
+- `basePath` and `assetPrefix` are set to `/portfolio` for GitHub Pages
+- All images use `unoptimized: true` for static compatibility
+
+### Vercel / Netlify (Alternative)
+
+While designed for GitHub Pages, you can also deploy to:
+
+- **Vercel:** Import from GitHub and deploy (remove `basePath` and `assetPrefix` from config)
+- **Netlify:** Connect repository and use build command `npm run build` with publish directory `out`
+
+> **Note:** This portfolio is 100% static with no server-side rendering, API routes, or backend dependencies. It works on any static hosting platform.
 
 ## 🗺️ Roadmap
 
@@ -330,6 +360,7 @@ Future enhancements planned for this portfolio:
 **Problem:** `npm run build` fails with module not found errors
 
 **Solution:**
+
 ```bash
 rm -rf node_modules package-lock.json
 npm install
@@ -341,6 +372,7 @@ npm run build
 **Problem:** Environment variables are undefined at runtime
 
 **Solution:**
+
 - Ensure `.env.local` exists and contains all required variables
 - For client-side variables, use `NEXT_PUBLIC_` prefix
 - Restart the development server after changing environment variables
@@ -350,6 +382,7 @@ npm run build
 **Problem:** Pre-commit hooks not running
 
 **Solution:**
+
 ```bash
 npm run prepare
 chmod +x .husky/pre-commit
@@ -360,6 +393,7 @@ chmod +x .husky/pre-commit
 **Problem:** TypeScript compilation errors
 
 **Solution:**
+
 ```bash
 npm run typecheck
 # Fix errors or add type definitions
@@ -370,6 +404,7 @@ npm run typecheck
 **Problem:** Port 3000 is already in use
 
 **Solution:**
+
 ```bash
 # Kill the process using port 3000
 lsof -ti:3000 | xargs kill -9
@@ -382,6 +417,7 @@ PORT=3001 npm run dev
 **Problem:** E2E tests fail with browser not installed
 
 **Solution:**
+
 ```bash
 npx playwright install --with-deps
 ```
