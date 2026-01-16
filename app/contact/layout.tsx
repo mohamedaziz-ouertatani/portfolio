@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     'Get in touch with Mohamed Aziz Ouertatani for project opportunities, collaborations, or general inquiries.',
   alternates: {
-    canonical: 'https://mohamedaziz-ouertatani.github.io/contact',
+    canonical: 'https://mohamedaziz-ouertatani.github.io/portfolio/contact/',
   },
 };
 

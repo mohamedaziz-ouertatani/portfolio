@@ -3,88 +3,7 @@
 import { useState } from 'react';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<
-    'idle' | 'success' | 'error'
-  >('idle');
-
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {};
-
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
-    }
-
-    if (!formData.subject.trim()) {
-      newErrors.subject = 'Subject is required';
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      } else {
-        setSubmitStatus('error');
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: '' }));
-    }
-  };
+  const [showFormspreeNote, setShowFormspreeNote] = useState(false);
 
   return (
     <div className="container px-4 py-16">
@@ -114,142 +33,175 @@ export default function Contact() {
           </p>
         </div>
 
-        {submitStatus === 'success' && (
-          <div className="mb-6 rounded-lg bg-green-50 p-4 text-green-800 dark:bg-green-900/20 dark:text-green-300">
-            <p className="font-medium">Message sent successfully!</p>
-            <p className="text-sm">
-              Thank you for reaching out. I&apos;ll get back to you soon.
-            </p>
-          </div>
-        )}
+        <div className="mb-6 rounded-lg bg-blue-50 p-4 text-blue-800 dark:bg-blue-900/20 dark:text-blue-300">
+          <p className="font-medium">📌 Static Hosting Note</p>
+          <p className="mt-1 text-sm">
+            This portfolio is statically hosted on GitHub Pages with no backend
+            or API routes. Contact me directly via email or use an external form
+            service.
+          </p>
+        </div>
 
-        {submitStatus === 'error' && (
-          <div className="mb-6 rounded-lg bg-red-50 p-4 text-red-800 dark:bg-red-900/20 dark:text-red-300">
-            <p className="font-medium">Something went wrong.</p>
-            <p className="text-sm">
-              Please try again or email me directly at
-              ouertatanimohamedaziz@gmail.com
-            </p>
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label
-              htmlFor="name"
-              className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
-            >
-              Name *
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className={`w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 dark:bg-gray-800 dark:text-white ${
-                errors.name
-                  ? 'border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:ring-primary-500 dark:border-gray-700'
-              }`}
-              placeholder="Your name"
-            />
-            {errors.name && (
-              <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-                {errors.name}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <label
-              htmlFor="email"
-              className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
-            >
-              Email *
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className={`w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 dark:bg-gray-800 dark:text-white ${
-                errors.email
-                  ? 'border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:ring-primary-500 dark:border-gray-700'
-              }`}
-              placeholder="your.email@example.com"
-            />
-            {errors.email && (
-              <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-                {errors.email}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <label
-              htmlFor="subject"
-              className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
-            >
-              Subject *
-            </label>
-            <input
-              type="text"
-              id="subject"
-              name="subject"
-              value={formData.subject}
-              onChange={handleChange}
-              className={`w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 dark:bg-gray-800 dark:text-white ${
-                errors.subject
-                  ? 'border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:ring-primary-500 dark:border-gray-700'
-              }`}
-              placeholder="What is this about?"
-            />
-            {errors.subject && (
-              <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-                {errors.subject}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <label
-              htmlFor="message"
-              className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
-            >
-              Message *
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              rows={6}
-              className={`w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 dark:bg-gray-800 dark:text-white ${
-                errors.message
-                  ? 'border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:ring-primary-500 dark:border-gray-700'
-              }`}
-              placeholder="Your message..."
-            />
-            {errors.message && (
-              <p className="mt-1 text-sm text-red-600 dark:text-red-400">
-                {errors.message}
-              </p>
-            )}
-          </div>
-
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full rounded-lg bg-primary-600 px-6 py-3 font-medium text-white transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:cursor-not-allowed disabled:opacity-50"
+        {/* Primary Contact Method */}
+        <div className="mb-8 rounded-lg border-2 border-primary-500 bg-white p-6 dark:border-primary-400 dark:bg-gray-800">
+          <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
+            Direct Email Contact
+          </h2>
+          <p className="mb-4 text-gray-600 dark:text-gray-400">
+            Click the button below to send me an email directly from your email
+            client:
+          </p>
+          <a
+            href="mailto:ouertatanimohamedaziz@gmail.com?subject=Portfolio Contact&body=Hi Mohamed Aziz,%0D%0A%0D%0AI would like to get in touch with you about..."
+            className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary-600 px-6 py-3 font-medium text-white transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
           >
-            {isSubmitting ? 'Sending...' : 'Send Message'}
-          </button>
-        </form>
+            <svg
+              className="h-5 w-5"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            Send Email to ouertatanimohamedaziz@gmail.com
+          </a>
+        </div>
+
+        {/* Alternative: External Form Service */}
+        <div className="rounded-lg border border-gray-200 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-900/50">
+          <div className="mb-4 flex items-start justify-between">
+            <div>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Alternative: External Form Service
+              </h2>
+              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                You can also use an external form service like Formspree (not
+                included by default).
+              </p>
+            </div>
+            <button
+              onClick={() => setShowFormspreeNote(!showFormspreeNote)}
+              className="text-sm text-primary-600 hover:underline dark:text-primary-400"
+            >
+              {showFormspreeNote ? 'Hide' : 'Show'} Info
+            </button>
+          </div>
+
+          {showFormspreeNote && (
+            <div className="mt-4 rounded-lg bg-white p-4 dark:bg-gray-800">
+              <h3 className="mb-2 font-medium text-gray-900 dark:text-white">
+                How to set up Formspree:
+              </h3>
+              <ol className="list-inside list-decimal space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                <li>
+                  Sign up for a free account at{' '}
+                  <a
+                    href="https://formspree.io"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary-600 hover:underline dark:text-primary-400"
+                  >
+                    formspree.io
+                  </a>
+                </li>
+                <li>Create a new form and get your form ID</li>
+                <li>
+                  Replace the form action URL below with:
+                  <code className="ml-1 rounded bg-gray-200 px-1 dark:bg-gray-700">
+                    https://formspree.io/f/YOUR_FORM_ID
+                  </code>
+                </li>
+                <li>Deploy your changes to enable the form</li>
+              </ol>
+
+              <form className="mt-6 space-y-4">
+                <div>
+                  <label
+                    htmlFor="formspree-name"
+                    className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="formspree-name"
+                    name="name"
+                    disabled
+                    className="w-full cursor-not-allowed rounded-lg border border-gray-300 bg-gray-100 px-4 py-3 opacity-60 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                    placeholder="Your name"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="formspree-email"
+                    className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    id="formspree-email"
+                    name="email"
+                    disabled
+                    className="w-full cursor-not-allowed rounded-lg border border-gray-300 bg-gray-100 px-4 py-3 opacity-60 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                    placeholder="your.email@example.com"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="formspree-subject"
+                    className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    Subject *
+                  </label>
+                  <input
+                    type="text"
+                    id="formspree-subject"
+                    name="subject"
+                    disabled
+                    className="w-full cursor-not-allowed rounded-lg border border-gray-300 bg-gray-100 px-4 py-3 opacity-60 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                    placeholder="What is this about?"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="formspree-message"
+                    className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    Message *
+                  </label>
+                  <textarea
+                    id="formspree-message"
+                    name="message"
+                    disabled
+                    rows={6}
+                    className="w-full cursor-not-allowed rounded-lg border border-gray-300 bg-gray-100 px-4 py-3 opacity-60 dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+                    placeholder="Your message..."
+                  />
+                </div>
+
+                <div className="rounded bg-yellow-50 p-3 text-sm text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-300">
+                  ⚠️ This form is disabled by default. To enable it, sign up for
+                  Formspree and update the form action URL.
+                </div>
+
+                <button
+                  type="button"
+                  disabled
+                  className="w-full cursor-not-allowed rounded-lg bg-gray-400 px-6 py-3 font-medium text-white opacity-60"
+                >
+                  Form Disabled (See Instructions Above)
+                </button>
+              </form>
+            </div>
+          )}
+        </div>
 
         <div className="mt-8 text-center">
           <p className="mb-2 text-gray-600 dark:text-gray-400">
