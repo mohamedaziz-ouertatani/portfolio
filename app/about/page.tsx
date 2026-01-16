@@ -2,6 +2,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 import { experiencesData } from '@/lib/experiences';
 import skillsData from '@/lib/skills';
+import { withBasePath } from '@/lib/basePath';
 
 export const metadata: Metadata = {
   title: 'About - Mohamed Aziz Ouertatani',
@@ -56,7 +57,7 @@ export default function About() {
           <div className="lg:pl-8">
             <div className="relative mx-auto h-[400px] w-[400px] overflow-hidden rounded-2xl shadow-xl">
               <Image
-                src="/me.jpg"
+                src={withBasePath('/me.jpg')}
                 alt="Mohamed Aziz Ouertatani"
                 fill
                 className="object-cover"

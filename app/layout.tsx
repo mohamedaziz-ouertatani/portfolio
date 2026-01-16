@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import Script from 'next/script';
+import { withBasePath } from '@/lib/basePath';
 
 export const metadata: Metadata = {
   title: 'Mohamed Aziz Ouertatani - Full Stack Developer',
@@ -31,7 +32,8 @@ export const metadata: Metadata = {
       'Full Stack Developer and Engineering Student specializing in web development with React, Node.js, and TypeScript.',
     images: [
       {
-        url: '/og-image.png',
+        // Use an absolute URL for OG images
+        url: 'https://mohamedaziz-ouertatani.github.io/portfolio/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Mohamed Aziz Ouertatani - Full Stack Developer',
@@ -43,7 +45,7 @@ export const metadata: Metadata = {
     title: 'Mohamed Aziz Ouertatani - Full Stack Developer',
     description:
       'Full Stack Developer and Engineering Student specializing in web development.',
-    images: ['/og-image.png'],
+    images: ['https://mohamedaziz-ouertatani.github.io/portfolio/og-image.png'],
   },
   robots: {
     index: true,
@@ -66,8 +68,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href={withBasePath('/favicon.ico')} sizes="any" />
+        <link rel="manifest" href={withBasePath('/manifest.json')} />
         <meta name="theme-color" content="#2563eb" />
         <script
           type="application/ld+json"

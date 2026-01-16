@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Project } from '@/lib/projects';
+import { prefix } from '@/lib/basePath';
 
 interface ProjectCardProps {
   project: Project;
@@ -12,6 +13,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
       {project.images && project.images.length > 0 && (
         <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
           <Image
+            loader={({ src }) => `${prefix}${src}`}
             src={project.images[0]}
             alt={project.title}
             fill

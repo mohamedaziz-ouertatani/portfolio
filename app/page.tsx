@@ -15,6 +15,7 @@ import {
   Bike,
   Swords,
 } from 'lucide-react';
+import { withBasePath } from '@/lib/basePath';
 
 export const metadata: Metadata = {
   title: 'Home - Mohamed Aziz Ouertatani',
@@ -69,7 +70,7 @@ export default function Home() {
                 <Mail size={18} /> Get in Touch
               </Link>
               <a
-                href="/cv.pdf"
+                href={withBasePath('/cv.pdf')}
                 download
                 className="flex items-center gap-2 rounded-lg border-2 border-gray-300 px-6 py-3 font-medium text-gray-700 transition-colors hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-800"
               >
