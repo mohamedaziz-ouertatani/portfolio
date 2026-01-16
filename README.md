@@ -232,16 +232,12 @@ npm run analyze
 ```
 ├── app/                      # Next.js App Router pages
 │   ├── about/               # About page
-│   ├── api/                 # API routes
-│   │   └── contact/         # Contact form handler
-│   ├── contact/             # Contact page
-│   ├── projects/            # Projects page
+│   ├── contact/             # Contact page (static, mailto links)
+│   ├── projects/            # Projects page (client-side filtering)
 │   ├── resume/              # Resume page
 │   ├── globals.css          # Global styles
 │   ├── layout.tsx           # Root layout
-│   ├── page.tsx             # Home page
-│   ├── robots.ts            # Dynamic robots.txt
-│   └── sitemap.ts           # Dynamic sitemap
+│   └── page.tsx             # Home page
 ├── components/              # React components
 │   ├── __tests__/           # Component tests
 │   ├── DarkModeToggle.tsx
@@ -255,13 +251,13 @@ npm run analyze
 ├── lib/                     # Data and utilities
 │   ├── experiences.ts
 │   ├── projects.ts
-│   ├── skills.ts
-│   └── validations.ts       # Zod schemas
+│   └── skills.ts
 ├── public/                  # Static assets
 │   ├── cv.pdf
 │   ├── images/
 │   ├── manifest.json
-│   └── robots.txt
+│   ├── robots.txt           # Static robots.txt
+│   └── sitemap.xml          # Static sitemap
 ├── .github/                 # GitHub configuration
 │   ├── workflows/           # CI/CD workflows
 │   └── dependabot.yml
