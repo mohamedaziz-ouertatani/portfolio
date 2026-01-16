@@ -10,10 +10,6 @@ export default function Contact() {
     message: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<
-    'idle' | 'success' | 'error'
-  >('idle');
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -42,37 +38,21 @@ export default function Contact() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleMailtoSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!validateForm()) {
       return;
     }
 
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
+    // Create mailto link with form data
+    const mailtoLink = `mailto:ouertatanimohamedaziz@gmail.com?subject=${encodeURIComponent(
+      formData.subject
+    )}&body=${encodeURIComponent(
+      `From: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    )}`;
 
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      } else {
-        setSubmitStatus('error');
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
-    }
+    window.location.href = mailtoLink;
   };
 
   const handleChange = (
@@ -114,26 +94,16 @@ export default function Contact() {
           </p>
         </div>
 
-        {submitStatus === 'success' && (
-          <div className="mb-6 rounded-lg bg-green-50 p-4 text-green-800 dark:bg-green-900/20 dark:text-green-300">
-            <p className="font-medium">Message sent successfully!</p>
-            <p className="text-sm">
-              Thank you for reaching out. I&apos;ll get back to you soon.
-            </p>
-          </div>
-        )}
+        {/* Static Hosting Notice */}
+        <div className="mb-6 rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-900 dark:bg-blue-900/20">
+          <p className="text-sm text-blue-800 dark:text-blue-300">
+            <strong>Note:</strong> This portfolio is statically hosted on GitHub
+            Pages with no backend or API routes. The form below will open your
+            default email client to send a message.
+          </p>
+        </div>
 
-        {submitStatus === 'error' && (
-          <div className="mb-6 rounded-lg bg-red-50 p-4 text-red-800 dark:bg-red-900/20 dark:text-red-300">
-            <p className="font-medium">Something went wrong.</p>
-            <p className="text-sm">
-              Please try again or email me directly at
-              ouertatanimohamedaziz@gmail.com
-            </p>
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleMailtoSubmit} className="space-y-6">
           <div>
             <label
               htmlFor="name"
@@ -244,10 +214,9 @@ export default function Contact() {
 
           <button
             type="submit"
-            disabled={isSubmitting}
-            className="w-full rounded-lg bg-primary-600 px-6 py-3 font-medium text-white transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:cursor-not-allowed disabled:opacity-50"
+            className="w-full rounded-lg bg-primary-600 px-6 py-3 font-medium text-white transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
           >
-            {isSubmitting ? 'Sending...' : 'Send Message'}
+            Send via Email
           </button>
         </form>
 
@@ -261,6 +230,46 @@ export default function Contact() {
           >
             ouertatanimohamedaziz@gmail.com
           </a>
+        </div>
+
+        {/* Optional External Form Service Example */}
+        <div className="mt-12 rounded-lg border border-gray-200 bg-gray-50 p-6 dark:border-gray-800 dark:bg-gray-900/50">
+          <h3 className="mb-3 text-lg font-semibold text-gray-900 dark:text-white">
+            Alternative: External Form Service
+          </h3>
+          <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
+            If you prefer not to use email clients, you can integrate with
+            external form services like{' '}
+            <a
+              href="https://formspree.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary-600 hover:underline dark:text-primary-400"
+            >
+              Formspree
+            </a>{' '}
+            or{' '}
+            <a
+              href="https://www.netlify.com/products/forms/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary-600 hover:underline dark:text-primary-400"
+            >
+              Netlify Forms
+            </a>
+            . These services handle form submissions without requiring a backend
+            in your repository.
+          </p>
+          <p className="text-xs text-gray-500 dark:text-gray-500">
+            Example: Replace the form action with{' '}
+            <code className="rounded bg-gray-200 px-1 py-0.5 dark:bg-gray-800">
+              action="https://formspree.io/f/your_form_id"
+            </code>{' '}
+            and{' '}
+            <code className="rounded bg-gray-200 px-1 py-0.5 dark:bg-gray-800">
+              method="POST"
+            </code>
+          </p>
         </div>
       </div>
     </div>

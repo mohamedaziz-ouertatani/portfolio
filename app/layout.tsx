@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Mohamed Aziz Ouertatani - Full Stack Developer',
   description:
     'Full Stack Developer and Engineering Student specializing in web development with React, Node.js, and TypeScript. View my portfolio of projects and experience.',
-  metadataBase: new URL('https://mohamedaziz-ouertatani.github.io'),
+  metadataBase: new URL('https://mohamedaziz-ouertatani.github.io/portfolio'),
   keywords: [
     'Full Stack Developer',
     'Web Developer',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://mohamedaziz-ouertatani.github.io',
+    url: 'https://mohamedaziz-ouertatani.github.io/portfolio/',
     siteName: 'Mohamed Aziz Ouertatani Portfolio',
     title: 'Mohamed Aziz Ouertatani - Full Stack Developer',
     description:
@@ -76,7 +76,7 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'Person',
               name: 'Mohamed Aziz Ouertatani',
-              url: 'https://mohamedaziz-ouertatani.github.io',
+              url: 'https://mohamedaziz-ouertatani.github.io/portfolio/',
               jobTitle: 'Full Stack Developer',
               alumniOf: 'ESPRIT',
               sameAs: [
@@ -100,7 +100,7 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'WebSite',
               name: 'Mohamed Aziz Ouertatani Portfolio',
-              url: 'https://mohamedaziz-ouertatani.github.io',
+              url: 'https://mohamedaziz-ouertatani.github.io/portfolio/',
               description:
                 'Portfolio of Mohamed Aziz Ouertatani - Full Stack Developer',
               author: {
