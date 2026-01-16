@@ -9,6 +9,8 @@ export default function Contact() {
     subject: '',
     message: '',
   });
+  const [showFormspreeNote, setShowFormspreeNote] = useState(false);
+
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const validateForm = () => {
@@ -131,60 +133,61 @@ export default function Contact() {
             )}
           </div>
 
-        {/* Primary Contact Method */}
-        <div className="mb-8 rounded-lg border-2 border-primary-500 bg-white p-6 dark:border-primary-400 dark:bg-gray-800">
-          <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
-            Direct Email Contact
-          </h2>
-          <p className="mb-4 text-gray-600 dark:text-gray-400">
-            Click the button below to send me an email directly from your email
-            client:
-          </p>
-          <a
-            href="mailto:ouertatanimohamedaziz@gmail.com?subject=Portfolio Contact&body=Hi Mohamed Aziz,%0D%0A%0D%0AI would like to get in touch with you about..."
-            className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary-600 px-6 py-3 font-medium text-white transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
-          >
-            <svg
-              className="h-5 w-5"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          {/* Primary Contact Method */}
+          <div className="mb-8 rounded-lg border-2 border-primary-500 bg-white p-6 dark:border-primary-400 dark:bg-gray-800">
+            <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
+              Direct Email Contact
+            </h2>
+            <p className="mb-4 text-gray-600 dark:text-gray-400">
+              Click the button below to send me an email directly from your
+              email client:
+            </p>
+            <a
+              href="mailto:ouertatanimohamedaziz@gmail.com?subject=Portfolio Contact&body=Hi Mohamed Aziz,%0D%0A%0D%0AI would like to get in touch with you about..."
+              className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary-600 px-6 py-3 font-medium text-white transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
-              <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            Send Email to ouertatanimohamedaziz@gmail.com
-          </a>
-        </div>
-
-        {/* Alternative: External Form Service */}
-        <div className="rounded-lg border border-gray-200 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-900/50">
-          <div className="mb-4 flex items-start justify-between">
-            <div>
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                Alternative: External Form Service
-              </h2>
-              <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                You can also use an external form service like Formspree (not
-                included by default).
-              </p>
-            </div>
-            <button
-              onClick={() => setShowFormspreeNote(!showFormspreeNote)}
-              className="text-sm text-primary-600 hover:underline dark:text-primary-400"
-            >
-              {showFormspreeNote ? 'Hide' : 'Show'} Info
-            </button>
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Send Email to ouertatanimohamedaziz@gmail.com
+            </a>
           </div>
 
-          <button
-            type="submit"
-            className="w-full rounded-lg bg-primary-600 px-6 py-3 font-medium text-white transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
-          >
-            Send via Email
-          </button>
+          {/* Alternative: External Form Service */}
+          <div className="rounded-lg border border-gray-200 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-900/50">
+            <div className="mb-4 flex items-start justify-between">
+              <div>
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  Alternative: External Form Service
+                </h2>
+                <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                  You can also use an external form service like Formspree (not
+                  included by default).
+                </p>
+              </div>
+              <button
+                onClick={() => setShowFormspreeNote(!showFormspreeNote)}
+                className="text-sm text-primary-600 hover:underline dark:text-primary-400"
+              >
+                {showFormspreeNote ? 'Hide' : 'Show'} Info
+              </button>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full rounded-lg bg-primary-600 px-6 py-3 font-medium text-white transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+            >
+              Send via Email
+            </button>
+          </div>
         </form>
 
         <div className="mt-8 text-center">
@@ -200,7 +203,7 @@ export default function Contact() {
         </div>
 
         {/* Optional External Form Service Example */}
-        <div className="mt-12 rounded-lg border border-gray-200 bg-gray-50 p-6 dark:border-gray-800 dark:bg-gray-900/50">
+        {/* <div className="mt-12 rounded-lg border border-gray-200 bg-gray-50 p-6 dark:border-gray-800 dark:bg-gray-900/50">
           <h3 className="mb-3 text-lg font-semibold text-gray-900 dark:text-white">
             Alternative: External Form Service
           </h3>
@@ -237,7 +240,7 @@ export default function Contact() {
               method="POST"
             </code>
           </p>
-        </div>
+        </div> */}
       </div>
     </div>
   );
