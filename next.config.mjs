@@ -17,7 +17,7 @@ const nextConfig = {
 
   // Required for GitHub Pages when repo name ≠ username.github.io
   basePath: isProd ? '/portfolio' : '',
-  assetPrefix: isProd ? '/portfolio/' : '',
+  assetPrefix: isProd ? '/portfolio' : '',
 
   // Fix routing issues on static hosts
   trailingSlash: true,
