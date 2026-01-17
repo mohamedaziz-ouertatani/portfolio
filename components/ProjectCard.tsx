@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Project } from '@/lib/projects';
-import { prefix } from '@/lib/basePath';
+import { withBasePath } from '@/lib/basePath';
 
 interface ProjectCardProps {
   project: Project;
@@ -9,16 +9,16 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   // Fallback to a known existing asset so cards never show a broken image
-  const imgSrc =
+  const first =
     project.images && project.images.length > 0
       ? project.images[0]
       : '/og-image.png';
+  const imgSrc = withBasePath(first);
 
   return (
     <div className="group flex h-full flex-col rounded-lg border border-gray-200 bg-white transition-shadow hover:shadow-xl dark:border-gray-800 dark:bg-gray-900">
       <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
         <Image
-          loader={({ src }) => `${prefix}${src}`}
           src={imgSrc}
           alt={project.title}
           fill
@@ -27,6 +27,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           // Optional perceived-performance improvement:
           // placeholder="blur"
           // blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTAwJyBoZWlnaHQ9JzEwMCc+PC9zdmc+"
+          priority={false}
         />
       </div>
 
@@ -34,6 +35,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <h3 className="mb-2 text-2xl font-semibold text-gray-900 dark:text-white">
           {project.title}
         </h3>
+
         {project.role && (
           <p className="mb-3 text-sm font-medium text-primary-600 dark:text-primary-400">
             {project.role}
@@ -74,7 +76,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
           </div>
         )}
 
-        {/* Fallback to description if case study fields are not present */}
         {!project.problem && !project.approach && !project.result && (
           <p className="mb-4 text-gray-700 dark:text-gray-300">
             {project.description}
