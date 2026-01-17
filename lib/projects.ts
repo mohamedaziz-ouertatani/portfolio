@@ -10,7 +10,7 @@ export interface Project {
   githubLink?: string;
   liveDemoLink?: string;
   images: string[];
-  // Higher number = more important (sorted descending)
+  // Higher number = more important
   priority?: number;
 }
 

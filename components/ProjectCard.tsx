@@ -1,23 +1,24 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Project } from '@/lib/projects';
-import { withBasePath } from '@/lib/basePath';
+import { prefix } from '@/lib/basePath';
 
 interface ProjectCardProps {
   project: Project;
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
-  const imageSrc =
+  const imgSrc =
     project.images && project.images.length > 0
       ? project.images[0]
-      : '/images/placeholder.png';
+      : '/og-image.png';
 
   return (
     <div className="group flex h-full flex-col rounded-lg border border-gray-200 bg-white transition-shadow hover:shadow-xl dark:border-gray-800 dark:bg-gray-900">
       <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
         <Image
-          src={withBasePath(imageSrc)}
+          loader={({ src }) => `${prefix}${src}`}
+          src={imgSrc}
           alt={project.title}
           fill
           className="object-cover transition-transform group-hover:scale-105"
@@ -68,7 +69,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
           </div>
         )}
 
-        {/* Fallback to description if case study fields are not present */}
         {!project.problem && !project.approach && !project.result && (
           <p className="mb-4 text-gray-700 dark:text-gray-300">
             {project.description}

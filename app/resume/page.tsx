@@ -14,7 +14,6 @@ export default function ResumePage() {
   return (
     <main id="main-content" className="container px-4 py-16">
       <div className="mx-auto max-w-5xl space-y-16">
-        {/* Header */}
         <header className="text-center">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
             Mohamed Aziz Ouertatani
@@ -26,7 +25,6 @@ export default function ResumePage() {
           <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
             Tunis, Tunisia
           </p>
-
           <div className="mt-4 flex flex-wrap justify-center gap-4">
             <a
               href="mailto:ouertatanimohamedaziz@gmail.com"
@@ -52,7 +50,6 @@ export default function ResumePage() {
           </div>
         </header>
 
-        {/* Summary */}
         <section>
           <h2 className="mb-4 text-3xl font-bold text-gray-900 dark:text-white">
             Summary
@@ -88,7 +85,6 @@ export default function ResumePage() {
           </div>
         </section>
 
-        {/* Contact Information */}
         <section>
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
             Contact Information
@@ -121,7 +117,6 @@ export default function ResumePage() {
           </div>
         </section>
 
-        {/* Top Skills */}
         <section>
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
             Top Skills
@@ -142,7 +137,6 @@ export default function ResumePage() {
           </div>
         </section>
 
-        {/* Languages */}
         <section>
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
             Languages
@@ -167,7 +161,6 @@ export default function ResumePage() {
           </div>
         </section>
 
-        {/* Certifications */}
         <section>
           <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
             Certifications
@@ -179,13 +172,11 @@ export default function ResumePage() {
           </ul>
         </section>
 
-        {/* Experience Timeline */}
         <section>
           <h2 className="mb-8 text-3xl font-bold text-gray-900 dark:text-white">
             Experience
           </h2>
           <div className="space-y-8 border-l border-gray-300 pl-6 dark:border-gray-700">
-            {/* iTransform365 */}
             <article className="relative">
               <span className="absolute -left-3 top-2 h-3 w-3 rounded-full bg-primary-600"></span>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
@@ -206,7 +197,6 @@ export default function ResumePage() {
               </ul>
             </article>
 
-            {/* Swiver */}
             <article className="relative">
               <span className="absolute -left-3 top-2 h-3 w-3 rounded-full bg-primary-600"></span>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
@@ -256,7 +246,6 @@ export default function ResumePage() {
           </div>
         </section>
 
-        {/* Education */}
         <section>
           <h2 className="mb-4 text-3xl font-bold text-gray-900 dark:text-white">
             Education

@@ -17,20 +17,13 @@ export default function Contact() {
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    }
-
+    if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
     }
-
-    if (!formData.subject.trim()) {
-      newErrors.subject = 'Subject is required';
-    }
-
+    if (!formData.subject.trim()) newErrors.subject = 'Subject is required';
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
     } else if (formData.message.trim().length < 10) {
@@ -60,10 +53,7 @@ export default function Contact() {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-
-    if (errors[name]) {
-      setErrors((prev) => ({ ...prev, [name]: '' }));
-    }
+    if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }));
     if (copied) setCopied(false);
   };
 
@@ -120,7 +110,6 @@ ${formData.message}`;
           </p>
         </div>
 
-        {/* Static Hosting Notice */}
         <div className="mb-6 rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-900 dark:bg-blue-900/20">
           <p className="text-sm text-blue-800 dark:text-blue-300">
             <strong>Note:</strong> This portfolio is statically hosted on GitHub
@@ -130,7 +119,6 @@ ${formData.message}`;
         </div>
 
         <form onSubmit={handleMailtoSubmit} className="space-y-6" noValidate>
-          {/* Name */}
           <div>
             <label
               htmlFor="name"
@@ -163,7 +151,6 @@ ${formData.message}`;
             )}
           </div>
 
-          {/* Email */}
           <div>
             <label
               htmlFor="email"
@@ -196,7 +183,6 @@ ${formData.message}`;
             )}
           </div>
 
-          {/* Subject */}
           <div>
             <label
               htmlFor="subject"
@@ -229,7 +215,6 @@ ${formData.message}`;
             )}
           </div>
 
-          {/* Message */}
           <div>
             <label
               htmlFor="message"
@@ -262,7 +247,6 @@ ${formData.message}`;
             )}
           </div>
 
-          {/* Primary Contact Method */}
           <div className="rounded-lg border-2 border-primary-500 bg-white p-6 dark:border-primary-400 dark:bg-gray-800">
             <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
               Direct Email Contact
@@ -290,7 +274,6 @@ ${formData.message}`;
               Send via Email
             </button>
 
-            {/* Fallback: copy email content */}
             <div className="mt-4 flex items-center justify-between">
               <button
                 type="button"
@@ -306,14 +289,12 @@ ${formData.message}`;
               )}
             </div>
 
-            {/* Preview mailto (read-only) */}
             <div className="mt-4 rounded-md bg-gray-50 p-3 text-xs text-gray-600 dark:bg-gray-900/40 dark:text-gray-300">
               <div className="truncate">mailto preview:</div>
               <div className="truncate">{buildMailto()}</div>
             </div>
           </div>
 
-          {/* Alternative: External Form Service */}
           <div className="rounded-lg border border-gray-200 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-900/50">
             <div className="mb-4 flex items-start justify-between">
               <div>
@@ -350,7 +331,6 @@ ${formData.message}`;
             )}
           </div>
 
-          {/* Form footer actions */}
           <div className="flex items-center justify-between">
             <a
               href="mailto:ouertatanimohamedaziz@gmail.com?subject=Portfolio Contact&body=Hi Mohamed Aziz,%0D%0A%0D%0AI would like to get in touch with you about..."
