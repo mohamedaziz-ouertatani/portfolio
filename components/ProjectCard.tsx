@@ -8,6 +8,7 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  // Fallback to a known existing asset so cards never show a broken image
   const imgSrc =
     project.images && project.images.length > 0
       ? project.images[0]
@@ -23,8 +24,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
           fill
           className="object-cover transition-transform group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          // Optional perceived-performance improvement:
+          // placeholder="blur"
+          // blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTAwJyBoZWlnaHQ9JzEwMCc+PC9zdmc+"
         />
       </div>
+
       <div className="flex flex-1 flex-col p-6">
         <h3 className="mb-2 text-2xl font-semibold text-gray-900 dark:text-white">
           {project.title}
@@ -69,6 +74,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           </div>
         )}
 
+        {/* Fallback to description if case study fields are not present */}
         {!project.problem && !project.approach && !project.result && (
           <p className="mb-4 text-gray-700 dark:text-gray-300">
             {project.description}
