@@ -1,27 +1,29 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Project } from '@/lib/projects';
-import { prefix } from '@/lib/basePath';
+import { withBasePath } from '@/lib/basePath';
 
 interface ProjectCardProps {
   project: Project;
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const imageSrc =
+    project.images && project.images.length > 0
+      ? project.images[0]
+      : '/images/placeholder.png';
+
   return (
     <div className="group flex h-full flex-col rounded-lg border border-gray-200 bg-white transition-shadow hover:shadow-xl dark:border-gray-800 dark:bg-gray-900">
-      {project.images && project.images.length > 0 && (
-        <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
-          <Image
-            loader={({ src }) => `${prefix}${src}`}
-            src={project.images[0]}
-            alt={project.title}
-            fill
-            className="object-cover transition-transform group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-        </div>
-      )}
+      <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
+        <Image
+          src={withBasePath(imageSrc)}
+          alt={project.title}
+          fill
+          className="object-cover transition-transform group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+      </div>
       <div className="flex flex-1 flex-col p-6">
         <h3 className="mb-2 text-2xl font-semibold text-gray-900 dark:text-white">
           {project.title}
