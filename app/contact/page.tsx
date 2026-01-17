@@ -9,9 +9,10 @@ export default function Contact() {
     subject: '',
     message: '',
   });
-  const [showFormspreeNote, setShowFormspreeNote] = useState(false);
 
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [showFormspreeNote, setShowFormspreeNote] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -40,21 +41,18 @@ export default function Contact() {
     return Object.keys(newErrors).length === 0;
   };
 
+  const buildMailto = () => {
+    const subject = encodeURIComponent(formData.subject);
+    const body = encodeURIComponent(
+      `From: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    );
+    return `mailto:ouertatanimohamedaziz@gmail.com?subject=${subject}&body=${body}`;
+  };
+
   const handleMailtoSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
-    // Create mailto link with form data
-    const mailtoLink = `mailto:ouertatanimohamedaziz@gmail.com?subject=${encodeURIComponent(
-      formData.subject
-    )}&body=${encodeURIComponent(
-      `From: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    )}`;
-
-    window.location.href = mailtoLink;
+    if (!validateForm()) return;
+    window.location.href = buildMailto();
   };
 
   const handleChange = (
@@ -62,10 +60,35 @@ export default function Contact() {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
+
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: '' }));
     }
+    if (copied) setCopied(false);
+  };
+
+  const copyEmailContent = async () => {
+    const text = `To: ouertatanimohamedaziz@gmail.com
+Subject: ${formData.subject}
+
+From: ${formData.name}
+Email: ${formData.email}
+
+Message:
+${formData.message}`;
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopied(false);
+    }
+  };
+
+  const resetForm = () => {
+    setFormData({ name: '', email: '', subject: '', message: '' });
+    setErrors({});
+    setCopied(false);
   };
 
   return (
@@ -82,6 +105,7 @@ export default function Contact() {
                 strokeWidth="2"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                aria-hidden="true"
               >
                 <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
@@ -105,7 +129,8 @@ export default function Contact() {
           </p>
         </div>
 
-        <form onSubmit={handleMailtoSubmit} className="space-y-6">
+        <form onSubmit={handleMailtoSubmit} className="space-y-6" noValidate>
+          {/* Name */}
           <div>
             <label
               htmlFor="name"
@@ -125,16 +150,120 @@ export default function Contact() {
                   : 'border-gray-300 focus:ring-primary-500 dark:border-gray-700'
               }`}
               placeholder="Your name"
+              aria-invalid={!!errors.name}
+              aria-describedby={errors.name ? 'name-error' : undefined}
             />
             {errors.name && (
-              <p className="mt-1 text-sm text-red-600 dark:text-red-400">
+              <p
+                id="name-error"
+                className="mt-1 text-sm text-red-600 dark:text-red-400"
+              >
                 {errors.name}
               </p>
             )}
           </div>
 
+          {/* Email */}
+          <div>
+            <label
+              htmlFor="email"
+              className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              Email *
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className={`w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 dark:bg-gray-800 dark:text-white ${
+                errors.email
+                  ? 'border-red-500 focus:ring-red-500'
+                  : 'border-gray-300 focus:ring-primary-500 dark:border-gray-700'
+              }`}
+              placeholder="you@example.com"
+              aria-invalid={!!errors.email}
+              aria-describedby={errors.email ? 'email-error' : undefined}
+            />
+            {errors.email && (
+              <p
+                id="email-error"
+                className="mt-1 text-sm text-red-600 dark:text-red-400"
+              >
+                {errors.email}
+              </p>
+            )}
+          </div>
+
+          {/* Subject */}
+          <div>
+            <label
+              htmlFor="subject"
+              className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              Subject *
+            </label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              value={formData.subject}
+              onChange={handleChange}
+              className={`w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 dark:bg-gray-800 dark:text-white ${
+                errors.subject
+                  ? 'border-red-500 focus:ring-red-500'
+                  : 'border-gray-300 focus:ring-primary-500 dark:border-gray-700'
+              }`}
+              placeholder="How can I help?"
+              aria-invalid={!!errors.subject}
+              aria-describedby={errors.subject ? 'subject-error' : undefined}
+            />
+            {errors.subject && (
+              <p
+                id="subject-error"
+                className="mt-1 text-sm text-red-600 dark:text-red-400"
+              >
+                {errors.subject}
+              </p>
+            )}
+          </div>
+
+          {/* Message */}
+          <div>
+            <label
+              htmlFor="message"
+              className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              Message *
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              rows={6}
+              className={`w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 dark:bg-gray-800 dark:text-white ${
+                errors.message
+                  ? 'border-red-500 focus:ring-red-500'
+                  : 'border-gray-300 focus:ring-primary-500 dark:border-gray-700'
+              }`}
+              placeholder="Tell me about your project or question..."
+              aria-invalid={!!errors.message}
+              aria-describedby={errors.message ? 'message-error' : undefined}
+            />
+            {errors.message && (
+              <p
+                id="message-error"
+                className="mt-1 text-sm text-red-600 dark:text-red-400"
+              >
+                {errors.message}
+              </p>
+            )}
+          </div>
+
           {/* Primary Contact Method */}
-          <div className="mb-8 rounded-lg border-2 border-primary-500 bg-white p-6 dark:border-primary-400 dark:bg-gray-800">
+          <div className="rounded-lg border-2 border-primary-500 bg-white p-6 dark:border-primary-400 dark:bg-gray-800">
             <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
               Direct Email Contact
             </h2>
@@ -142,8 +271,8 @@ export default function Contact() {
               Click the button below to send me an email directly from your
               email client:
             </p>
-            <a
-              href="mailto:ouertatanimohamedaziz@gmail.com?subject=Portfolio Contact&body=Hi Mohamed Aziz,%0D%0A%0D%0AI would like to get in touch with you about..."
+            <button
+              type="submit"
               className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-primary-600 px-6 py-3 font-medium text-white transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               <svg
@@ -154,11 +283,34 @@ export default function Contact() {
                 strokeWidth="2"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                aria-hidden="true"
               >
                 <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              Send Email to ouertatanimohamedaziz@gmail.com
-            </a>
+              Send via Email
+            </button>
+
+            {/* Fallback: copy email content */}
+            <div className="mt-4 flex items-center justify-between">
+              <button
+                type="button"
+                onClick={copyEmailContent}
+                className="text-sm text-primary-600 hover:underline dark:text-primary-400"
+              >
+                Copy email content
+              </button>
+              {copied && (
+                <span className="text-xs text-green-600 dark:text-green-400">
+                  Copied!
+                </span>
+              )}
+            </div>
+
+            {/* Preview mailto (read-only) */}
+            <div className="mt-4 rounded-md bg-gray-50 p-3 text-xs text-gray-600 dark:bg-gray-900/40 dark:text-gray-300">
+              <div className="truncate">mailto preview:</div>
+              <div className="truncate">{buildMailto()}</div>
+            </div>
           </div>
 
           {/* Alternative: External Form Service */}
@@ -174,18 +326,44 @@ export default function Contact() {
                 </p>
               </div>
               <button
+                type="button"
                 onClick={() => setShowFormspreeNote(!showFormspreeNote)}
                 className="text-sm text-primary-600 hover:underline dark:text-primary-400"
+                aria-expanded={showFormspreeNote}
               >
                 {showFormspreeNote ? 'Hide' : 'Show'} Info
               </button>
             </div>
 
-            <button
-              type="submit"
-              className="w-full rounded-lg bg-primary-600 px-6 py-3 font-medium text-white transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+            {showFormspreeNote && (
+              <div className="text-sm text-gray-600 dark:text-gray-400">
+                Example: Replace the form action with
+                <code className="mx-1 rounded bg-gray-200 px-1 py-0.5 dark:bg-gray-800">
+                  action="https://formspree.io/f/your_form_id"
+                </code>
+                and
+                <code className="mx-1 rounded bg-gray-200 px-1 py-0.5 dark:bg-gray-800">
+                  method="POST"
+                </code>
+                .
+              </div>
+            )}
+          </div>
+
+          {/* Form footer actions */}
+          <div className="flex items-center justify-between">
+            <a
+              href="mailto:ouertatanimohamedaziz@gmail.com?subject=Portfolio Contact&body=Hi Mohamed Aziz,%0D%0A%0D%0AI would like to get in touch with you about..."
+              className="text-sm text-primary-600 hover:underline dark:text-primary-400"
             >
-              Send via Email
+              Quick email link
+            </a>
+            <button
+              type="button"
+              onClick={resetForm}
+              className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+            >
+              Reset form
             </button>
           </div>
         </form>
@@ -201,46 +379,6 @@ export default function Contact() {
             ouertatanimohamedaziz@gmail.com
           </a>
         </div>
-
-        {/* Optional External Form Service Example */}
-        {/* <div className="mt-12 rounded-lg border border-gray-200 bg-gray-50 p-6 dark:border-gray-800 dark:bg-gray-900/50">
-          <h3 className="mb-3 text-lg font-semibold text-gray-900 dark:text-white">
-            Alternative: External Form Service
-          </h3>
-          <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
-            If you prefer not to use email clients, you can integrate with
-            external form services like{' '}
-            <a
-              href="https://formspree.io"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary-600 hover:underline dark:text-primary-400"
-            >
-              Formspree
-            </a>{' '}
-            or{' '}
-            <a
-              href="https://www.netlify.com/products/forms/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary-600 hover:underline dark:text-primary-400"
-            >
-              Netlify Forms
-            </a>
-            . These services handle form submissions without requiring a backend
-            in your repository.
-          </p>
-          <p className="text-xs text-gray-500 dark:text-gray-500">
-            Example: Replace the form action with{' '}
-            <code className="rounded bg-gray-200 px-1 py-0.5 dark:bg-gray-800">
-              action="https://formspree.io/f/your_form_id"
-            </code>{' '}
-            and{' '}
-            <code className="rounded bg-gray-200 px-1 py-0.5 dark:bg-gray-800">
-              method="POST"
-            </code>
-          </p>
-        </div> */}
       </div>
     </div>
   );

@@ -20,14 +20,22 @@ export default function Projects() {
     return Array.from(techSet).sort();
   }, []);
 
-  // Filter projects based on selected technologies
+  // Sort helper: higher priority first (missing priority = 0)
+  const byPriorityDesc = (a: { priority?: number }, b: { priority?: number }) =>
+    (b.priority ?? 0) - (a.priority ?? 0);
+
+  // Filter projects based on selected technologies, then sort by priority
   const filteredProjects = useMemo(() => {
-    if (selectedTechnologies.length === 0) {
-      return projectsData;
-    }
-    return projectsData.filter((project) =>
-      selectedTechnologies.every((tech) => project.technologies.includes(tech))
-    );
+    const base =
+      selectedTechnologies.length === 0
+        ? projectsData
+        : projectsData.filter((project) =>
+            selectedTechnologies.every((tech) =>
+              project.technologies.includes(tech)
+            )
+          );
+
+    return [...base].sort(byPriorityDesc);
   }, [selectedTechnologies]);
 
   return (
