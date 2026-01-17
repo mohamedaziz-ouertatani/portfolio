@@ -57,7 +57,7 @@ export default function About() {
           <div className="lg:pl-8">
             <div className="relative mx-auto h-[400px] w-[400px] overflow-hidden rounded-2xl shadow-xl">
               <Image
-                src={withBasePath('/me.jpg')}
+                src={withBasePath('/me2.jpg')}
                 alt="Mohamed Aziz Ouertatani"
                 fill
                 className="object-cover"

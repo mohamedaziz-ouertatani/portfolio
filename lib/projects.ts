@@ -81,7 +81,7 @@ const projectsData: Project[] = [
     ],
     githubLink: '',
     liveDemoLink: '',
-    images: ['/images/MLOpsProject/mlops1.png'],
+    images: ['/images/MLOpsProject/MLOps1.png'],
     priority: 80,
   },
   {

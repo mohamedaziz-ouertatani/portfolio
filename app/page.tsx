@@ -54,7 +54,10 @@ export default function Home() {
               >
                 ESPRIT
               </a>{' '}
-              with a focus on Data Science.
+              with a focus on Data Science — including{' '}
+              <strong>EDA & BI dashboards</strong>,{' '}
+              <strong>ML pipelines (scikit-learn, MLflow)</strong>, and{' '}
+              <strong>containerized deployment</strong>.
             </p>
             <div className="flex flex-wrap justify-center gap-4 lg:justify-start">
               <Link
@@ -113,6 +116,30 @@ export default function Home() {
             icon={<Layout className="text-primary-600" />}
             title="Modern UI/UX"
             description="Responsive, accessible designs using Tailwind CSS and TypeScript."
+          />
+        </div>
+      </section>
+
+      {/* Data Science Focus */}
+      <section className="mb-20">
+        <h2 className="mb-12 text-center text-3xl font-bold text-gray-900 dark:text-white">
+          Data Science Focus
+        </h2>
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <ValueCard
+            icon={<Database className="text-primary-600" />}
+            title="EDA & BI Dashboards"
+            description="Exploratory data analysis and dashboards using Power BI and Data Studio."
+          />
+          <ValueCard
+            icon={<Database className="text-primary-600" />}
+            title="ML Pipelines"
+            description="Training and evaluation with scikit-learn, experiment tracking in MLflow."
+          />
+          <ValueCard
+            icon={<Database className="text-primary-600" />}
+            title="MLOps"
+            description="Containerized deployment with Docker and reproducible artifacts."
           />
         </div>
       </section>
