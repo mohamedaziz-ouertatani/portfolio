@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { experiencesData } from '@/lib/experiences';
 import { projectsData } from '@/lib/projects';
 import skillsData from '@/lib/skills';
+import { withBasePath } from '@/lib/basePath';
 
 export const metadata: Metadata = {
   title: 'Resume | Mohamed Aziz Ouertatani',
@@ -55,7 +56,7 @@ export default function ResumePage() {
               GitHub
             </a>
             <a
-              href="/cv.pdf"
+              href={withBasePath('/cv.pdf')}
               download
               className="rounded-lg bg-primary-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-primary-700"
             >

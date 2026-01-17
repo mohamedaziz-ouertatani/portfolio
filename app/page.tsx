@@ -82,7 +82,7 @@ export default function Home() {
           <div className="animate-slide-up">
             <div className="relative mx-auto h-[320px] w-[320px] overflow-hidden rounded-full border-8 border-white shadow-2xl dark:border-gray-800 lg:h-[400px] lg:w-[400px]">
               <Image
-                src="/me.jpg"
+                src={withBasePath('/me.jpg')}
                 alt="Mohamed Aziz Ouertatani"
                 fill
                 className="object-cover"
