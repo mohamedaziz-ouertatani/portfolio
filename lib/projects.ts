@@ -191,6 +191,39 @@ const projectsData: Project[] = [
     images: ['/images/DataAnalysis/DataAnalysis.png'],
     priority: 20,
   },
+  {
+    id: '10',
+    title: 'Smart Inventory Forecasting & Replenishment Platform',
+    description:
+      'Production-style smart inventory system with demand forecasting, model selection, MLOps tracking, and replenishment recommendations served via secured APIs.',
+    role: 'ML Engineer / Backend Engineer',
+    problem:
+      'Retail inventory decisions require accurate demand forecasts, model transparency, and reproducible pipelines to avoid stockouts and overstock.',
+    approach:
+      'Built an end-to-end, containerized platform with data ingestion, feature engineering, rolling backtests, ETS/ARIMA model selection, MLflow tracking, and PostgreSQL-backed ops schemas. Forecasts and accuracy metrics are persisted and exposed through protected Fastify APIs.',
+    result:
+      'Delivered a stable system that ingests data, trains and evaluates multiple forecasting models, tracks experiments, generates replenishment recommendations, and serves validated forecasts via authenticated endpoints.',
+    technologies: [
+      'Python',
+      'Fastify',
+      'TypeScript',
+      'PostgreSQL',
+      'Docker',
+      'MLflow',
+      'statsmodels',
+      'Pandas',
+      'NumPy',
+      'JWT',
+    ],
+    githubLink: 'https://github.com/mohamedaziz-ouertatani/smart_inventory', // add when repo is public
+    liveDemoLink: '',
+    images: [
+      '/images/SmartInventory/architecture.png',
+      '/images/SmartInventory/forecast_dashboard.png',
+      '/images/SmartInventory/mlflow_runs.png',
+    ],
+    priority: 95,
+  },
 ];
 
 export { projectsData };
