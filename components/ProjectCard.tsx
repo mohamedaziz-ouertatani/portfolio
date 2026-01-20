@@ -3,11 +3,12 @@ import Link from 'next/link';
 import type { Project } from '@/lib/projects';
 import { withBasePath } from '@/lib/basePath';
 
-interface ProjectCardProps {
+export interface ProjectCardProps {
   project: Project;
+  isFeatured?: boolean;
 }
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
   // Fallback to a known existing asset so cards never show a broken image
   const first =
     project.images && project.images.length > 0
@@ -16,7 +17,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
   const imgSrc = withBasePath(first);
 
   return (
-    <div className="group flex h-full flex-col rounded-lg border border-gray-200 bg-white transition-shadow hover:shadow-xl dark:border-gray-800 dark:bg-gray-900">
+    <div className="group relative flex h-full flex-col rounded-lg border border-gray-200 bg-white transition-shadow hover:shadow-xl dark:border-gray-800 dark:bg-gray-900">
+      {/* Featured badge */}
+      {isFeatured && (
+        <span className="absolute right-4 top-4 z-10 rounded bg-yellow-300 px-2 py-0.5 text-xs font-semibold text-gray-900 dark:bg-yellow-400 dark:text-gray-900">
+          Featured
+        </span>
+      )}
+
       <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
         <Image
           src={imgSrc}
@@ -24,70 +32,50 @@ export function ProjectCard({ project }: ProjectCardProps) {
           fill
           className="object-cover transition-transform group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          // Optional perceived-performance improvement:
-          // placeholder="blur"
-          // blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0nMTAwJyBoZWlnaHQ9JzEwMCc+PC9zdmc+"
           priority={false}
         />
       </div>
 
       <div className="flex flex-1 flex-col p-6">
-        <h3 className="mb-2 text-2xl font-semibold text-gray-900 dark:text-white">
+        <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
           {project.title}
         </h3>
 
         {project.role && (
-          <p className="mb-3 text-sm font-medium text-primary-600 dark:text-primary-400">
+          <p className="mb-2 text-xs font-medium text-primary-600 dark:text-primary-400">
             {project.role}
           </p>
         )}
 
-        {/* Case Study Structure */}
-        {project.problem && (
-          <div className="mb-3">
-            <h4 className="mb-1 text-sm font-semibold text-gray-900 dark:text-white">
-              Problem
-            </h4>
-            <p className="text-sm text-gray-700 dark:text-gray-300">
-              {project.problem}
-            </p>
-          </div>
-        )}
+        <p className="mb-2 line-clamp-2 text-sm text-gray-700 dark:text-gray-300">
+          {project.description}
+        </p>
 
-        {project.approach && (
-          <div className="mb-3">
-            <h4 className="mb-1 text-sm font-semibold text-gray-900 dark:text-white">
-              Approach
-            </h4>
-            <p className="text-sm text-gray-700 dark:text-gray-300">
-              {project.approach}
-            </p>
-          </div>
-        )}
-
-        {project.result && (
-          <div className="mb-4">
-            <h4 className="mb-1 text-sm font-semibold text-gray-900 dark:text-white">
-              Result
-            </h4>
-            <p className="text-sm text-gray-700 dark:text-gray-300">
-              {project.result}
-            </p>
-          </div>
-        )}
-
-        {!project.problem && !project.approach && !project.result && (
-          <p className="mb-4 text-gray-700 dark:text-gray-300">
-            {project.description}
-          </p>
-        )}
+        {/* Case Study Structure as compact summary */}
+        <ul className="mb-2 space-y-1 text-xs text-gray-600 dark:text-gray-400">
+          {project.problem && (
+            <li>
+              <strong>Problem:</strong> {project.problem}
+            </li>
+          )}
+          {project.approach && (
+            <li>
+              <strong>Approach:</strong> {project.approach}
+            </li>
+          )}
+          {project.result && (
+            <li>
+              <strong>Result:</strong> {project.result}
+            </li>
+          )}
+        </ul>
 
         {/* Technologies */}
-        <div className="mb-4 flex flex-wrap gap-2">
-          {project.technologies.map((tech, idx) => (
+        <div className="mb-3 flex flex-wrap gap-2">
+          {project.technologies.slice(0, 5).map((tech, idx) => (
             <span
               key={idx}
-              className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+              className="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-300"
             >
               {tech}
             </span>
@@ -101,7 +89,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               href={project.githubLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center text-sm text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400"
+              className="inline-flex items-center text-xs text-primary-600 hover:underline dark:text-primary-400"
             >
               <svg
                 className="mr-1 h-4 w-4"
@@ -123,7 +111,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
               href={project.liveDemoLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center text-sm text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400"
+              className="inline-flex items-center text-xs text-green-700 hover:underline dark:text-green-400"
             >
               <svg
                 className="mr-1 h-4 w-4"
