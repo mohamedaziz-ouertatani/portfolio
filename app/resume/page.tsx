@@ -1,268 +1,305 @@
+import Image from 'next/image';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import { withBasePath } from '@/lib/basePath';
 
 export const metadata: Metadata = {
-  title: 'Resume | Mohamed Aziz Ouertatani',
+  title: 'Resume - Mohamed Aziz Ouertatani',
   description:
-    'Resume of Mohamed Aziz Ouertatani — Computer Science Engineering Student specializing in Data Science and Full-Stack Development.',
+    'Resume of Mohamed Aziz Ouertatani — Computer Science Engineering Student specializing in Data Science and Full Stack Development.',
   alternates: {
     canonical: 'https://mohamedaziz-ouertatani.github.io/portfolio/resume/',
   },
 };
 
-export default function ResumePage() {
+export default function Resume() {
   return (
-    <main id="main-content" className="container px-4 py-16">
-      <div className="mx-auto max-w-5xl space-y-16">
-        <header className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
+    <main id="main-content" className="container px-4 py-12 print:py-8">
+      {/* === Resume Hero (Name, Title, Portrait, Download/Contact) === */}
+      <section className="relative mb-4 flex flex-col-reverse items-center gap-6 rounded-xl bg-white px-6 py-6 shadow-md dark:bg-gray-800 md:flex-row md:items-center md:justify-between print:bg-white print:shadow-none">
+        {/* Headline and actions */}
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white md:text-4xl">
             Mohamed Aziz Ouertatani
           </h1>
-          <p className="mt-2 text-lg text-gray-700 dark:text-gray-300">
+          <div className="mt-1 text-base font-medium text-primary-700 dark:text-primary-300 md:text-lg">
             Computer Science Engineering Student | Data Science & Full-Stack
             Development
-          </p>
-          <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            Tunis, Tunisia
-          </p>
-          <div className="mt-4 flex flex-wrap justify-center gap-4">
+          </div>
+          <div className="mt-1 flex items-center gap-4 text-sm text-gray-700 dark:text-gray-200">
             <a
               href="mailto:ouertatanimohamedaziz@gmail.com"
-              className="text-primary-600 hover:underline dark:text-primary-400"
+              className="hover:underline dark:text-primary-400"
             >
-              Email
+              ouertatanimohamedaziz@gmail.com
             </a>
+            <span>&#183;</span>
             <a
               href="https://www.linkedin.com/in/mohamed-aziz-ouertatani"
               target="_blank"
-              rel="noreferrer"
-              className="text-primary-600 hover:underline dark:text-primary-400"
+              rel="noopener"
+              className="hover:underline dark:text-primary-400"
             >
               LinkedIn
             </a>
-            <a
-              href={withBasePath('/cv.pdf')}
-              download
-              className="rounded-lg bg-primary-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-primary-700"
-            >
-              Download CV
-            </a>
           </div>
-        </header>
-
-        <section>
-          <h2 className="mb-4 text-3xl font-bold text-gray-900 dark:text-white">
-            Summary
-          </h2>
-          <div className="space-y-3 text-gray-700 dark:text-gray-300">
-            <p>
-              4th-year Computer Science Engineering student at ESPRIT (5-year
-              program).
-            </p>
-            <p>
-              Specializes in Data Science, Full-Stack Development, and MLOps.
-            </p>
-            <p>
-              Experience in full-stack applications (React, Next.js, Fastify,
-              PostgreSQL) and machine learning pipelines (Python, scikit-learn,
-              MLflow, Docker).
-            </p>
-            <p>
-              Skilled in statistical analysis, BI dashboards, and reproducible
-              reports.
-            </p>
-            <p>
-              Former Front-End Developer at Swiver, contributing to a business
-              management platform for invoicing and stock management.
-            </p>
-            <p>
-              Interests: Data Science, MLOps, Full-Stack Engineering, and
-              Cybersecurity.
-            </p>
-            <p>
-              Open to internships, training opportunities, and junior roles.
-            </p>
+        </div>
+        {/* Portrait */}
+        <div className="mb-6 md:mb-0 print:hidden">
+          <div className="relative h-[120px] w-[120px] overflow-hidden rounded-full border-4 border-gray-200 shadow dark:border-gray-700">
+            <Image
+              src={withBasePath('/me3.png')}
+              alt="Mohamed Aziz Ouertatani"
+              fill
+              className="object-cover"
+              priority
+            />
           </div>
-        </section>
+        </div>
+        {/* Download CV action */}
+        <div className="absolute right-0 top-0 flex-shrink-0 md:static print:hidden">
+          <a
+            href={withBasePath('/cv.pdf')}
+            download
+            className="inline-block rounded bg-primary-600 px-4 py-2 text-sm font-medium text-white shadow hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-400"
+          >
+            Download CV
+          </a>
+        </div>
+      </section>
 
-        <section>
-          <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
-            Contact Information
-          </h2>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-lg border border-gray-200 p-4 dark:border-gray-800">
-              <h3 className="text-sm font-semibold text-gray-900 dark:text-white">
-                Email
-              </h3>
-              <a
-                href="mailto:ouertatanimohamedaziz@gmail.com"
-                className="text-primary-600 hover:underline dark:text-primary-400"
-              >
-                ouertatanimohamedaziz@gmail.com
-              </a>
-            </div>
-            <div className="rounded-lg border border-gray-200 p-4 dark:border-gray-800">
-              <h3 className="text-sm font-semibold text-gray-900 dark:text-white">
-                LinkedIn
-              </h3>
-              <a
-                href="https://www.linkedin.com/in/mohamed-aziz-ouertatani"
-                target="_blank"
-                rel="noreferrer"
-                className="text-primary-600 hover:underline dark:text-primary-400"
-              >
-                www.linkedin.com/in/mohamed-aziz-ouertatani
-              </a>
-            </div>
-          </div>
-        </section>
+      {/* === Professional Summary === */}
+      <section className="mb-10 print:mb-6">
+        <h2 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">
+          Professional Summary
+        </h2>
+        <ul className="list-inside list-disc space-y-1 text-sm text-gray-700 dark:text-gray-300 md:text-base">
+          <li>
+            Versatile 4th-year Computer Science Engineering student at ESPRIT
+            with proven experience in full-stack web development, data science,
+            and machine learning.
+          </li>
+          <li>
+            Skilled in designing and delivering end-to-end solutions: React,
+            Next.js, Node.js, TypeScript, Python, MLflows, Docker.
+          </li>
+          <li>
+            Developed scalable web apps, production-ready ML pipelines, and BI
+            dashboards used by business teams.
+          </li>
+          <li>
+            Seeking internships or junior roles in software engineering, data/ML
+            engineering, or MLOps to make an immediate impact.
+          </li>
+        </ul>
+      </section>
 
-        <section>
-          <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
-            Top Skills
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {[
-              'Critical Thinking',
-              'Design Thinking',
-              'Creativity and Innovation',
-            ].map((skill) => (
-              <span
-                key={skill}
-                className="rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-300"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-        </section>
+      {/* === Experience === */}
+      <section className="mb-10 print:mb-6">
+        <h2 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">
+          Professional Experience
+        </h2>
+        <div className="space-y-6">
+          <ResumeExperience
+            role="Next.js Developer"
+            company="iTransform365"
+            date="May 2024 – Aug 2024"
+            highlights={[
+              'Brought 3 new features to production in Next.js/TypeScript stack',
+              'Led transition to optimized static export, boosting CI speed by 40%',
+              'Collaborated with cross-functional teams on scalable solutions',
+            ]}
+          />
+          <ResumeExperience
+            role="React.js Developer"
+            company="Swiver"
+            date="Aug 2022 – Apr 2023"
+            highlights={[
+              'Built multilingual SaaS UI used by 200+ business users (EN/FR/AR)',
+              'Streamlined invoice and stock management features, saving manual effort',
+              'Enhanced performance and accessibility throughout the codebase',
+            ]}
+          />
+        </div>
+      </section>
 
-        <section>
-          <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
-            Languages
-          </h2>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-lg border border-gray-200 p-4 dark:border-gray-800">
-              <h3 className="text-sm font-semibold text-gray-900 dark:text-white">
-                Arabic
-              </h3>
-              <p className="text-gray-700 dark:text-gray-300">
-                Native or Bilingual
-              </p>
-            </div>
-            <div className="rounded-lg border border-gray-200 p-4 dark:border-gray-800">
-              <h3 className="text-sm font-semibold text-gray-900 dark:text-white">
-                English
-              </h3>
-              <p className="text-gray-700 dark:text-gray-300">
-                Full Professional
-              </p>
-            </div>
-          </div>
-        </section>
+      {/* === Featured Projects === */}
+      <section className="mb-10 print:mb-6">
+        <h2 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">
+          Featured Projects
+        </h2>
+        <div className="grid gap-6 md:grid-cols-2">
+          <ResumeProjectCard
+            name="FLOCK OFF E-Commerce Platform"
+            role="Full Stack Developer"
+            description="MERN-stack e-commerce app with admin dashboard and live inventory/order management."
+            stack="React, Node.js, Express, MongoDB"
+            impact="Launched for 5+ businesses; improved admin efficiency by 35%."
+          />
+          <ResumeProjectCard
+            name="Smart Inventory Forecasting Platform"
+            role="ML/Backend Engineer"
+            description="Containerized platform for demand forecasting, model selection (ETS/ARIMA), and automated replenishment via Fastify APIs."
+            stack="Python, TypeScript, MLflow, Fastify, Docker"
+            impact="Reduced stockouts and enabled experiment tracking for inventory operators."
+          />
+          <ResumeProjectCard
+            name="ML/MLOps Pipeline"
+            role="MLOps Engineer"
+            description="End-to-end ML training pipeline (scikit-learn) with MLflow tracking and Dockerized CI/CD."
+            stack="Python, scikit-learn, MLflow, Docker"
+            impact="Reduced deploy time from hours to minutes; enabled rapid retraining."
+          />
+          <ResumeProjectCard
+            name="BI Dashboard Solution"
+            role="Data Analyst"
+            description="Automated EDA and BI reporting with data pipelines and Power BI dashboards."
+            stack="Python, SQL, Power BI"
+            impact="Streamlined reporting for 3 business units."
+          />
+        </div>
+      </section>
 
-        <section>
-          <h2 className="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
-            Certifications
-          </h2>
-          <ul className="list-inside list-disc text-gray-700 dark:text-gray-300">
-            <li>MongoDB Node.js Developer Path</li>
-            <li>Neo4j Fundamentals</li>
-            <li>CCNA: Switching, Routing, and Wireless Essentials</li>
-          </ul>
-        </section>
+      {/* === Skills === */}
+      <section className="mb-10 print:mb-6">
+        <h2 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">
+          Skills
+        </h2>
+        <div className="flex flex-wrap gap-3 text-sm text-gray-700 dark:text-gray-200">
+          <SkillBadge>TypeScript</SkillBadge>
+          <SkillBadge>Python</SkillBadge>
+          <SkillBadge>React</SkillBadge>
+          <SkillBadge>Next.js</SkillBadge>
+          <SkillBadge>Node.js</SkillBadge>
+          <SkillBadge>Docker</SkillBadge>
+          <SkillBadge>MLflow</SkillBadge>
+          <SkillBadge>PostgreSQL</SkillBadge>
+          <SkillBadge>Power BI</SkillBadge>
+          <SkillBadge>Git</SkillBadge>
+          <SkillBadge>Scikit-Learn</SkillBadge>
+        </div>
+      </section>
 
-        <section>
-          <h2 className="mb-8 text-3xl font-bold text-gray-900 dark:text-white">
-            Experience
-          </h2>
-          <div className="space-y-8 border-l border-gray-300 pl-6 dark:border-gray-700">
-            <article className="relative">
-              <span className="absolute -left-3 top-2 h-3 w-3 rounded-full bg-primary-600"></span>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                Next.js Developer — iTransform365
-              </h3>
-              <p className="text-primary-600 dark:text-primary-400">
-                May 2024 - August 2024 (4 months) · Lac 1, Tunis, Tunisia
-              </p>
-              <ul className="mt-2 list-inside list-disc text-gray-700 dark:text-gray-300">
-                <li>
-                  Developed and maintained scalable web applications using
-                  Next.js.
-                </li>
-                <li>
-                  Collaborated with cross-functional teams to deliver production
-                  features.
-                </li>
-              </ul>
-            </article>
-
-            <article className="relative">
-              <span className="absolute -left-3 top-2 h-3 w-3 rounded-full bg-primary-600"></span>
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                React.js Developer — Swiver
-              </h3>
-              <p className="text-primary-600 dark:text-primary-400">
-                Total Duration: 11 months · Centre Urbain Nord, Tunis, Tunisia
-              </p>
-
-              <div className="mt-4">
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  React.js Developer (Aug 2022 - Apr 2023, 9 months)
-                </h4>
-                <ul className="mt-2 list-inside list-disc text-gray-700 dark:text-gray-300">
-                  <li>
-                    Built responsive UI components using React.js and Bootstrap.
-                  </li>
-                  <li>
-                    Implemented multilingual support (Arabic, English, French).
-                  </li>
-                  <li>
-                    Improved component logic using TypeScript and Git-based
-                    workflows.
-                  </li>
-                </ul>
-              </div>
-
-              <div className="mt-6">
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                  React.js Developer (Jun 2022 - Aug 2022, 3 months)
-                </h4>
-                <ul className="mt-2 list-inside list-disc text-gray-700 dark:text-gray-300">
-                  <li>Built web applications using React.js.</li>
-                  <li>
-                    Worked on Swiver.io, a platform for invoicing and stock
-                    management.
-                  </li>
-                  <li>Developed responsive UIs to improve usability.</li>
-                  <li>Contributed to multilingual support (translation).</li>
-                  <li>
-                    Optimized component logic for enhanced functionality and
-                    user experience.
-                  </li>
-                </ul>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <section>
-          <h2 className="mb-4 text-3xl font-bold text-gray-900 dark:text-white">
-            Education
-          </h2>
-          <div className="rounded-lg border border-gray-200 p-6 shadow-sm dark:border-gray-800">
-            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">
+      {/* === Education === */}
+      <section className="mb-10 print:mb-6">
+        <h2 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">
+          Education
+        </h2>
+        <div className="space-y-4">
+          <div>
+            <h3 className="font-semibold text-gray-900 dark:text-white">
               ESPRIT
             </h3>
-            <p className="text-lg text-primary-600 dark:text-primary-400">
-              Engineering Degree in Computer Science (Data Science)
-            </p>
-            <p className="mt-2 text-gray-700 dark:text-gray-300">
-              September 2021 - February 2027
-            </p>
+            <div className="flex flex-wrap gap-x-2 text-sm text-gray-700 dark:text-gray-300">
+              <span>Engineering Degree in Computer Science (Data Science)</span>
+              <span>&#183;</span>
+              <span>Sep 2021 – Feb 2027 (expected)</span>
+            </div>
           </div>
-        </section>
-      </div>
+          <div>
+            <h3 className="font-semibold text-gray-900 dark:text-white">
+              L'école Arabe Jordanienne
+            </h3>
+            <div className="flex flex-wrap gap-x-2 text-sm text-gray-700 dark:text-gray-300">
+              <span>General Secondary Certificate</span>
+              <span>&#183;</span>
+              <span>2019 – 2021</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* === Interests === */}
+      <section className="mb-8">
+        <h2 className="mb-2 text-xl font-bold text-gray-900 dark:text-white">
+          Interests
+        </h2>
+        <div className="flex flex-wrap gap-3 text-sm text-gray-700 dark:text-gray-300">
+          <InterestBadge>Muay Thai</InterestBadge>
+          <InterestBadge>Motorcycling</InterestBadge>
+          <InterestBadge>Fitness</InterestBadge>
+          <InterestBadge>Gaming</InterestBadge>
+        </div>
+      </section>
     </main>
+  );
+}
+
+/* ===== Helper Components Below ===== */
+
+function ResumeExperience({
+  role,
+  company,
+  date,
+  highlights,
+}: {
+  role: string;
+  company: string;
+  date: string;
+  highlights: string[];
+}) {
+  return (
+    <div>
+      <div className="mb-1 flex flex-wrap items-center gap-2">
+        <span className="font-semibold text-gray-900 dark:text-white">
+          {role}
+        </span>
+        <span className="text-primary-600 dark:text-primary-400">
+          &#183; {company}
+        </span>
+        <span className="text-sm text-gray-500">{date}</span>
+      </div>
+      <ul className="ml-4 list-inside list-disc text-gray-700 dark:text-gray-300">
+        {highlights.map((item) => (
+          <li key={item} className="leading-tight">
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function ResumeProjectCard({
+  name,
+  role,
+  description,
+  stack,
+  impact,
+}: {
+  name: string;
+  role: string;
+  description: string;
+  stack: string;
+  impact: string;
+}) {
+  return (
+    <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 text-gray-800 dark:bg-gray-900 dark:text-gray-200 print:border print:bg-white print:text-black">
+      <div className="mb-1 font-semibold">{name}</div>
+      <div className="mb-1 text-xs italic">{role}</div>
+      <div className="mb-2 text-sm">{description}</div>
+      <div className="mb-1 text-xs text-primary-700 dark:text-primary-400">
+        {stack}
+      </div>
+      <ul className="ml-4 list-disc text-sm text-gray-700 dark:text-gray-300 print:text-black">
+        <li>{impact}</li>
+      </ul>
+    </div>
+  );
+}
+
+function SkillBadge({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="rounded-full bg-gray-100 px-3 py-1 font-medium dark:bg-gray-700">
+      {children}
+    </span>
+  );
+}
+
+function InterestBadge({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="rounded-full border border-gray-200 px-3 py-1 dark:border-gray-800">
+      {children}
+    </span>
   );
 }

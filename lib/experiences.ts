@@ -9,7 +9,7 @@ export interface Experience {
 
 const experiencesData: Experience[] = [
   {
-    jobTitle: 'Next.js Developer',
+    jobTitle: 'Next.js Developer Intern',
     companyName: 'iTransform365',
     date: 'May 2024 – Aug 2024',
     description: `Developed and maintained scalable web applications using Next.js, collaborating with cross-functional teams to deliver high-quality solutions.`,
