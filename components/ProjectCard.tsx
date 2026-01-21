@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Project } from '@/lib/projects';
+import { useState } from 'react';
 import { withBasePath } from '@/lib/basePath';
 
 export interface ProjectCardProps {
@@ -9,12 +10,28 @@ export interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
+  const [expanded, setExpanded] = useState(false);
+
   // Fallback to a known existing asset so cards never show a broken image
   const first =
     project.images && project.images.length > 0
       ? project.images[0]
       : '/og-image.png';
   const imgSrc = withBasePath(first);
+
+  // Compact case study summary
+  const summary = [
+    project.problem ? `Problem: ${project.problem}` : '',
+    project.approach ? `Approach: ${project.approach}` : '',
+    project.result ? `Result: ${project.result}` : '',
+  ].filter(Boolean);
+
+  // Show first line & "Read more" if needed
+  const hasDetails =
+    project.problem ||
+    project.approach ||
+    project.result ||
+    !!project.description;
 
   return (
     <div className="group relative flex h-full flex-col rounded-lg border border-gray-200 bg-white transition-shadow hover:shadow-xl dark:border-gray-800 dark:bg-gray-900">
@@ -51,24 +68,45 @@ export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
           {project.description}
         </p>
 
-        {/* Case Study Structure as compact summary */}
-        <ul className="mb-2 space-y-1 text-xs text-gray-600 dark:text-gray-400">
-          {project.problem && (
-            <li>
-              <strong>Problem:</strong> {project.problem}
-            </li>
+        {/* Read more for case study */}
+        <div className="mb-2">
+          {!expanded && !!hasDetails && (
+            <>
+              {summary[0] && (
+                <div className="mb-1 text-xs text-gray-600 dark:text-gray-400">
+                  <strong>{summary[0].split(':')[0]}:</strong>{' '}
+                  {summary[0].split(':').slice(1).join(':').trim()}
+                </div>
+              )}
+              {summary.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => setExpanded(true)}
+                  className="text-xs text-primary-600 hover:underline dark:text-primary-400"
+                >
+                  Read more
+                </button>
+              )}
+            </>
           )}
-          {project.approach && (
-            <li>
-              <strong>Approach:</strong> {project.approach}
-            </li>
+          {expanded && (
+            <ul className="space-y-1 text-xs text-gray-600 dark:text-gray-400">
+              {summary.map((s, idx) => (
+                <li key={idx}>
+                  <strong>{s.split(':')[0]}:</strong>{' '}
+                  {s.split(':').slice(1).join(':').trim()}
+                </li>
+              ))}
+              <button
+                type="button"
+                onClick={() => setExpanded(false)}
+                className="text-xs text-primary-600 hover:underline dark:text-primary-400"
+              >
+                Show less
+              </button>
+            </ul>
           )}
-          {project.result && (
-            <li>
-              <strong>Result:</strong> {project.result}
-            </li>
-          )}
-        </ul>
+        </div>
 
         {/* Technologies */}
         <div className="mb-3 flex flex-wrap gap-2">
@@ -127,6 +165,12 @@ export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
               Demo
             </a>
           )}
+          <Link
+            href={`/projects/${project.id}`}
+            className="inline-flex items-center text-xs text-primary-700 underline hover:text-primary-900 dark:text-primary-400 dark:hover:text-primary-300"
+          >
+            View Details
+          </Link>
         </div>
       </div>
     </div>

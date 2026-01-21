@@ -31,11 +31,11 @@ const projectsData: Project[] = [
     githubLink: 'https://github.com/mohamedaziz-ouertatani/flock-off-ecommerce',
     liveDemoLink: '',
     images: [
+      '/images/FLOCKOFF/flockoff3.png',
       '/images/FLOCKOFF/flockoff1.png',
       '/images/FLOCKOFF/flockoff2.png',
-      '/images/FLOCKOFF/flockoff3.png',
     ],
-    priority: 100,
+    priority: 70,
   },
   {
     id: '8',
@@ -219,11 +219,41 @@ const projectsData: Project[] = [
     liveDemoLink: '',
     images: [
       '/images/SmartInventory/architecture.png',
-      '/images/SmartInventory/forecast_dashboard.png',
       '/images/SmartInventory/mlflow_runs.png',
     ],
     priority: 95,
   },
+  {
+    id: '11',
+    title: 'Estate-Mind: Tunisian Real Estate Data Pipeline & Advanced EDA',
+    description:
+      'Comprehensive data pipeline and exploratory data analysis (EDA) project for multi-source Tunisian real estate listings dataset. Includes full data cleaning, standardization, enrichment, statistics, and advanced visualization in Python notebooks.',
+    role: 'Data Engineer & Analyst',
+    problem:
+      'Tunisia’s second-hand real estate market had fragmented, unstructured online listing data from multiple sources with inconsistent fields and limited actionable insights.',
+    approach:
+      'Engineered a robust data pipeline using pandas for loading and cleaning scraped data from various sources, parsed and standardized location & price fields, extracted features (e.g., type, bedrooms, listing “age”), and produced cleaned artifacts for analysis. Built detailed EDA notebooks with summary stats, geographic and price distribution visualizations, density heatmaps, and property-type clustering.',
+    result:
+      'Delivered a reproducible pipeline and advanced analysis notebooks yielding actionable market insights (e.g., price distribution by region, listing activity, rental/sale split, spatial visualizations, and clustering of property segments). Created high-quality figures and reporting-ready visuals for portfolio and business use.',
+    technologies: [
+      'Python',
+      'pandas',
+      'seaborn',
+      'matplotlib',
+      'plotly',
+      'scikit-learn',
+      'Jupyter Notebook',
+      'Data Cleaning',
+      'Data Visualization',
+      'Clustering',
+      'EDA',
+    ],
+    githubLink: 'https://github.com/mohamedaziz-ouertatani/estate-mind',
+    liveDemoLink: '',
+    images: ['/images/mind-estate/Figure_1.png'],
+    priority: 100,
+  },
+  // Add other projects here...
 ];
 
 export { projectsData };
