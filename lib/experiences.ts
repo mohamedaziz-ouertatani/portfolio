@@ -2,9 +2,11 @@ export interface Experience {
   jobTitle: string;
   companyName: string;
   date: string;
-  description: string;
-  contributions: string[];
+  description?: string;
   skills: string[];
+  contributions: string[];
+  github?: string; // <-- Add this
+  demo?: string; // <-- And this
 }
 
 const experiencesData: Experience[] = [
