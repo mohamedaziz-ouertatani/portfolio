@@ -68,7 +68,7 @@ const experiencesData: Experience[] = [
   {
     jobTitle: 'Academic Project Developer',
     companyName: 'ESPRIT',
-    date: '2021 – 2023',
+    date: '2021 – Present',
     description: `Collaborated on multiple academic projects including e-commerce platforms, games, and desktop applications.`,
     contributions: [
       'Developed MERN-stack e-commerce platform with user and admin dashboards.',

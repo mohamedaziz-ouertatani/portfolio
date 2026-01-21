@@ -1,499 +1,309 @@
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { experiencesData } from '@/lib/experiences';
-import skillsData from '@/lib/skills';
 import { withBasePath } from '@/lib/basePath';
 
 export const metadata: Metadata = {
   title: 'About - Mohamed Aziz Ouertatani',
   description:
-    'Portfolio of Mohamed Aziz Ouertatani — Computer Science Engineering Student specializing in Data Science and Full Stack Development.',
+    'Computer Science Engineering student at ESPRIT specialized in Data Science, MLOps, and production-grade full stack development. Proven experience with MLflow, Fastify APIs, Docker pipelines, and quantifiable business impact.',
   alternates: {
     canonical: 'https://mohamedaziz-ouertatani.github.io/portfolio/about/',
   },
 };
 
-// Estate-Mind supplemental/unique skills for the Skills section
-const estateMindSkills = [
-  'Python',
-  'pandas',
-  'seaborn',
-  'matplotlib',
-  'plotly',
-  'scikit-learn',
-  'Jupyter',
-  'ETL',
-  'Data Pipeline',
-  'EDA',
-  'Data Visualization',
-  'Outlier Detection',
-  'Clustering',
-  'Geospatial Analysis',
-  'Feature Engineering',
-  'Automated Data Enrichment',
-];
-
 export default function About() {
   return (
-    <div className="container mx-auto max-w-screen-lg px-4 py-16">
-      {/* Hero Bio Section */}
+    <div className="container mx-auto max-w-4xl px-4 py-16 md:py-24">
+      {/* Hero Bio Section (CV-tight, no quotes/motto) */}
       <section className="mb-20">
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
           <div>
-            <h1 className="mb-6 text-4xl font-extrabold text-gray-900 dark:text-white md:text-5xl">
+            <h1 className="mb-8 text-4xl font-bold tracking-tight text-gray-900 dark:text-white md:text-5xl">
               About Me
             </h1>
             <div className="space-y-4 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
               <p>
-                <strong>Hi! I’m Mohamed Aziz Ouertatani,</strong> a Computer
-                Science Engineering student at{' '}
+                Fourth-year Computer Science Engineering student at{' '}
                 <a
                   href="https://esprit.tn/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary-600 hover:underline dark:text-primary-400"
+                  className="font-semibold text-primary-600 hover:underline dark:text-primary-400"
                 >
                   ESPRIT
                 </a>
-                , deeply focused on <b>Data Science</b> and{' '}
-                <b>Full Stack Web Development</b>.
+                , specializing in Data Science and production MLOps platforms.
               </p>
               <p>
-                When I’m not coding, I’m often optimizing workflows, mentoring
-                friends, learning new ML tricks, or sparring in Muay Thai. I
-                believe in the power of{' '}
-                <span className="text-primary-700 dark:text-primary-400">
-                  automation
-                </span>
-                , and I build solutions with the motto:
-                <br />
-                <span className="font-semibold italic text-blue-700 dark:text-blue-400">
-                  "If you can automate it, you should."
-                </span>
+                Experienced architect: ML forecasting (ETS/ARIMA, MLflow
+                tracking), Fastify APIs (JWT/RBAC), PostgreSQL warehousing, and
+                Dockerized pipelines delivering BI analytics.
               </p>
               <p>
-                <b>Tech specialties:</b> React, Next.js, Node.js, TypeScript,
-                Python, MLOps, scikit-learn, MLflow, Power BI.
-                <br />
-                <span className="text-sm text-gray-500">
-                  I ship robust and scalable web & data products, from idea to
-                  production.
-                </span>
+                Proven at iTransform365 (Next.js) and Swiver (React); shipping
+                scalable code from prototype to production.
               </p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                <span className="rounded bg-primary-100 px-3 py-1 text-primary-700 dark:bg-primary-900/20 dark:text-primary-200">
-                  TypeScript
+            </div>
+            <div className="mt-8 flex flex-wrap gap-3">
+              {[
+                { label: 'TypeScript', color: 'primary' },
+                { label: 'React/Next.js', color: 'blue' },
+                { label: 'Python', color: 'green' },
+                { label: 'MLflow/Docker', color: 'indigo' },
+                { label: 'PostgreSQL', color: 'gray' },
+              ].map(({ label, color }) => (
+                <span
+                  key={label}
+                  className={`rounded-lg bg-${color}-100 px-4 py-2 text-sm font-medium text-${color}-700 dark:bg-${color}-900/20 dark:text-${color}-300`}
+                >
+                  {label}
                 </span>
-                <span className="rounded bg-blue-100 px-3 py-1 text-blue-700 dark:bg-blue-900/20 dark:text-blue-300">
-                  React/Next.js
-                </span>
-                <span className="rounded bg-green-100 px-3 py-1 text-green-700 dark:bg-green-900/20 dark:text-green-300">
-                  Python
-                </span>
-                <span className="rounded bg-yellow-100 px-3 py-1 text-yellow-700 dark:bg-yellow-900/20 dark:text-yellow-200">
-                  Data Science
-                </span>
-                <span className="rounded bg-sky-100 px-3 py-1 text-sky-700 dark:bg-sky-900/20 dark:text-sky-300">
-                  MLOps
-                </span>
-                <span className="rounded bg-gray-100 px-3 py-1 text-gray-700 dark:bg-gray-700 dark:text-gray-300">
-                  DevOps
-                </span>
-              </div>
-              <div className="pt-1">
-                <span className="mr-2 inline-block text-xs font-semibold text-primary-700 dark:text-primary-300">
-                  Languages:
-                </span>
-                <span className="mr-1 rounded bg-primary-50 px-2 py-0.5">
-                  AR
-                </span>
-                <span className="mr-1 rounded bg-primary-50 px-2 py-0.5">
-                  FR
-                </span>
-                <span className="rounded bg-primary-50 px-2 py-0.5">EN</span>
-                <span className="ml-3 text-xs text-gray-400">
-                  / Native or Fluent
-                </span>
-              </div>
+              ))}
+            </div>
+            <div className="mt-6 flex items-center gap-4 text-sm">
+              <span className="font-semibold text-gray-900 dark:text-white">
+                Languages:
+              </span>
+              <span className="rounded bg-primary-50 px-3 py-1 text-primary-700 dark:bg-primary-900/20 dark:text-primary-300">
+                AR (Native)
+              </span>
+              <span className="rounded bg-primary-50 px-3 py-1 text-primary-700 dark:bg-primary-900/20 dark:text-primary-300">
+                FR (Fluent)
+              </span>
+              <span className="rounded bg-primary-50 px-3 py-1 text-primary-700 dark:bg-primary-900/20 dark:text-primary-300">
+                EN (Fluent)
+              </span>
             </div>
           </div>
-          <div className="flex items-center lg:justify-end">
-            <div className="relative mx-auto h-[320px] w-[320px] overflow-hidden rounded-2xl border-8 border-white shadow-2xl dark:border-gray-800 md:h-[380px] md:w-[380px]">
-              <Image
-                src={withBasePath('/me2.jpg')}
-                alt="Mohamed Aziz Ouertatani"
-                fill
-                className="object-cover transition-transform duration-300 ease-in-out hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 380px"
-                priority
-              />
-              {/* Glow */}
-              <div className="pointer-events-none absolute -inset-1 z-0 animate-pulse rounded-2xl bg-gradient-to-tr from-primary-100 via-transparent to-blue-50 opacity-70 blur-3xl" />
-            </div>
+          <div className="relative mx-auto h-80 w-80 overflow-hidden rounded-2xl border-4 border-white shadow-xl dark:border-gray-800 md:h-96 md:w-96 lg:h-[420px] lg:w-[420px]">
+            <Image
+              src={withBasePath('/me2.jpg')}
+              alt="Mohamed Aziz Ouertatani"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 420px"
+              priority
+            />
           </div>
         </div>
       </section>
 
-      {/* Aspirations Section */}
-      <section className="mb-16">
-        <h2 className="mb-6 text-2xl font-bold text-primary-700 dark:text-primary-400">
-          What I’m Looking For
-        </h2>
-        <ul className="list-inside list-disc space-y-2 text-lg text-gray-700 dark:text-gray-300">
-          <li>
-            I’m seeking <b>internships</b> or <b>junior roles</b> in full stack
-            web, data engineering, or MLOps where I can contribute, learn, and
-            grow.
-          </li>
-          <li>
-            I thrive in <b>product-driven</b> and <b>collaborative teams</b>
-            —especially where learning, code reviews, and building go hand in
-            hand.
-          </li>
-          <li>
-            I love shipping features, building dashboards, and turning ML/data
-            prototypes into business value.
-          </li>
-        </ul>
-        <div className="mt-5 text-base text-gray-500">
-          <strong>Open to:</strong> Internships, part/full-time, research roles,
-          and remote or hybrid setups.
-        </div>
-      </section>
-
-      {/* Experience Section */}
-      <section className="mb-18">
+      {/* Career Aspirations */}
+      <section className="mb-24">
         <h2 className="mb-8 text-3xl font-bold text-gray-900 dark:text-white">
-          <span className="text-primary-800 dark:text-primary-400">
-            Professional Experience
+          <span className="text-primary-700 dark:text-primary-400">
+            What I’m Seeking
           </span>
         </h2>
-        <div className="space-y-10">
-          {experiencesData.map((experience, index) =>
-            experience.jobTitle === 'Academic Project Developer' ? (
-              <article
-                key={index}
-                className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900"
-              >
-                <header className="mb-2">
-                  <h3 className="text-2xl font-semibold text-primary-700 dark:text-primary-400">
-                    {experience.jobTitle}
-                  </h3>
-                  <p className="text-lg font-medium text-blue-700 dark:text-blue-300">
-                    {experience.companyName}
+        <div className="grid max-w-2xl gap-6 text-lg text-gray-700 dark:text-gray-300">
+          <div>
+            <strong>Open to</strong>: Junior or internship positions in Data
+            Engineering, MLOps, or Full-Stack Development, remote/hybrid
+            (Tunisia/EU).
+          </div>
+          <div>
+            Thrive in product-driven teams—building production ML pipelines and
+            dashboards, quantifying business impact, and optimizing data
+            workflows.
+          </div>
+        </div>
+      </section>
+
+      {/* Professional Experience (CV-Aligned) */}
+      <section className="mb-24">
+        <h2 className="mb-12 text-4xl font-bold text-gray-900 dark:text-white">
+          <span className="text-primary-700 dark:text-primary-400">
+            Experience
+          </span>
+        </h2>
+        <div className="space-y-8">
+          {experiencesData.map((experience, index) => (
+            <article
+              key={index}
+              className="group rounded-2xl border border-gray-200 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-xl dark:border-gray-800 dark:bg-gray-900/50"
+            >
+              <header className="mb-6">
+                <h3 className="text-2xl font-bold text-primary-700 group-hover:text-primary-800 dark:text-primary-400 dark:group-hover:text-primary-300">
+                  {experience.jobTitle}
+                </h3>
+                <p className="mt-1 text-xl font-semibold text-gray-900 dark:text-white">
+                  {experience.companyName}
+                </p>
+                <p className="mt-1 text-base font-medium text-blue-600 dark:text-blue-400">
+                  {experience.date}
+                </p>
+                <div className="mt-4 flex gap-4 text-sm">
+                  {experience.github && (
+                    <a
+                      href={experience.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-primary-600 hover:underline dark:text-primary-400"
+                    >
+                      GitHub
+                    </a>
+                  )}
+                  {experience.demo && (
+                    <a
+                      href={experience.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-green-600 hover:underline dark:text-green-400"
+                    >
+                      Demo
+                    </a>
+                  )}
+                </div>
+              </header>
+              {experience.jobTitle === 'Academic Project Developer' ? (
+                <div>
+                  <p className="mb-4 text-lg font-semibold text-gray-800 dark:text-gray-200">
+                    Developed <strong>Estate-Mind</strong>: an advanced
+                    end-to-end data pipeline and exploratory analytics system
+                    for Tunisian real estate market data.
                   </p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    {experience.date}
-                  </p>
-                </header>
-                {experience.description && (
-                  <p className="mb-4 font-medium text-gray-800 dark:text-gray-200">
-                    {experience.description}
-                  </p>
-                )}
-                {/* --- Enhanced Estate-Mind achievement --- */}
-                <div className="mb-4 rounded-xl border border-blue-200 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-900/20">
-                  <div className="mb-1 font-bold text-blue-900 dark:text-blue-200">
-                    <span className="text-lg">
-                      🏆 Featured: Estate-Mind — Advanced Data Pipeline & EDA
-                      for Tunisian Real Estate
-                    </span>
-                  </div>
-                  <div className="mb-2 text-base text-gray-700 dark:text-gray-300">
-                    <b>Role:</b> Data Engineer & Analyst
-                    <br />
-                    <b>Impact:</b> Automated consolidation and EDA for 15,000+
-                    listings, harmonizing 90%+ fields from 7+ sources.
-                    <br />
-                    Designed a robust ETL pipeline for multi-source web data,
-                    conducted geospatial clustering, price heatmap generation,
-                    and built 30+ meaningful analytics to drive the first
-                    cross-market price benchmarking in Tunisia.
-                  </div>
-                  <ul className="mb-2 ml-5 list-disc text-sm text-gray-700 dark:text-gray-300">
+                  <ul className="mb-6 ml-6 list-disc space-y-3 text-gray-700 dark:text-gray-300">
                     <li>
-                      Reduced manual data preparation by 80% for academic
-                      BI/analytics tasks
+                      Automated ETL and normalization for 15,000+ multi-source
+                      real estate listings across Tunisia.
                     </li>
                     <li>
-                      Delivered true city-by-city price heatmaps and outlier
-                      analytics for actionable urban insights
+                      Designed clustering algorithms, outlier detection, and
+                      interactive price benchmarking dashboards for agencies and
+                      investors.
                     </li>
                     <li>
-                      Published reproducible notebooks blending EDA, geospatial
-                      mapping & clustering (Python, pandas, scikit-learn,
-                      plotly)
+                      Delivered reproducible EDA notebooks, geospatial mapping,
+                      and reduced manual data prep by 80%.
                     </li>
                   </ul>
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {estateMindSkills.map((s) => (
-                      <span
-                        key={s}
-                        className="rounded bg-gray-200 px-2 py-1 text-xs dark:bg-gray-700 dark:text-white"
-                      >
-                        {s}
-                      </span>
+                </div>
+              ) : (
+                <>
+                  {experience.description && (
+                    <p className="mb-6 text-lg font-semibold text-gray-800 dark:text-gray-200">
+                      {experience.description}
+                    </p>
+                  )}
+                  <ul className="mb-6 ml-6 list-disc space-y-3 text-gray-700 dark:text-gray-300">
+                    {experience.contributions.map((contribution, idx) => (
+                      <li key={idx}>{contribution}</li>
                     ))}
-                  </div>
-                  {/* <div className="flex flex-wrap gap-4 pt-3">
-                    <a
-                      className="font-semibold text-primary-600 underline dark:text-primary-400"
-                      href="https://github.com/mohamedaziz-ouertatani/estate-mind-tayara-eda"
-                      target="_blank"
-                      rel="noopener"
-                    >
-                      GitHub Repo
-                    </a>
-                    <a
-                      className="font-semibold text-green-700 underline dark:text-green-300"
-                      href="https://github.com/mohamedaziz-ouertatani/estate-mind-tayara-eda#demo"
-                      target="_blank"
-                      rel="noopener"
-                    >
-                      Visual Demo
-                    </a>
-                  </div> */}
-                </div>
-                {/* --- End enhancement --- */}
-                <ul className="mb-3 list-inside list-disc space-y-1 text-gray-700 dark:text-gray-300">
-                  {experience.contributions.map((contribution, idx) => (
-                    <li key={idx}>{contribution}</li>
-                  ))}
-                </ul>
-                <div className="mt-2 flex flex-wrap gap-2">
-                  {experience.skills.map((skill, idx) => (
-                    <span
-                      key={idx}
-                      className="rounded-full bg-primary-100 px-3 py-1 text-sm text-primary-700 dark:bg-primary-900/20 dark:text-primary-300"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            ) : (
-              <article
-                key={index}
-                className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900"
-              >
-                <header className="mb-2">
-                  <h3 className="text-2xl font-semibold text-primary-700 dark:text-primary-400">
-                    {experience.jobTitle}
-                  </h3>
-                  <p className="text-lg font-medium text-blue-700 dark:text-blue-300">
-                    {experience.companyName}
-                  </p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    {experience.date}
-                  </p>
-                </header>
-                {experience.description && (
-                  <p className="mb-4 font-medium text-gray-800 dark:text-gray-200">
-                    {experience.description}
-                  </p>
-                )}
-                <ul className="mb-3 list-inside list-disc space-y-1 text-gray-700 dark:text-gray-300">
-                  {experience.contributions.map((contribution, idx) => (
-                    <li key={idx}>{contribution}</li>
-                  ))}
-                </ul>
-                <div className="mt-2 flex flex-wrap gap-2">
-                  {experience.skills.map((skill, idx) => (
-                    <span
-                      key={idx}
-                      className="rounded-full bg-primary-100 px-3 py-1 text-sm text-primary-700 dark:bg-primary-900/20 dark:text-primary-300"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            )
-          )}
+                  </ul>
+                </>
+              )}
+              <div className="flex flex-wrap items-center gap-3">
+                {experience.skills.map((skill, idx) => (
+                  <span
+                    key={idx}
+                    className="rounded-full bg-primary-50 px-4 py-2 text-sm font-medium text-primary-700 dark:bg-primary-900/20 dark:text-primary-300"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
-      {/* Skills Section - now includes Estate-Mind stack */}
-      <section className="mt-24">
-        <h2 className="mb-8 text-3xl font-bold text-gray-900 dark:text-white">
-          <span className="text-primary-800 dark:text-primary-400">
-            Skills At a Glance
+      {/* Professional Skills Grid (progress bars, 3-column) */}
+      <section className="mb-24">
+        <h2 className="mb-12 text-4xl font-bold text-gray-900 dark:text-white">
+          <span className="text-primary-700 dark:text-primary-400">
+            Skills & Tools
           </span>
         </h2>
-        <div className="mb-12 grid gap-8 text-base md:grid-cols-3">
-          <div>
-            <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
-              Languages
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {/* estateMindSkills merged into skillsData.languages (if not present) */}
-              {[
-                ...skillsData.languages.map((s) => s.name),
-                ...(estateMindSkills.includes('Python') ? [] : ['Python']),
-                ...(estateMindSkills.includes('Jupyter') ? [] : ['Jupyter']),
-              ].map((skill, idx) => (
-                <span
-                  key={idx}
-                  className="rounded bg-gray-200 px-3 py-1 text-sm dark:bg-gray-700 dark:text-white"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div>
-            <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
-              Frameworks & Libraries
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {[
-                ...skillsData.librariesFrameworks.map((s) => s.name),
-                ...estateMindSkills.filter(
-                  (s) =>
-                    [
-                      'pandas',
-                      'seaborn',
-                      'matplotlib',
-                      'plotly',
-                      'scikit-learn',
-                    ].includes(s) &&
-                    !skillsData.librariesFrameworks
-                      .map((f) => f.name)
-                      .includes(s)
-                ),
-              ].map((skill, idx) => (
-                <span
-                  key={idx}
-                  className="rounded bg-gray-200 px-3 py-1 text-sm dark:bg-gray-700 dark:text-white"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div>
-            <h3 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
-              Tools & Techniques
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {[
-                ...skillsData.tools.map((s) => s.name),
-                ...estateMindSkills.filter(
-                  (s) =>
-                    [
-                      'ETL',
-                      'Data Pipeline',
-                      'EDA',
-                      'Data Visualization',
-                      'Outlier Detection',
-                      'Clustering',
-                      'Geospatial Analysis',
-                      'Feature Engineering',
-                      'Automated Data Enrichment',
-                    ].includes(s) &&
-                    !skillsData.tools.map((t) => t.name).includes(s)
-                ),
-              ].map((skill, idx) => (
-                <span
-                  key={idx}
-                  className="rounded bg-gray-200 px-3 py-1 text-sm dark:bg-gray-700 dark:text-white"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-        {/* Technologies in Practice */}
-        <h3 className="mb-6 mt-2 text-xl font-bold text-gray-900 dark:text-white">
-          Technologies In Practice
-        </h3>
-        <div className="grid gap-4 md:grid-cols-3">
-          <TechCard
-            title="Web Applications"
-            items={['React', 'Next.js', 'Node.js', 'PostgreSQL', 'MongoDB']}
-          />
-          <TechCard
-            title="Data & ML"
+        <div className="grid gap-8 md:grid-cols-3">
+          <SkillGroup
+            title="Languages"
             items={[
-              'Python',
-              'Pandas',
-              'scikit-learn',
-              'MLflow',
-              'Power BI',
-              'Data Pipeline',
-              'EDA',
-              'Geospatial Analysis',
+              ['Python (Expert)', 95],
+              ['TypeScript', 90],
+              ['SQL', 85],
+              ['Java', 75],
+              ['R', 70],
             ]}
           />
-          <TechCard
-            title="Dev & Ops"
-            items={['Git', 'Docker', 'CI/CD', 'Containers']}
+          <SkillGroup
+            title="Data/ML"
+            items={[
+              ['Pandas/NumPy', 92],
+              ['scikit-learn', 88],
+              ['MLflow', 85],
+              ['statsmodels', 80],
+              ['Metabase/Power BI', 82],
+            ]}
+          />
+          <SkillGroup
+            title="DevOps/Backend"
+            items={[
+              ['Docker', 87],
+              ['Fastify/Node', 85],
+              ['PostgreSQL', 88],
+              ['JWT/RBAC', 82],
+            ]}
           />
         </div>
       </section>
 
-      {/* Extra: Fun Facts, Interests */}
+      {/* Credentials/Education Section */}
       <section className="mt-24">
-        <h2 className="mb-6 text-2xl font-bold text-gray-900 dark:text-white md:text-3xl">
-          Beyond Coding
+        <h2 className="mb-8 text-3xl font-bold text-gray-900 dark:text-white">
+          Credentials
         </h2>
-        <div className="grid items-start gap-10 md:grid-cols-2">
-          <ul className="space-y-2 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-            <li>
-              🥊 Practicing <strong>Muay Thai</strong> (martial arts,
-              discipline, and mental focus)
-            </li>
-            <li>
-              🏍️ Enjoy riding motorcycles, adventure, and the thrill of
-              mastering new skills
-            </li>
-            <li>
-              🎮 Gaming (strategy, reflexes, teamwork), video editing, and
-              creative coding mini-projects
-            </li>
-            <li>
-              📊 Love storytelling through data visualizations and slide design
-            </li>
-          </ul>
-          <div>
-            <div className="rounded-lg bg-sky-50 p-4 dark:bg-sky-900/10">
-              <div className="mb-2 font-semibold text-primary-700 dark:text-primary-300">
-                Fun Fact:
-              </div>
-              <div className="text-gray-700 dark:text-gray-300">
-                Built a 2D game with a custom Arduino joystick and automated ML
-                reporting for my own study projects.
-              </div>
-            </div>
-            <div className="mt-6 rounded-lg bg-yellow-50 p-4 dark:bg-yellow-900/10">
-              <div className="mb-2 font-semibold text-yellow-800 dark:text-yellow-200">
-                My philosophy:
-              </div>
-              <div className="italic text-gray-600 dark:text-gray-300">
-                "Be the engineer who adapts fast and leaves things better than
-                they found them."
-              </div>
-            </div>
-          </div>
+        <div className="grid gap-6 md:grid-cols-2">
+          <Card
+            title="Education"
+            content="Engineering Degree in Computer Science, Data Science focus. ESPRIT (2021–Present). Areas: ML, Databases, Systems Design."
+          />
+          <Card
+            title="Certifications"
+            content="CCNA (Cisco), MongoDB Node.js Developer, Neo4j Fundamentals."
+          />
         </div>
       </section>
     </div>
   );
 }
 
-// ----- Inline helper -----
-function TechCard({ title, items }: { title: string; items: string[] }) {
+/* ------ Helper Components ------ */
+
+function SkillGroup({
+  title,
+  items,
+}: {
+  title: string;
+  items: [string, number][];
+}) {
   return (
-    <div className="rounded-xl border border-gray-100 bg-white p-6 dark:border-gray-800 dark:bg-gray-800/50">
-      <h4 className="mb-2 text-lg font-semibold text-primary-700 dark:text-primary-400">
-        {title}
-      </h4>
-      <ul className="list-inside list-disc space-y-1 text-gray-700 dark:text-gray-300">
-        {items.map((item) => (
-          <li key={item}>{item}</li>
+    <div>
+      <h3 className="mb-4 font-semibold">{title}</h3>
+      <div className="space-y-2">
+        {items.map(([item, level]) => (
+          <div key={item} className="flex items-center gap-2">
+            <div className="h-2 flex-1 rounded bg-gray-200 dark:bg-gray-700">
+              <div
+                className="h-2 rounded bg-primary-600"
+                style={{ width: `${level}%` }}
+              />
+            </div>
+            <span className="text-sm font-medium">{item}</span>
+          </div>
         ))}
-      </ul>
+      </div>
+    </div>
+  );
+}
+
+function Card({ title, content }: { title: string; content: string }) {
+  return (
+    <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+      <h3 className="mb-2 text-lg font-bold text-primary-700 dark:text-primary-400">
+        {title}
+      </h3>
+      <p className="text-gray-700 dark:text-gray-300">{content}</p>
     </div>
   );
 }

@@ -50,41 +50,11 @@ function TypingEffect({ texts }: { texts: string[] }) {
 }
 
 export default function HomeHero() {
-  // Parallax + animated floating effect
-  const [imgOffset, setImgOffset] = useState(0);
+  // Remove parallax/floating/tilt: image stays fixed
   const [hover, setHover] = useState(false);
 
-  // For a subtle rotation "tilt" effect on mouse move
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-
-  // Parallax on scroll
-  useEffect(() => {
-    const handleScroll = () => setImgOffset(window.scrollY * 0.15);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Tilt on mouse move
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const handleMove = (e: MouseEvent) => {
-      const rect = el.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1; // -1 to 1
-      const y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
-      setTilt({ x: x * 12, y: y * 12 }); // stronger tilt
-    };
-    const handleLeave = () => setTilt({ x: 0, y: 0 });
-    if (hover) {
-      el.addEventListener('mousemove', handleMove);
-      el.addEventListener('mouseleave', handleLeave);
-    }
-    return () => {
-      el.removeEventListener('mousemove', handleMove);
-      el.removeEventListener('mouseleave', handleLeave);
-    };
-  }, [hover]);
+  // (Optionally, remove containerRef/tilt as they're unused)
+  // const containerRef = useRef<HTMLDivElement>(null);
 
   return (
     <section className="mb-20">
@@ -235,13 +205,12 @@ export default function HomeHero() {
             </a>
           </div>
         </div>
-        {/* Animated Image, Responsive, with Parallax and Hover Tilt, plus Glow */}
+        {/* Static Image -- no parallax, no tilt, no floating */}
         <div className="flex flex-col items-center">
           <div
-            ref={containerRef}
             className="relative mx-auto h-[250px] w-[250px] overflow-hidden rounded-full border-8 border-white shadow-2xl transition-transform duration-200 will-change-transform dark:border-gray-800 sm:h-[325px] sm:w-[325px] lg:h-[420px] lg:w-[420px]"
             style={{
-              transform: `translateY(${imgOffset}px) rotateX(${tilt.y}deg) rotateY(${-tilt.x}deg) scale(${hover ? 1.03 : 1})`,
+              transform: `scale(${hover ? 1.03 : 1})`,
               boxShadow: hover
                 ? '0 0 64px 16px rgba(59, 130, 246, 0.33), 0px 0px 0px 1px rgba(59,130,246,0.08)'
                 : '0 12px 56px 0 rgba(0,0,0,.11), 0px 0px 0px 1px rgba(59,130,246,0.09)',
@@ -251,7 +220,7 @@ export default function HomeHero() {
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
           >
-            {/* Animated long glow */}
+            {/* Animated long glow (optional, remains) */}
             <div className="pointer-events-none absolute inset-0 z-10 rounded-full">
               <div
                 className="animate-hero-glow pointer-events-none absolute inset-0 rounded-full"
