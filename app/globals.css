@@ -10,8 +10,9 @@
   --color-muted: #f1f5f9;
   --color-muted-foreground: #475569;
   --color-border: #e2e8f0;
-  --color-accent: #16a34a;
+  --color-accent: #15803d;
   --color-accent-foreground: #ffffff;
+  --color-destructive: #dc2626;
 }
 
 :root.dark {
@@ -24,6 +25,7 @@
   --color-border: #334155;
   --color-accent: #22c55e;
   --color-accent-foreground: #0f172a;
+  --color-destructive: #ef4444;
 }
 
 @layer base {
