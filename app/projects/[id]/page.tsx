@@ -2,6 +2,7 @@ import { projectsData } from '@/lib/projects';
 import { notFound } from 'next/navigation';
 import ProjectImagesZoom from '@/components/ProjectImagesZoom';
 import Image from 'next/image';
+import { Chip } from '@/components/ui/Chip';
 
 // Static params for static export (Server Component only!)
 export function generateStaticParams() {
@@ -18,7 +19,7 @@ export default function ProjectDetails({ params }: { params: { id: string } }) {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <h1 className="mb-4 text-3xl font-bold text-gray-900 dark:text-white">
+      <h1 className="mb-4 text-3xl font-bold text-foreground">
         {project.title}
       </h1>
       {project.role && (
@@ -27,7 +28,7 @@ export default function ProjectDetails({ params }: { params: { id: string } }) {
         </div>
       )}
 
-      <div className="mb-6 text-lg text-gray-700 dark:text-gray-300">
+      <div className="mb-6 text-lg text-muted-foreground">
         {project.description}
       </div>
 
@@ -54,12 +55,7 @@ export default function ProjectDetails({ params }: { params: { id: string } }) {
 
       <div className="mb-6 flex flex-wrap gap-2">
         {project.technologies.map((tech) => (
-          <span
-            key={tech}
-            className="rounded bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-300"
-          >
-            {tech}
-          </span>
+          <Chip key={tech}>{tech}</Chip>
         ))}
       </div>
 
