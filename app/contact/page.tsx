@@ -12,7 +12,9 @@ export default function Contact() {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<
+    'idle' | 'submitting' | 'success' | 'error'
+  >('idle');
   const [serverError, setServerError] = useState('');
 
   const validateForm = () => {
@@ -59,7 +61,9 @@ export default function Contact() {
 
       if (!res.ok || !body.ok) {
         if (body.errors) setErrors(body.errors);
-        setServerError(body.error ?? 'Something went wrong sending your message.');
+        setServerError(
+          body.error ?? 'Something went wrong sending your message.'
+        );
         setStatus('error');
         return;
       }
@@ -113,10 +117,10 @@ export default function Contact() {
               </svg>
             </div>
           </div>
-          <h1 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
+          <h1 className="mb-4 text-4xl font-bold text-foreground">
             Contact Me
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
+          <p className="text-lg text-muted-foreground">
             I welcome messages from recruiters, hiring managers, and
             collaborators—especially regarding internships, junior roles, or
             team projects. <br />
@@ -127,7 +131,7 @@ export default function Contact() {
         {/* Contact options helper */}
         <div className="mb-8">
           <h2 className="sr-only">How to contact me</h2>
-          <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+          <ul className="space-y-2 text-sm text-muted-foreground">
             <li>
               <span className="font-semibold text-primary-700 dark:text-primary-400">
                 Option 1:
@@ -148,7 +152,7 @@ export default function Contact() {
           <div>
             <label
               htmlFor="name"
-              className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="mb-2 block text-sm font-medium text-muted-foreground"
             >
               Name *
             </label>
@@ -159,10 +163,10 @@ export default function Contact() {
               value={formData.name}
               onBlur={handleChange}
               onChange={handleChange}
-              className={`w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 dark:bg-gray-800 dark:text-white ${
+              className={`w-full rounded-lg border bg-card px-4 py-3 text-foreground focus:outline-none focus:ring-2 ${
                 errors.name && touched.name
                   ? 'border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:ring-primary-500 dark:border-gray-700'
+                  : 'border-border focus:ring-primary-500'
               }`}
               placeholder="Your name or company"
               aria-invalid={!!errors.name}
@@ -182,7 +186,7 @@ export default function Contact() {
           <div>
             <label
               htmlFor="email"
-              className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="mb-2 block text-sm font-medium text-muted-foreground"
             >
               Email *
             </label>
@@ -193,10 +197,10 @@ export default function Contact() {
               value={formData.email}
               onBlur={handleChange}
               onChange={handleChange}
-              className={`w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 dark:bg-gray-800 dark:text-white ${
+              className={`w-full rounded-lg border bg-card px-4 py-3 text-foreground focus:outline-none focus:ring-2 ${
                 errors.email && touched.email
                   ? 'border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:ring-primary-500 dark:border-gray-700'
+                  : 'border-border focus:ring-primary-500'
               }`}
               placeholder="you@company.com"
               aria-invalid={!!errors.email}
@@ -216,7 +220,7 @@ export default function Contact() {
           <div>
             <label
               htmlFor="subject"
-              className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="mb-2 block text-sm font-medium text-muted-foreground"
             >
               Subject *
             </label>
@@ -227,10 +231,10 @@ export default function Contact() {
               value={formData.subject}
               onBlur={handleChange}
               onChange={handleChange}
-              className={`w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 dark:bg-gray-800 dark:text-white ${
+              className={`w-full rounded-lg border bg-card px-4 py-3 text-foreground focus:outline-none focus:ring-2 ${
                 errors.subject && touched.subject
                   ? 'border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:ring-primary-500 dark:border-gray-700'
+                  : 'border-border focus:ring-primary-500'
               }`}
               placeholder="e.g. Internship opportunity, Project collaboration"
               aria-invalid={!!errors.subject}
@@ -250,7 +254,7 @@ export default function Contact() {
           <div>
             <label
               htmlFor="message"
-              className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="mb-2 block text-sm font-medium text-muted-foreground"
             >
               Message *
             </label>
@@ -261,10 +265,10 @@ export default function Contact() {
               onBlur={handleChange}
               onChange={handleChange}
               rows={6}
-              className={`w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 dark:bg-gray-800 dark:text-white ${
+              className={`w-full rounded-lg border bg-card px-4 py-3 text-foreground focus:outline-none focus:ring-2 ${
                 errors.message && touched.message
                   ? 'border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:ring-primary-500 dark:border-gray-700'
+                  : 'border-border focus:ring-primary-500'
               }`}
               placeholder="Let me know how I can help, or how you'd like to connect."
               aria-invalid={!!errors.message}
@@ -317,7 +321,7 @@ export default function Contact() {
             <button
               type="button"
               onClick={resetForm}
-              className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+              className="text-sm text-muted-foreground hover:text-foreground"
             >
               Reset form
             </button>
@@ -325,9 +329,7 @@ export default function Contact() {
         </form>
 
         <div className="mt-8 text-center">
-          <p className="mb-2 text-gray-600 dark:text-gray-400">
-            Or reach me directly at:
-          </p>
+          <p className="mb-2 text-muted-foreground">Or reach me directly at:</p>
           <a
             href="mailto:ouertatanimohamedaziz@gmail.com"
             className="text-primary-600 hover:underline dark:text-primary-400"
