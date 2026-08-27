@@ -2,11 +2,14 @@ module.exports = {
   ci: {
     collect: {
       startServerCommand: 'npm run start',
-      url: ['http://localhost:3000', 'http://localhost:3000/projects', 'http://localhost:3000/about'],
+      url: [
+        'http://localhost:3000',
+        'http://localhost:3000/projects',
+        'http://localhost:3000/about',
+      ],
       numberOfRuns: 3,
     },
     assert: {
-      preset: 'lighthouse:recommended',
       assertions: {
         'categories:performance': ['error', { minScore: 0.9 }],
         'categories:accessibility': ['error', { minScore: 0.95 }],
@@ -18,4 +21,4 @@ module.exports = {
       target: 'temporary-public-storage',
     },
   },
-}
+};
