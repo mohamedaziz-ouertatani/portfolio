@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { DarkModeToggle } from './DarkModeToggle';
+import { Button } from './ui/Button';
+import { Download } from 'lucide-react';
 import { useState } from 'react';
 
 export function Header() {
@@ -18,7 +20,7 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-sm dark:border-gray-800 dark:bg-gray-900/80">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-sm">
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-primary-600 focus:px-4 focus:py-2 focus:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
@@ -28,7 +30,7 @@ export function Header() {
       <nav className="container mx-auto flex items-center justify-between px-4 py-4">
         <Link
           href="/"
-          className="text-xl font-bold text-gray-900 dark:text-white"
+          className="text-xl font-bold text-foreground"
         >
           MA
         </Link>
@@ -42,7 +44,7 @@ export function Header() {
                 className={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
                   pathname === item.href
                     ? 'text-primary-600 dark:text-primary-400'
-                    : 'text-gray-700 dark:text-gray-300'
+                    : 'text-muted-foreground'
                 }`}
               >
                 {item.label}
@@ -50,13 +52,7 @@ export function Header() {
             </li>
           ))}
           <li>
-            <a
-              href="/cv.pdf"
-              download
-              className="rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
-            >
-              Download CV
-            </a>
+            <Button href="/cv.pdf" download variant="primary"><Download size={16} />Download CV</Button>
           </li>
           <li>
             <DarkModeToggle />
@@ -68,7 +64,7 @@ export function Header() {
           <DarkModeToggle />
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="rounded-lg p-2 hover:bg-gray-200 dark:hover:bg-gray-700"
+            className="rounded-lg p-2 hover:bg-muted"
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
           >
@@ -103,7 +99,7 @@ export function Header() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="border-t border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 md:hidden">
+        <div className="border-t border-border bg-background md:hidden">
           <ul className="container mx-auto space-y-2 px-4 py-4">
             {navItems.map((item) => (
               <li key={item.href}>
@@ -112,8 +108,8 @@ export function Header() {
                   onClick={() => setIsMenuOpen(false)}
                   className={`block rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
                     pathname === item.href
-                      ? 'bg-primary-100 text-primary-600 dark:bg-primary-900/20 dark:text-primary-400'
-                      : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800'
+                      ? 'bg-muted text-primary-600 dark:text-primary-400'
+                      : 'text-muted-foreground hover:bg-muted'
                   }`}
                 >
                   {item.label}
@@ -121,13 +117,7 @@ export function Header() {
               </li>
             ))}
             <li>
-              <a
-                href="/cv.pdf"
-                download
-                className="block rounded-lg bg-primary-600 px-4 py-2 text-center text-sm font-medium text-white transition-colors hover:bg-primary-700"
-              >
-                Download CV
-              </a>
+              <Button href="/cv.pdf" download variant="primary"><Download size={16} />Download CV</Button>
             </li>
           </ul>
         </div>
