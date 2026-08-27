@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description:
     'Computer Science Engineering student at ESPRIT specialized in Data Science, MLOps, and production-grade full stack development. Proven experience with MLflow, Fastify APIs, Docker pipelines, and quantifiable business impact.',
   alternates: {
-    canonical: 'https://mohamedaziz-ouertatani.github.io/portfolio/about/',
+    canonical: '/about',
   },
 };
 

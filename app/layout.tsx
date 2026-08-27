@@ -18,11 +18,15 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 });
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  'https://mohamedaziz-ouertatani.vercel.app';
+
 export const metadata: Metadata = {
   title: 'Mohamed Aziz Ouertatani - Full Stack Developer',
   description:
     'Full Stack Developer and Engineering Student specializing in web development with React, Node.js, and TypeScript. View my portfolio of projects and experience.',
-  metadataBase: new URL('https://mohamedaziz-ouertatani.github.io/portfolio'),
+  metadataBase: new URL(SITE_URL),
   keywords: [
     'Full Stack Developer',
     'Web Developer',
@@ -37,7 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://mohamedaziz-ouertatani.github.io/portfolio/',
+    url: `${SITE_URL}/`,
     siteName: 'Mohamed Aziz Ouertatani Portfolio',
     title: 'Mohamed Aziz Ouertatani - Full Stack Developer',
     description:
@@ -45,7 +49,7 @@ export const metadata: Metadata = {
     images: [
       {
         // Use an absolute URL for OG images
-        url: 'https://mohamedaziz-ouertatani.github.io/portfolio/og-image.png',
+        url: `${SITE_URL}/og-image.png`,
         width: 1200,
         height: 630,
         alt: 'Mohamed Aziz Ouertatani - Full Stack Developer',
@@ -57,7 +61,7 @@ export const metadata: Metadata = {
     title: 'Mohamed Aziz Ouertatani - Full Stack Developer',
     description:
       'Full Stack Developer and Engineering Student specializing in web development.',
-    images: ['https://mohamedaziz-ouertatani.github.io/portfolio/og-image.png'],
+    images: [`${SITE_URL}/og-image.png`],
   },
   robots: {
     index: true,
@@ -90,7 +94,7 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'Person',
               name: 'Mohamed Aziz Ouertatani',
-              url: 'https://mohamedaziz-ouertatani.github.io/portfolio/',
+              url: `${SITE_URL}/`,
               jobTitle: 'Full Stack Developer',
               alumniOf: 'ESPRIT',
               sameAs: [
@@ -114,7 +118,7 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'WebSite',
               name: 'Mohamed Aziz Ouertatani Portfolio',
-              url: 'https://mohamedaziz-ouertatani.github.io/portfolio/',
+              url: `${SITE_URL}/`,
               description:
                 'Portfolio of Mohamed Aziz Ouertatani - Full Stack Developer',
               author: {
