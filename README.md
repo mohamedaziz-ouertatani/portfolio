@@ -7,13 +7,13 @@
 
 A modern, performant portfolio built with Next.js 14 (App Router), TypeScript, and Tailwind CSS.
 
-> **🎯 Architecture:** This portfolio is 100% static with no server-side rendering, API routes, or backend dependencies. It's optimized for GitHub Pages deployment and can be hosted on any static hosting platform.
+> **🎯 Architecture:** This portfolio is a full Next.js server application with SSR, API routes, and backend integration. It's optimized for Vercel deployment with support for serverless functions and dynamic rendering.
 
 ## 🌐 Live Demo
 
-Visit the live portfolio: [https://mohamedaziz-ouertatani.github.io/portfolio/](https://mohamedaziz-ouertatani.github.io/portfolio/)
+Visit the live portfolio: [https://mohamedaziz-ouertatani.vercel.app](https://mohamedaziz-ouertatani.vercel.app)
 
-> **Note:** This portfolio is 100% static and deployed on GitHub Pages with no server-side rendering, API routes, or backend services.
+> **Note:** This portfolio is deployed on Vercel with full Next.js server capabilities including SSR, API routes, and backend service integration.
 
 ## 📸 Screenshots
 
@@ -23,17 +23,17 @@ Visit the live portfolio: [https://mohamedaziz-ouertatani.github.io/portfolio/](
 
 ### Core Technologies
 
-- **Next.js 14 App Router** - Modern React framework with static export for GitHub Pages
+- **Next.js 14 App Router** - Modern React framework with server-side rendering and API routes
 - **TypeScript** - Type-safe code for better developer experience and fewer runtime errors
 - **Tailwind CSS** - Utility-first CSS framework for rapid UI development with custom design system
-- **Static Export** - 100% static site generation with `output: 'export'` configuration
+- **Server Deployment** - Standard Next.js server deployment with SSR and API routes enabled
 
 ### User Experience
 
 - **Dark Mode** - Seamless theme toggle with localStorage persistence using next-themes
 - **Responsive Design** - Mobile-first approach that works flawlessly on all devices and screen sizes
 - **Project Filtering** - Client-side multi-select technology filter for easy project browsing
-- **Contact Form** - mailto-based contact with validation and optional external service integration
+- **Contact Form** - Functional contact form powered by Resend API with client and server-side validation
 - **PWA Support** - Progressive Web App capabilities for offline access and app-like experience
 
 ### Performance & SEO
@@ -54,19 +54,19 @@ Visit the live portfolio: [https://mohamedaziz-ouertatani.github.io/portfolio/](
 
 ### Frontend
 
-- **Framework:** Next.js 14 (App Router) with static export
+- **Framework:** Next.js 14 (App Router)
 - **Language:** TypeScript 5.4
 - **Styling:** Tailwind CSS 3.4
 - **UI Components:** Custom components with Lucide React icons
 - **Animations:** Framer Motion
 - **Theme:** next-themes for dark mode
 
-### Static Hosting
+### Deployment
 
-- **Platform:** GitHub Pages
-- **Build Output:** Static HTML/CSS/JS (no server-side rendering)
-- **Base Path:** `/portfolio` for GitHub Pages compatibility
-- **Contact:** mailto links (no backend API)
+- **Platform:** Vercel with git integration
+- **Build Output:** Optimized Next.js server with SSR and API routes
+- **Contact Form:** Resend API for email delivery
+- **Environment Variables:** `RESEND_API_KEY`, `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`
 
 ### Development Tools
 
@@ -126,16 +126,20 @@ npm install
 cp .env.example .env.local
 ```
 
-4. Update environment variables in `.env.local` (all optional):
+4. Update environment variables in `.env.local`:
 
 ```bash
 # Optional: Analytics tracking
 NEXT_PUBLIC_PLAUSIBLE_DOMAIN=yourdomain.com
 
-# Note: No backend API keys needed for static export
+# Required: Email service for contact form
+RESEND_API_KEY=your_resend_api_key_here
+
+# Optional: Site configuration
+NEXT_PUBLIC_SITE_URL=https://yourdomain.com
 ```
 
-> **Note:** This is a static-only site. No server-side environment variables or API keys are required.
+> **Note:** The `RESEND_API_KEY` is required for the contact form to send emails. Without it, the form will show an error message but still provide a visible mailto fallback link. Analytics and site URL configuration are optional.
 
 ### Development
 
@@ -149,30 +153,23 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Build
 
-Build for production (static export):
+Build for production:
 
 ```bash
 npm run build
 ```
 
-This will generate a static site in the `out` directory.
+This will generate an optimized production build in the `.next/` directory.
 
-### Preview Static Build Locally
+### Preview Build Locally
 
-Since this is a static export, you can preview the built site using any static file server:
+Run the production build locally:
 
 ```bash
-# Using npx serve
-npx serve out
-
-# Or using Python
-cd out && python3 -m http.server 3000
-
-# Or using Node.js http-server
-npx http-server out -p 3000
+npm start
 ```
 
-> **Note:** `npm start` is not available for static exports. Use a static file server instead.
+This starts the Next.js server on `http://localhost:3000` with the optimized production build.
 
 ### Testing
 
@@ -301,59 +298,47 @@ NEXT_PUBLIC_PLAUSIBLE_DOMAIN=yourdomain.com
 
 ### Contact Form
 
-This portfolio uses a static-only contact approach:
+This portfolio includes a functional contact form with email delivery:
 
-1. **Default Method:** mailto links that open the user's default email client
-2. **Client-side Validation:** Form validation using React state (no server-side processing)
-3. **External Services (Optional):** You can integrate with external form services like:
-   - [Formspree](https://formspree.io) - Simple form backend
-   - [Netlify Forms](https://www.netlify.com/products/forms/) - If deploying to Netlify
-   - [Web3Forms](https://web3forms.com/) - Another form backend option
+1. **Email Service:** Powered by Resend API for reliable email delivery
+2. **Server-side Processing:** API route at `app/api/contact/route.ts` handles form submission
+3. **Validation:** Both client-side (React) and server-side (Zod) validation for security and UX
+4. **Fallback:** When `RESEND_API_KEY` is not configured, the form degrades gracefully with a visible mailto link
 
-> **Note:** No API routes or backend services are used in this repository. All contact functionality is either client-side or relies on external services.
+To enable the contact form:
+- Set the `RESEND_API_KEY` environment variable in your Vercel project settings
+- Without it, the form will show an error state but still provide a working mailto fallback
 
 ## 🚀 Deployment
 
-### GitHub Pages (Current Deployment)
+### Vercel Deployment
 
-This portfolio is configured for GitHub Pages deployment:
+This portfolio is deployed on Vercel with automatic git integration:
 
-1. **Automatic Deployment:**
-   - Push to `main` branch triggers automatic deployment via GitHub Actions
-   - Workflow: `.github/workflows/deploy.yml`
-2. **Manual Deployment:**
+1. **Setup:**
+   - Connect the GitHub repository to Vercel via the [Vercel Dashboard](https://vercel.com)
+   - Select the repository and import the project
+   - Vercel automatically detects this is a Next.js project
 
-   ```bash
-   npm run build
-   # The static files will be in the 'out' directory
-   ```
+2. **Automatic Deployment:**
+   - Every push to the `main` branch automatically deploys to production
+   - Vercel's git integration handles deployment — no custom workflow file needed
+   - Preview deployments are created for pull requests
 
-3. **Configuration:**
-   - `next.config.mjs` is configured with `output: 'export'`
-   - Base path set to `/portfolio` for GitHub Pages
-   - Static assets served from `/portfolio/` path
+3. **Environment Variables:**
+   - Set the following environment variables in your Vercel project settings:
+     - `RESEND_API_KEY`: API key for the contact form email service (required for form functionality)
+     - `NEXT_PUBLIC_SITE_URL`: The deployed URL, e.g., `https://mohamedaziz-ouertatani.vercel.app`
+     - `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`: Domain for Plausible analytics (optional)
+   - These are configured in the Vercel dashboard under Project Settings → Environment Variables
 
-4. **GitHub Pages Setup:**
-   - Go to repository Settings → Pages
-   - Source: GitHub Actions
-   - Branch: main
-   - The site will be available at: `https://<username>.github.io/portfolio/`
-
-### Other Static Hosting Platforms
-
-This static portfolio can be deployed to any static hosting service:
-
-- **Netlify** - Drag and drop the `out` folder or connect to GitHub
-- **Vercel** - Import project and deploy (will use static export automatically)
-- **Cloudflare Pages** - Connect to GitHub and deploy
-- **AWS S3 + CloudFront** - Upload the `out` folder to S3 bucket
-- **Any Static Host** - Upload the contents of the `out` folder
-
-> **Important:** When deploying to other platforms, update the `basePath` in `next.config.mjs` if not using a subdirectory, or remove it entirely for root domain deployment.
+4. **Monitoring:**
+   - View deployments, logs, and analytics in the Vercel dashboard
+   - Monitor build times and function performance for API routes
 
 ## 🗺️ Roadmap
 
-Future enhancements planned for this portfolio (maintaining static-only approach):
+Future enhancements planned for this portfolio:
 
 - [ ] **Blog Section** - Add a blog with MDX support for technical writing (static generation)
 - [ ] **Project Details Pages** - Individual pages for each project with more screenshots and details

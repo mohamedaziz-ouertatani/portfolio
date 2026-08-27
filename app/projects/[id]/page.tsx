@@ -3,9 +3,6 @@ import { notFound } from 'next/navigation';
 import ProjectImagesZoom from '@/components/ProjectImagesZoom';
 import Image from 'next/image';
 
-// Import and use withBasePath for static/public file paths
-import { withBasePath } from '@/lib/basePath';
-
 // Static params for static export (Server Component only!)
 export function generateStaticParams() {
   return projectsData.map((project) => ({
@@ -17,10 +14,7 @@ export default function ProjectDetails({ params }: { params: { id: string } }) {
   const project = projectsData.find((p) => p.id === params.id);
   if (!project) return notFound();
 
-  // Use withBasePath for images array if needed (e.g., when used as src for <Image>)
-  // If your images are relative (e.g., '/images/foo.jpg'), wrap them; else, you can skip.
-  const imagesWithBasePath =
-    project.images?.map((img) => withBasePath(img)) ?? [];
+  const images = project.images ?? [];
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -37,8 +31,8 @@ export default function ProjectDetails({ params }: { params: { id: string } }) {
         {project.description}
       </div>
 
-      {/* Images with modal zoom, using withBasePath */}
-      <ProjectImagesZoom images={imagesWithBasePath} />
+      {/* Images with modal zoom */}
+      <ProjectImagesZoom images={images} />
 
       <ul className="text-md mb-8 space-y-2">
         {project.problem && (

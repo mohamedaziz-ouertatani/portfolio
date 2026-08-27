@@ -1,10 +1,22 @@
 import type { Metadata } from 'next';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import Script from 'next/script';
-import { withBasePath } from '@/lib/basePath';
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: 'Mohamed Aziz Ouertatani - Full Stack Developer',
@@ -68,8 +80,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href={withBasePath('/favicon.ico')} sizes="any" />
-        <link rel="manifest" href={withBasePath('/manifest.json')} />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#2563eb" />
         <script
           type="application/ld+json"
@@ -113,7 +125,9 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="flex min-h-screen flex-col">
+      <body
+        className={`${inter.variable} ${jetbrainsMono.variable} flex min-h-screen flex-col font-sans`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

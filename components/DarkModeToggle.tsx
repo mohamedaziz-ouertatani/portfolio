@@ -14,7 +14,7 @@ export function DarkModeToggle() {
   if (!mounted) {
     return (
       <button
-        className="rounded-lg p-2 hover:bg-gray-200 dark:hover:bg-gray-700"
+        className="rounded-lg p-2 hover:bg-muted"
         aria-label="Toggle dark mode"
       >
         <svg
@@ -35,7 +35,7 @@ export function DarkModeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="rounded-lg p-2 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-500 dark:hover:bg-gray-700"
+      className="rounded-lg p-2 hover:bg-muted focus:outline-none focus:ring-2 focus:ring-primary-500"
       aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
     >
       {theme === 'dark' ? (

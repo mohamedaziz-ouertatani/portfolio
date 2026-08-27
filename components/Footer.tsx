@@ -2,27 +2,27 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto border-t border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+    <footer className="mt-auto border-t border-border bg-background">
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+            <h3 className="mb-4 text-lg font-semibold text-foreground">
               Mohamed Aziz Ouertatani
             </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-sm text-muted-foreground">
               Full Stack Developer & Engineering Student
             </p>
           </div>
 
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+            <h3 className="mb-4 text-lg font-semibold text-foreground">
               Quick Links
             </h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <a
                   href="/"
-                  className="text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
+                  className="text-muted-foreground hover:text-primary-600 dark:hover:text-primary-400"
                 >
                   Home
                 </a>
@@ -30,7 +30,7 @@ export function Footer() {
               <li>
                 <a
                   href="/about"
-                  className="text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
+                  className="text-muted-foreground hover:text-primary-600 dark:hover:text-primary-400"
                 >
                   About
                 </a>
@@ -38,7 +38,7 @@ export function Footer() {
               <li>
                 <a
                   href="/projects"
-                  className="text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
+                  className="text-muted-foreground hover:text-primary-600 dark:hover:text-primary-400"
                 >
                   Projects
                 </a>
@@ -46,7 +46,7 @@ export function Footer() {
               <li>
                 <a
                   href="/contact"
-                  className="text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
+                  className="text-muted-foreground hover:text-primary-600 dark:hover:text-primary-400"
                 >
                   Contact
                 </a>
@@ -55,7 +55,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">
+            <h3 className="mb-4 text-lg font-semibold text-foreground">
               Connect
             </h3>
             <div className="flex space-x-4">
@@ -63,7 +63,7 @@ export function Footer() {
                 href="https://github.com/mohamedaziz-ouertatani"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
+                className="text-muted-foreground hover:text-primary-600 dark:hover:text-primary-400"
                 aria-label="GitHub"
               >
                 <svg
@@ -83,7 +83,7 @@ export function Footer() {
                 href="https://www.linkedin.com/in/mohamed-aziz-ouertatani"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
+                className="text-muted-foreground hover:text-primary-600 dark:hover:text-primary-400"
                 aria-label="LinkedIn"
               >
                 <svg
@@ -97,7 +97,7 @@ export function Footer() {
               </a>
               <a
                 href="mailto:ouertatanimohamedaziz@gmail.com"
-                className="text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-400"
+                className="text-muted-foreground hover:text-primary-600 dark:hover:text-primary-400"
                 aria-label="Email"
               >
                 <svg
@@ -116,8 +116,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-gray-200 pt-8 text-center dark:border-gray-800">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
+        <div className="mt-8 border-t border-border pt-8 text-center">
+          <p className="text-sm text-muted-foreground">
             © {currentYear} Mohamed Aziz Ouertatani. All rights reserved.
           </p>
         </div>
