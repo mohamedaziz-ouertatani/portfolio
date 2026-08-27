@@ -1,6 +1,10 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import { experiencesData } from '@/lib/experiences';
+import { projectsData } from '@/lib/projects';
+import skillsData from '@/lib/skills';
+import { Chip } from '@/components/ui/Chip';
 
 export const metadata: Metadata = {
   title: 'About - Mohamed Aziz Ouertatani',
@@ -18,10 +22,10 @@ export default function About() {
       <section className="mb-20">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
           <div>
-            <h1 className="mb-8 text-4xl font-bold tracking-tight text-gray-900 dark:text-white md:text-5xl">
+            <h1 className="mb-8 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
               About Me
             </h1>
-            <div className="space-y-4 text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+            <div className="space-y-4 text-lg leading-relaxed text-muted-foreground">
               <p>
                 Fourth-year Computer Science Engineering student at{' '}
                 <a
@@ -46,24 +50,19 @@ export default function About() {
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
               {[
-                { label: 'TypeScript', color: 'primary' },
-                { label: 'React/Next.js', color: 'blue' },
-                { label: 'Python', color: 'green' },
-                { label: 'MLflow/Docker', color: 'indigo' },
-                { label: 'PostgreSQL', color: 'gray' },
-              ].map(({ label, color }) => (
-                <span
-                  key={label}
-                  className={`rounded-lg bg-${color}-100 px-4 py-2 text-sm font-medium text-${color}-700 dark:bg-${color}-900/20 dark:text-${color}-300`}
-                >
+                'TypeScript',
+                'React/Next.js',
+                'Python',
+                'MLflow/Docker',
+                'PostgreSQL',
+              ].map((label) => (
+                <Chip key={label} className="text-sm">
                   {label}
-                </span>
+                </Chip>
               ))}
             </div>
             <div className="mt-6 flex items-center gap-4 text-sm">
-              <span className="font-semibold text-gray-900 dark:text-white">
-                Languages:
-              </span>
+              <span className="font-semibold text-foreground">Languages:</span>
               <span className="rounded bg-primary-50 px-3 py-1 text-primary-700 dark:bg-primary-900/20 dark:text-primary-300">
                 AR (Native)
               </span>
@@ -90,12 +89,12 @@ export default function About() {
 
       {/* Career Aspirations */}
       <section className="mb-24">
-        <h2 className="mb-8 text-3xl font-bold text-gray-900 dark:text-white">
+        <h2 className="mb-8 text-3xl font-bold text-foreground">
           <span className="text-primary-700 dark:text-primary-400">
             What I’m Seeking
           </span>
         </h2>
-        <div className="grid max-w-2xl gap-6 text-lg text-gray-700 dark:text-gray-300">
+        <div className="grid max-w-2xl gap-6 text-lg text-muted-foreground">
           <div>
             <strong>Open to</strong>: Junior or internship positions in Data
             Engineering, MLOps, or Full-Stack Development, remote/hybrid
@@ -111,7 +110,7 @@ export default function About() {
 
       {/* Professional Experience (CV-Aligned) */}
       <section className="mb-24">
-        <h2 className="mb-12 text-4xl font-bold text-gray-900 dark:text-white">
+        <h2 className="mb-12 text-4xl font-bold text-foreground">
           <span className="text-primary-700 dark:text-primary-400">
             Experience
           </span>
@@ -120,13 +119,13 @@ export default function About() {
           {experiencesData.map((experience, index) => (
             <article
               key={index}
-              className="group rounded-2xl border border-gray-200 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-xl dark:border-gray-800 dark:bg-gray-900/50"
+              className="group rounded-2xl border border-border bg-card p-8 shadow-sm transition-all duration-300 hover:shadow-xl"
             >
               <header className="mb-6">
                 <h3 className="text-2xl font-bold text-primary-700 group-hover:text-primary-800 dark:text-primary-400 dark:group-hover:text-primary-300">
                   {experience.jobTitle}
                 </h3>
-                <p className="mt-1 text-xl font-semibold text-gray-900 dark:text-white">
+                <p className="mt-1 text-xl font-semibold text-foreground">
                   {experience.companyName}
                 </p>
                 <p className="mt-1 text-base font-medium text-blue-600 dark:text-blue-400">
@@ -157,35 +156,29 @@ export default function About() {
               </header>
               {experience.jobTitle === 'Academic Project Developer' ? (
                 <div>
-                  <p className="mb-4 text-lg font-semibold text-gray-800 dark:text-gray-200">
-                    Developed <strong>Estate-Mind</strong>: an advanced
-                    end-to-end data pipeline and exploratory analytics system
-                    for Tunisian real estate market data.
+                  <p className="mb-4 text-lg font-semibold text-card-foreground">
+                    Developed{' '}
+                    <Link
+                      href="/projects/11"
+                      className="text-primary-600 underline dark:text-primary-400"
+                    >
+                      Estate-Mind
+                    </Link>
+                    : {projectsData.find((p) => p.id === '11')?.description}
                   </p>
-                  <ul className="mb-6 ml-6 list-disc space-y-3 text-gray-700 dark:text-gray-300">
-                    <li>
-                      Automated ETL and normalization for 15,000+ multi-source
-                      real estate listings across Tunisia.
-                    </li>
-                    <li>
-                      Designed clustering algorithms, outlier detection, and
-                      interactive price benchmarking dashboards for agencies and
-                      investors.
-                    </li>
-                    <li>
-                      Delivered reproducible EDA notebooks, geospatial mapping,
-                      and reduced manual data prep by 80%.
-                    </li>
+                  <ul className="mb-6 ml-6 list-disc space-y-3 text-muted-foreground">
+                    <li>{projectsData.find((p) => p.id === '11')?.approach}</li>
+                    <li>{projectsData.find((p) => p.id === '11')?.result}</li>
                   </ul>
                 </div>
               ) : (
                 <>
                   {experience.description && (
-                    <p className="mb-6 text-lg font-semibold text-gray-800 dark:text-gray-200">
+                    <p className="mb-6 text-lg font-semibold text-card-foreground">
                       {experience.description}
                     </p>
                   )}
-                  <ul className="mb-6 ml-6 list-disc space-y-3 text-gray-700 dark:text-gray-300">
+                  <ul className="mb-6 ml-6 list-disc space-y-3 text-muted-foreground">
                     {experience.contributions.map((contribution, idx) => (
                       <li key={idx}>{contribution}</li>
                     ))}
@@ -209,7 +202,7 @@ export default function About() {
 
       {/* Professional Skills Grid (progress bars, 3-column) */}
       <section className="mb-24">
-        <h2 className="mb-12 text-4xl font-bold text-gray-900 dark:text-white">
+        <h2 className="mb-12 text-4xl font-bold text-foreground">
           <span className="text-primary-700 dark:text-primary-400">
             Skills & Tools
           </span>
@@ -217,41 +210,28 @@ export default function About() {
         <div className="grid gap-8 md:grid-cols-3">
           <SkillGroup
             title="Languages"
-            items={[
-              ['Python (Expert)', 95],
-              ['TypeScript', 90],
-              ['SQL', 85],
-              ['Java', 75],
-              ['R', 70],
-            ]}
+            items={skillsData.languages
+              .slice(0, 5)
+              .map((s) => [s.name, s.level] as [string, number])}
           />
           <SkillGroup
-            title="Data/ML"
-            items={[
-              ['Pandas/NumPy', 92],
-              ['scikit-learn', 88],
-              ['MLflow', 85],
-              ['statsmodels', 80],
-              ['Metabase/Power BI', 82],
-            ]}
+            title="Frameworks & Libraries"
+            items={skillsData.librariesFrameworks
+              .slice(0, 5)
+              .map((s) => [s.name, s.level] as [string, number])}
           />
           <SkillGroup
-            title="DevOps/Backend"
-            items={[
-              ['Docker', 87],
-              ['Fastify/Node', 85],
-              ['PostgreSQL', 88],
-              ['JWT/RBAC', 82],
-            ]}
+            title="Tools & Platforms"
+            items={skillsData.tools
+              .slice(0, 5)
+              .map((s) => [s.name, s.level] as [string, number])}
           />
         </div>
       </section>
 
       {/* Credentials/Education Section */}
       <section className="mt-24">
-        <h2 className="mb-8 text-3xl font-bold text-gray-900 dark:text-white">
-          Credentials
-        </h2>
+        <h2 className="mb-8 text-3xl font-bold text-foreground">Credentials</h2>
         <div className="grid gap-6 md:grid-cols-2">
           <Card
             title="Education"
@@ -282,7 +262,7 @@ function SkillGroup({
       <div className="space-y-2">
         {items.map(([item, level]) => (
           <div key={item} className="flex items-center gap-2">
-            <div className="h-2 flex-1 rounded bg-gray-200 dark:bg-gray-700">
+            <div className="h-2 flex-1 rounded bg-muted">
               <div
                 className="h-2 rounded bg-primary-600"
                 style={{ width: `${level}%` }}
@@ -298,11 +278,11 @@ function SkillGroup({
 
 function Card({ title, content }: { title: string; content: string }) {
   return (
-    <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
+    <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
       <h3 className="mb-2 text-lg font-bold text-primary-700 dark:text-primary-400">
         {title}
       </h3>
-      <p className="text-gray-700 dark:text-gray-300">{content}</p>
+      <p className="text-muted-foreground">{content}</p>
     </div>
   );
 }
