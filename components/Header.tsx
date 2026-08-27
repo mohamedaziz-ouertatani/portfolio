@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { DarkModeToggle } from './DarkModeToggle';
 import { useState } from 'react';
-import { withBasePath } from '@/lib/basePath';
 
 export function Header() {
   const pathname = usePathname();
@@ -52,7 +51,7 @@ export function Header() {
           ))}
           <li>
             <a
-              href={withBasePath('/cv.pdf')}
+              href="/cv.pdf"
               download
               className="rounded-lg bg-primary-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
@@ -123,7 +122,7 @@ export function Header() {
             ))}
             <li>
               <a
-                href={withBasePath('/cv.pdf')}
+                href="/cv.pdf"
                 download
                 className="block rounded-lg bg-primary-600 px-4 py-2 text-center text-sm font-medium text-white transition-colors hover:bg-primary-700"
               >

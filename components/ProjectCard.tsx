@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { Project } from '@/lib/projects';
 import { useState } from 'react';
-import { withBasePath } from '@/lib/basePath';
 
 export interface ProjectCardProps {
   project: Project;
@@ -17,7 +16,7 @@ export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
     project.images && project.images.length > 0
       ? project.images[0]
       : '/og-image.png';
-  const imgSrc = withBasePath(first);
+  const imgSrc = first;
 
   // Compact case study summary
   const summary = [

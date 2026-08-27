@@ -5,7 +5,6 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import Script from 'next/script';
-import { withBasePath } from '@/lib/basePath';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -81,8 +80,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href={withBasePath('/favicon.ico')} sizes="any" />
-        <link rel="manifest" href={withBasePath('/manifest.json')} />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#2563eb" />
         <script
           type="application/ld+json"

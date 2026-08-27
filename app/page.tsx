@@ -17,7 +17,6 @@ import {
   Bike,
   Swords,
 } from 'lucide-react';
-import { withBasePath } from '@/lib/basePath';
 import HomeHero from '@/components/HomeHero';
 
 // export const metadata: Metadata = {
@@ -142,7 +141,7 @@ export default function Home() {
                 <Mail size={18} /> Get in Touch
               </Link>
               <a
-                href={withBasePath('/cv.pdf')}
+                href="/cv.pdf"
                 download
                 className="flex items-center gap-2 rounded-lg border-2 border-gray-300 px-6 py-3 font-medium text-gray-700 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-800"
               >
@@ -181,7 +180,7 @@ export default function Home() {
               style={{ transform: `translateY(${imgOffset}px)` }}
             >
               <Image
-                src={withBasePath('/me.jpg')}
+                src="/me.jpg"
                 alt="Mohamed Aziz Ouertatani"
                 fill
                 className="object-cover"

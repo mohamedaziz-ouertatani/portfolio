@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { withBasePath } from '@/lib/basePath';
 
 export const metadata: Metadata = {
   title: 'Resume - Mohamed Aziz Ouertatani',
@@ -132,7 +131,7 @@ export default function Resume() {
         <div className="mb-6 flex-shrink-0 md:mb-0 print:hidden">
           <div className="animate-float-up relative h-[120px] w-[120px] overflow-hidden rounded-full border-4 border-primary-200 shadow-lg dark:border-primary-700">
             <Image
-              src={withBasePath('/me3.png')}
+              src="/me3.png"
               alt="Mohamed Aziz Ouertatani"
               fill
               className="object-cover"
@@ -146,7 +145,7 @@ export default function Resume() {
         {/* Download CV action */}
         <div className="animate-slide-from-right absolute right-0 top-0 flex-shrink-0 md:static print:hidden">
           <a
-            href={withBasePath('/cv.pdf')}
+            href="/cv.pdf"
             download
             className="animate-pop-in inline-block rounded bg-primary-600 px-4 py-2 text-sm font-medium text-white shadow-lg transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-400"
           >
