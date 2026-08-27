@@ -26,7 +26,7 @@ export function FilterBar({
   return (
     <div className="mb-8">
       <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+        <h3 className="text-lg font-semibold text-foreground">
           Filter by Technology
         </h3>
         {selectedTechnologies.length > 0 && (
@@ -51,8 +51,8 @@ export function FilterBar({
               onClick={() => toggleTechnology(tech)}
               className={`rounded-full px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 ${
                 isSelected
-                  ? 'bg-primary-600 text-white hover:bg-primary-700'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700'
+                  ? 'bg-accent text-accent-foreground'
+                  : 'bg-muted text-muted-foreground hover:bg-border'
               }`}
               aria-pressed={isSelected}
             >

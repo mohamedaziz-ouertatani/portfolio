@@ -50,14 +50,12 @@ export default function Projects() {
   return (
     <div className="container px-4 py-16">
       <div className="mb-8 text-center">
-        <h1 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
-          My Projects
-        </h1>
-        <p className="text-lg text-gray-600 dark:text-gray-400">
+        <h1 className="mb-4 text-4xl font-bold text-foreground">My Projects</h1>
+        <p className="text-lg text-muted-foreground">
           Explore my work across full stack engineering, data science & ML,
           business intelligence, desktop, and game development. Each card
           includes{' '}
-          <span className="font-medium text-gray-900 dark:text-white">
+          <span className="font-medium text-foreground">
             Problem → Approach → Result
           </span>{' '}
           so you can see real impact, not just code.
@@ -70,10 +68,10 @@ export default function Projects() {
         onFilterChange={setSelectedTechnologies}
       />
 
-      <div className="mb-6 text-sm text-gray-600 dark:text-gray-400">
+      <div className="mb-6 text-sm text-muted-foreground">
         Showing {filteredProjects.length} of {projectsData.length} projects
         {filtersActive && (
-          <span className="ml-2 rounded bg-primary-100 px-2 py-0.5 text-xs text-primary-700 dark:bg-primary-900/20 dark:text-primary-400">
+          <span className="ml-2 rounded bg-muted px-2 py-0.5 text-xs text-muted-foreground">
             Filter active
           </span>
         )}
@@ -82,7 +80,7 @@ export default function Projects() {
       {/* ---- Featured Projects ---- */}
       {featuredProjects.length > 0 && (
         <>
-          <h2 className="mb-6 mt-12 text-center text-2xl font-bold text-primary-700 dark:text-primary-400">
+          <h2 className="mb-6 mt-12 text-center text-2xl font-bold text-foreground">
             Featured Projects
           </h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -99,18 +97,20 @@ export default function Projects() {
 
       {/* ---- Data & ML Emphasis Strip ---- */}
       {featuredProjects.length > 0 && (
-        <div className="my-12 rounded-xl bg-blue-50 px-6 py-6 text-center text-blue-900 dark:bg-blue-900/20 dark:text-blue-200">
-          <b>Data & ML Emphasis:</b> My portfolio includes smart inventory
-          forecasting, MLOps pipelines, BI dashboards, and deep-dive data
-          analysis— spanning experiment tracking, production-grade APIs, and
-          actionable reports for decision makers.
+        <div className="my-12 rounded-xl bg-muted px-6 py-6 text-center text-muted-foreground">
+          <b className="text-primary-600 dark:text-primary-400">
+            Data & ML Emphasis:
+          </b>{' '}
+          My portfolio includes smart inventory forecasting, MLOps pipelines, BI
+          dashboards, and deep-dive data analysis— spanning experiment tracking,
+          production-grade APIs, and actionable reports for decision makers.
         </div>
       )}
 
       {/* ---- More Projects ---- */}
       {moreProjects.length > 0 && (
         <>
-          <h3 className="mb-4 mt-8 text-center text-xl font-semibold text-gray-800 dark:text-gray-200">
+          <h3 className="mb-4 mt-8 text-center text-xl font-semibold text-foreground">
             More Projects
           </h3>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -123,7 +123,7 @@ export default function Projects() {
 
       {filteredProjects.length === 0 && (
         <div className="py-16 text-center">
-          <p className="text-lg text-gray-600 dark:text-gray-400">
+          <p className="text-lg text-muted-foreground">
             No projects found matching the selected filters.
           </p>
           <button
