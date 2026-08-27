@@ -32,7 +32,7 @@ export default function About() {
                   href="https://esprit.tn/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-semibold text-primary-600 hover:underline dark:text-primary-400"
+                  className="font-semibold text-primary-700 hover:underline dark:text-primary-400"
                 >
                   ESPRIT
                 </a>
@@ -128,7 +128,7 @@ export default function About() {
                 <p className="mt-1 text-xl font-semibold text-foreground">
                   {experience.companyName}
                 </p>
-                <p className="mt-1 text-base font-medium text-blue-600 dark:text-blue-400">
+                <p className="mt-1 text-base font-medium text-muted-foreground">
                   {experience.date}
                 </p>
                 <div className="mt-4 flex gap-4 text-sm">
@@ -137,7 +137,7 @@ export default function About() {
                       href={experience.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-semibold text-primary-600 hover:underline dark:text-primary-400"
+                      className="font-semibold text-primary-700 hover:underline dark:text-primary-400"
                     >
                       GitHub
                     </a>
@@ -160,7 +160,7 @@ export default function About() {
                     Developed{' '}
                     <Link
                       href="/projects/11"
-                      className="text-primary-600 underline dark:text-primary-400"
+                      className="text-primary-700 underline dark:text-primary-400"
                     >
                       Estate-Mind
                     </Link>

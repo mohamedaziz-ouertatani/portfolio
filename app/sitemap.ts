@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { projectsData } from '@/lib/projects';
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ??
+  process.env.NEXT_PUBLIC_SITE_URL ||
   'https://mohamedaziz-ouertatani.vercel.app';
 
 export default function sitemap(): MetadataRoute.Sitemap {

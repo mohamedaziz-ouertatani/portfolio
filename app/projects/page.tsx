@@ -98,7 +98,7 @@ export default function Projects() {
       {/* ---- Data & ML Emphasis Strip ---- */}
       {featuredProjects.length > 0 && (
         <div className="my-12 rounded-xl bg-muted px-6 py-6 text-center text-muted-foreground">
-          <b className="text-primary-600 dark:text-primary-400">
+          <b className="text-primary-700 dark:text-primary-400">
             Data & ML Emphasis:
           </b>{' '}
           My portfolio includes smart inventory forecasting, MLOps pipelines, BI
@@ -128,7 +128,7 @@ export default function Projects() {
           </p>
           <button
             onClick={() => setSelectedTechnologies([])}
-            className="mt-4 text-primary-600 hover:underline dark:text-primary-400"
+            className="mt-4 text-primary-700 hover:underline dark:text-primary-400"
           >
             Clear filters
           </button>

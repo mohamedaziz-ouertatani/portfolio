@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import type { Project } from '@/lib/projects';
+import { hasRealScreenshot, type Project } from '@/lib/projects';
 import { useState } from 'react';
 import { Chip } from '@/components/ui/Chip';
 
@@ -12,12 +12,7 @@ export interface ProjectCardProps {
 export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
   const [expanded, setExpanded] = useState(false);
 
-  // '/images/placeholder.png' is a stub asset, not a real screenshot —
-  // treat it the same as "no image" so weak projects get the clean fallback.
-  const hasImage =
-    project.images &&
-    project.images.length > 0 &&
-    !project.images[0].includes('/images/placeholder.png');
+  const hasImage = hasRealScreenshot(project);
   const imgSrc = hasImage ? project.images[0] : undefined;
   const hasLinks = Boolean(project.githubLink || project.liveDemoLink);
 
@@ -67,7 +62,7 @@ export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
         </h3>
 
         {project.role && (
-          <p className="mb-2 text-xs font-medium text-primary-600 dark:text-primary-400">
+          <p className="mb-2 text-xs font-medium text-primary-700 dark:text-primary-400">
             {project.role}
           </p>
         )}
@@ -90,7 +85,7 @@ export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
                 <button
                   type="button"
                   onClick={() => setExpanded(true)}
-                  className="text-xs text-primary-600 hover:underline dark:text-primary-400"
+                  className="text-xs text-primary-700 hover:underline dark:text-primary-400"
                 >
                   Read more
                 </button>
@@ -108,7 +103,7 @@ export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
               <button
                 type="button"
                 onClick={() => setExpanded(false)}
-                className="text-xs text-primary-600 hover:underline dark:text-primary-400"
+                className="text-xs text-primary-700 hover:underline dark:text-primary-400"
               >
                 Show less
               </button>
@@ -130,7 +125,7 @@ export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
               href={project.githubLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center text-xs text-primary-600 hover:underline dark:text-primary-400"
+              className="inline-flex items-center text-xs text-primary-700 hover:underline dark:text-primary-400"
             >
               <svg
                 className="mr-1 h-4 w-4"

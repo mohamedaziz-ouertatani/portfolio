@@ -1,4 +1,4 @@
-import { projectsData } from '@/lib/projects';
+import { projectsData, hasRealScreenshot } from '@/lib/projects';
 import { notFound } from 'next/navigation';
 import ProjectImagesZoom from '@/components/ProjectImagesZoom';
 import Image from 'next/image';
@@ -15,7 +15,7 @@ export default function ProjectDetails({ params }: { params: { id: string } }) {
   const project = projectsData.find((p) => p.id === params.id);
   if (!project) return notFound();
 
-  const images = project.images ?? [];
+  const images = hasRealScreenshot(project) ? (project.images ?? []) : [];
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -65,7 +65,7 @@ export default function ProjectDetails({ params }: { params: { id: string } }) {
             href={project.githubLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-primary-600 underline dark:text-primary-400"
+            className="text-primary-700 underline dark:text-primary-400"
           >
             GitHub Code
           </a>

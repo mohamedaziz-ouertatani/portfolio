@@ -3,9 +3,17 @@ import { Resend } from 'resend';
 import { contactFormSchema } from '@/lib/validations';
 
 export async function POST(request: NextRequest) {
-  const json = await request.json();
-  const parsed = contactFormSchema.safeParse(json);
+  let json: unknown;
+  try {
+    json = await request.json();
+  } catch {
+    return NextResponse.json(
+      { ok: false, error: 'Invalid request body.' },
+      { status: 400 }
+    );
+  }
 
+  const parsed = contactFormSchema.safeParse(json);
   if (!parsed.success) {
     const errors: Record<string, string> = {};
     for (const issue of parsed.error.issues) {
@@ -14,20 +22,43 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: false, errors }, { status: 400 });
   }
 
-  const { name, email, subject, message } = parsed.data;
-  const resend = new Resend(process.env.RESEND_API_KEY);
-
-  const { error } = await resend.emails.send({
-    from: 'Portfolio Contact <contact@resend.dev>',
-    to: 'ouertatanimohamedaziz@gmail.com',
-    replyTo: email,
-    subject: `[Portfolio] ${subject}`,
-    text: `From: ${name} <${email}>\n\n${message}`,
-  });
-
-  if (error) {
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+  if (!process.env.RESEND_API_KEY) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: 'Email service is not configured. Please email me directly.',
+      },
+      { status: 503 }
+    );
   }
 
-  return NextResponse.json({ ok: true }, { status: 200 });
+  const { name, email, subject, message } = parsed.data;
+
+  try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    const { error } = await resend.emails.send({
+      from: 'Portfolio Contact <contact@resend.dev>',
+      to: 'ouertatanimohamedaziz@gmail.com',
+      replyTo: email,
+      subject: `[Portfolio] ${subject}`,
+      text: `From: ${name} <${email}>\n\n${message}`,
+    });
+
+    if (error) {
+      return NextResponse.json(
+        { ok: false, error: error.message },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({ ok: true }, { status: 200 });
+  } catch {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: 'Failed to send message. Please try again or email me directly.',
+      },
+      { status: 500 }
+    );
+  }
 }

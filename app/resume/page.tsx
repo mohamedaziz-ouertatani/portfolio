@@ -100,7 +100,7 @@ export default function Resume() {
           </li>
           <li>
             Specialized in architecting{' '}
-            <span className="font-semibold text-primary-600">
+            <span className="font-semibold text-primary-700">
               end-to-end data pipelines
             </span>{' '}
             and interactive analytics for business and real-world impact.
@@ -234,7 +234,7 @@ function ResumeExperience({
         <span className="font-semibold text-foreground group-hover:text-primary-700">
           {role}
         </span>
-        <span className="text-primary-600 group-hover:underline dark:text-primary-400">
+        <span className="text-primary-700 group-hover:underline dark:text-primary-400">
           &#183; {company}
         </span>
         <span className="text-sm text-muted-foreground">{date}</span>
@@ -277,7 +277,7 @@ function ResumeProjectCard({
         <span className="font-bold">{name}</span>
         {url && (
           <a
-            className="ml-3 text-xs text-primary-600 underline hover:text-primary-800 dark:text-primary-300"
+            className="ml-3 text-xs text-primary-700 underline hover:text-primary-800 dark:text-primary-300"
             href={url}
             target="_blank"
             rel="noopener noreferrer"

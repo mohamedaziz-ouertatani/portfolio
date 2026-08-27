@@ -22,7 +22,7 @@ export function Footer() {
               <li>
                 <a
                   href="/"
-                  className="text-muted-foreground hover:text-primary-600 dark:hover:text-primary-400"
+                  className="text-muted-foreground hover:text-primary-700 dark:hover:text-primary-400"
                 >
                   Home
                 </a>
@@ -30,7 +30,7 @@ export function Footer() {
               <li>
                 <a
                   href="/about"
-                  className="text-muted-foreground hover:text-primary-600 dark:hover:text-primary-400"
+                  className="text-muted-foreground hover:text-primary-700 dark:hover:text-primary-400"
                 >
                   About
                 </a>
@@ -38,7 +38,7 @@ export function Footer() {
               <li>
                 <a
                   href="/projects"
-                  className="text-muted-foreground hover:text-primary-600 dark:hover:text-primary-400"
+                  className="text-muted-foreground hover:text-primary-700 dark:hover:text-primary-400"
                 >
                   Projects
                 </a>
@@ -46,7 +46,7 @@ export function Footer() {
               <li>
                 <a
                   href="/contact"
-                  className="text-muted-foreground hover:text-primary-600 dark:hover:text-primary-400"
+                  className="text-muted-foreground hover:text-primary-700 dark:hover:text-primary-400"
                 >
                   Contact
                 </a>
@@ -63,7 +63,7 @@ export function Footer() {
                 href="https://github.com/mohamedaziz-ouertatani"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary-600 dark:hover:text-primary-400"
+                className="text-muted-foreground hover:text-primary-700 dark:hover:text-primary-400"
                 aria-label="GitHub"
               >
                 <svg
@@ -83,7 +83,7 @@ export function Footer() {
                 href="https://www.linkedin.com/in/mohamed-aziz-ouertatani"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary-600 dark:hover:text-primary-400"
+                className="text-muted-foreground hover:text-primary-700 dark:hover:text-primary-400"
                 aria-label="LinkedIn"
               >
                 <svg
@@ -97,7 +97,7 @@ export function Footer() {
               </a>
               <a
                 href="mailto:ouertatanimohamedaziz@gmail.com"
-                className="text-muted-foreground hover:text-primary-600 dark:hover:text-primary-400"
+                className="text-muted-foreground hover:text-primary-700 dark:hover:text-primary-400"
                 aria-label="Email"
               >
                 <svg

@@ -32,7 +32,7 @@ export function FilterBar({
         {selectedTechnologies.length > 0 && (
           <button
             onClick={clearFilters}
-            className="text-sm text-primary-600 hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500 dark:text-primary-400"
+            className="text-sm text-primary-700 hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500 dark:text-primary-400"
           >
             Clear all ({selectedTechnologies.length})
           </button>

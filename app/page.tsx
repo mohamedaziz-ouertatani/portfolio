@@ -56,7 +56,7 @@ export default function Home() {
                   <Chip key={tech}>{tech}</Chip>
                 ))}
               </div>
-              <span className="mt-auto inline-flex items-center gap-1 text-sm font-medium text-primary-600 dark:text-primary-400">
+              <span className="mt-auto inline-flex items-center gap-1 text-sm font-medium text-primary-700 dark:text-primary-400">
                 View case study <ArrowRight size={14} />
               </span>
             </Link>
@@ -81,7 +81,7 @@ export default function Home() {
       <div className="mb-20 grid gap-12 lg:grid-cols-2">
         <Reveal>
           <div className="mb-8 flex items-center gap-3">
-            <Briefcase className="text-primary-600 dark:text-primary-400" />
+            <Briefcase className="text-primary-700 dark:text-primary-400" />
             <h2 className="text-3xl font-bold text-foreground">Experience</h2>
           </div>
           <div className="space-y-6">
@@ -96,7 +96,7 @@ export default function Home() {
                   <h3 className="text-xl font-semibold text-foreground">
                     {exp.jobTitle}
                   </h3>
-                  <p className="mb-2 text-sm font-medium text-primary-600 dark:text-primary-400">
+                  <p className="mb-2 text-sm font-medium text-primary-700 dark:text-primary-400">
                     {exp.companyName} • {exp.date}
                   </p>
                   <ul className="ml-4 list-disc space-y-1 text-muted-foreground">
@@ -111,14 +111,12 @@ export default function Home() {
 
         <Reveal delay={0.05}>
           <div className="mb-8 flex items-center gap-3">
-            <GraduationCap className="text-primary-600 dark:text-primary-400" />
+            <GraduationCap className="text-primary-700 dark:text-primary-400" />
             <h2 className="text-3xl font-bold text-foreground">Education</h2>
           </div>
           <div className="space-y-6">
             <div className="rounded-md border border-border p-6">
-              <h3 className="text-lg font-semibold text-foreground">
-                ESPRIT
-              </h3>
+              <h3 className="text-lg font-semibold text-foreground">ESPRIT</h3>
               <p className="text-muted-foreground">
                 Engineering in CS (Data Science)
               </p>
@@ -133,9 +131,7 @@ export default function Home() {
               <p className="text-muted-foreground">
                 General Secondary Certificate
               </p>
-              <p className="mt-1 text-sm text-muted-foreground">
-                2019 – 2021
-              </p>
+              <p className="mt-1 text-sm text-muted-foreground">2019 – 2021</p>
             </div>
           </div>
         </Reveal>
@@ -198,12 +194,10 @@ function InterestItem({
 }) {
   return (
     <div className="flex flex-col items-center gap-2">
-      <div className="rounded-full bg-card p-4 text-primary-600 shadow-sm dark:text-primary-400">
+      <div className="rounded-full bg-card p-4 text-primary-700 shadow-sm dark:text-primary-400">
         {icon}
       </div>
-      <span className="text-sm font-medium text-muted-foreground">
-        {label}
-      </span>
+      <span className="text-sm font-medium text-muted-foreground">{label}</span>
     </div>
   );
 }
