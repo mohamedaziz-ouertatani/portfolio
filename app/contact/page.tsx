@@ -11,9 +11,9 @@ export default function Contact() {
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [showFormspreeNote, setShowFormspreeNote] = useState(false);
-  const [copied, setCopied] = useState(false);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [serverError, setServerError] = useState('');
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -36,18 +36,40 @@ export default function Contact() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const buildMailto = () => {
-    const subject = encodeURIComponent(formData.subject);
-    const body = encodeURIComponent(
-      `From: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    );
-    return `mailto:ouertatanimohamedaziz@gmail.com?subject=${subject}&body=${body}`;
+  const resetForm = () => {
+    setFormData({ name: '', email: '', subject: '', message: '' });
+    setErrors({});
+    setTouched({});
   };
 
-  const handleMailtoSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
-    window.location.href = buildMailto();
+
+    setStatus('submitting');
+    setServerError('');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+      const body = await res.json();
+
+      if (!res.ok || !body.ok) {
+        if (body.errors) setErrors(body.errors);
+        setServerError(body.error ?? 'Something went wrong sending your message.');
+        setStatus('error');
+        return;
+      }
+
+      setStatus('success');
+      resetForm();
+    } catch {
+      setServerError('Network error — please try again or email me directly.');
+      setStatus('error');
+    }
   };
 
   const handleChange = (
@@ -57,32 +79,6 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [name]: value }));
     setTouched((prev) => ({ ...prev, [name]: true }));
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }));
-    if (copied) setCopied(false);
-  };
-
-  const copyEmailContent = async () => {
-    const text = `To: ouertatanimohamedaziz@gmail.com
-Subject: ${formData.subject}
-
-From: ${formData.name}
-Email: ${formData.email}
-
-Message:
-${formData.message}`;
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      setCopied(false);
-    }
-  };
-
-  const resetForm = () => {
-    setFormData({ name: '', email: '', subject: '', message: '' });
-    setErrors({});
-    setTouched({});
-    setCopied(false);
   };
 
   // Button is enabled only if form is filled and valid
@@ -95,19 +91,6 @@ ${formData.message}`;
       formData.message.trim().length >= 10
     );
   };
-
-  // Mailto preview helper (truncate message for display)
-  const mailtoPreview = (() => {
-    const shortMsg =
-      formData.message.length > 50
-        ? formData.message.slice(0, 50) + '…'
-        : formData.message;
-    return `mailto:ouertatanimohamedaziz@gmail.com?subject=${encodeURIComponent(
-      formData.subject || '[No Subject]'
-    )}&body=${encodeURIComponent(
-      `From: ${formData.name || '[No Name]'}\nEmail: ${formData.email || '[No Email]'}\n\nMessage:\n${shortMsg}`
-    )}`;
-  })();
 
   return (
     <div className="container px-4 py-16">
@@ -141,13 +124,6 @@ ${formData.message}`;
           </p>
         </div>
 
-        {/* Note about static hosting */}
-        <div className="mb-5 rounded-lg border border-blue-200 bg-blue-50 p-3 text-sm text-blue-800 dark:border-blue-900 dark:bg-blue-900/20 dark:text-blue-300">
-          <strong>Note:</strong> This portfolio is statically hosted. Please use
-          one of the options below to contact me—no data is sent to any server
-          by default.
-        </div>
-
         {/* Contact options helper */}
         <div className="mb-8">
           <h2 className="sr-only">How to contact me</h2>
@@ -157,8 +133,7 @@ ${formData.message}`;
                 Option 1:
               </span>{' '}
               Fill this form and click{' '}
-              <span className="font-semibold">Send via Email</span> (opens your
-              default mail client).
+              <span className="font-semibold">Send Message</span>.
             </li>
             <li>
               <span className="font-semibold text-primary-700 dark:text-primary-400">
@@ -166,17 +141,10 @@ ${formData.message}`;
               </span>{' '}
               Use the quick email link below the form.
             </li>
-            <li>
-              <span className="font-semibold text-primary-700 dark:text-primary-400">
-                Option 3:
-              </span>{' '}
-              Click <span className="font-semibold">Copy email content</span> to
-              paste into any email service or ATS.
-            </li>
           </ul>
         </div>
 
-        <form onSubmit={handleMailtoSubmit} className="space-y-6" noValidate>
+        <form onSubmit={handleSubmit} className="space-y-6" noValidate>
           <div>
             <label
               htmlFor="name"
@@ -313,98 +281,29 @@ ${formData.message}`;
             )}
           </div>
 
-          <div className="rounded-lg border-2 border-primary-500 bg-white p-6 dark:border-primary-400 dark:bg-gray-800">
-            <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
-              Send via Email
+          <div className="rounded-md border border-border bg-card p-6">
+            <h2 className="mb-4 text-xl font-semibold text-foreground">
+              Send a Message
             </h2>
-            <p className="mb-4 text-gray-600 dark:text-gray-400">
-              This will open your email client with a prefilled message. Make
-              edits before sending!
-            </p>
             <button
               type="submit"
-              disabled={!isFormValid()}
-              aria-disabled={!isFormValid()}
-              className={`inline-flex w-full items-center justify-center gap-2 rounded-lg px-6 py-3 font-medium transition-colors focus:outline-none focus:ring-2
-                ${
-                  isFormValid()
-                    ? 'bg-primary-600 text-white hover:bg-primary-700'
-                    : 'cursor-not-allowed bg-gray-200 text-gray-500 dark:bg-gray-700 dark:text-gray-400'
-                }
-              `}
+              disabled={!isFormValid() || status === 'submitting'}
+              aria-disabled={!isFormValid() || status === 'submitting'}
+              className={`inline-flex w-full items-center justify-center gap-2 rounded-md px-6 py-3 font-medium transition-colors focus-visible:outline-none ${
+                isFormValid() && status !== 'submitting'
+                  ? 'bg-accent text-accent-foreground hover:opacity-90'
+                  : 'cursor-not-allowed bg-muted text-muted-foreground'
+              }`}
             >
-              <svg
-                className="h-5 w-5"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              Send via Email
+              {status === 'submitting' ? 'Sending…' : 'Send Message'}
             </button>
-
-            <div className="mt-4 flex items-center justify-between">
-              <button
-                type="button"
-                onClick={copyEmailContent}
-                className="text-sm text-primary-600 hover:underline dark:text-primary-400"
-              >
-                Copy email content
-              </button>
-              {copied && (
-                <span className="text-xs text-green-600 dark:text-green-400">
-                  Copied!
-                </span>
-              )}
-            </div>
-
-            <div className="mt-4 rounded-md bg-gray-100 p-3 text-xs text-gray-700 dark:bg-gray-900/40 dark:text-gray-300">
-              <div className="mb-1 font-bold">Mailto preview:</div>
-              <code className="break-all">{mailtoPreview}</code>
-            </div>
-          </div>
-
-          <div className="mt-8 rounded-lg border border-gray-200 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-900/50">
-            <div className="mb-4 flex items-start justify-between">
-              <div>
-                <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">
-                  Alternative: External Form Service
-                </h2>
-                <p className="mt-1 text-xs text-gray-600 dark:text-gray-400">
-                  <span className="font-medium">
-                    For developers forking this repo:
-                  </span>{' '}
-                  You can integrate with services like Formspree to accept
-                  online submissions here.
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setShowFormspreeNote(!showFormspreeNote)}
-                className="text-sm text-primary-600 hover:underline dark:text-primary-400"
-                aria-expanded={showFormspreeNote}
-              >
-                {showFormspreeNote ? 'Hide' : 'Show'} Info
-              </button>
-            </div>
-
-            {showFormspreeNote && (
-              <div className="text-xs text-gray-600 dark:text-gray-400">
-                Example: Replace the form <b>action</b> with{' '}
-                <code className="rounded bg-gray-200 px-1 py-0.5 dark:bg-gray-800">
-                  action="https://formspree.io/f/your_form_id"
-                </code>{' '}
-                and{' '}
-                <code className="rounded bg-gray-200 px-1 py-0.5 dark:bg-gray-800">
-                  method="POST"
-                </code>
-                .
-              </div>
+            {status === 'success' && (
+              <p className="mt-4 text-sm text-primary-600 dark:text-primary-400">
+                Message sent — thanks for reaching out, I'll reply soon.
+              </p>
+            )}
+            {status === 'error' && (
+              <p className="mt-4 text-sm text-destructive">{serverError}</p>
             )}
           </div>
 
