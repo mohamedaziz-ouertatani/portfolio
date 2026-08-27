@@ -7,13 +7,13 @@
 
 A modern, performant portfolio built with Next.js 14 (App Router), TypeScript, and Tailwind CSS.
 
-> **🎯 Architecture:** This portfolio is 100% static with no server-side rendering, API routes, or backend dependencies. It's optimized for GitHub Pages deployment and can be hosted on any static hosting platform.
+> **🎯 Architecture:** This portfolio is a full Next.js server application with SSR, API routes, and backend integration. It's optimized for Vercel deployment with support for serverless functions and dynamic rendering.
 
 ## 🌐 Live Demo
 
-Visit the live portfolio: [https://mohamedaziz-ouertatani.github.io/portfolio/](https://mohamedaziz-ouertatani.github.io/portfolio/)
+Visit the live portfolio: [https://mohamedaziz-ouertatani.vercel.app](https://mohamedaziz-ouertatani.vercel.app)
 
-> **Note:** This portfolio is 100% static and deployed on GitHub Pages with no server-side rendering, API routes, or backend services.
+> **Note:** This portfolio is deployed on Vercel with full Next.js server capabilities including SSR, API routes, and backend service integration.
 
 ## 📸 Screenshots
 
@@ -23,10 +23,10 @@ Visit the live portfolio: [https://mohamedaziz-ouertatani.github.io/portfolio/](
 
 ### Core Technologies
 
-- **Next.js 14 App Router** - Modern React framework with static export for GitHub Pages
+- **Next.js 14 App Router** - Modern React framework with server-side rendering and API routes
 - **TypeScript** - Type-safe code for better developer experience and fewer runtime errors
 - **Tailwind CSS** - Utility-first CSS framework for rapid UI development with custom design system
-- **Static Export** - 100% static site generation with `output: 'export'` configuration
+- **Server Deployment** - Standard Next.js server deployment with SSR and API routes enabled
 
 ### User Experience
 
