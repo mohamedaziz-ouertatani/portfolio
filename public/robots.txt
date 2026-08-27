@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mohamedaziz-ouertatani.github.io/portfolio/sitemap.xml
+Sitemap: https://mohamedaziz-ouertatani.vercel.app/sitemap.xml

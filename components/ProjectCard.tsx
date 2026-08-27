@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import type { Project } from '@/lib/projects';
+import { hasRealScreenshot, type Project } from '@/lib/projects';
 import { useState } from 'react';
+import { Chip } from '@/components/ui/Chip';
 
 export interface ProjectCardProps {
   project: Project;
@@ -11,12 +12,9 @@ export interface ProjectCardProps {
 export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
   const [expanded, setExpanded] = useState(false);
 
-  // Fallback to a known existing asset so cards never show a broken image
-  const first =
-    project.images && project.images.length > 0
-      ? project.images[0]
-      : '/og-image.png';
-  const imgSrc = first;
+  const hasImage = hasRealScreenshot(project);
+  const imgSrc = hasImage ? project.images[0] : undefined;
+  const hasLinks = Boolean(project.githubLink || project.liveDemoLink);
 
   // Compact case study summary
   const summary = [
@@ -33,37 +31,43 @@ export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
     !!project.description;
 
   return (
-    <div className="group relative flex h-full flex-col rounded-lg border border-gray-200 bg-white transition-shadow hover:shadow-xl dark:border-gray-800 dark:bg-gray-900">
+    <div className="group relative flex h-full flex-col rounded-lg border border-border bg-card transition-shadow hover:shadow-xl">
       {/* Featured badge */}
       {isFeatured && (
-        <span className="absolute right-4 top-4 z-10 rounded bg-yellow-300 px-2 py-0.5 text-xs font-semibold text-gray-900 dark:bg-yellow-400 dark:text-gray-900">
+        <span className="absolute right-4 top-4 z-10 rounded bg-accent px-2 py-0.5 text-xs font-semibold text-accent-foreground">
           Featured
         </span>
       )}
 
-      <div className="relative h-48 w-full overflow-hidden rounded-t-lg">
-        <Image
-          src={imgSrc}
-          alt={project.title}
-          fill
-          className="object-cover transition-transform group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          priority={false}
-        />
+      <div className="relative flex h-48 w-full items-center justify-center overflow-hidden rounded-t-md bg-muted">
+        {hasImage && imgSrc ? (
+          <Image
+            src={imgSrc}
+            alt={project.title}
+            fill
+            className="object-cover transition-transform group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority={false}
+          />
+        ) : (
+          <span className="font-mono text-xs text-muted-foreground">
+            No screenshot yet
+          </span>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col p-6">
-        <h3 className="mb-2 text-xl font-semibold text-gray-900 dark:text-white">
+        <h3 className="mb-2 text-xl font-semibold text-card-foreground">
           {project.title}
         </h3>
 
         {project.role && (
-          <p className="mb-2 text-xs font-medium text-primary-600 dark:text-primary-400">
+          <p className="mb-2 text-xs font-medium text-primary-700 dark:text-primary-400">
             {project.role}
           </p>
         )}
 
-        <p className="mb-2 line-clamp-2 text-sm text-gray-700 dark:text-gray-300">
+        <p className="mb-2 line-clamp-2 text-sm text-muted-foreground">
           {project.description}
         </p>
 
@@ -72,7 +76,7 @@ export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
           {!expanded && !!hasDetails && (
             <>
               {summary[0] && (
-                <div className="mb-1 text-xs text-gray-600 dark:text-gray-400">
+                <div className="mb-1 text-xs text-muted-foreground">
                   <strong>{summary[0].split(':')[0]}:</strong>{' '}
                   {summary[0].split(':').slice(1).join(':').trim()}
                 </div>
@@ -81,7 +85,7 @@ export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
                 <button
                   type="button"
                   onClick={() => setExpanded(true)}
-                  className="text-xs text-primary-600 hover:underline dark:text-primary-400"
+                  className="text-xs text-primary-700 hover:underline dark:text-primary-400"
                 >
                   Read more
                 </button>
@@ -89,7 +93,7 @@ export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
             </>
           )}
           {expanded && (
-            <ul className="space-y-1 text-xs text-gray-600 dark:text-gray-400">
+            <ul className="space-y-1 text-xs text-muted-foreground">
               {summary.map((s, idx) => (
                 <li key={idx}>
                   <strong>{s.split(':')[0]}:</strong>{' '}
@@ -99,7 +103,7 @@ export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
               <button
                 type="button"
                 onClick={() => setExpanded(false)}
-                className="text-xs text-primary-600 hover:underline dark:text-primary-400"
+                className="text-xs text-primary-700 hover:underline dark:text-primary-400"
               >
                 Show less
               </button>
@@ -110,23 +114,18 @@ export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
         {/* Technologies */}
         <div className="mb-3 flex flex-wrap gap-2">
           {project.technologies.slice(0, 5).map((tech, idx) => (
-            <span
-              key={idx}
-              className="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-700 dark:bg-gray-800 dark:text-gray-300"
-            >
-              {tech}
-            </span>
+            <Chip key={idx}>{tech}</Chip>
           ))}
         </div>
 
         {/* Links */}
-        <div className="mt-auto flex flex-wrap gap-3">
+        <div className="mt-auto flex flex-wrap items-center gap-3">
           {project.githubLink && (
             <a
               href={project.githubLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center text-xs text-primary-600 hover:underline dark:text-primary-400"
+              className="inline-flex items-center text-xs text-primary-700 hover:underline dark:text-primary-400"
             >
               <svg
                 className="mr-1 h-4 w-4"
@@ -163,6 +162,11 @@ export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
               </svg>
               Demo
             </a>
+          )}
+          {!hasLinks && (
+            <span className="font-mono text-xs text-muted-foreground">
+              No public link yet
+            </span>
           )}
           <Link
             href={`/projects/${project.id}`}

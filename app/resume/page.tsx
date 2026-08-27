@@ -1,96 +1,31 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { projectsData } from '@/lib/projects';
+import { experiencesData } from '@/lib/experiences';
+import skillsData from '@/lib/skills';
 
 export const metadata: Metadata = {
   title: 'Resume - Mohamed Aziz Ouertatani',
   description:
     'Resume of Mohamed Aziz Ouertatani — Computer Science Engineering Student specializing in Data Science and Full Stack Development.',
   alternates: {
-    canonical: 'https://mohamedaziz-ouertatani.github.io/portfolio/resume/',
+    canonical: '/resume',
   },
 };
 
-const featuredProjects = [
-  {
-    name: 'Estate-Mind: Real Estate Data Platform',
-    role: 'Data Engineer & Analyst',
-    description:
-      "End-to-end data pipeline and advanced EDA for Tunisia's property market: 15,000+ listings, 7 sources harmonized, with dynamic price heatmaps and clustering.",
-    stack: 'Python, pandas, Jupyter, scikit-learn, Plotly, ETL',
-    impact:
-      'Harmonized 90%+ of data fields, automated cleaning (80% less manual prep), delivered 30+ EDA visualizations and interactive pricing analytics.',
-    url: 'https://github.com/mohamedaziz-ouertatani/estate-mind',
-  },
-  {
-    name: 'FLOCK OFF E-Commerce Platform',
-    role: 'Full Stack Developer',
-    description:
-      'MERN-stack e-commerce app with admin dashboard and live inventory/order management.',
-    stack: 'React, Node.js, Express, MongoDB',
-    impact: 'Launched for 5+ businesses; improved admin efficiency by 35%.',
-  },
-  {
-    name: 'Smart Inventory Forecasting Platform',
-    role: 'ML/Backend Engineer',
-    description:
-      'Containerized platform for demand forecasting, model selection (ETS/ARIMA), and automated replenishment via Fastify APIs.',
-    stack: 'Python, TypeScript, MLflow, Fastify, Docker',
-    impact:
-      'Reduced stockouts and enabled experiment tracking for inventory operators.',
-  },
-  {
-    name: 'ML/MLOps Pipeline',
-    role: 'MLOps Engineer',
-    description:
-      'End-to-end ML training pipeline (scikit-learn) with MLflow tracking and Dockerized CI/CD.',
-    stack: 'Python, scikit-learn, MLflow, Docker',
-    impact:
-      'Reduced deploy time from hours to minutes; enabled rapid retraining.',
-  },
-  {
-    name: 'BI Dashboard Solution',
-    role: 'Data Analyst',
-    description:
-      'Automated EDA and BI reporting with data pipelines and Power BI dashboards.',
-    stack: 'Python, SQL, Power BI',
-    impact: 'Streamlined reporting for 3 business units.',
-  },
-];
+const featuredProjectIds = ['11', '1', '10', '6', '7'];
+const resumeProjects = featuredProjectIds
+  .map((id) => projectsData.find((p) => p.id === id))
+  .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
-const SKILLS = [
-  'TypeScript',
-  'Python',
-  'React',
-  'Next.js',
-  'Node.js',
-  'Docker',
-  'MLflow',
-  'PostgreSQL',
-  'Power BI',
-  'Git',
-  'scikit-learn',
-  'pandas',
-  'Plotly',
-  'Jupyter',
-  'ETL',
-  'EDA',
-  'CI/CD',
-  'Outlier Detection',
-  'Clustering',
-  'Geospatial Analysis',
-  'Feature Engineering',
-  'Data Pipeline',
-  'TailwindCSS',
-];
+const allSkills = [
+  ...skillsData.languages,
+  ...skillsData.librariesFrameworks,
+  ...skillsData.tools,
+].sort((a, b) => b.level - a.level);
 
-const INTERESTS = [
-  'Muay Thai',
-  'Motorcycling',
-  'Fitness',
-  'Gaming',
-  'Data Viz',
-];
+const INTERESTS = ['Muay Thai', 'Motorcycling', 'Fitness', 'Gaming'];
 
 export default function Resume() {
   return (
@@ -99,17 +34,17 @@ export default function Resume() {
       className="container mx-auto max-w-3xl px-4 py-12 print:py-8"
     >
       {/* === Resume Hero (Name, Title, Portrait, Download/Contact) === */}
-      <section className="relative mb-8 flex animate-fade-in flex-col-reverse items-center gap-6 overflow-hidden rounded-xl bg-white px-6 py-6 shadow-lg dark:bg-gray-800 md:flex-row md:items-center md:justify-between print:bg-white print:shadow-none">
+      <section className="relative mb-8 flex flex-col-reverse items-center gap-6 overflow-hidden rounded-xl bg-card px-6 py-6 shadow-lg md:flex-row md:items-center md:justify-between print:bg-white print:shadow-none">
         {/* Headline and actions */}
         <div>
-          <h1 className="animate-slide-from-left text-3xl font-bold tracking-tight text-gray-900 dark:text-white md:text-4xl">
+          <h1 className="text-3xl font-bold tracking-tight text-card-foreground md:text-4xl">
             Mohamed Aziz Ouertatani
           </h1>
-          <div className="animate-fade-in-more mt-1 text-base font-semibold text-primary-700 dark:text-primary-300 md:text-lg">
+          <div className="mt-1 text-base font-semibold text-primary-700 dark:text-primary-300 md:text-lg">
             Computer Science Engineering Student | Data Science & Full-Stack
             Development
           </div>
-          <div className="animate-fade-in-soon mt-1 flex items-center gap-4 text-sm text-gray-700 dark:text-gray-200">
+          <div className="mt-1 flex items-center gap-4 text-sm text-muted-foreground">
             <a
               href="mailto:ouertatanimohamedaziz@gmail.com"
               className="transition-colors hover:underline dark:text-primary-400"
@@ -129,7 +64,7 @@ export default function Resume() {
         </div>
         {/* Portrait */}
         <div className="mb-6 flex-shrink-0 md:mb-0 print:hidden">
-          <div className="animate-float-up relative h-[120px] w-[120px] overflow-hidden rounded-full border-4 border-primary-200 shadow-lg dark:border-primary-700">
+          <div className="relative h-[120px] w-[120px] overflow-hidden rounded-full border-4 border-primary-200 shadow-lg dark:border-primary-700">
             <Image
               src="/me3.png"
               alt="Mohamed Aziz Ouertatani"
@@ -138,16 +73,14 @@ export default function Resume() {
               priority
               draggable={false}
             />
-            {/* Soft glow/ring */}
-            {/* <div className="animate-resume-glow pointer-events-none absolute inset-0 rounded-full bg-gradient-to-bl from-primary-100 via-primary-200 to-blue-100 opacity-40 blur-xl"></div> */}
           </div>
         </div>
         {/* Download CV action */}
-        <div className="animate-slide-from-right absolute right-0 top-0 flex-shrink-0 md:static print:hidden">
+        <div className="absolute right-0 top-0 flex-shrink-0 md:static print:hidden">
           <a
             href="/cv.pdf"
             download
-            className="animate-pop-in inline-block rounded bg-primary-600 px-4 py-2 text-sm font-medium text-white shadow-lg transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-400"
+            className="inline-block rounded bg-primary-600 px-4 py-2 text-sm font-medium text-white shadow-lg transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-400"
           >
             Download CV
           </a>
@@ -155,11 +88,11 @@ export default function Resume() {
       </section>
 
       {/* === Professional Summary === */}
-      <section className="animate-fade-in-more mb-10 print:mb-6">
-        <h2 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+      <section className="mb-10 print:mb-6">
+        <h2 className="mb-2 text-xl font-bold tracking-tight text-foreground">
           Professional Summary
         </h2>
-        <ul className="list-inside list-disc space-y-2 text-sm text-gray-700 dark:text-gray-300 md:text-base">
+        <ul className="list-inside list-disc space-y-2 text-sm text-muted-foreground md:text-base">
           <li>
             Creative and results-driven Computer Science Engineering student at
             ESPRIT with hands-on experience in full-stack web development,
@@ -167,7 +100,7 @@ export default function Resume() {
           </li>
           <li>
             Specialized in architecting{' '}
-            <span className="font-semibold text-primary-600">
+            <span className="font-semibold text-primary-700">
               end-to-end data pipelines
             </span>{' '}
             and interactive analytics for business and real-world impact.
@@ -188,55 +121,44 @@ export default function Resume() {
       </section>
 
       {/* === Experience === */}
-      <section className="animate-fade-in-long mb-10 print:mb-6">
-        <h2 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+      <section className="mb-10 print:mb-6">
+        <h2 className="mb-2 text-xl font-bold tracking-tight text-foreground">
           Professional Experience
         </h2>
         <div className="space-y-6">
-          <ResumeExperience
-            role="Next.js Developer"
-            company="iTransform365"
-            date="May 2024 – Aug 2024"
-            highlights={[
-              'Brought 3 new features to production in Next.js/TypeScript stack',
-              'Led transition to optimized static export, boosting CI speed by 40%',
-              'Collaborated with cross-functional teams on scalable solutions',
-            ]}
-          />
-          <ResumeExperience
-            role="React.js Developer"
-            company="Swiver"
-            date="Aug 2022 – Apr 2023"
-            highlights={[
-              'Built multilingual SaaS UI used by 200+ business users (EN/FR/AR)',
-              'Streamlined invoice and stock management features, saving manual effort',
-              'Enhanced performance and accessibility throughout the codebase',
-            ]}
-          />
+          {experiencesData
+            .filter((exp) => exp.companyName !== 'ESPRIT')
+            .map((exp) => (
+              <ResumeExperience
+                key={exp.jobTitle + exp.companyName}
+                role={exp.jobTitle}
+                company={exp.companyName}
+                date={exp.date}
+                highlights={exp.contributions.slice(0, 3)}
+              />
+            ))}
         </div>
       </section>
 
       {/* === Education === */}
-      <section className="mb-10 animate-fade-in print:mb-6">
-        <h2 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+      <section className="mb-10 print:mb-6">
+        <h2 className="mb-2 text-xl font-bold tracking-tight text-foreground">
           Education
         </h2>
         <div className="space-y-4">
           <div>
-            <h3 className="font-semibold text-gray-900 dark:text-white">
-              ESPRIT
-            </h3>
-            <div className="flex flex-wrap gap-x-2 text-sm text-gray-700 dark:text-gray-300">
+            <h3 className="font-semibold text-foreground">ESPRIT</h3>
+            <div className="flex flex-wrap gap-x-2 text-sm text-muted-foreground">
               <span>Engineering Degree in Computer Science (Data Science)</span>
               <span>&#183;</span>
               <span>Sep 2021 – Feb 2027 (expected)</span>
             </div>
           </div>
           <div>
-            <h3 className="font-semibold text-gray-900 dark:text-white">
+            <h3 className="font-semibold text-foreground">
               L'école Arabe Jordanienne
             </h3>
-            <div className="flex flex-wrap gap-x-2 text-sm text-gray-700 dark:text-gray-300">
+            <div className="flex flex-wrap gap-x-2 text-sm text-muted-foreground">
               <span>General Secondary Certificate</span>
               <span>&#183;</span>
               <span>2019 – 2021</span>
@@ -246,20 +168,20 @@ export default function Resume() {
       </section>
 
       {/* === Featured Projects === */}
-      <section className="animate-pop-in mb-10 print:mb-6">
-        <h2 className="mb-3 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+      <section className="mb-10 print:mb-6">
+        <h2 className="mb-3 text-xl font-bold tracking-tight text-foreground">
           Featured Projects
         </h2>
         <div className="grid gap-6 md:grid-cols-2">
-          {featuredProjects.map((proj, idx) => (
+          {resumeProjects.map((proj, idx) => (
             <ResumeProjectCard
-              key={proj.name}
-              name={proj.name}
-              role={proj.role}
+              key={proj.id}
+              name={proj.title}
+              role={proj.role ?? ''}
               description={proj.description}
-              stack={proj.stack}
-              impact={proj.impact}
-              url={proj.url}
+              stack={proj.technologies.join(', ')}
+              impact={proj.result ?? ''}
+              url={proj.githubLink}
               animate={idx === 0}
             />
           ))}
@@ -267,23 +189,23 @@ export default function Resume() {
       </section>
 
       {/* === Skills === */}
-      <section className="animate-fade-in-more mb-10 print:mb-6">
-        <h2 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+      <section className="mb-10 print:mb-6">
+        <h2 className="mb-2 text-xl font-bold tracking-tight text-foreground">
           Skills & Technologies
         </h2>
-        <div className="flex flex-wrap gap-3 text-sm text-gray-700 dark:text-gray-200">
-          {SKILLS.map((skill) => (
-            <SkillBadge key={skill}>{skill}</SkillBadge>
+        <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
+          {allSkills.slice(0, 22).map((skill) => (
+            <SkillBadge key={skill.name}>{skill.name}</SkillBadge>
           ))}
         </div>
       </section>
 
       {/* === Interests === */}
-      <section className="mb-8 animate-slide-up">
-        <h2 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+      <section className="mb-8">
+        <h2 className="mb-2 text-xl font-bold tracking-tight text-foreground">
           Interests
         </h2>
-        <div className="flex flex-wrap gap-3 text-sm text-gray-700 dark:text-gray-300">
+        <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
           {INTERESTS.map((interest) => (
             <InterestBadge key={interest}>{interest}</InterestBadge>
           ))}
@@ -309,15 +231,15 @@ function ResumeExperience({
   return (
     <div className="group">
       <div className="mb-1 flex flex-wrap items-center gap-2">
-        <span className="font-semibold text-gray-900 group-hover:text-primary-700 dark:text-white">
+        <span className="font-semibold text-foreground group-hover:text-primary-700">
           {role}
         </span>
-        <span className="text-primary-600 group-hover:underline dark:text-primary-400">
+        <span className="text-primary-700 group-hover:underline dark:text-primary-400">
           &#183; {company}
         </span>
-        <span className="text-sm text-gray-500">{date}</span>
+        <span className="text-sm text-muted-foreground">{date}</span>
       </div>
-      <ul className="ml-4 list-inside list-disc text-gray-700 transition-all duration-200 group-hover:pl-2 dark:text-gray-300">
+      <ul className="ml-4 list-inside list-disc text-muted-foreground transition-all duration-200 group-hover:pl-2">
         {highlights.map((item, idx) => (
           <li key={idx} className="leading-tight">
             {item}
@@ -347,15 +269,15 @@ function ResumeProjectCard({
 }) {
   return (
     <div
-      className={`rounded-lg border border-gray-200 bg-gray-50 p-4 text-gray-800 shadow transition-shadow duration-300 dark:bg-gray-900 dark:text-gray-200 print:border print:bg-white print:text-black 
-        ${animate ? 'animate-highlight-glow hover:scale-[1.03] hover:shadow-2xl' : 'hover:scale-[1.01] hover:shadow-lg'}
+      className={`rounded-lg border border-border bg-muted p-4 text-card-foreground shadow transition-shadow duration-300 print:border print:bg-white print:text-black
+        ${animate ? 'ring-1 ring-accent hover:scale-[1.02] hover:shadow-md' : 'hover:scale-[1.01] hover:shadow-sm'}
       `}
     >
       <div className="mb-1 flex items-center justify-between">
         <span className="font-bold">{name}</span>
         {url && (
           <a
-            className="ml-3 text-xs text-primary-600 underline hover:text-primary-800 dark:text-primary-300"
+            className="ml-3 text-xs text-primary-700 underline hover:text-primary-800 dark:text-primary-300"
             href={url}
             target="_blank"
             rel="noopener noreferrer"
@@ -369,7 +291,7 @@ function ResumeProjectCard({
       <div className="mb-1 text-xs text-primary-700 dark:text-primary-400">
         {stack}
       </div>
-      <ul className="ml-4 list-disc text-sm text-gray-700 dark:text-gray-300 print:text-black">
+      <ul className="ml-4 list-disc text-sm text-muted-foreground print:text-black">
         <li>{impact}</li>
       </ul>
     </div>
@@ -378,7 +300,7 @@ function ResumeProjectCard({
 
 function SkillBadge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="animate-fade-in-more cursor-pointer rounded-full bg-gray-100 px-3 py-1 font-medium shadow-sm transition-colors hover:bg-primary-50 dark:bg-gray-700 dark:hover:bg-primary-900/20">
+    <span className="cursor-pointer rounded-full bg-muted px-3 py-1 font-medium shadow-sm transition-colors hover:bg-primary-50 dark:hover:bg-primary-900/20">
       {children}
     </span>
   );
@@ -386,7 +308,7 @@ function SkillBadge({ children }: { children: React.ReactNode }) {
 
 function InterestBadge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="animate-fade-in cursor-pointer rounded-full border border-gray-200 px-3 py-1 transition-colors hover:bg-primary-50 dark:border-gray-800 dark:hover:bg-primary-900/10">
+    <span className="cursor-pointer rounded-full border border-border px-3 py-1 transition-colors hover:bg-primary-50 dark:hover:bg-primary-900/10">
       {children}
     </span>
   );

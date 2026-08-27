@@ -30,7 +30,7 @@ export function TypingEffect({ texts }: { texts: string[] }) {
   }, [subIndex, index, deleting, texts]);
 
   return (
-    <span className="inline-block min-h-[1.5em] text-primary-600 dark:text-primary-400">
+    <span className="inline-block min-h-[1.5em] text-primary-700 dark:text-primary-400">
       {text}
       <span aria-hidden="true" className="animate-pulse">
         |

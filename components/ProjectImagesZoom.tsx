@@ -14,7 +14,7 @@ export default function ProjectImagesZoom({ images }: { images: string[] }) {
           <button
             key={idx}
             type="button"
-            className="overflow-hidden rounded-lg border transition-transform hover:scale-105 focus:outline-primary-400 dark:border-gray-700"
+            className="overflow-hidden rounded-lg border border-border transition-transform hover:scale-105 focus:outline-primary-400"
             onClick={() => setModalImg(img)}
             aria-label={`Zoom image ${idx + 1}`}
           >

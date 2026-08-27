@@ -39,7 +39,7 @@ Visit the live portfolio: [https://mohamedaziz-ouertatani.vercel.app](https://mo
 ### Performance & SEO
 
 - **SEO Optimized** - Comprehensive meta tags, Open Graph, Twitter Cards, JSON-LD structured data
-- **Performance** - Image optimization with Next.js Image (unoptimized mode), font loading optimization, and minimal client-side JavaScript
+- **Performance** - Image optimization with Next.js Image, font loading optimization, and minimal client-side JavaScript
 - **Sitemap & Robots.txt** - Static sitemap.xml and robots.txt for better search engine crawling
 - **Lighthouse Scores** - Consistently high performance, accessibility, best practices, and SEO scores
 
@@ -306,6 +306,7 @@ This portfolio includes a functional contact form with email delivery:
 4. **Fallback:** When `RESEND_API_KEY` is not configured, the form degrades gracefully with a visible mailto link
 
 To enable the contact form:
+
 - Set the `RESEND_API_KEY` environment variable in your Vercel project settings
 - Without it, the form will show an error state but still provide a working mailto fallback
 

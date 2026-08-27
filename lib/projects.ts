@@ -14,6 +14,15 @@ export interface Project {
   priority?: number;
 }
 
+// '/images/placeholder.png' is a stub asset, not a real screenshot —
+// treat it the same as "no image" so weak projects get the clean fallback.
+export function hasRealScreenshot(project: Project): boolean {
+  return Boolean(
+    project.images?.[0] &&
+    !project.images[0].includes('/images/placeholder.png')
+  );
+}
+
 const projectsData: Project[] = [
   {
     id: '1',

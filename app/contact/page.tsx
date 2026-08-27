@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { contactFormSchema } from '@/lib/validations';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -12,28 +13,25 @@ export default function Contact() {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<
+    'idle' | 'submitting' | 'success' | 'error'
+  >('idle');
   const [serverError, setServerError] = useState('');
 
   const validateForm = () => {
+    const result = contactFormSchema.safeParse(formData);
+
+    if (result.success) {
+      setErrors({});
+      return true;
+    }
+
     const newErrors: Record<string, string> = {};
-
-    if (!formData.name.trim())
-      newErrors.name = 'Please enter your name or company.';
-    if (!formData.email.trim()) {
-      newErrors.email = 'Please enter your email address.';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address.';
+    for (const issue of result.error.issues) {
+      newErrors[String(issue.path[0])] = issue.message;
     }
-    if (!formData.subject.trim()) newErrors.subject = 'Please enter a subject.';
-    if (!formData.message.trim()) {
-      newErrors.message = 'Please enter your message.';
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters.';
-    }
-
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return false;
   };
 
   const resetForm = () => {
@@ -59,7 +57,9 @@ export default function Contact() {
 
       if (!res.ok || !body.ok) {
         if (body.errors) setErrors(body.errors);
-        setServerError(body.error ?? 'Something went wrong sending your message.');
+        setServerError(
+          body.error ?? 'Something went wrong sending your message.'
+        );
         setStatus('error');
         return;
       }
@@ -83,13 +83,7 @@ export default function Contact() {
 
   // Button is enabled only if form is filled and valid
   const isFormValid = () => {
-    return (
-      formData.name.trim() &&
-      formData.email.trim() &&
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) &&
-      formData.subject.trim() &&
-      formData.message.trim().length >= 10
-    );
+    return contactFormSchema.safeParse(formData).success;
   };
 
   return (
@@ -100,7 +94,7 @@ export default function Contact() {
           <div className="mb-4 flex justify-center">
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900/20">
               <svg
-                className="h-8 w-8 text-primary-600 dark:text-primary-400"
+                className="h-8 w-8 text-primary-700 dark:text-primary-400"
                 fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -113,10 +107,10 @@ export default function Contact() {
               </svg>
             </div>
           </div>
-          <h1 className="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
+          <h1 className="mb-4 text-4xl font-bold text-foreground">
             Contact Me
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
+          <p className="text-lg text-muted-foreground">
             I welcome messages from recruiters, hiring managers, and
             collaborators—especially regarding internships, junior roles, or
             team projects. <br />
@@ -127,7 +121,7 @@ export default function Contact() {
         {/* Contact options helper */}
         <div className="mb-8">
           <h2 className="sr-only">How to contact me</h2>
-          <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+          <ul className="space-y-2 text-sm text-muted-foreground">
             <li>
               <span className="font-semibold text-primary-700 dark:text-primary-400">
                 Option 1:
@@ -148,7 +142,7 @@ export default function Contact() {
           <div>
             <label
               htmlFor="name"
-              className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="mb-2 block text-sm font-medium text-muted-foreground"
             >
               Name *
             </label>
@@ -159,10 +153,10 @@ export default function Contact() {
               value={formData.name}
               onBlur={handleChange}
               onChange={handleChange}
-              className={`w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 dark:bg-gray-800 dark:text-white ${
+              className={`w-full rounded-lg border bg-card px-4 py-3 text-foreground focus:outline-none focus:ring-2 ${
                 errors.name && touched.name
-                  ? 'border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:ring-primary-500 dark:border-gray-700'
+                  ? 'border-destructive focus:ring-destructive'
+                  : 'border-border focus:ring-primary-500'
               }`}
               placeholder="Your name or company"
               aria-invalid={!!errors.name}
@@ -170,10 +164,7 @@ export default function Contact() {
               required
             />
             {errors.name && touched.name && (
-              <p
-                id="name-error"
-                className="mt-1 text-sm text-red-600 dark:text-red-400"
-              >
+              <p id="name-error" className="mt-1 text-sm text-destructive">
                 {errors.name}
               </p>
             )}
@@ -182,7 +173,7 @@ export default function Contact() {
           <div>
             <label
               htmlFor="email"
-              className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="mb-2 block text-sm font-medium text-muted-foreground"
             >
               Email *
             </label>
@@ -193,10 +184,10 @@ export default function Contact() {
               value={formData.email}
               onBlur={handleChange}
               onChange={handleChange}
-              className={`w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 dark:bg-gray-800 dark:text-white ${
+              className={`w-full rounded-lg border bg-card px-4 py-3 text-foreground focus:outline-none focus:ring-2 ${
                 errors.email && touched.email
-                  ? 'border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:ring-primary-500 dark:border-gray-700'
+                  ? 'border-destructive focus:ring-destructive'
+                  : 'border-border focus:ring-primary-500'
               }`}
               placeholder="you@company.com"
               aria-invalid={!!errors.email}
@@ -204,10 +195,7 @@ export default function Contact() {
               required
             />
             {errors.email && touched.email && (
-              <p
-                id="email-error"
-                className="mt-1 text-sm text-red-600 dark:text-red-400"
-              >
+              <p id="email-error" className="mt-1 text-sm text-destructive">
                 {errors.email}
               </p>
             )}
@@ -216,7 +204,7 @@ export default function Contact() {
           <div>
             <label
               htmlFor="subject"
-              className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="mb-2 block text-sm font-medium text-muted-foreground"
             >
               Subject *
             </label>
@@ -227,10 +215,10 @@ export default function Contact() {
               value={formData.subject}
               onBlur={handleChange}
               onChange={handleChange}
-              className={`w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 dark:bg-gray-800 dark:text-white ${
+              className={`w-full rounded-lg border bg-card px-4 py-3 text-foreground focus:outline-none focus:ring-2 ${
                 errors.subject && touched.subject
-                  ? 'border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:ring-primary-500 dark:border-gray-700'
+                  ? 'border-destructive focus:ring-destructive'
+                  : 'border-border focus:ring-primary-500'
               }`}
               placeholder="e.g. Internship opportunity, Project collaboration"
               aria-invalid={!!errors.subject}
@@ -238,10 +226,7 @@ export default function Contact() {
               required
             />
             {errors.subject && touched.subject && (
-              <p
-                id="subject-error"
-                className="mt-1 text-sm text-red-600 dark:text-red-400"
-              >
+              <p id="subject-error" className="mt-1 text-sm text-destructive">
                 {errors.subject}
               </p>
             )}
@@ -250,7 +235,7 @@ export default function Contact() {
           <div>
             <label
               htmlFor="message"
-              className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300"
+              className="mb-2 block text-sm font-medium text-muted-foreground"
             >
               Message *
             </label>
@@ -261,10 +246,10 @@ export default function Contact() {
               onBlur={handleChange}
               onChange={handleChange}
               rows={6}
-              className={`w-full rounded-lg border px-4 py-3 focus:outline-none focus:ring-2 dark:bg-gray-800 dark:text-white ${
+              className={`w-full rounded-lg border bg-card px-4 py-3 text-foreground focus:outline-none focus:ring-2 ${
                 errors.message && touched.message
-                  ? 'border-red-500 focus:ring-red-500'
-                  : 'border-gray-300 focus:ring-primary-500 dark:border-gray-700'
+                  ? 'border-destructive focus:ring-destructive'
+                  : 'border-border focus:ring-primary-500'
               }`}
               placeholder="Let me know how I can help, or how you'd like to connect."
               aria-invalid={!!errors.message}
@@ -272,10 +257,7 @@ export default function Contact() {
               required
             />
             {errors.message && touched.message && (
-              <p
-                id="message-error"
-                className="mt-1 text-sm text-red-600 dark:text-red-400"
-              >
+              <p id="message-error" className="mt-1 text-sm text-destructive">
                 {errors.message}
               </p>
             )}
@@ -298,7 +280,7 @@ export default function Contact() {
               {status === 'submitting' ? 'Sending…' : 'Send Message'}
             </button>
             {status === 'success' && (
-              <p className="mt-4 text-sm text-primary-600 dark:text-primary-400">
+              <p className="mt-4 text-sm text-primary-700 dark:text-primary-400">
                 Message sent — thanks for reaching out, I'll reply soon.
               </p>
             )}
@@ -310,14 +292,14 @@ export default function Contact() {
           <div className="mt-4 flex items-center justify-between">
             <a
               href="mailto:ouertatanimohamedaziz@gmail.com?subject=Portfolio Contact&body=Hi Mohamed Aziz,%0D%0A%0D%0AI would like to get in touch with you about..."
-              className="text-sm text-primary-600 hover:underline dark:text-primary-400"
+              className="text-sm text-primary-700 hover:underline dark:text-primary-400"
             >
               Quick email link
             </a>
             <button
               type="button"
               onClick={resetForm}
-              className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+              className="text-sm text-muted-foreground hover:text-foreground"
             >
               Reset form
             </button>
@@ -325,12 +307,10 @@ export default function Contact() {
         </form>
 
         <div className="mt-8 text-center">
-          <p className="mb-2 text-gray-600 dark:text-gray-400">
-            Or reach me directly at:
-          </p>
+          <p className="mb-2 text-muted-foreground">Or reach me directly at:</p>
           <a
             href="mailto:ouertatanimohamedaziz@gmail.com"
-            className="text-primary-600 hover:underline dark:text-primary-400"
+            className="text-primary-700 hover:underline dark:text-primary-400"
           >
             ouertatanimohamedaziz@gmail.com
           </a>

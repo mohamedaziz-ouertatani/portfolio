@@ -20,18 +20,15 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-sm">
+    <header className="bg-background/80 sticky top-0 z-50 w-full border-b border-border backdrop-blur-sm">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-primary-600 focus:px-4 focus:py-2 focus:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-primary-700 focus:px-4 focus:py-2 focus:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
       >
         Skip to content
       </a>
       <nav className="container mx-auto flex items-center justify-between px-4 py-4">
-        <Link
-          href="/"
-          className="text-xl font-bold text-foreground"
-        >
+        <Link href="/" className="text-xl font-bold text-foreground">
           MA
         </Link>
 
@@ -41,9 +38,9 @@ export function Header() {
             <li key={item.href}>
               <Link
                 href={item.href}
-                className={`text-sm font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400 ${
+                className={`text-sm font-medium transition-colors hover:text-primary-700 dark:hover:text-primary-400 ${
                   pathname === item.href
-                    ? 'text-primary-600 dark:text-primary-400'
+                    ? 'text-primary-700 dark:text-primary-400'
                     : 'text-muted-foreground'
                 }`}
               >
@@ -52,7 +49,10 @@ export function Header() {
             </li>
           ))}
           <li>
-            <Button href="/cv.pdf" download variant="primary"><Download size={16} />Download CV</Button>
+            <Button href="/cv.pdf" download variant="primary">
+              <Download size={16} />
+              Download CV
+            </Button>
           </li>
           <li>
             <DarkModeToggle />
@@ -108,7 +108,7 @@ export function Header() {
                   onClick={() => setIsMenuOpen(false)}
                   className={`block rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
                     pathname === item.href
-                      ? 'bg-muted text-primary-600 dark:text-primary-400'
+                      ? 'bg-muted text-primary-700 dark:text-primary-400'
                       : 'text-muted-foreground hover:bg-muted'
                   }`}
                 >
@@ -117,7 +117,10 @@ export function Header() {
               </li>
             ))}
             <li>
-              <Button href="/cv.pdf" download variant="primary"><Download size={16} />Download CV</Button>
+              <Button href="/cv.pdf" download variant="primary">
+                <Download size={16} />
+                Download CV
+              </Button>
             </li>
           </ul>
         </div>
