@@ -5,6 +5,7 @@ import { experiencesData } from '@/lib/experiences';
 import { projectsData } from '@/lib/projects';
 import skillsData from '@/lib/skills';
 import { Chip } from '@/components/ui/Chip';
+import { Reveal } from '@/components/ui/Reveal';
 
 export const metadata: Metadata = {
   title: 'About - Mohamed Aziz Ouertatani',
@@ -15,14 +16,31 @@ export const metadata: Metadata = {
   },
 };
 
+const TECH_TAGS = [
+  'TypeScript',
+  'React/Next.js',
+  'Python',
+  'MLflow/Docker',
+  'PostgreSQL',
+];
+
+const LANGUAGES = [
+  { code: 'AR', label: 'Native' },
+  { code: 'FR', label: 'Fluent' },
+  { code: 'EN', label: 'Fluent' },
+];
+
 export default function About() {
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-16 md:py-24">
-      {/* Hero Bio Section (CV-tight, no quotes/motto) */}
-      <section className="mb-20">
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
+    <div className="container mx-auto max-w-5xl px-4 py-16 md:py-24">
+      {/* Hero */}
+      <section className="mb-20 border-b border-border pb-16">
+        <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-start">
           <div>
-            <h1 className="mb-8 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+            <p className="mb-3 font-mono text-sm text-primary-700 dark:text-primary-400">
+              ~/about
+            </p>
+            <h1 className="mb-6 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
               About Me
             </h1>
             <div className="space-y-4 text-lg leading-relaxed text-muted-foreground">
@@ -48,87 +66,56 @@ export default function About() {
                 scalable code from prototype to production.
               </p>
             </div>
-            <div className="mt-8 flex flex-wrap gap-3">
-              {[
-                'TypeScript',
-                'React/Next.js',
-                'Python',
-                'MLflow/Docker',
-                'PostgreSQL',
-              ].map((label) => (
+            <div className="mt-8 flex flex-wrap gap-2">
+              {TECH_TAGS.map((label) => (
                 <Chip key={label} className="text-sm">
                   {label}
                 </Chip>
               ))}
             </div>
-            <div className="mt-6 flex items-center gap-4 text-sm">
-              <span className="font-semibold text-foreground">Languages:</span>
-              <span className="rounded bg-primary-50 px-3 py-1 text-primary-700 dark:bg-primary-900/20 dark:text-primary-300">
-                AR (Native)
-              </span>
-              <span className="rounded bg-primary-50 px-3 py-1 text-primary-700 dark:bg-primary-900/20 dark:text-primary-300">
-                FR (Fluent)
-              </span>
-              <span className="rounded bg-primary-50 px-3 py-1 text-primary-700 dark:bg-primary-900/20 dark:text-primary-300">
-                EN (Fluent)
-              </span>
+            <div className="mt-6 flex flex-wrap items-center gap-3 font-mono text-xs">
+              <span className="font-semibold text-muted-foreground">lang:</span>
+              {LANGUAGES.map(({ code, label }) => (
+                <span
+                  key={code}
+                  className="rounded border border-border px-2 py-1 text-primary-700 dark:text-primary-400"
+                >
+                  {code}{' '}
+                  <span className="text-muted-foreground">· {label}</span>
+                </span>
+              ))}
             </div>
           </div>
-          <div className="relative mx-auto h-80 w-80 overflow-hidden rounded-2xl border-4 border-white shadow-xl dark:border-gray-800 md:h-96 md:w-96 lg:h-[420px] lg:w-[420px]">
+          <div className="relative mx-auto h-48 w-48 shrink-0 overflow-hidden rounded border border-border md:h-56 md:w-56">
             <Image
               src="/me2.jpg"
               alt="Mohamed Aziz Ouertatani"
               fill
               className="object-cover"
-              sizes="(max-width: 768px) 100vw, 420px"
+              sizes="224px"
               priority
             />
           </div>
         </div>
       </section>
 
-      {/* Career Aspirations */}
-      <section className="mb-24">
-        <h2 className="mb-8 text-3xl font-bold text-foreground">
-          <span className="text-primary-700 dark:text-primary-400">
-            What I’m Seeking
-          </span>
-        </h2>
-        <div className="grid max-w-2xl gap-6 text-lg text-muted-foreground">
-          <div>
-            <strong>Open to</strong>: Junior or internship positions in Data
-            Engineering, MLOps, or Full-Stack Development, remote/hybrid
-            (Tunisia/EU).
-          </div>
-          <div>
-            Thrive in product-driven teams—building production ML pipelines and
-            dashboards, quantifying business impact, and optimizing data
-            workflows.
-          </div>
-        </div>
-      </section>
-
-      {/* Professional Experience (CV-Aligned) */}
-      <section className="mb-24">
-        <h2 className="mb-12 text-4xl font-bold text-foreground">
-          <span className="text-primary-700 dark:text-primary-400">
-            Experience
-          </span>
-        </h2>
-        <div className="space-y-8">
+      {/* Experience */}
+      <Reveal className="mb-24">
+        <SectionHeading index="01" title="Experience" />
+        <div className="space-y-6">
           {experiencesData.map((experience, index) => (
             <article
               key={index}
-              className="group rounded-2xl border border-border bg-card p-8 shadow-sm transition-all duration-300 hover:shadow-xl"
+              className="rounded border border-border bg-card p-8 transition-colors hover:border-primary-600/50"
             >
               <header className="mb-6">
-                <h3 className="text-2xl font-bold text-primary-700 group-hover:text-primary-800 dark:text-primary-400 dark:group-hover:text-primary-300">
+                <h3 className="text-2xl font-bold text-foreground">
                   {experience.jobTitle}
                 </h3>
-                <p className="mt-1 text-xl font-semibold text-foreground">
+                <p className="mt-1 text-xl font-semibold text-card-foreground">
                   {experience.companyName}
                 </p>
-                <p className="mt-1 text-base font-medium text-muted-foreground">
+                <p className="mt-1 font-mono text-sm text-primary-700 dark:text-primary-400">
                   {experience.date}
                 </p>
                 <div className="mt-4 flex gap-4 text-sm">
@@ -185,29 +172,20 @@ export default function About() {
                   </ul>
                 </>
               )}
-              <div className="flex flex-wrap items-center gap-3">
+              <div className="flex flex-wrap items-center gap-2">
                 {experience.skills.map((skill, idx) => (
-                  <span
-                    key={idx}
-                    className="rounded-full bg-primary-50 px-4 py-2 text-sm font-medium text-primary-700 dark:bg-primary-900/20 dark:text-primary-300"
-                  >
-                    {skill}
-                  </span>
+                  <Chip key={idx}>{skill}</Chip>
                 ))}
               </div>
             </article>
           ))}
         </div>
-      </section>
+      </Reveal>
 
-      {/* Professional Skills Grid (progress bars, 3-column) */}
-      <section className="mb-24">
-        <h2 className="mb-12 text-4xl font-bold text-foreground">
-          <span className="text-primary-700 dark:text-primary-400">
-            Skills & Tools
-          </span>
-        </h2>
-        <div className="grid gap-8 md:grid-cols-3">
+      {/* Skills & Tools */}
+      <Reveal className="mb-24" delay={0.05}>
+        <SectionHeading index="02" title="Skills & Tools" />
+        <div className="grid gap-6 md:grid-cols-3">
           <SkillGroup
             title="Languages"
             items={skillsData.languages
@@ -227,11 +205,25 @@ export default function About() {
               .map((s) => [s.name, s.level] as [string, number])}
           />
         </div>
-      </section>
+      </Reveal>
 
-      {/* Credentials/Education Section */}
-      <section className="mt-24">
-        <h2 className="mb-8 text-3xl font-bold text-foreground">Credentials</h2>
+      {/* Career Aspirations — compact closing note */}
+      <Reveal className="mb-24 rounded border border-border bg-muted p-8">
+        <p className="mb-2 font-mono text-xs uppercase tracking-wider text-primary-700 dark:text-primary-400">
+          $ status --seeking
+        </p>
+        <p className="text-lg text-muted-foreground">
+          <strong className="text-foreground">Open to</strong>: Junior or
+          internship positions in Data Engineering, MLOps, or Full-Stack
+          Development, remote/hybrid (Tunisia/EU). Thrive in product-driven
+          teams—building production ML pipelines and dashboards, quantifying
+          business impact, and optimizing data workflows.
+        </p>
+      </Reveal>
+
+      {/* Credentials/Education */}
+      <Reveal>
+        <SectionHeading index="03" title="Credentials" />
         <div className="grid gap-6 md:grid-cols-2">
           <Card
             title="Education"
@@ -242,12 +234,21 @@ export default function About() {
             content="CCNA (Cisco), MongoDB Node.js Developer, Neo4j Fundamentals."
           />
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }
 
 /* ------ Helper Components ------ */
+
+function SectionHeading({ index, title }: { index: string; title: string }) {
+  return (
+    <div className="mb-10 flex items-baseline gap-3 border-b border-border pb-4">
+      <span className="font-mono text-sm text-muted-foreground">{index}</span>
+      <h2 className="text-3xl font-bold text-foreground">{title}</h2>
+    </div>
+  );
+}
 
 function SkillGroup({
   title,
@@ -257,18 +258,25 @@ function SkillGroup({
   items: [string, number][];
 }) {
   return (
-    <div>
-      <h3 className="mb-4 font-semibold">{title}</h3>
-      <div className="space-y-2">
+    <div className="rounded border border-border bg-card p-6">
+      <h3 className="mb-4 font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground">
+        {title}
+      </h3>
+      <div className="space-y-3">
         {items.map(([item, level]) => (
-          <div key={item} className="flex items-center gap-2">
-            <div className="h-2 flex-1 rounded bg-muted">
+          <div key={item}>
+            <div className="mb-1 flex items-center justify-between text-sm">
+              <span className="font-medium text-card-foreground">{item}</span>
+              <span className="font-mono text-xs text-primary-700 dark:text-primary-400">
+                {level}%
+              </span>
+            </div>
+            <div className="h-1.5 rounded-full bg-muted">
               <div
-                className="h-2 rounded bg-primary-600"
+                className="h-1.5 rounded-full bg-primary-600 dark:bg-primary-400"
                 style={{ width: `${level}%` }}
               />
             </div>
-            <span className="text-sm font-medium">{item}</span>
           </div>
         ))}
       </div>
@@ -278,8 +286,8 @@ function SkillGroup({
 
 function Card({ title, content }: { title: string; content: string }) {
   return (
-    <div className="rounded-xl border border-border bg-card p-6 shadow-sm">
-      <h3 className="mb-2 text-lg font-bold text-primary-700 dark:text-primary-400">
+    <div className="rounded border border-border bg-card p-6">
+      <h3 className="mb-2 font-mono text-lg font-bold text-primary-700 dark:text-primary-400">
         {title}
       </h3>
       <p className="text-muted-foreground">{content}</p>
