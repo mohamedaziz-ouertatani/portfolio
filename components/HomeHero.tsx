@@ -4,11 +4,12 @@ import Image from 'next/image';
 import { Layout, Mail, Download } from 'lucide-react';
 import { TypingEffect } from '@/components/TypingEffect';
 import { Button } from '@/components/ui/Button';
+import { AvailabilityBadge } from '@/components/ui/AvailabilityBadge';
 
 const HEADLINES = [
-  'Computer Science Engineering Student',
-  'Full Stack & Data Engineering',
-  'ML • MLOps • Production Pipelines',
+  'Final-Year CS Engineering Student — Data Science',
+  'Data Engineering & MLOps',
+  'ML • Production Pipelines • Full Stack',
 ];
 
 export default function HomeHero() {
@@ -16,6 +17,7 @@ export default function HomeHero() {
     <section className="mb-20">
       <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
         <div className="flex max-w-2xl flex-col items-center text-center lg:items-start lg:text-left">
+          <AvailabilityBadge className="mb-6" />
           <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             Mohamed Aziz Ouertatani
           </h1>
@@ -23,14 +25,18 @@ export default function HomeHero() {
             <TypingEffect texts={HEADLINES} />
           </div>
           <p className="mb-6 text-lg text-muted-foreground">
-            Fourth-year Computer Science Engineering student at ESPRIT,
-            building production data pipelines, ML forecasting systems, and
-            full-stack web applications — from Next.js/TypeScript frontends to
-            Fastify APIs and MLflow-tracked ML pipelines.
+            Final-year Computer Science Engineering student at ESPRIT (Data
+            Science), focused on delivering production-grade systems rather than
+            isolated experiments. Recent work includes a solo-built research
+            intelligence platform combining semantic retrieval with LLM-based
+            reasoning to produce cited, evidence-grounded assessments, ML
+            forecasting pipelines tracked in MLflow, and full-stack applications
+            built on Fastify, Next.js, and PostgreSQL.
           </p>
           <p className="mb-8 text-base text-muted-foreground">
-            Open to Data Engineering, MLOps, and Full-Stack roles — internship
-            or junior, remote/hybrid (Tunisia/EU).
+            Seeking a 6-month End-of-Studies Internship (PFE) starting February
+            2027 in Data Engineering, MLOps, or Full-Stack Development —
+            remote/hybrid (Tunisia/EU).
           </p>
           <div className="flex flex-wrap justify-center gap-4 lg:justify-start">
             <Button href="/projects" icon={<Layout size={18} />}>

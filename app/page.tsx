@@ -12,20 +12,20 @@ import {
 import HomeHero from '@/components/HomeHero';
 import { Reveal } from '@/components/ui/Reveal';
 import { Chip } from '@/components/ui/Chip';
-import { projectsData } from '@/lib/projects';
+import { strongProjects } from '@/lib/projects';
 import { experiencesData } from '@/lib/experiences';
 import skillsData from '@/lib/skills';
 
 export const metadata: Metadata = {
   title: 'Home - Mohamed Aziz Ouertatani',
   description:
-    'Computer Science Engineering student specializing in Data Science and production MLOps platforms. Experienced with Next.js, Fastify, PostgreSQL, MLflow, and Docker.',
+    'Final-year Computer Science Engineering student seeking a 6-month PFE internship (Feb 2027) in Data Engineering, MLOps, or Full-Stack Development. Experienced with Next.js, Fastify, PostgreSQL, MLflow, and Docker.',
   alternates: {
     canonical: '/',
   },
 };
 
-const featuredProjects = [...projectsData]
+const featuredProjects = [...strongProjects]
   .sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0))
   .slice(0, 2);
 
@@ -68,13 +68,14 @@ export default function Home() {
         <h2 className="mb-12 text-center text-3xl font-bold text-foreground lg:text-left">
           Technical Expertise
         </h2>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <SkillGroup title="Languages" skills={skillsData.languages} />
-          <SkillGroup
-            title="Frameworks & Libraries"
-            skills={skillsData.librariesFrameworks}
-          />
-          <SkillGroup title="Tools & Platforms" skills={skillsData.tools} />
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {skillsData.map((category) => (
+            <SkillGroup
+              key={category.key}
+              title={category.label}
+              skills={category.items}
+            />
+          ))}
         </div>
       </Reveal>
 
@@ -121,7 +122,7 @@ export default function Home() {
                 Engineering in CS (Data Science)
               </p>
               <p className="mt-1 text-sm text-muted-foreground">
-                2021 – Present
+                Sep 2021 – Feb 2027 (expected) · Final year
               </p>
             </div>
             <div className="rounded-md border border-border p-6">

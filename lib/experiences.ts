@@ -67,32 +67,6 @@ const experiencesData: Experience[] = [
       'Accessibility',
     ],
   },
-  {
-    jobTitle: 'Academic Project Developer',
-    companyName: 'ESPRIT',
-    date: '2021 – Present',
-    description: `Collaborated on multiple academic projects including e-commerce platforms, games, and desktop applications.`,
-    contributions: [
-      'Developed MERN-stack e-commerce platform with user and admin dashboards.',
-      'Built a photo cube shop with image upload and order management.',
-      'Implemented CRUD operations and database management in WASHA website project.',
-      'Contributed to 2D game development using C and SDL with Arduino joystick integration.',
-      'Developed charity management desktop application with PDF generation and QR code features.',
-    ],
-    skills: [
-      'React.js',
-      'Node.js',
-      'Express.js',
-      'MongoDB',
-      'Bootstrap',
-      'PHP',
-      'Oracle',
-      'C/C++',
-      'Qt',
-      'Arduino',
-      'SDL',
-    ],
-  },
 ];
 
 export { experiencesData };

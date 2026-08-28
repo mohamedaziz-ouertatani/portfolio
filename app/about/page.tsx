@@ -1,16 +1,15 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import type { Metadata } from 'next';
 import { experiencesData } from '@/lib/experiences';
-import { projectsData } from '@/lib/projects';
 import skillsData from '@/lib/skills';
 import { Chip } from '@/components/ui/Chip';
 import { Reveal } from '@/components/ui/Reveal';
+import { AvailabilityBadge } from '@/components/ui/AvailabilityBadge';
 
 export const metadata: Metadata = {
   title: 'About - Mohamed Aziz Ouertatani',
   description:
-    'Computer Science Engineering student at ESPRIT specialized in Data Science, MLOps, and production-grade full stack development. Proven experience with MLflow, Fastify APIs, Docker pipelines, and quantifiable business impact.',
+    'Final-year Computer Science Engineering student at ESPRIT, seeking a 6-month PFE internship (Feb 2027) in Data Science, Data Engineering, MLOps, or full-stack development. Proven experience with MLflow, Fastify APIs, Docker pipelines, and quantifiable business impact.',
   alternates: {
     canonical: '/about',
   },
@@ -26,7 +25,7 @@ const TECH_TAGS = [
 
 const LANGUAGES = [
   { code: 'AR', label: 'Native' },
-  { code: 'FR', label: 'Fluent' },
+  { code: 'FR', label: 'Basic' },
   { code: 'EN', label: 'Fluent' },
 ];
 
@@ -43,9 +42,10 @@ export default function About() {
             <h1 className="mb-6 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
               About Me
             </h1>
+            <AvailabilityBadge className="mb-6" />
             <div className="space-y-4 text-lg leading-relaxed text-muted-foreground">
               <p>
-                Fourth-year Computer Science Engineering student at{' '}
+                Final-year Computer Science Engineering student at{' '}
                 <a
                   href="https://esprit.tn/"
                   target="_blank"
@@ -54,16 +54,24 @@ export default function About() {
                 >
                   ESPRIT
                 </a>
-                , specializing in Data Science and production MLOps platforms.
+                , specializing in Data Science and production-grade MLOps. My
+                focus is on building systems that perform reliably beyond a
+                single successful run — models, pipelines, and APIs designed for
+                continuous, real-world use.
               </p>
               <p>
-                Experienced architect: ML forecasting (ETS/ARIMA, MLflow
-                tracking), Fastify APIs (JWT/RBAC), PostgreSQL warehousing, and
-                Dockerized pipelines delivering BI analytics.
+                This is reflected in ML forecasting systems built on ETS/ARIMA
+                and tracked with MLflow, authenticated Fastify APIs implementing
+                JWT/RBAC, PostgreSQL-backed data warehousing, and Dockerized
+                pipelines feeding BI dashboards. Most recently, it includes a
+                solo-developed platform that retrieves and reasons over research
+                literature to produce cited, evidence-grounded assessments.
               </p>
               <p>
-                Proven at iTransform365 (Next.js) and Swiver (React); shipping
-                scalable code from prototype to production.
+                This experience extends to industry roles: developing Next.js
+                features at iTransform365 and React components at Swiver,
+                consistently delivering production-ready code from initial
+                prototype to final implementation.
               </p>
             </div>
             <div className="mt-8 flex flex-wrap gap-2">
@@ -141,37 +149,16 @@ export default function About() {
                   )}
                 </div>
               </header>
-              {experience.jobTitle === 'Academic Project Developer' ? (
-                <div>
-                  <p className="mb-4 text-lg font-semibold text-card-foreground">
-                    Developed{' '}
-                    <Link
-                      href="/projects/11"
-                      className="text-primary-700 underline dark:text-primary-400"
-                    >
-                      Estate-Mind
-                    </Link>
-                    : {projectsData.find((p) => p.id === '11')?.description}
-                  </p>
-                  <ul className="mb-6 ml-6 list-disc space-y-3 text-muted-foreground">
-                    <li>{projectsData.find((p) => p.id === '11')?.approach}</li>
-                    <li>{projectsData.find((p) => p.id === '11')?.result}</li>
-                  </ul>
-                </div>
-              ) : (
-                <>
-                  {experience.description && (
-                    <p className="mb-6 text-lg font-semibold text-card-foreground">
-                      {experience.description}
-                    </p>
-                  )}
-                  <ul className="mb-6 ml-6 list-disc space-y-3 text-muted-foreground">
-                    {experience.contributions.map((contribution, idx) => (
-                      <li key={idx}>{contribution}</li>
-                    ))}
-                  </ul>
-                </>
+              {experience.description && (
+                <p className="mb-6 text-lg font-semibold text-card-foreground">
+                  {experience.description}
+                </p>
               )}
+              <ul className="mb-6 ml-6 list-disc space-y-3 text-muted-foreground">
+                {experience.contributions.map((contribution, idx) => (
+                  <li key={idx}>{contribution}</li>
+                ))}
+              </ul>
               <div className="flex flex-wrap items-center gap-2">
                 {experience.skills.map((skill, idx) => (
                   <Chip key={idx}>{skill}</Chip>
@@ -185,25 +172,14 @@ export default function About() {
       {/* Skills & Tools */}
       <Reveal className="mb-24" delay={0.05}>
         <SectionHeading index="02" title="Skills & Tools" />
-        <div className="grid gap-6 md:grid-cols-3">
-          <SkillGroup
-            title="Languages"
-            items={skillsData.languages
-              .slice(0, 5)
-              .map((s) => [s.name, s.level] as [string, number])}
-          />
-          <SkillGroup
-            title="Frameworks & Libraries"
-            items={skillsData.librariesFrameworks
-              .slice(0, 5)
-              .map((s) => [s.name, s.level] as [string, number])}
-          />
-          <SkillGroup
-            title="Tools & Platforms"
-            items={skillsData.tools
-              .slice(0, 5)
-              .map((s) => [s.name, s.level] as [string, number])}
-          />
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {skillsData.map((category) => (
+            <SkillCategoryCard
+              key={category.key}
+              title={category.label}
+              items={category.items}
+            />
+          ))}
         </div>
       </Reveal>
 
@@ -212,13 +188,18 @@ export default function About() {
         <p className="mb-2 font-mono text-xs uppercase tracking-wider text-primary-700 dark:text-primary-400">
           $ status --seeking
         </p>
-        <p className="text-lg text-muted-foreground">
-          <strong className="text-foreground">Open to</strong>: Junior or
-          internship positions in Data Engineering, MLOps, or Full-Stack
-          Development, remote/hybrid (Tunisia/EU). Thrive in product-driven
-          teams—building production ML pipelines and dashboards, quantifying
-          business impact, and optimizing data workflows.
+        <p className="mb-4 text-lg text-muted-foreground">
+          Currently seeking a{' '}
+          <strong className="text-foreground">
+            6-month End-of-Studies Internship (PFE) beginning February 2027
+          </strong>
+          , in Data Engineering, MLOps, or Full-Stack Development, remote or
+          hybrid (Tunisia/EU). I perform best within product-driven teams,
+          translating raw data into reliable pipelines and dashboards, and
+          machine learning models into systems that perform consistently in
+          production.
         </p>
+        <AvailabilityBadge />
       </Reveal>
 
       {/* Credentials/Education */}
@@ -227,7 +208,7 @@ export default function About() {
         <div className="grid gap-6 md:grid-cols-2">
           <Card
             title="Education"
-            content="Engineering Degree in Computer Science, Data Science focus. ESPRIT (2021–Present). Areas: ML, Databases, Systems Design."
+            content="Engineering Degree in Computer Science, Data Science focus. ESPRIT (2021–2027, expected). Final year. Areas: ML, Databases, Systems Design."
           />
           <Card
             title="Certifications"
@@ -250,34 +231,21 @@ function SectionHeading({ index, title }: { index: string; title: string }) {
   );
 }
 
-function SkillGroup({
+function SkillCategoryCard({
   title,
   items,
 }: {
   title: string;
-  items: [string, number][];
+  items: { name: string; level: number }[];
 }) {
   return (
     <div className="rounded border border-border bg-card p-6">
       <h3 className="mb-4 font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground">
         {title}
       </h3>
-      <div className="space-y-3">
-        {items.map(([item, level]) => (
-          <div key={item}>
-            <div className="mb-1 flex items-center justify-between text-sm">
-              <span className="font-medium text-card-foreground">{item}</span>
-              <span className="font-mono text-xs text-primary-700 dark:text-primary-400">
-                {level}%
-              </span>
-            </div>
-            <div className="h-1.5 rounded-full bg-muted">
-              <div
-                className="h-1.5 rounded-full bg-primary-600 dark:bg-primary-400"
-                style={{ width: `${level}%` }}
-              />
-            </div>
-          </div>
+      <div className="flex flex-wrap gap-2">
+        {items.map((item) => (
+          <Chip key={item.name}>{item.name}</Chip>
         ))}
       </div>
     </div>

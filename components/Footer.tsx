@@ -10,7 +10,7 @@ export function Footer() {
               Mohamed Aziz Ouertatani
             </h3>
             <p className="text-sm text-muted-foreground">
-              Full Stack Developer & Engineering Student
+              Final-Year CS Engineering Student — Data Science
             </p>
           </div>
 

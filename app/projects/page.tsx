@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { projectsData } from '@/lib/projects';
+import { strongProjects } from '@/lib/projects';
 import { ProjectCard } from '@/components/ProjectCard';
 import { FilterBar } from '@/components/FilterBar';
 
@@ -10,10 +10,11 @@ export default function Projects() {
     []
   );
 
-  // All technologies for the filter bar
+  // All technologies for the filter bar — derived from the curated,
+  // currently-relevant project set only.
   const allTechnologies = useMemo(() => {
     const techSet = new Set<string>();
-    projectsData.forEach((project) => {
+    strongProjects.forEach((project) => {
       project.technologies.forEach((tech) => techSet.add(tech));
     });
     return Array.from(techSet).sort();
@@ -27,23 +28,14 @@ export default function Projects() {
   const filteredProjects = useMemo(() => {
     const base =
       selectedTechnologies.length === 0
-        ? projectsData
-        : projectsData.filter((project) =>
+        ? strongProjects
+        : strongProjects.filter((project) =>
             selectedTechnologies.every((tech) =>
               project.technologies.includes(tech)
             )
           );
     return [...base].sort(byPriorityDesc);
   }, [selectedTechnologies]);
-
-  // Featured: priority >= 90, up to 4
-  const featuredProjects = filteredProjects
-    .filter((p) => (p.priority ?? 0) >= 90)
-    .slice(0, 4);
-  // Everything else
-  const moreProjects = filteredProjects.filter(
-    (p) => !featuredProjects.includes(p)
-  );
 
   const filtersActive = selectedTechnologies.length > 0;
 
@@ -52,9 +44,8 @@ export default function Projects() {
       <div className="mb-8 text-center">
         <h1 className="mb-4 text-4xl font-bold text-foreground">My Projects</h1>
         <p className="text-lg text-muted-foreground">
-          Explore my work across full stack engineering, data science & ML,
-          business intelligence, desktop, and game development. Each card
-          includes{' '}
+          A curated set of production-oriented work in data engineering, MLOps,
+          and full-stack development. Each card includes{' '}
           <span className="font-medium text-foreground">
             Problem → Approach → Result
           </span>{' '}
@@ -69,7 +60,7 @@ export default function Projects() {
       />
 
       <div className="mb-6 text-sm text-muted-foreground">
-        Showing {filteredProjects.length} of {projectsData.length} projects
+        Showing {filteredProjects.length} of {strongProjects.length} projects
         {filtersActive && (
           <span className="ml-2 rounded bg-muted px-2 py-0.5 text-xs text-muted-foreground">
             Filter active
@@ -77,49 +68,15 @@ export default function Projects() {
         )}
       </div>
 
-      {/* ---- Featured Projects ---- */}
-      {featuredProjects.length > 0 && (
-        <>
-          <h2 className="mb-6 mt-12 text-center text-2xl font-bold text-foreground">
-            Featured Projects
-          </h2>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {featuredProjects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                isFeatured // Pass a prop so the ProjectCard can render a badge or distinction!
-              />
-            ))}
-          </div>
-        </>
-      )}
-
-      {/* ---- Data & ML Emphasis Strip ---- */}
-      {featuredProjects.length > 0 && (
-        <div className="my-12 rounded-xl bg-muted px-6 py-6 text-center text-muted-foreground">
-          <b className="text-primary-700 dark:text-primary-400">
-            Data & ML Emphasis:
-          </b>{' '}
-          My portfolio includes smart inventory forecasting, MLOps pipelines, BI
-          dashboards, and deep-dive data analysis— spanning experiment tracking,
-          production-grade APIs, and actionable reports for decision makers.
-        </div>
-      )}
-
-      {/* ---- More Projects ---- */}
-      {moreProjects.length > 0 && (
-        <>
-          <h3 className="mb-4 mt-8 text-center text-xl font-semibold text-foreground">
-            More Projects
-          </h3>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {moreProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </div>
-        </>
-      )}
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {filteredProjects.map((project, idx) => (
+          <ProjectCard
+            key={project.id}
+            project={project}
+            isFeatured={idx < 3}
+          />
+        ))}
+      </div>
 
       {filteredProjects.length === 0 && (
         <div className="py-16 text-center">

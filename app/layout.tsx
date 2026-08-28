@@ -23,16 +23,20 @@ const SITE_URL =
   'https://mohamedaziz-ouertatani.vercel.app';
 
 export const metadata: Metadata = {
-  title: 'Mohamed Aziz Ouertatani - Full Stack Developer',
+  title: 'Mohamed Aziz Ouertatani - Final-Year CS Engineering Student',
   description:
-    'Full Stack Developer and Engineering Student specializing in web development with React, Node.js, and TypeScript. View my portfolio of projects and experience.',
+    'Final-year Computer Science Engineering student (Data Science) seeking a 6-month PFE internship starting Feb 2027 in Data Engineering, MLOps, or Full-Stack Development. React, Next.js, Fastify, PostgreSQL, MLflow, Docker.',
   metadataBase: new URL(SITE_URL),
   keywords: [
+    'PFE Internship',
+    'End of Studies Internship',
+    'Data Engineering',
+    'MLOps',
+    'Data Science',
     'Full Stack Developer',
-    'Web Developer',
     'React',
     'TypeScript',
-    'Node.js',
+    'Python',
     'Portfolio',
     'Mohamed Aziz Ouertatani',
   ],
@@ -43,24 +47,24 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: `${SITE_URL}/`,
     siteName: 'Mohamed Aziz Ouertatani Portfolio',
-    title: 'Mohamed Aziz Ouertatani - Full Stack Developer',
+    title: 'Mohamed Aziz Ouertatani - Final-Year CS Engineering Student',
     description:
-      'Full Stack Developer and Engineering Student specializing in web development with React, Node.js, and TypeScript.',
+      'Seeking a 6-month PFE internship starting Feb 2027 in Data Engineering, MLOps, or Full-Stack Development.',
     images: [
       {
         // Use an absolute URL for OG images
         url: `${SITE_URL}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: 'Mohamed Aziz Ouertatani - Full Stack Developer',
+        alt: 'Mohamed Aziz Ouertatani - Final-Year CS Engineering Student',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mohamed Aziz Ouertatani - Full Stack Developer',
+    title: 'Mohamed Aziz Ouertatani - Final-Year CS Engineering Student',
     description:
-      'Full Stack Developer and Engineering Student specializing in web development.',
+      'Seeking a 6-month PFE internship starting Feb 2027 in Data Engineering, MLOps, or Full-Stack Development.',
     images: [`${SITE_URL}/og-image.png`],
   },
   robots: {
@@ -95,17 +99,19 @@ export default function RootLayout({
               '@type': 'Person',
               name: 'Mohamed Aziz Ouertatani',
               url: `${SITE_URL}/`,
-              jobTitle: 'Full Stack Developer',
+              jobTitle: 'Final-Year Computer Science Engineering Student',
               alumniOf: 'ESPRIT',
               sameAs: [
                 'https://github.com/mohamedaziz-ouertatani',
                 'https://www.linkedin.com/in/mohamed-aziz-ouertatani',
               ],
               knowsAbout: [
-                'Web Development',
+                'Data Engineering',
+                'MLOps',
+                'Data Science',
                 'React',
                 'TypeScript',
-                'Node.js',
+                'Python',
                 'Full Stack Development',
               ],
             }),
@@ -120,7 +126,7 @@ export default function RootLayout({
               name: 'Mohamed Aziz Ouertatani Portfolio',
               url: `${SITE_URL}/`,
               description:
-                'Portfolio of Mohamed Aziz Ouertatani - Full Stack Developer',
+                'Portfolio of Mohamed Aziz Ouertatani - Final-Year CS Engineering Student seeking a PFE internship',
               author: {
                 '@type': 'Person',
                 name: 'Mohamed Aziz Ouertatani',

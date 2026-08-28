@@ -4,26 +4,23 @@ import type { Metadata } from 'next';
 import { projectsData } from '@/lib/projects';
 import { experiencesData } from '@/lib/experiences';
 import skillsData from '@/lib/skills';
+import { AvailabilityBadge } from '@/components/ui/AvailabilityBadge';
 
 export const metadata: Metadata = {
   title: 'Resume - Mohamed Aziz Ouertatani',
   description:
-    'Resume of Mohamed Aziz Ouertatani — Computer Science Engineering Student specializing in Data Science and Full Stack Development.',
+    'Resume of Mohamed Aziz Ouertatani — Final-year Computer Science Engineering Student seeking a 6-month PFE internship (Feb 2027) in Data Science, Data Engineering, MLOps, or Full-Stack Development.',
   alternates: {
     canonical: '/resume',
   },
 };
 
-const featuredProjectIds = ['11', '1', '10', '6', '7'];
+const featuredProjectIds = ['12', '11', '10', '6'];
 const resumeProjects = featuredProjectIds
   .map((id) => projectsData.find((p) => p.id === id))
   .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
-const allSkills = [
-  ...skillsData.languages,
-  ...skillsData.librariesFrameworks,
-  ...skillsData.tools,
-].sort((a, b) => b.level - a.level);
+const allSkills = skillsData.flatMap((category) => category.items);
 
 const INTERESTS = ['Muay Thai', 'Motorcycling', 'Fitness', 'Gaming'];
 
@@ -41,16 +38,24 @@ export default function Resume() {
             Mohamed Aziz Ouertatani
           </h1>
           <div className="mt-1 text-base font-semibold text-primary-700 dark:text-primary-300 md:text-lg">
-            Computer Science Engineering Student | Data Science & Full-Stack
-            Development
+            Final-Year Computer Science Engineering Student — Data Science
           </div>
-          <div className="mt-1 flex items-center gap-4 text-sm text-muted-foreground">
+          <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
             <a
               href="mailto:ouertatanimohamedaziz@gmail.com"
               className="transition-colors hover:underline dark:text-primary-400"
             >
               ouertatanimohamedaziz@gmail.com
             </a>
+            <span>&#183;</span>
+            <a
+              href="tel:+21629241717"
+              className="transition-colors hover:underline dark:text-primary-400"
+            >
+              +216 29 241 717
+            </a>
+            <span>&#183;</span>
+            <span>Tunis, Tunisia</span>
             <span>&#183;</span>
             <a
               href="https://www.linkedin.com/in/mohamed-aziz-ouertatani"
@@ -61,6 +66,7 @@ export default function Resume() {
               LinkedIn
             </a>
           </div>
+          <AvailabilityBadge className="mt-3 print:hidden" />
         </div>
         {/* Portrait */}
         <div className="mb-6 flex-shrink-0 md:mb-0 print:hidden">
@@ -94,9 +100,9 @@ export default function Resume() {
         </h2>
         <ul className="list-inside list-disc space-y-2 text-sm text-muted-foreground md:text-base">
           <li>
-            Creative and results-driven Computer Science Engineering student at
-            ESPRIT with hands-on experience in full-stack web development,
-            machine learning, and advanced data engineering.
+            Final-year Computer Science Engineering student at ESPRIT
+            specializing in Data Science, with hands-on experience in full-stack
+            web development, machine learning, and advanced data engineering.
           </li>
           <li>
             Specialized in architecting{' '}
@@ -114,8 +120,9 @@ export default function Resume() {
             and rapid-deploy web products with measurable ROI.
           </li>
           <li>
-            Seeking internship or junior opportunities to bring strong
-            engineering and analytics skills to your data and product teams.
+            Seeking a 6-month End-of-Studies Internship (PFE) starting February
+            2027 in Data Science, Data Engineering, MLOps, or Full-Stack
+            Development.
           </li>
         </ul>
       </section>
@@ -194,7 +201,7 @@ export default function Resume() {
           Skills & Technologies
         </h2>
         <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
-          {allSkills.slice(0, 22).map((skill) => (
+          {allSkills.map((skill) => (
             <SkillBadge key={skill.name}>{skill.name}</SkillBadge>
           ))}
         </div>

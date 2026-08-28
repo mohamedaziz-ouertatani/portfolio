@@ -25,6 +25,30 @@ export function hasRealScreenshot(project: Project): boolean {
 
 const projectsData: Project[] = [
   {
+    id: '12',
+    title: 'ResearchBridge — Research Intelligence Platform',
+    description:
+      'Solo-built platform that takes a research idea or uploaded paper and returns an evidence-grounded assessment: related work, novelty, research gap, plausible applications, and feasibility.',
+    role: 'Solo Developer',
+    problem:
+      'Researchers need a fast, trustworthy way to check novelty and find prior art without every claim risking fabrication from an LLM.',
+    approach:
+      'Architected the full pipeline solo — literature ingestion from arXiv, Semantic Scholar, and Springer Nature; PostgreSQL + pgvector semantic retrieval; LLM-based knowledge extraction; and gap/opportunity detection. Every claim is tied to cited evidence, with categorical (non-fabricated) confidence scoring, loud/logged ingestion failures, and a free/open-source-first stack with LLM providers behind a replaceable interface.',
+    result:
+      'Shipped an end-to-end, evidence-grounded research assessment tool built and deployed solo, from ingestion to retrieval to reasoning.',
+    technologies: ['Python', 'PostgreSQL', 'pgvector', 'LLM APIs', 'Docker'],
+    githubLink: 'https://github.com/mohamedaziz-ouertatani/ResearchBridge.git',
+    liveDemoLink: '',
+    images: [
+      '/images/ResearchBridge/ResearchBridge1.png',
+      '/images/ResearchBridge/ResearchBridge2.png',
+      '/images/ResearchBridge/ResearchBridge3.png',
+      '/images/ResearchBridge/ResearchBridge4.png',
+      '/images/ResearchBridge/ResearchBridge5.png',
+    ],
+    priority: 110,
+  },
+  {
     id: '1',
     title: 'FLOCK OFF E-Commerce Platform',
     description:
@@ -44,7 +68,7 @@ const projectsData: Project[] = [
       '/images/FLOCKOFF/flockoff1.png',
       '/images/FLOCKOFF/flockoff2.png',
     ],
-    priority: 70,
+    priority: 20,
   },
   {
     id: '8',
@@ -66,7 +90,7 @@ const projectsData: Project[] = [
     githubLink: '',
     liveDemoLink: '',
     images: ['/images/Fastify/fastify.png'],
-    priority: 90,
+    priority: 20,
   },
   {
     id: '6',
@@ -198,7 +222,7 @@ const projectsData: Project[] = [
     githubLink: '',
     liveDemoLink: '',
     images: ['/images/DataAnalysis/DataAnalysis.png'],
-    priority: 20,
+    priority: 70,
   },
   {
     id: '10',
@@ -259,10 +283,21 @@ const projectsData: Project[] = [
     ],
     githubLink: 'https://github.com/mohamedaziz-ouertatani/estate-mind',
     liveDemoLink: '',
-    images: ['/images/mind-estate/Figure_1.png'],
+    images: [
+      '/images/mind-estate/estateMind2.jpg',
+      '/images/mind-estate/Figure_1.png',
+    ],
     priority: 100,
   },
   // Add other projects here...
 ];
+
+// Only surface strong, currently-relevant work in the public listing —
+// lower-priority coursework stays in the data but off the front page.
+export const STRONG_PROJECT_THRESHOLD = 70;
+
+export const strongProjects = projectsData.filter(
+  (project) => (project.priority ?? 0) >= STRONG_PROJECT_THRESHOLD
+);
 
 export { projectsData };
