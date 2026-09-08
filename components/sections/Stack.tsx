@@ -1,63 +1,106 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Section } from '@/components/ui/Section';
 import skillsData from '@/lib/skills';
-import { relatedSkills, validStackEdges } from '@/lib/stackGraph';
+import { relatedSkills } from '@/lib/stackGraph';
+
+interface Connector {
+  id: string;
+  d: string;
+}
 
 /**
  * The engineering graph.
  *
- * Built as SVG rather than WebGL: it has to stay legible, keyboard-navigable
- * and readable by assistive technology, and the relationships are the point —
- * not the rendering. Hovering or focusing a technology dims everything it is
- * not connected to, so the graph answers "what does this sit next to?".
+ * Drawing every edge at once produced a mess: with categories laid out as
+ * columns, most relationships span the full width, so the lines crossed each
+ * other and ran straight through the labels they were meant to connect.
+ *
+ * So the resting state has no edges at all — just a legible grid of what I
+ * work with. Connectors are drawn only for the technology under the pointer or
+ * keyboard focus, which is at most a handful of curves and actually answers
+ * the question the graph exists to answer: what does this sit next to?
+ *
+ * Positions are measured from the live DOM rather than computed from a fixed
+ * layout, so the connectors follow the responsive grid instead of forcing a
+ * fixed-width canvas and a horizontal scrollbar.
  */
 export function Stack() {
   const [active, setActive] = useState<string | null>(null);
+  const [connectors, setConnectors] = useState<Connector[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef(new Map<string, HTMLElement>());
 
-  const { nodes, edges, width, height } = useMemo(() => {
-    // Categories become columns; skills stack within them. A deterministic
-    // layout beats a force simulation here — it is stable, cheap, and the
-    // grouping is exactly the information we want to convey.
-    const columnWidth = 200;
-    const rowHeight = 46;
-    const positions = new Map<string, { x: number; y: number }>();
+  const relatedToActive = active ? new Set(relatedSkills(active)) : null;
 
-    const columns = skillsData.map((category, columnIndex) => {
-      const x = columnIndex * columnWidth + 100;
-      const items = category.items.map((item, rowIndex) => {
-        const y = rowIndex * rowHeight + 70;
-        positions.set(item.name, { x, y });
-        return { name: item.name, x, y };
-      });
-      return { label: category.label, x, items };
-    });
+  const draw = useCallback(() => {
+    const container = containerRef.current;
+    if (!container || !active) {
+      setConnectors([]);
+      return;
+    }
 
-    const maxRows = Math.max(...skillsData.map((c) => c.items.length));
-
-    return {
-      nodes: columns,
-      edges: validStackEdges
-        .map(([from, to]) => ({
-          from,
-          to,
-          a: positions.get(from)!,
-          b: positions.get(to)!,
-        }))
-        .filter((edge) => edge.a && edge.b),
-      width: skillsData.length * columnWidth + 100,
-      height: maxRows * rowHeight + 110,
+    const base = container.getBoundingClientRect();
+    const centreOf = (name: string) => {
+      const el = itemRefs.current.get(name);
+      if (!el) return null;
+      const rect = el.getBoundingClientRect();
+      return {
+        x: rect.left - base.left + rect.width / 2,
+        y: rect.top - base.top + rect.height / 2,
+      };
     };
-  }, []);
 
-  const highlighted = useMemo(() => {
-    if (!active) return null;
-    return new Set([active, ...relatedSkills(active)]);
+    const from = centreOf(active);
+    if (!from) {
+      setConnectors([]);
+      return;
+    }
+
+    const next: Connector[] = [];
+    for (const name of relatedSkills(active)) {
+      const to = centreOf(name);
+      if (!to) continue;
+
+      // Bow each curve perpendicular to its own run so that connectors
+      // sharing endpoints stay distinguishable instead of overlapping.
+      const dx = to.x - from.x;
+      const dy = to.y - from.y;
+      const length = Math.hypot(dx, dy) || 1;
+      const bow = Math.min(length * 0.16, 40);
+      const cx = (from.x + to.x) / 2 + (-dy / length) * bow;
+      const cy = (from.y + to.y) / 2 + (dx / length) * bow;
+
+      next.push({
+        id: `${active}--${name}`,
+        d: `M ${from.x.toFixed(1)} ${from.y.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${to.x.toFixed(1)} ${to.y.toFixed(1)}`,
+      });
+    }
+    setConnectors(next);
   }, [active]);
 
-  const isDimmed = (name: string) =>
-    highlighted !== null && !highlighted.has(name);
+  useLayoutEffect(draw, [draw]);
+
+  useEffect(() => {
+    if (!active) return;
+    window.addEventListener('resize', draw);
+    return () => window.removeEventListener('resize', draw);
+  }, [active, draw]);
+
+  // Anchors are the bullets, not the buttons. Terminating a connector at the
+  // centre of a full-width button drags the curve straight across the label it
+  // is pointing at; ending it on the bullet keeps every line in the gutter.
+  const registerAnchor = (name: string) => (el: HTMLSpanElement | null) => {
+    if (el) itemRefs.current.set(name, el);
+    else itemRefs.current.delete(name);
+  };
 
   return (
     <Section
@@ -65,113 +108,111 @@ export function Stack() {
       index="03"
       label="Stack"
       heading="How I build it"
-      caption="The tools I actually reach for, and how they connect. Select a technology to see what it works with."
+      caption="The tools I actually reach for. Select any one of them to see what it works with."
     >
-      <div className="bg-surface/50 overflow-x-auto rounded-lg border border-border p-4">
+      <div ref={containerRef} className="relative">
         <svg
-          viewBox={`0 0 ${width} ${height}`}
-          width={width}
-          height={height}
-          className="min-w-full"
-          role="img"
-          aria-label="Graph of technologies grouped by category, with lines connecting related tools."
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
         >
-          <g>
-            {edges.map((edge) => {
-              const dim =
-                highlighted !== null &&
-                !(highlighted.has(edge.from) && highlighted.has(edge.to));
-              return (
-                <line
-                  key={`${edge.from}-${edge.to}`}
-                  x1={edge.a.x}
-                  y1={edge.a.y}
-                  x2={edge.b.x}
-                  y2={edge.b.y}
-                  stroke="var(--color-accent)"
-                  strokeWidth={dim ? 0.5 : 1.2}
-                  opacity={dim ? 0.06 : 0.4}
-                  className="transition-all duration-300"
-                />
-              );
-            })}
-          </g>
-
-          {nodes.map((column) => (
-            <g key={column.label}>
-              <text
-                x={column.x}
-                y={34}
-                textAnchor="middle"
-                className="fill-[var(--color-faint-foreground)] font-mono text-[10px] uppercase tracking-[0.16em]"
-              >
-                {column.label}
-              </text>
-              {column.items.map((item) => {
-                const dim = isDimmed(item.name);
-                const isActive = active === item.name;
-                return (
-                  <g
-                    key={item.name}
-                    tabIndex={0}
-                    role="button"
-                    aria-pressed={isActive}
-                    aria-label={`${item.name}. ${
-                      relatedSkills(item.name).length
-                    } related technologies.`}
-                    className="cursor-pointer outline-none transition-opacity duration-300 focus-visible:opacity-100"
-                    opacity={dim ? 0.28 : 1}
-                    onMouseEnter={() => setActive(item.name)}
-                    onMouseLeave={() => setActive(null)}
-                    onFocus={() => setActive(item.name)}
-                    onBlur={() => setActive(null)}
-                  >
-                    <circle
-                      cx={item.x}
-                      cy={item.y}
-                      r={isActive ? 5.5 : 3.5}
-                      fill={
-                        isActive
-                          ? 'var(--color-accent-strong)'
-                          : 'var(--color-accent)'
-                      }
-                      className="transition-all duration-300"
-                    />
-                    <text
-                      x={item.x}
-                      y={item.y + 18}
-                      textAnchor="middle"
-                      className={`font-mono text-[10px] transition-colors ${
-                        isActive
-                          ? 'fill-[var(--color-accent)]'
-                          : 'fill-[var(--color-muted-foreground)]'
-                      }`}
-                    >
-                      {item.name}
-                    </text>
-                  </g>
-                );
-              })}
-            </g>
+          {connectors.map((connector) => (
+            <path
+              key={connector.id}
+              d={connector.d}
+              fill="none"
+              stroke="var(--color-accent)"
+              strokeWidth="1.25"
+              strokeLinecap="round"
+              opacity="0.5"
+            />
           ))}
         </svg>
+
+        <div className="relative grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {skillsData.map((category) => (
+            <div key={category.key}>
+              <h3 className="label-mono mb-4">{category.label}</h3>
+              <ul>
+                {category.items.map((item) => {
+                  const isActive = active === item.name;
+                  const isRelated = relatedToActive?.has(item.name) ?? false;
+                  const isDimmed = active !== null && !isActive && !isRelated;
+                  const connections = relatedSkills(item.name);
+
+                  return (
+                    <li key={item.name}>
+                      <button
+                        type="button"
+                        aria-pressed={isActive}
+                        aria-label={
+                          connections.length
+                            ? `${item.name}, ${connections.length} related technologies`
+                            : item.name
+                        }
+                        // Hover is for mice only. On a touch screen the
+                        // synthetic mouse-enter fires first and a toggling
+                        // click would immediately switch the selection back
+                        // off, so taps select rather than toggle and the
+                        // selection clears on blur.
+                        onPointerEnter={(event) => {
+                          if (event.pointerType === 'mouse') {
+                            setActive(item.name);
+                          }
+                        }}
+                        onPointerLeave={(event) => {
+                          if (event.pointerType === 'mouse') setActive(null);
+                        }}
+                        onFocus={() => setActive(item.name)}
+                        onBlur={() => setActive(null)}
+                        onClick={() => setActive(item.name)}
+                        className={`flex w-full items-center gap-2.5 rounded-sm py-1 text-left text-sm transition-opacity duration-200 ${
+                          isDimmed ? 'opacity-25' : 'opacity-100'
+                        } ${
+                          isActive
+                            ? 'text-accent'
+                            : isRelated
+                              ? 'text-foreground'
+                              : 'text-muted-foreground hover:text-foreground'
+                        }`}
+                      >
+                        <span
+                          ref={registerAnchor(item.name)}
+                          aria-hidden="true"
+                          className={`h-1.5 w-1.5 shrink-0 rounded-full transition-colors ${
+                            isActive || isRelated
+                              ? 'bg-accent'
+                              : 'bg-border-strong'
+                          }`}
+                        />
+                        {item.name}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* The same information as plain text, for anyone not using the graph. */}
-      <div className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
-        {skillsData.map((category) => (
-          <div key={category.key}>
-            <h3 className="label-mono mb-3">{category.label}</h3>
-            <ul className="space-y-1.5">
-              {category.items.map((item) => (
-                <li key={item.name} className="text-sm text-muted-foreground">
-                  {item.name}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
+      {/* Reserves its own line so activating a technology never shifts the
+          layout underneath the pointer. */}
+      <p className="mt-10 min-h-[1.5rem] border-t border-border pt-6 text-sm text-muted-foreground">
+        {active ? (
+          <>
+            <span className="text-accent">{active}</span>
+            {relatedSkills(active).length > 0 ? (
+              <> works with {relatedSkills(active).join(', ')}.</>
+            ) : (
+              <> stands on its own here.</>
+            )}
+          </>
+        ) : (
+          <span className="text-faint">
+            Hover or focus a technology to trace its connections.
+          </span>
+        )}
+      </p>
     </Section>
   );
 }
