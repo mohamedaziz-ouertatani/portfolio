@@ -13,9 +13,14 @@ describe('sitemap', () => {
     expect(urls.some((u) => u.endsWith('/resume'))).toBe(true);
 
     for (const project of projectsData) {
-      expect(urls.some((u) => u.endsWith(`/projects/${project.id}`))).toBe(
+      expect(urls.some((u) => u.endsWith(`/projects/${project.slug}`))).toBe(
         true
       );
     }
+  });
+
+  it('indexes project slugs rather than the legacy numeric ids', () => {
+    const urls = sitemap().map((e) => e.url);
+    expect(urls.some((u) => /\/projects\/\d+$/.test(u))).toBe(false);
   });
 });
