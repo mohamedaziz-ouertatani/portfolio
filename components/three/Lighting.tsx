@@ -11,11 +11,7 @@ export function Lighting() {
   return (
     <>
       <ambientLight intensity={0.35} color="#cfd6de" />
-      <directionalLight
-        position={[8, 10, 6]}
-        intensity={1.1}
-        color={ACCENT}
-      />
+      <directionalLight position={[8, 10, 6]} intensity={1.1} color={ACCENT} />
       <pointLight
         position={[-12, -4, -10]}
         intensity={26}

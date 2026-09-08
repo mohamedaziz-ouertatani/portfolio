@@ -88,12 +88,19 @@ export function useDeferredMount(delay = 200): boolean {
   useEffect(() => {
     const idle = (
       window as Window & {
-        requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+        requestIdleCallback?: (
+          cb: () => void,
+          opts?: { timeout: number }
+        ) => number;
       }
     ).requestIdleCallback;
 
     if (idle) {
-      const handle = idle(() => setMounted(true), { timeout: 1200 });
+      // A long timeout on purpose. On a healthy machine idle fires within a
+      // frame or two; under heavy CPU contention this keeps the WebGL
+      // compile off the main thread until the page's own work has finished
+      // rather than forcing it into the busiest moment of the load.
+      const handle = idle(() => setMounted(true), { timeout: 4000 });
       return () => {
         (
           window as Window & { cancelIdleCallback?: (h: number) => void }

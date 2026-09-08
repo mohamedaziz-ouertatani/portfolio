@@ -30,11 +30,11 @@ export function EnvironmentScrim() {
           darkest part of the frame, whatever the network is doing. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-[5] bg-gradient-to-r from-background via-background/55 to-transparent"
+        className="via-background/55 pointer-events-none fixed inset-0 z-[5] bg-gradient-to-r from-background to-transparent"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-[5] bg-gradient-to-t from-background via-transparent to-background/70"
+        className="to-background/70 pointer-events-none fixed inset-0 z-[5] bg-gradient-to-t from-background via-transparent"
       />
     </>
   );

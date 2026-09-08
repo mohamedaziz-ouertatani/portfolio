@@ -23,7 +23,7 @@ export function Work() {
           <Reveal key={project.id} delay={index * 0.06}>
             <Link
               href={projectHref(project)}
-              className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-border bg-surface/70 transition-colors duration-300 ease-cine hover:border-accent-dim"
+              className="bg-surface/70 group relative flex h-full flex-col overflow-hidden rounded-lg border border-border transition-colors duration-300 ease-cine hover:border-accent-dim"
             >
               {/* Each flagship carries its own miniature environment. */}
               <div className="relative h-52 overflow-hidden border-b border-border bg-background-elevated">

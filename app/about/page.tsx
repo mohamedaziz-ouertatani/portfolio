@@ -5,6 +5,11 @@ import skillsData from '@/lib/skills';
 import { Chip } from '@/components/ui/Chip';
 import { Reveal } from '@/components/ui/Reveal';
 import { AvailabilityBadge } from '@/components/ui/AvailabilityBadge';
+import {
+  certificationsData,
+  educationData,
+  languagesData,
+} from '@/lib/education';
 
 export const metadata: Metadata = {
   title: 'About - Mohamed Aziz Ouertatani',
@@ -21,12 +26,6 @@ const TECH_TAGS = [
   'Python',
   'MLflow/Docker',
   'PostgreSQL',
-];
-
-const LANGUAGES = [
-  { code: 'AR', label: 'Native' },
-  { code: 'FR', label: 'Basic' },
-  { code: 'EN', label: 'Fluent' },
 ];
 
 export default function About() {
@@ -83,10 +82,10 @@ export default function About() {
             </div>
             <div className="mt-6 flex flex-wrap items-center gap-3 font-mono text-xs">
               <span className="font-semibold text-muted-foreground">lang:</span>
-              {LANGUAGES.map(({ code, label }) => (
+              {languagesData.map(({ code, label }) => (
                 <span
                   key={code}
-                  className="rounded border border-border px-2 py-1 text-primary-700 dark:text-primary-400"
+                  className="rounded-sm border border-border px-2 py-1 text-accent"
                 >
                   {code}{' '}
                   <span className="text-muted-foreground">· {label}</span>
@@ -208,11 +207,18 @@ export default function About() {
         <div className="grid gap-6 md:grid-cols-2">
           <Card
             title="Education"
-            content="Engineering Degree in Computer Science, Data Science focus. ESPRIT (2021–2027, expected). Final year. Areas: ML, Databases, Systems Design."
+            content={educationData
+              .map(
+                (entry) =>
+                  `${entry.credential}. ${entry.institution} (${entry.date}).`
+              )
+              .join(' ')}
           />
           <Card
             title="Certifications"
-            content="CCNA (Cisco), MongoDB Node.js Developer, Neo4j Fundamentals."
+            content={certificationsData
+              .map((cert) => `${cert.name} (${cert.issuer})`)
+              .join(', ')}
           />
         </div>
       </Reveal>
@@ -254,11 +260,11 @@ function SkillCategoryCard({
 
 function Card({ title, content }: { title: string; content: string }) {
   return (
-    <div className="rounded border border-border bg-card p-6">
-      <h3 className="mb-2 font-mono text-lg font-bold text-primary-700 dark:text-primary-400">
+    <div className="bg-surface/50 rounded-lg border border-border p-6">
+      <h3 className="mb-3 font-mono text-xs uppercase tracking-[0.16em] text-accent">
         {title}
       </h3>
-      <p className="text-muted-foreground">{content}</p>
+      <p className="leading-relaxed text-muted-foreground">{content}</p>
     </div>
   );
 }

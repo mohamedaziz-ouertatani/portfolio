@@ -77,7 +77,8 @@ function buildNetwork(nodeCount: number, linkCount: number): NetworkGeometry {
 
     phases[i] = random() * Math.PI * 2;
     // A few hub nodes carry most of the visual weight.
-    scales[i] = random() > 0.88 ? 0.13 + random() * 0.1 : 0.035 + random() * 0.05;
+    scales[i] =
+      random() > 0.88 ? 0.13 + random() * 0.1 : 0.035 + random() * 0.05;
 
     tint.copy(accent).lerp(secondary, random() * 0.55);
     colors[i * 3] = tint.r;
@@ -249,7 +250,11 @@ export function DataNetwork({
         />
       </instancedMesh>
 
-      <lineSegments ref={linesRef} geometry={linkGeometry} frustumCulled={false}>
+      <lineSegments
+        ref={linesRef}
+        geometry={linkGeometry}
+        frustumCulled={false}
+      >
         <lineBasicMaterial
           color={ACCENT}
           transparent

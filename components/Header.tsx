@@ -42,7 +42,7 @@ export function Header() {
     <header
       className={`fixed top-0 z-50 w-full transition-colors duration-300 ease-cine ${
         isScrolled || isMenuOpen
-          ? 'border-b border-border bg-background/85 backdrop-blur-md'
+          ? 'bg-background/85 border-b border-border backdrop-blur-md'
           : 'border-b border-transparent'
       }`}
     >

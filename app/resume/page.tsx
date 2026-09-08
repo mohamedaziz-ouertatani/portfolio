@@ -5,6 +5,9 @@ import { projectsData } from '@/lib/projects';
 import { experiencesData } from '@/lib/experiences';
 import skillsData from '@/lib/skills';
 import { AvailabilityBadge } from '@/components/ui/AvailabilityBadge';
+import { educationData } from '@/lib/education';
+import { site } from '@/lib/site';
+import { socialLink } from '@/lib/social';
 
 export const metadata: Metadata = {
   title: 'Resume - Mohamed Aziz Ouertatani',
@@ -35,33 +38,33 @@ export default function Resume() {
         {/* Headline and actions */}
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-card-foreground md:text-4xl">
-            Mohamed Aziz Ouertatani
+            {site.name}
           </h1>
           <div className="mt-1 text-base font-semibold text-primary-700 dark:text-primary-300 md:text-lg">
             Final-Year Computer Science Engineering Student — Data Science
           </div>
           <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
             <a
-              href="mailto:ouertatanimohamedaziz@gmail.com"
-              className="transition-colors hover:underline dark:text-primary-400"
+              href={`mailto:${site.email}`}
+              className="transition-colors hover:text-accent hover:underline"
             >
-              ouertatanimohamedaziz@gmail.com
+              {site.email}
             </a>
-            <span>&#183;</span>
+            <span aria-hidden="true">&#183;</span>
             <a
-              href="tel:+21629241717"
-              className="transition-colors hover:underline dark:text-primary-400"
+              href={site.phoneHref}
+              className="transition-colors hover:text-accent hover:underline"
             >
-              +216 29 241 717
+              {site.phone}
             </a>
-            <span>&#183;</span>
-            <span>Tunis, Tunisia</span>
-            <span>&#183;</span>
+            <span aria-hidden="true">&#183;</span>
+            <span>{site.location}</span>
+            <span aria-hidden="true">&#183;</span>
             <a
-              href="https://www.linkedin.com/in/mohamed-aziz-ouertatani"
+              href={socialLink('linkedin').href}
               target="_blank"
-              rel="noopener"
-              className="transition-colors hover:underline dark:text-primary-400"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-accent hover:underline"
             >
               LinkedIn
             </a>
@@ -70,7 +73,7 @@ export default function Resume() {
         </div>
         {/* Portrait */}
         <div className="mb-6 flex-shrink-0 md:mb-0 print:hidden">
-          <div className="relative h-[120px] w-[120px] overflow-hidden rounded-full border-4 border-primary-200 shadow-lg dark:border-primary-700">
+          <div className="relative h-[120px] w-[120px] overflow-hidden rounded-full border border-border">
             <Image
               src="/me3.png"
               alt="Mohamed Aziz Ouertatani"
@@ -84,9 +87,9 @@ export default function Resume() {
         {/* Download CV action */}
         <div className="absolute right-0 top-0 flex-shrink-0 md:static print:hidden">
           <a
-            href="/cv.pdf"
+            href={site.cv}
             download
-            className="inline-block rounded bg-primary-600 px-4 py-2 text-sm font-medium text-white shadow-lg transition-colors hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-400"
+            className="inline-block rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent-strong"
           >
             Download CV
           </a>
@@ -153,24 +156,18 @@ export default function Resume() {
           Education
         </h2>
         <div className="space-y-4">
-          <div>
-            <h3 className="font-semibold text-foreground">ESPRIT</h3>
-            <div className="flex flex-wrap gap-x-2 text-sm text-muted-foreground">
-              <span>Engineering Degree in Computer Science (Data Science)</span>
-              <span>&#183;</span>
-              <span>Sep 2021 – Feb 2027 (expected)</span>
+          {educationData.map((entry) => (
+            <div key={entry.institution}>
+              <h3 className="font-semibold text-foreground">
+                {entry.institution}
+              </h3>
+              <div className="flex flex-wrap gap-x-2 text-sm text-muted-foreground">
+                <span>{entry.credential}</span>
+                <span aria-hidden="true">&#183;</span>
+                <span>{entry.date}</span>
+              </div>
             </div>
-          </div>
-          <div>
-            <h3 className="font-semibold text-foreground">
-              L'école Arabe Jordanienne
-            </h3>
-            <div className="flex flex-wrap gap-x-2 text-sm text-muted-foreground">
-              <span>General Secondary Certificate</span>
-              <span>&#183;</span>
-              <span>2019 – 2021</span>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 

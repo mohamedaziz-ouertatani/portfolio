@@ -13,7 +13,9 @@ describe('Header', () => {
     expect(nav).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /^work$/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /^about$/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /^contact$/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole('link', { name: /^contact$/i })
+    ).toBeInTheDocument();
   });
 
   it('exposes a CV download that points at the real asset', () => {

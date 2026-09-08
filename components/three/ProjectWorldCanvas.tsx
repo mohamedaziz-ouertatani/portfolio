@@ -26,7 +26,8 @@ export default function ProjectWorldCanvas({
 }: ProjectWorldCanvasProps) {
   const { settings, webgl, reducedMotion, ready } = useRenderCapability();
 
-  if (!ready || !webgl || !settings) return <ProjectWorldFallback slug={slug} />;
+  if (!ready || !webgl || !settings)
+    return <ProjectWorldFallback slug={slug} />;
 
   const animate = active && !reducedMotion;
 

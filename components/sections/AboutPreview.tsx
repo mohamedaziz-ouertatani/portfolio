@@ -32,9 +32,9 @@ export function AboutPreview() {
               traced back to something real.
             </p>
             <p>
-              Outside of it, I keep the same habit of showing up repeatedly:
-              the discipline of Muay Thai, the attention motorcycling demands,
-              and time in the gym.
+              Outside of it, I keep the same habit of showing up repeatedly: the
+              discipline of Muay Thai, the attention motorcycling demands, and
+              time in the gym.
             </p>
           </div>
 
@@ -52,7 +52,7 @@ export function AboutPreview() {
             {interests.map(({ icon: Icon, label }) => (
               <li
                 key={label}
-                className="flex flex-col gap-3 rounded-lg border border-border bg-surface/50 p-6 transition-colors hover:border-accent-dim"
+                className="bg-surface/50 flex flex-col gap-3 rounded-lg border border-border p-6 transition-colors hover:border-accent-dim"
               >
                 <Icon size={20} className="text-accent" aria-hidden="true" />
                 <span className="text-sm font-medium text-foreground">

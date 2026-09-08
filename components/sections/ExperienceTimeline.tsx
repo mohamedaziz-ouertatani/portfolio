@@ -76,7 +76,7 @@ export function ExperienceTimeline() {
             {educationData.map((entry) => (
               <div
                 key={entry.institution}
-                className="rounded-lg border border-border bg-surface/50 p-6"
+                className="bg-surface/50 rounded-lg border border-border p-6"
               >
                 <h4 className="text-base font-semibold text-foreground">
                   {entry.url ? (

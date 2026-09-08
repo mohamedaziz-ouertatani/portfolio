@@ -26,10 +26,27 @@ const rise = {
   },
 };
 
+/**
+ * The headline is the page's Largest Contentful Paint element. Fading it in
+ * from zero opacity means the browser does not count it as painted until the
+ * JavaScript has loaded, hydrated and run the stagger — which pushed LCP past
+ * twenty seconds under CPU throttling. It therefore animates on transform
+ * only and is fully opaque in the very first frame, whether or not JS ever
+ * arrives.
+ */
+const riseOpaque = {
+  hidden: { y: 18 },
+  visible: {
+    y: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
+  },
+};
+
 export function Hero() {
   const reduceMotion = useReducedMotion();
   const variants = reduceMotion ? undefined : container;
   const item = reduceMotion ? undefined : rise;
+  const itemOpaque = reduceMotion ? undefined : riseOpaque;
 
   return (
     <section
@@ -52,7 +69,7 @@ export function Hero() {
         </motion.p>
 
         <motion.h1
-          variants={item}
+          variants={itemOpaque}
           id="hero-heading"
           className="text-5xl font-bold leading-[0.95] tracking-tightest text-foreground sm:text-7xl lg:text-8xl"
         >

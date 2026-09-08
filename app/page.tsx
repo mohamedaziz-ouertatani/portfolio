@@ -33,7 +33,7 @@ export default function Home() {
 
       <ScrollRail />
 
-      <div className="relative z-10 container mx-auto px-4">
+      <div className="container relative z-10 mx-auto px-4">
         <Hero />
         <Work />
         <Stack />

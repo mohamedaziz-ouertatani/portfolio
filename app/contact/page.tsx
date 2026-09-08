@@ -1,7 +1,39 @@
 'use client';
 
 import { useState } from 'react';
+import { ArrowUpRight } from 'lucide-react';
 import { contactFormSchema } from '@/lib/validations';
+import { SectionLabel } from '@/components/ui/SectionLabel';
+import { site } from '@/lib/site';
+import { socialLinks } from '@/lib/social';
+
+const fieldClasses = (invalid: boolean) =>
+  `w-full rounded-md border bg-background-elevated px-4 py-3 text-foreground placeholder:text-faint focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background ${
+    invalid
+      ? 'border-destructive focus:ring-destructive'
+      : 'border-border focus:border-accent focus:ring-accent'
+  }`;
+
+const fields = [
+  {
+    id: 'name',
+    label: 'Name',
+    type: 'text',
+    placeholder: 'Your name or company',
+  },
+  {
+    id: 'email',
+    label: 'Email',
+    type: 'email',
+    placeholder: 'you@company.com',
+  },
+  {
+    id: 'subject',
+    label: 'Subject',
+    type: 'text',
+    placeholder: 'e.g. PFE internship — Data Engineering',
+  },
+] as const;
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -81,163 +113,71 @@ export default function Contact() {
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
-  // Button is enabled only if form is filled and valid
-  const isFormValid = () => {
-    return contactFormSchema.safeParse(formData).success;
-  };
+  const isFormValid = () => contactFormSchema.safeParse(formData).success;
 
   return (
-    <div className="container px-4 pb-16 pt-32">
-      <div className="mx-auto max-w-2xl">
-        {/* Improved Hero / Page Intro */}
-        <div className="mb-8 text-center">
-          <div className="mb-4 flex justify-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900/20">
-              <svg
-                className="h-8 w-8 text-primary-700 dark:text-primary-400"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </div>
-          </div>
-          <h1 className="mb-4 text-4xl font-bold text-foreground">
-            Contact Me
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            I welcome messages from recruiters, hiring managers, and
-            collaborators—especially regarding internships, junior roles, or
-            team projects. <br />
-            Let's connect and build something great together!
-          </p>
-        </div>
+    <div className="container mx-auto px-4 pb-24 pt-32">
+      <header className="mb-16 max-w-3xl">
+        <SectionLabel index="06" className="mb-6">
+          Contact
+        </SectionLabel>
+        <h1 className="text-4xl font-bold tracking-tightest text-foreground sm:text-5xl md:text-6xl">
+          Get in touch
+        </h1>
+        <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+          {site.availability.detail}
+        </p>
+      </header>
 
-        {/* Contact options helper */}
-        <div className="mb-8">
-          <h2 className="sr-only">How to contact me</h2>
-          <ul className="space-y-2 text-sm text-muted-foreground">
-            <li>
-              <span className="font-semibold text-primary-700 dark:text-primary-400">
-                Option 1:
-              </span>{' '}
-              Fill this form and click{' '}
-              <span className="font-semibold">Send Message</span>.
-            </li>
-            <li>
-              <span className="font-semibold text-primary-700 dark:text-primary-400">
-                Option 2:
-              </span>{' '}
-              Use the quick email link below the form.
-            </li>
-          </ul>
-        </div>
-
+      <div className="grid gap-16 lg:grid-cols-[1.4fr_1fr] lg:gap-24">
         <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-          <div>
-            <label
-              htmlFor="name"
-              className="mb-2 block text-sm font-medium text-muted-foreground"
-            >
-              Name *
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onBlur={handleChange}
-              onChange={handleChange}
-              className={`w-full rounded-lg border bg-card px-4 py-3 text-foreground focus:outline-none focus:ring-2 ${
-                errors.name && touched.name
-                  ? 'border-destructive focus:ring-destructive'
-                  : 'border-border focus:ring-primary-500'
-              }`}
-              placeholder="Your name or company"
-              aria-invalid={!!errors.name}
-              aria-describedby={errors.name ? 'name-error' : undefined}
-              required
-            />
-            {errors.name && touched.name && (
-              <p id="name-error" className="mt-1 text-sm text-destructive">
-                {errors.name}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <label
-              htmlFor="email"
-              className="mb-2 block text-sm font-medium text-muted-foreground"
-            >
-              Email *
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onBlur={handleChange}
-              onChange={handleChange}
-              className={`w-full rounded-lg border bg-card px-4 py-3 text-foreground focus:outline-none focus:ring-2 ${
-                errors.email && touched.email
-                  ? 'border-destructive focus:ring-destructive'
-                  : 'border-border focus:ring-primary-500'
-              }`}
-              placeholder="you@company.com"
-              aria-invalid={!!errors.email}
-              aria-describedby={errors.email ? 'email-error' : undefined}
-              required
-            />
-            {errors.email && touched.email && (
-              <p id="email-error" className="mt-1 text-sm text-destructive">
-                {errors.email}
-              </p>
-            )}
-          </div>
-
-          <div>
-            <label
-              htmlFor="subject"
-              className="mb-2 block text-sm font-medium text-muted-foreground"
-            >
-              Subject *
-            </label>
-            <input
-              type="text"
-              id="subject"
-              name="subject"
-              value={formData.subject}
-              onBlur={handleChange}
-              onChange={handleChange}
-              className={`w-full rounded-lg border bg-card px-4 py-3 text-foreground focus:outline-none focus:ring-2 ${
-                errors.subject && touched.subject
-                  ? 'border-destructive focus:ring-destructive'
-                  : 'border-border focus:ring-primary-500'
-              }`}
-              placeholder="e.g. Internship opportunity, Project collaboration"
-              aria-invalid={!!errors.subject}
-              aria-describedby={errors.subject ? 'subject-error' : undefined}
-              required
-            />
-            {errors.subject && touched.subject && (
-              <p id="subject-error" className="mt-1 text-sm text-destructive">
-                {errors.subject}
-              </p>
-            )}
-          </div>
+          {fields.map((field) => {
+            const invalid = Boolean(errors[field.id] && touched[field.id]);
+            return (
+              <div key={field.id}>
+                <label
+                  htmlFor={field.id}
+                  className="label-mono mb-2 block normal-case"
+                >
+                  {field.label}{' '}
+                  <span aria-hidden="true" className="text-accent">
+                    *
+                  </span>
+                </label>
+                <input
+                  type={field.type}
+                  id={field.id}
+                  name={field.id}
+                  value={formData[field.id]}
+                  onBlur={handleChange}
+                  onChange={handleChange}
+                  className={fieldClasses(invalid)}
+                  placeholder={field.placeholder}
+                  aria-invalid={invalid}
+                  aria-describedby={invalid ? `${field.id}-error` : undefined}
+                  required
+                />
+                {invalid && (
+                  <p
+                    id={`${field.id}-error`}
+                    className="mt-2 text-sm text-destructive"
+                  >
+                    {errors[field.id]}
+                  </p>
+                )}
+              </div>
+            );
+          })}
 
           <div>
             <label
               htmlFor="message"
-              className="mb-2 block text-sm font-medium text-muted-foreground"
+              className="label-mono mb-2 block normal-case"
             >
-              Message *
+              Message{' '}
+              <span aria-hidden="true" className="text-accent">
+                *
+              </span>
             </label>
             <textarea
               id="message"
@@ -245,76 +185,98 @@ export default function Contact() {
               value={formData.message}
               onBlur={handleChange}
               onChange={handleChange}
-              rows={6}
-              className={`w-full rounded-lg border bg-card px-4 py-3 text-foreground focus:outline-none focus:ring-2 ${
-                errors.message && touched.message
-                  ? 'border-destructive focus:ring-destructive'
-                  : 'border-border focus:ring-primary-500'
-              }`}
-              placeholder="Let me know how I can help, or how you'd like to connect."
-              aria-invalid={!!errors.message}
-              aria-describedby={errors.message ? 'message-error' : undefined}
+              rows={7}
+              className={fieldClasses(
+                Boolean(errors.message && touched.message)
+              )}
+              placeholder="What the role involves, the team, and the timeline."
+              aria-invalid={Boolean(errors.message && touched.message)}
+              aria-describedby={
+                errors.message && touched.message ? 'message-error' : undefined
+              }
               required
             />
             {errors.message && touched.message && (
-              <p id="message-error" className="mt-1 text-sm text-destructive">
+              <p id="message-error" className="mt-2 text-sm text-destructive">
                 {errors.message}
               </p>
             )}
           </div>
 
-          <div className="rounded-md border border-border bg-card p-6">
-            <h2 className="mb-4 text-xl font-semibold text-foreground">
-              Send a Message
-            </h2>
+          <div className="flex flex-wrap items-center gap-6">
             <button
               type="submit"
               disabled={!isFormValid() || status === 'submitting'}
-              aria-disabled={!isFormValid() || status === 'submitting'}
-              className={`inline-flex w-full items-center justify-center gap-2 rounded-md px-6 py-3 font-medium transition-colors focus-visible:outline-none ${
+              className={`inline-flex items-center justify-center gap-2 rounded-md px-7 py-3 text-sm font-medium transition-all duration-200 ease-cine focus-visible:outline-none ${
                 isFormValid() && status !== 'submitting'
-                  ? 'bg-accent text-accent-foreground hover:opacity-90'
-                  : 'cursor-not-allowed bg-muted text-muted-foreground'
+                  ? 'bg-accent text-accent-foreground hover:bg-accent-strong hover:shadow-glow'
+                  : 'cursor-not-allowed border border-border text-faint'
               }`}
             >
-              {status === 'submitting' ? 'Sending…' : 'Send Message'}
+              {status === 'submitting' ? 'Sending…' : 'Send message'}
             </button>
-            {status === 'success' && (
-              <p className="mt-4 text-sm text-primary-700 dark:text-primary-400">
-                Message sent — thanks for reaching out, I'll reply soon.
-              </p>
-            )}
-            {status === 'error' && (
-              <p className="mt-4 text-sm text-destructive">{serverError}</p>
-            )}
-          </div>
-
-          <div className="mt-4 flex items-center justify-between">
-            <a
-              href="mailto:ouertatanimohamedaziz@gmail.com?subject=Portfolio Contact&body=Hi Mohamed Aziz,%0D%0A%0D%0AI would like to get in touch with you about..."
-              className="text-sm text-primary-700 hover:underline dark:text-primary-400"
-            >
-              Quick email link
-            </a>
             <button
               type="button"
               onClick={resetForm}
-              className="text-sm text-muted-foreground hover:text-foreground"
+              className="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-foreground"
             >
-              Reset form
+              Reset
             </button>
           </div>
+
+          {/* Announced to assistive technology: the outcome is otherwise
+              conveyed only by colour and position. */}
+          <p
+            role="status"
+            aria-live="polite"
+            className={`text-sm ${
+              status === 'error' ? 'text-destructive' : 'text-success'
+            }`}
+          >
+            {status === 'success' &&
+              "Message sent — thanks for reaching out, I'll reply soon."}
+            {status === 'error' && serverError}
+          </p>
         </form>
 
-        <div className="mt-8 text-center">
-          <p className="mb-2 text-muted-foreground">Or reach me directly at:</p>
+        <aside>
+          <h2 className="label-mono mb-6">Or reach me directly</h2>
+
           <a
-            href="mailto:ouertatanimohamedaziz@gmail.com"
-            className="text-primary-700 hover:underline dark:text-primary-400"
+            href={`mailto:${site.email}`}
+            className="block break-all font-mono text-base text-accent underline-offset-8 transition-colors hover:text-accent-strong hover:underline"
           >
-            ouertatanimohamedaziz@gmail.com
+            {site.email}
           </a>
-        </div>
+
+          <ul className="mt-10 space-y-4 border-t border-border pt-8">
+            {socialLinks
+              .filter((link) => link.id !== 'email')
+              .map((link) => (
+                <li key={link.id}>
+                  <a
+                    href={link.href}
+                    download={link.id === 'cv' || undefined}
+                    target={link.external ? '_blank' : undefined}
+                    rel={link.external ? 'noopener noreferrer' : undefined}
+                    className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-accent"
+                  >
+                    {link.label}
+                    <ArrowUpRight
+                      size={13}
+                      className="transition-transform duration-300 ease-cine group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                      aria-hidden="true"
+                    />
+                  </a>
+                </li>
+              ))}
+          </ul>
+
+          <p className="mt-10 text-sm leading-relaxed text-faint">
+            Messages sent through the form arrive in the same inbox. If the form
+            is unavailable for any reason, the address above always works.
+          </p>
+        </aside>
       </div>
     </div>
   );

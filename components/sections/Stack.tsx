@@ -67,7 +67,7 @@ export function Stack() {
       heading="How I build it"
       caption="The tools I actually reach for, and how they connect. Select a technology to see what it works with."
     >
-      <div className="overflow-x-auto rounded-lg border border-border bg-surface/50 p-4">
+      <div className="bg-surface/50 overflow-x-auto rounded-lg border border-border p-4">
         <svg
           viewBox={`0 0 ${width} ${height}`}
           width={width}

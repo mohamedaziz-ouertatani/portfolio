@@ -17,7 +17,11 @@ import {
  * mounted only after the browser has gone idle, so the canvas never competes
  * with the hero's own text for the first paint.
  */
-export default function SceneCanvas({ className = '' }: { className?: string }) {
+export default function SceneCanvas({
+  className = '',
+}: {
+  className?: string;
+}) {
   useEnvironmentTracking();
   const { settings, webgl, reducedMotion, ready } = useRenderCapability();
   const deferred = useDeferredMount();

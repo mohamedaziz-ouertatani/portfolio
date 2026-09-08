@@ -15,6 +15,9 @@ export const site = {
   disciplines: 'Data Engineering · MLOps · Full-Stack',
   school: 'ESPRIT',
   email: 'ouertatanimohamedaziz@gmail.com',
+  phone: '+216 29 241 717',
+  phoneHref: 'tel:+21629241717',
+  location: 'Tunis, Tunisia',
   cv: '/cv.pdf',
   url: SITE_URL,
   availability: {
