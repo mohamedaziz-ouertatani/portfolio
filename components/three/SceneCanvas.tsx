@@ -7,7 +7,6 @@ import { SceneFallback } from './SceneFallback';
 import { SceneErrorBoundary } from './SceneErrorBoundary';
 import { DemandDriver } from './DemandDriver';
 import {
-  useDeferredMount,
   useEnvironmentTracking,
   useRenderCapability,
 } from '@/hooks/useEnvironment';
@@ -23,10 +22,11 @@ export default function SceneCanvas({
   className?: string;
 }) {
   useEnvironmentTracking();
+  // Environment3D has already established that WebGL exists and that the page
+  // has finished loading; this only waits for the capability probe itself.
   const { settings, webgl, reducedMotion, ready } = useRenderCapability();
-  const deferred = useDeferredMount();
 
-  const canRender = ready && webgl && settings !== null && deferred;
+  const canRender = ready && webgl && settings !== null;
 
   return (
     <div className={`absolute inset-0 ${className}`} aria-hidden="true">

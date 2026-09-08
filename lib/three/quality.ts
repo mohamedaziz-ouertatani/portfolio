@@ -23,20 +23,20 @@ const PRESETS: Record<QualityTier, QualitySettings> = {
     // Beyond ~1.75 the extra fragments buy nothing visible on this content but
     // cost fill rate quadratically, so the ratio is clamped rather than raw.
     dpr: [1, 1.75],
-    nodeCount: 120,
-    linkCount: 170,
-    particleCount: 1400,
-    streamCount: 40,
+    nodeCount: 90,
+    linkCount: 130,
+    particleCount: 900,
+    streamCount: 30,
     grid: true,
     pointerParallax: true,
   },
   medium: {
     tier: 'medium',
     dpr: [1, 1.4],
-    nodeCount: 70,
-    linkCount: 95,
-    particleCount: 700,
-    streamCount: 20,
+    nodeCount: 55,
+    linkCount: 75,
+    particleCount: 450,
+    streamCount: 16,
     grid: true,
     pointerParallax: true,
   },
@@ -75,6 +75,34 @@ export function detectQualityTier(): QualityTier {
 
 export function qualitySettings(tier: QualityTier): QualitySettings {
   return PRESETS[tier];
+}
+
+interface NetworkInformation {
+  saveData?: boolean;
+  effectiveType?: string;
+}
+
+/**
+ * Whether this connection should be spared the 3D bundle entirely.
+ *
+ * The environment costs a few hundred kilobytes of JavaScript and a shader
+ * compile. On a metered or genuinely slow connection that is a bad trade for
+ * decoration the reader did not ask for, and the static fallback carries the
+ * same idea for free. Save-Data is an explicit request from the reader and is
+ * always honoured.
+ */
+export function prefersLightweight(): boolean {
+  if (typeof navigator === 'undefined') return false;
+  const connection = (
+    navigator as Navigator & { connection?: NetworkInformation }
+  ).connection;
+  if (!connection) return false;
+  if (connection.saveData) return true;
+  return (
+    connection.effectiveType === 'slow-2g' ||
+    connection.effectiveType === '2g' ||
+    connection.effectiveType === '3g'
+  );
 }
 
 export function prefersReducedMotion(): boolean {

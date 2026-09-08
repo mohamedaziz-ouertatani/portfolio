@@ -53,88 +53,91 @@ export function Header() {
         Skip to content
       </a>
 
-      <nav
-        aria-label="Primary"
-        className="container mx-auto flex items-center justify-between px-4 py-4"
-      >
-        <Link
-          href="/"
-          className="font-mono text-sm font-bold tracking-[0.2em] text-foreground transition-colors hover:text-accent"
-        >
-          {site.shortName}
-          <span className="text-accent">.</span>
-        </Link>
+      {/* The drawer lives inside this landmark: mobile visitors would
+          otherwise have navigation links that sit outside any nav element. */}
+      <nav aria-label="Primary">
+        <div className="container mx-auto flex items-center justify-between px-4 py-4">
+          <Link
+            href="/"
+            className="font-mono text-sm font-bold tracking-[0.2em] text-foreground transition-colors hover:text-accent"
+          >
+            {site.shortName}
+            <span className="text-accent">.</span>
+          </Link>
 
-        <ul className="hidden items-center gap-8 md:flex">
-          {navItems.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                aria-current={isActive(item.href) ? 'page' : undefined}
-                className={`font-mono text-xs uppercase tracking-[0.14em] transition-colors hover:text-accent ${
-                  isActive(item.href) ? 'text-accent' : 'text-muted-foreground'
-                }`}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
-          <li>
-            <Button
-              href={site.cv}
-              download
-              variant="secondary"
-              className="px-4 py-2"
-            >
-              <Download size={14} />
-              CV
-            </Button>
-          </li>
-        </ul>
-
-        <button
-          type="button"
-          onClick={() => setIsMenuOpen((open) => !open)}
-          className="rounded-md p-2 text-foreground transition-colors hover:bg-surface md:hidden"
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={isMenuOpen}
-          aria-controls="mobile-menu"
-        >
-          {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
-      </nav>
-
-      {isMenuOpen && (
-        <div
-          id="mobile-menu"
-          className="border-t border-border bg-background md:hidden"
-        >
-          <ul className="container mx-auto space-y-1 px-4 py-4">
+          <ul className="hidden items-center gap-8 md:flex">
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  onClick={() => setIsMenuOpen(false)}
                   aria-current={isActive(item.href) ? 'page' : undefined}
-                  className={`block rounded-md px-4 py-3 font-mono text-xs uppercase tracking-[0.14em] transition-colors ${
+                  className={`font-mono text-xs uppercase tracking-[0.14em] transition-colors hover:text-accent ${
                     isActive(item.href)
-                      ? 'bg-surface text-accent'
-                      : 'text-muted-foreground hover:bg-surface'
+                      ? 'text-accent'
+                      : 'text-muted-foreground'
                   }`}
                 >
                   {item.label}
                 </Link>
               </li>
             ))}
-            <li className="pt-2">
-              <Button href={site.cv} download variant="secondary">
-                <Download size={16} />
-                Download CV
+            <li>
+              <Button
+                href={site.cv}
+                download
+                variant="secondary"
+                className="px-4 py-2"
+              >
+                <Download size={14} />
+                CV
               </Button>
             </li>
           </ul>
+
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen((open) => !open)}
+            className="rounded-md p-2 text-foreground transition-colors hover:bg-surface md:hidden"
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
+          >
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
-      )}
+
+        {isMenuOpen && (
+          <div
+            id="mobile-menu"
+            className="border-t border-border bg-background md:hidden"
+          >
+            <ul className="container mx-auto space-y-1 px-4 py-4">
+              {navItems.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    aria-current={isActive(item.href) ? 'page' : undefined}
+                    className={`block rounded-md px-4 py-3 font-mono text-xs uppercase tracking-[0.14em] transition-colors ${
+                      isActive(item.href)
+                        ? 'bg-surface text-accent'
+                        : 'text-muted-foreground hover:bg-surface'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+              <li className="pt-2">
+                <Button href={site.cv} download variant="secondary">
+                  <Download size={16} />
+                  Download CV
+                </Button>
+              </li>
+            </ul>
+          </div>
+        )}
+      </nav>
     </header>
   );
 }

@@ -8,6 +8,7 @@ import {
 } from '@/lib/three/scrollStore';
 import {
   detectQualityTier,
+  prefersLightweight,
   prefersReducedMotion,
   qualitySettings,
   supportsWebGL,
@@ -60,7 +61,9 @@ export function useRenderCapability(): RenderCapability {
 
   useEffect(() => {
     const reduced = prefersReducedMotion();
-    const webgl = supportsWebGL();
+    // A save-data or slow connection is treated exactly like no WebGL at all:
+    // the static environment is shown and the 3D chunk is never fetched.
+    const webgl = supportsWebGL() && !prefersLightweight();
     setCapability({
       settings: qualitySettings(detectQualityTier()),
       webgl,
@@ -79,38 +82,71 @@ export function useRenderCapability(): RenderCapability {
 }
 
 /**
- * True once the browser has been idle after first paint. Used to defer
- * mounting the WebGL canvas until the page's own content has rendered.
+ * True once the reader has actually engaged with the page — a pointer move, a
+ * scroll, a touch or a key — and the main thread is idle.
+ *
+ * The 3D environment costs a few hundred kilobytes and a shader compile. Tying
+ * it to engagement rather than to load means that cost is never on the
+ * critical path: the static environment carries the first paint, and the live
+ * one takes over on the reader's first gesture, which on a desktop is
+ * effectively immediate and reads as the system responding to them.
  */
-export function useDeferredMount(delay = 200): boolean {
+export function useDeferredMount(): boolean {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const idle = (
-      window as Window & {
-        requestIdleCallback?: (
-          cb: () => void,
-          opts?: { timeout: number }
-        ) => number;
-      }
-    ).requestIdleCallback;
+    let idleHandle: number | undefined;
+    let timer: number | undefined;
 
-    if (idle) {
-      // A long timeout on purpose. On a healthy machine idle fires within a
-      // frame or two; under heavy CPU contention this keeps the WebGL
-      // compile off the main thread until the page's own work has finished
-      // rather than forcing it into the busiest moment of the load.
-      const handle = idle(() => setMounted(true), { timeout: 4000 });
-      return () => {
+    // Wait for the load event first, then for the main thread to go idle.
+    // Mounting on idle alone still lands the WebGL compile inside the page's
+    // own loading work on a slow machine, where it competes with the content
+    // the reader is actually waiting for.
+    const scheduleIdle = () => {
+      const idle = (
+        window as Window & {
+          requestIdleCallback?: (
+            cb: () => void,
+            opts?: { timeout: number }
+          ) => number;
+        }
+      ).requestIdleCallback;
+
+      if (idle) {
+        idleHandle = idle(() => setMounted(true), { timeout: 3000 });
+      } else {
+        timer = window.setTimeout(() => setMounted(true), 300);
+      }
+    };
+
+    const events = [
+      'pointermove',
+      'pointerdown',
+      'touchstart',
+      'wheel',
+      'scroll',
+      'keydown',
+    ] as const;
+
+    const onEngage = () => {
+      events.forEach((event) => window.removeEventListener(event, onEngage));
+      scheduleIdle();
+    };
+
+    events.forEach((event) =>
+      window.addEventListener(event, onEngage, { once: true, passive: true })
+    );
+
+    return () => {
+      events.forEach((event) => window.removeEventListener(event, onEngage));
+      if (idleHandle !== undefined) {
         (
           window as Window & { cancelIdleCallback?: (h: number) => void }
-        ).cancelIdleCallback?.(handle);
-      };
-    }
-
-    const timer = window.setTimeout(() => setMounted(true), delay);
-    return () => window.clearTimeout(timer);
-  }, [delay]);
+        ).cancelIdleCallback?.(idleHandle);
+      }
+      if (timer !== undefined) window.clearTimeout(timer);
+    };
+  }, []);
 
   return mounted;
 }

@@ -17,24 +17,17 @@ const container = {
   },
 };
 
-const rise = {
-  hidden: { opacity: 0, y: 18 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const },
-  },
-};
-
 /**
- * The headline is the page's Largest Contentful Paint element. Fading it in
- * from zero opacity means the browser does not count it as painted until the
- * JavaScript has loaded, hydrated and run the stagger — which pushed LCP past
- * twenty seconds under CPU throttling. It therefore animates on transform
- * only and is fully opaque in the very first frame, whether or not JS ever
- * arrives.
+ * Hero copy animates on transform only, never opacity.
+ *
+ * Text that fades in from zero opacity is not counted as painted until the
+ * JavaScript has loaded, hydrated and reached that element in the stagger.
+ * Measured under Lighthouse's mobile throttling, that made the description
+ * paragraph — the largest text block at narrow widths, and therefore the LCP
+ * element — paint at 3.0s. Rising into place reads the same and is visible in
+ * the first frame, whether or not the JavaScript ever arrives.
  */
-const riseOpaque = {
+const rise = {
   hidden: { y: 18 },
   visible: {
     y: 0,
@@ -42,11 +35,21 @@ const riseOpaque = {
   },
 };
 
+/** The scroll cue is decorative and below the copy, so it may still fade. */
+const fadeIn = {
+  hidden: { opacity: 0, y: 10 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
+  },
+};
+
 export function Hero() {
   const reduceMotion = useReducedMotion();
   const variants = reduceMotion ? undefined : container;
   const item = reduceMotion ? undefined : rise;
-  const itemOpaque = reduceMotion ? undefined : riseOpaque;
+  const cue = reduceMotion ? undefined : fadeIn;
 
   return (
     <section
@@ -69,7 +72,7 @@ export function Hero() {
         </motion.p>
 
         <motion.h1
-          variants={itemOpaque}
+          variants={item}
           id="hero-heading"
           className="text-5xl font-bold leading-[0.95] tracking-tightest text-foreground sm:text-7xl lg:text-8xl"
         >
@@ -124,7 +127,7 @@ export function Hero() {
 
       <motion.a
         href="#work"
-        variants={item}
+        variants={cue}
         initial={reduceMotion ? undefined : 'hidden'}
         animate={reduceMotion ? undefined : 'visible'}
         className="label-mono absolute bottom-8 left-0 inline-flex items-center gap-3 transition-colors hover:text-accent"

@@ -26,7 +26,9 @@
   /* Text — warm off-white against a cool ground */
   --color-foreground: #edece8;
   --color-muted-foreground: #8b939e;
-  --color-faint-foreground: #5c646e;
+  /* 4.8:1 on the page background. The previous value (#5c646e) measured
+     3.3:1 and failed WCAG AA for the small metadata text it is used on. */
+  --color-faint-foreground: #767e88;
 
   /* Signal accent */
   --color-accent: #45d9e8;
