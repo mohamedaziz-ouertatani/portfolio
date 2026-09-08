@@ -40,7 +40,7 @@ export default function Projects() {
   const filtersActive = selectedTechnologies.length > 0;
 
   return (
-    <div className="container px-4 py-16">
+    <div className="container px-4 pb-16 pt-32">
       <div className="mb-8 text-center">
         <h1 className="mb-4 text-4xl font-bold text-foreground">My Projects</h1>
         <p className="text-lg text-muted-foreground">

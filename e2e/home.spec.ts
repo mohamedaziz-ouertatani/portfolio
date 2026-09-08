@@ -1,34 +1,26 @@
 import { test, expect } from '@playwright/test';
 
-test('homepage has title and links', async ({ page }) => {
+test('homepage has title and primary navigation', async ({ page }) => {
   await page.goto('/');
 
   await expect(page).toHaveTitle(/Mohamed Aziz Ouertatani/);
 
-  const projectsLink = page
-    .getByRole('navigation')
-    .getByRole('link', { name: /^projects$/i });
-  await expect(projectsLink).toBeVisible();
+  const nav = page.getByRole('navigation', { name: 'Primary' });
+  await expect(nav.getByRole('link', { name: /^work$/i })).toBeVisible();
 });
 
-test('dark mode toggle works', async ({ page }) => {
+test('site renders on the dark palette', async ({ page }) => {
   await page.goto('/');
 
-  const themeToggle = page.getByRole('button', {
-    name: /toggle dark mode|switch to (dark|light) mode/i,
-  });
-  await themeToggle.click();
-
-  // Verify theme changed
-  await expect(page.locator('html')).toHaveAttribute('class', /dark/);
+  await expect(page.locator('html')).toHaveClass(/dark/);
 });
 
 test('navigation works correctly', async ({ page }) => {
   await page.goto('/');
 
-  const nav = page.getByRole('navigation');
+  const nav = page.getByRole('navigation', { name: 'Primary' });
 
-  await nav.getByRole('link', { name: /^projects$/i }).click();
+  await nav.getByRole('link', { name: /^work$/i }).click();
   await expect(page).toHaveURL(/.*projects/);
 
   await nav.getByRole('link', { name: /^about$/i }).click();

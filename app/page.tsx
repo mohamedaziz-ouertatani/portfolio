@@ -31,7 +31,7 @@ const featuredProjects = [...strongProjects]
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-4 py-6 sm:py-10 md:py-16">
+    <div className="container mx-auto px-4 pb-10 pt-32 md:pb-16">
       <HomeHero />
 
       <Reveal className="mb-20">

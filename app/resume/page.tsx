@@ -28,7 +28,7 @@ export default function Resume() {
   return (
     <main
       id="main-content"
-      className="container mx-auto max-w-3xl px-4 py-12 print:py-8"
+      className="container mx-auto max-w-3xl px-4 pb-12 pt-32 print:py-8"
     >
       {/* === Resume Hero (Name, Title, Portrait, Download/Contact) === */}
       <section className="relative mb-8 flex flex-col-reverse items-center gap-6 overflow-hidden rounded-xl bg-card px-6 py-6 shadow-lg md:flex-row md:items-center md:justify-between print:bg-white print:shadow-none">

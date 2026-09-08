@@ -87,7 +87,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="container px-4 py-16">
+    <div className="container px-4 pb-16 pt-32">
       <div className="mx-auto max-w-2xl">
         {/* Improved Hero / Page Intro */}
         <div className="mb-8 text-center">

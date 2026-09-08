@@ -31,7 +31,7 @@ const LANGUAGES = [
 
 export default function About() {
   return (
-    <div className="container mx-auto max-w-5xl px-4 py-16 md:py-24">
+    <div className="container mx-auto max-w-5xl px-4 pb-16 pt-32 md:pb-24 md:pt-40">
       {/* Hero */}
       <section className="mb-20 border-b border-border pb-16">
         <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-start">

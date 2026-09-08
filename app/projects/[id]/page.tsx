@@ -18,7 +18,7 @@ export default function ProjectDetails({ params }: { params: { id: string } }) {
   const images = hasRealScreenshot(project) ? (project.images ?? []) : [];
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 pb-12 pt-32">
       <h1 className="mb-4 text-3xl font-bold text-foreground">
         {project.title}
       </h1>

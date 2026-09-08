@@ -2,46 +2,77 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { DarkModeToggle } from './DarkModeToggle';
+import { useEffect, useState } from 'react';
+import { Download, Menu, X } from 'lucide-react';
 import { Button } from './ui/Button';
-import { Download } from 'lucide-react';
-import { useState } from 'react';
+import { site } from '@/lib/site';
+
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/projects', label: 'Work' },
+  { href: '/#stack', label: 'Stack' },
+  { href: '/#experience', label: 'Experience' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
 
 export function Header() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const navItems = [
-    { href: '/', label: 'Home' },
-    { href: '/about', label: 'About' },
-    { href: '/projects', label: 'Projects' },
-    { href: '/contact', label: 'Contact' },
-    { href: '/resume', label: 'Resume' },
-  ];
+  // The bar is transparent over the hero and only materialises once the
+  // environment has scrolled past it.
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // A drawer left open across a route change would trap the viewport.
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
+
+  const isActive = (href: string) =>
+    href.startsWith('/#') ? false : pathname === href;
 
   return (
-    <header className="bg-background/80 sticky top-0 z-50 w-full border-b border-border backdrop-blur-sm">
+    <header
+      className={`fixed top-0 z-50 w-full transition-colors duration-300 ease-cine ${
+        isScrolled || isMenuOpen
+          ? 'border-b border-border bg-background/85 backdrop-blur-md'
+          : 'border-b border-transparent'
+      }`}
+    >
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-primary-700 focus:px-4 focus:py-2 focus:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:text-accent-foreground"
       >
         Skip to content
       </a>
-      <nav className="container mx-auto flex items-center justify-between px-4 py-4">
-        <Link href="/" className="text-xl font-bold text-foreground">
-          MA
+
+      <nav
+        aria-label="Primary"
+        className="container mx-auto flex items-center justify-between px-4 py-4"
+      >
+        <Link
+          href="/"
+          className="font-mono text-sm font-bold tracking-[0.2em] text-foreground transition-colors hover:text-accent"
+        >
+          {site.shortName}
+          <span className="text-accent">.</span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <ul className="hidden items-center space-x-8 md:flex">
+        <ul className="hidden items-center gap-8 md:flex">
           {navItems.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
-                className={`text-sm font-medium transition-colors hover:text-primary-700 dark:hover:text-primary-400 ${
-                  pathname === item.href
-                    ? 'text-primary-700 dark:text-primary-400'
-                    : 'text-muted-foreground'
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                className={`font-mono text-xs uppercase tracking-[0.14em] transition-colors hover:text-accent ${
+                  isActive(item.href) ? 'text-accent' : 'text-muted-foreground'
                 }`}
               >
                 {item.label}
@@ -49,75 +80,54 @@ export function Header() {
             </li>
           ))}
           <li>
-            <Button href="/cv.pdf" download variant="primary">
-              <Download size={16} />
-              Download CV
+            <Button
+              href={site.cv}
+              download
+              variant="secondary"
+              className="px-4 py-2"
+            >
+              <Download size={14} />
+              CV
             </Button>
-          </li>
-          <li>
-            <DarkModeToggle />
           </li>
         </ul>
 
-        {/* Mobile Menu Button */}
-        <div className="flex items-center space-x-4 md:hidden">
-          <DarkModeToggle />
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="rounded-lg p-2 hover:bg-muted"
-            aria-label="Toggle menu"
-            aria-expanded={isMenuOpen}
-          >
-            {isMenuOpen ? (
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={() => setIsMenuOpen((open) => !open)}
+          className="rounded-md p-2 text-foreground transition-colors hover:bg-surface md:hidden"
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-menu"
+        >
+          {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
       </nav>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="border-t border-border bg-background md:hidden">
-          <ul className="container mx-auto space-y-2 px-4 py-4">
+        <div
+          id="mobile-menu"
+          className="border-t border-border bg-background md:hidden"
+        >
+          <ul className="container mx-auto space-y-1 px-4 py-4">
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className={`block rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-                    pathname === item.href
-                      ? 'bg-muted text-primary-700 dark:text-primary-400'
-                      : 'text-muted-foreground hover:bg-muted'
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                  className={`block rounded-md px-4 py-3 font-mono text-xs uppercase tracking-[0.14em] transition-colors ${
+                    isActive(item.href)
+                      ? 'bg-surface text-accent'
+                      : 'text-muted-foreground hover:bg-surface'
                   }`}
                 >
                   {item.label}
                 </Link>
               </li>
             ))}
-            <li>
-              <Button href="/cv.pdf" download variant="primary">
+            <li className="pt-2">
+              <Button href={site.cv} download variant="secondary">
                 <Download size={16} />
                 Download CV
               </Button>
