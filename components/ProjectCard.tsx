@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { hasRealScreenshot, type Project } from '@/lib/projects';
-import { useState } from 'react';
+import { ArrowRight, ExternalLink, Github } from 'lucide-react';
+import { hasRealScreenshot, projectHref, type Project } from '@/lib/projects';
 import { Chip } from '@/components/ui/Chip';
 
 export interface ProjectCardProps {
@@ -10,135 +10,80 @@ export interface ProjectCardProps {
 }
 
 export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
-  const [expanded, setExpanded] = useState(false);
-
   const hasImage = hasRealScreenshot(project);
   const imgSrc = hasImage ? project.images[0] : undefined;
   const hasLinks = Boolean(project.githubLink || project.liveDemoLink);
 
-  // Compact case study summary
-  const summary = [
-    project.problem ? `Problem: ${project.problem}` : '',
-    project.approach ? `Approach: ${project.approach}` : '',
-    project.result ? `Result: ${project.result}` : '',
-  ].filter(Boolean);
-
-  // Show first line & "Read more" if needed
-  const hasDetails =
-    project.problem ||
-    project.approach ||
-    project.result ||
-    !!project.description;
-
   return (
-    <div className="group relative flex h-full flex-col rounded-lg border border-border bg-card transition-shadow hover:shadow-xl">
-      {/* Featured badge */}
-      {isFeatured && (
-        <span className="absolute right-4 top-4 z-10 rounded bg-accent px-2 py-0.5 text-xs font-semibold text-accent-foreground">
-          Featured
-        </span>
-      )}
-
-      <div className="relative flex h-48 w-full items-center justify-center overflow-hidden rounded-t-md bg-muted">
+    <article className="bg-surface/60 group relative flex h-full flex-col overflow-hidden rounded-lg border border-border transition-colors duration-300 ease-cine hover:border-accent-dim">
+      <div className="relative h-44 w-full overflow-hidden border-b border-border bg-background-elevated">
         {hasImage && imgSrc ? (
-          <Image
-            src={imgSrc}
-            alt={project.title}
-            fill
-            className="object-cover transition-transform group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            priority={false}
-          />
+          <>
+            <Image
+              src={imgSrc}
+              alt={`Screenshot from ${project.title}`}
+              fill
+              // Most of these are light-UI screenshots. Left at full
+              // brightness they glare against the dark page and pull the eye
+              // away from the writing, so they sit back until hovered.
+              className="object-cover opacity-55 transition-all duration-500 ease-cine group-hover:scale-[1.03] group-hover:opacity-85"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+            <div
+              aria-hidden="true"
+              className="via-surface/30 absolute inset-0 bg-gradient-to-t from-surface to-transparent"
+            />
+          </>
         ) : (
-          <span className="font-mono text-xs text-muted-foreground">
-            No screenshot yet
+          <div className="grid-backdrop flex h-full items-center justify-center">
+            <span className="label-mono">No screenshot yet</span>
+          </div>
+        )}
+
+        {isFeatured && (
+          <span className="bg-background/85 absolute right-3 top-3 rounded-sm border border-accent-dim px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.14em] text-accent">
+            Featured
           </span>
         )}
       </div>
 
       <div className="flex flex-1 flex-col p-6">
-        <h3 className="mb-2 text-xl font-semibold text-card-foreground">
-          {project.title}
+        <h3 className="text-lg font-semibold leading-snug text-foreground">
+          <Link
+            href={projectHref(project)}
+            // Stretched link: the whole card is the target, while the nested
+            // GitHub and demo links stay individually clickable above it.
+            className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none group-hover:text-accent"
+          >
+            {project.title}
+          </Link>
         </h3>
 
         {project.role && (
-          <p className="mb-2 text-xs font-medium text-primary-700 dark:text-primary-400">
+          <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-faint">
             {project.role}
           </p>
         )}
 
-        <p className="mb-2 line-clamp-2 text-sm text-muted-foreground">
-          {project.description}
+        <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+          {project.result ?? project.description}
         </p>
 
-        {/* Read more for case study */}
-        <div className="mb-2">
-          {!expanded && !!hasDetails && (
-            <>
-              {summary[0] && (
-                <div className="mb-1 text-xs text-muted-foreground">
-                  <strong>{summary[0].split(':')[0]}:</strong>{' '}
-                  {summary[0].split(':').slice(1).join(':').trim()}
-                </div>
-              )}
-              {summary.length > 1 && (
-                <button
-                  type="button"
-                  onClick={() => setExpanded(true)}
-                  className="text-xs text-primary-700 hover:underline dark:text-primary-400"
-                >
-                  Read more
-                </button>
-              )}
-            </>
-          )}
-          {expanded && (
-            <ul className="space-y-1 text-xs text-muted-foreground">
-              {summary.map((s, idx) => (
-                <li key={idx}>
-                  <strong>{s.split(':')[0]}:</strong>{' '}
-                  {s.split(':').slice(1).join(':').trim()}
-                </li>
-              ))}
-              <button
-                type="button"
-                onClick={() => setExpanded(false)}
-                className="text-xs text-primary-700 hover:underline dark:text-primary-400"
-              >
-                Show less
-              </button>
-            </ul>
-          )}
-        </div>
-
-        {/* Technologies */}
-        <div className="mb-3 flex flex-wrap gap-2">
-          {project.technologies.slice(0, 5).map((tech, idx) => (
-            <Chip key={idx}>{tech}</Chip>
+        <div className="mt-5 flex flex-wrap gap-2">
+          {project.technologies.slice(0, 5).map((tech) => (
+            <Chip key={tech}>{tech}</Chip>
           ))}
         </div>
 
-        {/* Links */}
-        <div className="mt-auto flex flex-wrap items-center gap-3">
+        <div className="relative z-10 mt-auto flex flex-wrap items-center gap-5 pt-6">
           {project.githubLink && (
             <a
               href={project.githubLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center text-xs text-primary-700 hover:underline dark:text-primary-400"
+              className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-accent"
             >
-              <svg
-                className="mr-1 h-4 w-4"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                  clipRule="evenodd"
-                />
-              </svg>
+              <Github size={13} aria-hidden="true" />
               Code
             </a>
           )}
@@ -147,35 +92,28 @@ export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
               href={project.liveDemoLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center text-xs text-green-700 hover:underline dark:text-green-400"
+              className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-accent"
             >
-              <svg
-                className="mr-1 h-4 w-4"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
+              <ExternalLink size={13} aria-hidden="true" />
               Demo
             </a>
           )}
           {!hasLinks && (
-            <span className="font-mono text-xs text-muted-foreground">
+            <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-faint">
               No public link yet
             </span>
           )}
-          <Link
-            href={`/projects/${project.id}`}
-            className="inline-flex items-center text-xs text-primary-700 underline hover:text-primary-900 dark:text-primary-400 dark:hover:text-primary-300"
-          >
-            View Details
-          </Link>
+
+          <span className="ml-auto inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-accent">
+            Case study
+            <ArrowRight
+              size={13}
+              className="transition-transform duration-300 ease-cine group-hover:translate-x-1"
+              aria-hidden="true"
+            />
+          </span>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

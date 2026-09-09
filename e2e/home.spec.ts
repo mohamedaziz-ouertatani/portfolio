@@ -1,39 +1,72 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 
-test('homepage has title and links', async ({ page }) => {
+/**
+ * Navigation collapses into a drawer below the md breakpoint, so the mobile
+ * projects have to open it before the links exist on screen.
+ */
+async function openNavigation(page: Page) {
+  const menuButton = page.getByRole('button', { name: /open menu/i });
+  if (await menuButton.isVisible()) {
+    await menuButton.click();
+  }
+  return page.getByRole('navigation', { name: 'Primary' });
+}
+
+test('homepage has title and primary navigation', async ({ page }) => {
   await page.goto('/');
 
   await expect(page).toHaveTitle(/Mohamed Aziz Ouertatani/);
 
-  const projectsLink = page
-    .getByRole('navigation')
-    .getByRole('link', { name: /^projects$/i });
-  await expect(projectsLink).toBeVisible();
+  const nav = await openNavigation(page);
+  await expect(nav.getByRole('link', { name: /^work$/i })).toBeVisible();
 });
 
-test('dark mode toggle works', async ({ page }) => {
+test('site renders on the dark palette', async ({ page }) => {
   await page.goto('/');
 
-  const themeToggle = page.getByRole('button', {
-    name: /toggle dark mode|switch to (dark|light) mode/i,
-  });
-  await themeToggle.click();
+  await expect(page.locator('html')).toHaveClass(/dark/);
+});
 
-  // Verify theme changed
-  await expect(page.locator('html')).toHaveAttribute('class', /dark/);
+test('hero content is present without any interaction', async ({ page }) => {
+  await page.goto('/');
+
+  // The headline and the primary route out must not depend on WebGL, on
+  // JavaScript-driven reveals, or on the reader interacting with the page.
+  await expect(
+    page.getByRole('heading', { level: 1, name: /Mohamed Aziz/i })
+  ).toBeVisible();
+  await expect(
+    page.getByRole('link', { name: /explore my work/i })
+  ).toBeVisible();
 });
 
 test('navigation works correctly', async ({ page }) => {
   await page.goto('/');
 
-  const nav = page.getByRole('navigation');
-
-  await nav.getByRole('link', { name: /^projects$/i }).click();
+  let nav = await openNavigation(page);
+  await nav.getByRole('link', { name: /^work$/i }).click();
   await expect(page).toHaveURL(/.*projects/);
 
+  nav = await openNavigation(page);
   await nav.getByRole('link', { name: /^about$/i }).click();
   await expect(page).toHaveURL(/.*about/);
 
+  nav = await openNavigation(page);
   await nav.getByRole('link', { name: /^contact$/i }).click();
   await expect(page).toHaveURL(/.*contact/);
+});
+
+test('project case studies resolve by slug and by legacy id', async ({
+  page,
+}) => {
+  await page.goto('/projects/researchbridge');
+  await expect(
+    page.getByRole('heading', { level: 1, name: /ResearchBridge/i })
+  ).toBeVisible();
+
+  // URLs shared before the slug migration must keep working.
+  await page.goto('/projects/12');
+  await expect(
+    page.getByRole('heading', { level: 1, name: /ResearchBridge/i })
+  ).toBeVisible();
 });

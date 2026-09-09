@@ -1,57 +1,51 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-import { strongProjects } from '@/lib/projects';
+import { useMemo, useState } from 'react';
+import { rankedProjects, strongProjects } from '@/lib/projects';
 import { ProjectCard } from '@/components/ProjectCard';
 import { FilterBar } from '@/components/FilterBar';
+import { SectionLabel } from '@/components/ui/SectionLabel';
+
+// Filter options come from the curated set only, so the list never offers a
+// technology that cannot match anything on screen.
+const allTechnologies = Array.from(
+  new Set(strongProjects.flatMap((project) => project.technologies))
+).sort((a, b) => a.localeCompare(b));
 
 export default function Projects() {
   const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>(
     []
   );
 
-  // All technologies for the filter bar — derived from the curated,
-  // currently-relevant project set only.
-  const allTechnologies = useMemo(() => {
-    const techSet = new Set<string>();
-    strongProjects.forEach((project) => {
-      project.technologies.forEach((tech) => techSet.add(tech));
-    });
-    return Array.from(techSet).sort();
-  }, []);
-
-  // Sort helper: higher priority first (missing priority = 0)
-  const byPriorityDesc = (a: { priority?: number }, b: { priority?: number }) =>
-    (b.priority ?? 0) - (a.priority ?? 0);
-
-  // Projects filtered by tech, then sorted by priority
-  const filteredProjects = useMemo(() => {
-    const base =
+  const filteredProjects = useMemo(
+    () =>
       selectedTechnologies.length === 0
-        ? strongProjects
-        : strongProjects.filter((project) =>
+        ? rankedProjects
+        : rankedProjects.filter((project) =>
             selectedTechnologies.every((tech) =>
               project.technologies.includes(tech)
             )
-          );
-    return [...base].sort(byPriorityDesc);
-  }, [selectedTechnologies]);
-
-  const filtersActive = selectedTechnologies.length > 0;
+          ),
+    [selectedTechnologies]
+  );
 
   return (
-    <div className="container px-4 py-16">
-      <div className="mb-8 text-center">
-        <h1 className="mb-4 text-4xl font-bold text-foreground">My Projects</h1>
-        <p className="text-lg text-muted-foreground">
-          A curated set of production-oriented work in data engineering, MLOps,
-          and full-stack development. Each card includes{' '}
-          <span className="font-medium text-foreground">
-            Problem → Approach → Result
-          </span>{' '}
-          so you can see real impact, not just code.
+    <div className="container mx-auto px-4 pb-24 pt-32">
+      <header className="mb-14 max-w-3xl">
+        <SectionLabel index="02" className="mb-6">
+          Work
+        </SectionLabel>
+        <h1 className="text-4xl font-bold tracking-tightest text-foreground sm:text-5xl md:text-6xl">
+          Selected work
+        </h1>
+        <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+          Production-oriented work in data engineering, MLOps and full-stack
+          development. Every project is written up as{' '}
+          <span className="text-foreground">problem → approach → result</span>,
+          so you can see what it was for rather than only what it was built
+          with.
         </p>
-      </div>
+      </header>
 
       <FilterBar
         allTechnologies={allTechnologies}
@@ -59,33 +53,29 @@ export default function Projects() {
         onFilterChange={setSelectedTechnologies}
       />
 
-      <div className="mb-6 text-sm text-muted-foreground">
-        Showing {filteredProjects.length} of {strongProjects.length} projects
-        {filtersActive && (
-          <span className="ml-2 rounded bg-muted px-2 py-0.5 text-xs text-muted-foreground">
-            Filter active
-          </span>
-        )}
-      </div>
+      <p className="mb-8 font-mono text-xs uppercase tracking-[0.14em] text-faint">
+        Showing {filteredProjects.length} of {rankedProjects.length}
+      </p>
 
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {filteredProjects.map((project, idx) => (
-          <ProjectCard
-            key={project.id}
-            project={project}
-            isFeatured={idx < 3}
-          />
-        ))}
-      </div>
-
-      {filteredProjects.length === 0 && (
-        <div className="py-16 text-center">
-          <p className="text-lg text-muted-foreground">
-            No projects found matching the selected filters.
+      {filteredProjects.length > 0 ? (
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {filteredProjects.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              isFeatured={selectedTechnologies.length === 0 && index < 2}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="bg-surface/50 rounded-lg border border-border py-20 text-center">
+          <p className="text-muted-foreground">
+            Nothing matches that combination of technologies.
           </p>
           <button
+            type="button"
             onClick={() => setSelectedTechnologies([])}
-            className="mt-4 text-primary-700 hover:underline dark:text-primary-400"
+            className="mt-4 font-mono text-xs uppercase tracking-[0.14em] text-accent transition-colors hover:text-accent-strong"
           >
             Clear filters
           </button>

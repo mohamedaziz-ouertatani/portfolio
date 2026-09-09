@@ -1,13 +1,15 @@
+import { site } from '@/lib/site';
+
 export function AvailabilityBadge({ className = '' }: { className?: string }) {
   return (
     <span
-      className={`inline-flex items-center gap-2 rounded-full border border-primary-600/30 bg-primary-50 px-4 py-1.5 font-mono text-xs font-semibold text-primary-800 dark:border-primary-400/30 dark:bg-primary-900/20 dark:text-primary-300 ${className}`}
+      className={`inline-flex items-center gap-2.5 rounded-full border border-accent-dim bg-background-elevated px-4 py-1.5 font-mono text-xs font-medium tracking-wide text-accent ${className}`}
     >
-      <span className="relative flex h-2 w-2">
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-500 opacity-75" />
-        <span className="relative inline-flex h-2 w-2 rounded-full bg-primary-600 dark:bg-primary-400" />
+      <span className="relative flex h-1.5 w-1.5">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
       </span>
-      Available for PFE — Feb 2027 · 6 mo
+      {site.availability.label}
     </span>
   );
 }

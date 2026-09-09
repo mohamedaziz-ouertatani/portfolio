@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
-import { ThemeProvider } from '@/components/ThemeProvider';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import Script from 'next/script';
+import { site, SITE_URL } from '@/lib/site';
+import { sameAs } from '@/lib/social';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -18,14 +19,14 @@ const jetbrainsMono = JetBrains_Mono({
   display: 'swap',
 });
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  'https://mohamedaziz-ouertatani.vercel.app';
+const TITLE = `${site.name} — ${site.role}`;
+const DESCRIPTION = `${site.role} — ${site.disciplines}. Final-year Computer Science Engineering student at ${site.school} seeking a 6-month PFE internship starting February 2027. Python, PostgreSQL, MLflow, Docker, Fastify, Next.js.`;
+const SHORT_DESCRIPTION =
+  'Seeking a 6-month PFE internship starting Feb 2027 in Data Engineering, MLOps, or Full-Stack Development.';
 
 export const metadata: Metadata = {
-  title: 'Mohamed Aziz Ouertatani - Final-Year CS Engineering Student',
-  description:
-    'Final-year Computer Science Engineering student (Data Science) seeking a 6-month PFE internship starting Feb 2027 in Data Engineering, MLOps, or Full-Stack Development. React, Next.js, Fastify, PostgreSQL, MLflow, Docker.',
+  title: TITLE,
+  description: DESCRIPTION,
   metadataBase: new URL(SITE_URL),
   keywords: [
     'PFE Internship',
@@ -38,33 +39,31 @@ export const metadata: Metadata = {
     'TypeScript',
     'Python',
     'Portfolio',
-    'Mohamed Aziz Ouertatani',
+    site.name,
   ],
-  authors: [{ name: 'Mohamed Aziz Ouertatani' }],
-  creator: 'Mohamed Aziz Ouertatani',
+  authors: [{ name: site.name }],
+  creator: site.name,
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: `${SITE_URL}/`,
-    siteName: 'Mohamed Aziz Ouertatani Portfolio',
-    title: 'Mohamed Aziz Ouertatani - Final-Year CS Engineering Student',
-    description:
-      'Seeking a 6-month PFE internship starting Feb 2027 in Data Engineering, MLOps, or Full-Stack Development.',
+    siteName: `${site.name} Portfolio`,
+    title: TITLE,
+    description: SHORT_DESCRIPTION,
     images: [
       {
-        // Use an absolute URL for OG images
+        // Absolute URL — relative OG images are not resolved by every crawler.
         url: `${SITE_URL}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: 'Mohamed Aziz Ouertatani - Final-Year CS Engineering Student',
+        alt: TITLE,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mohamed Aziz Ouertatani - Final-Year CS Engineering Student',
-    description:
-      'Seeking a 6-month PFE internship starting Feb 2027 in Data Engineering, MLOps, or Full-Stack Development.',
+    title: TITLE,
+    description: SHORT_DESCRIPTION,
     images: [`${SITE_URL}/og-image.png`],
   },
   robots: {
@@ -80,76 +79,64 @@ export const metadata: Metadata = {
   },
 };
 
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  url: `${SITE_URL}/`,
+  jobTitle: site.role,
+  alumniOf: site.school,
+  email: `mailto:${site.email}`,
+  sameAs,
+  knowsAbout: [
+    'Data Engineering',
+    'MLOps',
+    'Data Science',
+    'React',
+    'TypeScript',
+    'Python',
+    'Full Stack Development',
+  ],
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: `${site.name} Portfolio`,
+  url: `${SITE_URL}/`,
+  description: DESCRIPTION,
+  author: { '@type': 'Person', name: site.name },
+};
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    // The site is dark-only: `dark` is set here rather than toggled at runtime.
+    <html lang="en" className="dark">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#0f172a" />
+        <meta name="theme-color" content="#08090B" />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'Person',
-              name: 'Mohamed Aziz Ouertatani',
-              url: `${SITE_URL}/`,
-              jobTitle: 'Final-Year Computer Science Engineering Student',
-              alumniOf: 'ESPRIT',
-              sameAs: [
-                'https://github.com/mohamedaziz-ouertatani',
-                'https://www.linkedin.com/in/mohamed-aziz-ouertatani',
-              ],
-              knowsAbout: [
-                'Data Engineering',
-                'MLOps',
-                'Data Science',
-                'React',
-                'TypeScript',
-                'Python',
-                'Full Stack Development',
-              ],
-            }),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'WebSite',
-              name: 'Mohamed Aziz Ouertatani Portfolio',
-              url: `${SITE_URL}/`,
-              description:
-                'Portfolio of Mohamed Aziz Ouertatani - Final-Year CS Engineering Student seeking a PFE internship',
-              author: {
-                '@type': 'Person',
-                name: 'Mohamed Aziz Ouertatani',
-              },
-            }),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} flex min-h-screen flex-col font-sans`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Header />
-          <main id="main-content" className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </ThemeProvider>
+        <Header />
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
+        <Footer />
         {process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN && (
           <Script
             defer

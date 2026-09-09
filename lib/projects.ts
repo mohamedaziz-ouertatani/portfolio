@@ -1,5 +1,8 @@
 export interface Project {
   id: string;
+  /** Human-readable URL segment. The numeric `id` still resolves for links
+   *  that were published before slugs existed. */
+  slug: string;
   title: string;
   description: string;
   role?: string;
@@ -10,6 +13,12 @@ export interface Project {
   githubLink?: string;
   liveDemoLink?: string;
   images: string[];
+  /**
+   * Architecture stages, in order. Every entry is drawn from the project's
+   * own `approach` text — nothing here describes work that is not already
+   * documented in this file.
+   */
+  pipeline?: string[];
   // Higher number = more important
   priority?: number;
 }
@@ -26,6 +35,7 @@ export function hasRealScreenshot(project: Project): boolean {
 const projectsData: Project[] = [
   {
     id: '12',
+    slug: 'researchbridge',
     title: 'ResearchBridge — Research Intelligence Platform',
     description:
       'Solo-built platform that takes a research idea or uploaded paper and returns an evidence-grounded assessment: related work, novelty, research gap, plausible applications, and feasibility.',
@@ -37,6 +47,14 @@ const projectsData: Project[] = [
     result:
       'Shipped an end-to-end, evidence-grounded research assessment tool built and deployed solo, from ingestion to retrieval to reasoning.',
     technologies: ['Python', 'PostgreSQL', 'pgvector', 'LLM APIs', 'Docker'],
+    pipeline: [
+      'Research idea or uploaded paper',
+      'Literature ingestion — arXiv, Semantic Scholar, Springer Nature',
+      'PostgreSQL + pgvector semantic retrieval',
+      'LLM-based knowledge extraction',
+      'Gap and opportunity detection',
+      'Cited, evidence-grounded assessment',
+    ],
     githubLink: 'https://github.com/mohamedaziz-ouertatani/ResearchBridge.git',
     liveDemoLink: '',
     images: [
@@ -50,6 +68,7 @@ const projectsData: Project[] = [
   },
   {
     id: '1',
+    slug: 'flock-off-ecommerce',
     title: 'FLOCK OFF E-Commerce Platform',
     description:
       'Developed a MERN-stack e-commerce platform with customer and admin interfaces, cart management, order processing, and stock control dashboard.',
@@ -72,6 +91,7 @@ const projectsData: Project[] = [
   },
   {
     id: '8',
+    slug: 'fullstack-fastify-next',
     title: 'Full-Stack Web Application',
     description:
       'Type-safe full-stack app with authentication, Fastify backend, PostgreSQL database, and Next.js frontend.',
@@ -94,6 +114,7 @@ const projectsData: Project[] = [
   },
   {
     id: '6',
+    slug: 'mlops-pipeline',
     title: 'ML Project – MLOps Pipeline',
     description:
       'End-to-end ML pipeline with experiment tracking, containerized deployment, and reproducible training.',
@@ -115,10 +136,17 @@ const projectsData: Project[] = [
     githubLink: '',
     liveDemoLink: '',
     images: ['/images/MLOpsProject/MLOps1.png'],
+    pipeline: [
+      'scikit-learn training pipeline',
+      'MLflow experiment tracking',
+      'Versioned artifacts with Joblib',
+      'Containerised inference app',
+    ],
     priority: 80,
   },
   {
     id: '7',
+    slug: 'business-intelligence-dashboards',
     title: 'Business Intelligence Dashboards',
     description:
       'BI project transforming raw data into dashboards using Power BI, Power Query, and Google Data Studio.',
@@ -135,6 +163,7 @@ const projectsData: Project[] = [
   },
   {
     id: '4',
+    slug: 'share-and-care',
     title: 'Share and Care',
     description:
       'Desktop application for charity management with PDF generation, QR encoding/decoding, and statistical analysis.',
@@ -152,6 +181,7 @@ const projectsData: Project[] = [
   },
   {
     id: '2',
+    slug: 'washa',
     title: 'WASHA Website',
     description:
       'Academic full-stack project with responsive UIs, PHP CRUD operations, and Oracle database integration.',
@@ -170,6 +200,7 @@ const projectsData: Project[] = [
   },
   {
     id: '3',
+    slug: 'the-motherland',
     title: 'The Motherland',
     description:
       '2D game built with C and SDL, featuring custom joystick controls via Arduino and assets designed with Adobe tools.',
@@ -187,6 +218,7 @@ const projectsData: Project[] = [
   },
   {
     id: '5',
+    slug: 'photocube-shop',
     title: 'PhotoCube Shop',
     description:
       'Web platform for selling custom photo cubes with image upload, product selection, and order management.',
@@ -203,6 +235,7 @@ const projectsData: Project[] = [
   },
   {
     id: '9',
+    slug: 'data-analysis',
     title: 'Data Analysis Projects',
     description:
       'Statistical analysis and hypothesis testing with reproducible reporting in R Markdown.',
@@ -226,6 +259,7 @@ const projectsData: Project[] = [
   },
   {
     id: '10',
+    slug: 'smart-inventory',
     title: 'Smart Inventory Forecasting & Replenishment Platform',
     description:
       'Production-style smart inventory system with demand forecasting, model selection, MLOps tracking, and replenishment recommendations served via secured APIs.',
@@ -248,6 +282,15 @@ const projectsData: Project[] = [
       'NumPy',
       'JWT',
     ],
+    pipeline: [
+      'Data ingestion',
+      'Feature engineering',
+      'Rolling backtests',
+      'ETS/ARIMA model selection',
+      'MLflow experiment tracking',
+      'PostgreSQL ops schemas',
+      'Protected Fastify forecast APIs',
+    ],
     githubLink: 'https://github.com/mohamedaziz-ouertatani/smart_inventory', // add when repo is public
     liveDemoLink: '',
     images: [
@@ -258,6 +301,7 @@ const projectsData: Project[] = [
   },
   {
     id: '11',
+    slug: 'estate-mind',
     title: 'Estate-Mind: Tunisian Real Estate Data Pipeline & Advanced EDA',
     description:
       'Comprehensive data pipeline and exploratory data analysis (EDA) project for multi-source Tunisian real estate listings dataset. Includes full data cleaning, standardization, enrichment, statistics, and advanced visualization in Python notebooks.',
@@ -270,16 +314,24 @@ const projectsData: Project[] = [
       'Delivered a reproducible pipeline and advanced analysis notebooks yielding actionable market insights (e.g., price distribution by region, listing activity, rental/sale split, spatial visualizations, and clustering of property segments). Created high-quality figures and reporting-ready visuals for portfolio and business use.',
     technologies: [
       'Python',
-      'pandas',
-      'seaborn',
-      'matplotlib',
-      'plotly',
+      'Pandas',
+      'Seaborn',
+      'Matplotlib',
+      'Plotly',
       'scikit-learn',
       'Jupyter Notebook',
       'Data Cleaning',
       'Data Visualization',
       'Clustering',
       'EDA',
+    ],
+    pipeline: [
+      'Multi-source scraped listings',
+      'Loading and cleaning with pandas',
+      'Location and price standardisation',
+      'Feature extraction — type, bedrooms, listing age',
+      'Cleaned artifacts',
+      'Advanced EDA, visualisation and clustering',
     ],
     githubLink: 'https://github.com/mohamedaziz-ouertatani/estate-mind',
     liveDemoLink: '',
@@ -299,5 +351,31 @@ export const STRONG_PROJECT_THRESHOLD = 70;
 export const strongProjects = projectsData.filter(
   (project) => (project.priority ?? 0) >= STRONG_PROJECT_THRESHOLD
 );
+
+/** Projects sorted the way they should always be presented. */
+export const rankedProjects = [...strongProjects].sort(
+  (a, b) => (b.priority ?? 0) - (a.priority ?? 0)
+);
+
+export function projectHref(project: Project): string {
+  return `/projects/${project.slug}`;
+}
+
+/**
+ * Resolves either a slug or a legacy numeric id, so URLs shared before the
+ * slug migration keep working.
+ */
+export function findProject(idOrSlug: string): Project | undefined {
+  return projectsData.find(
+    (project) => project.slug === idOrSlug || project.id === idOrSlug
+  );
+}
+
+/** The next project in ranked order, for case-study navigation. */
+export function nextProject(current: Project): Project {
+  const index = rankedProjects.findIndex((p) => p.id === current.id);
+  if (index === -1) return rankedProjects[0];
+  return rankedProjects[(index + 1) % rankedProjects.length];
+}
 
 export { projectsData };

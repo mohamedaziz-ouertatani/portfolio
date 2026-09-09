@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Projects - Mohamed Aziz Ouertatani',
+  title: 'Selected Work - Mohamed Aziz Ouertatani',
   description:
-    'Browse my portfolio of web development projects including MERN stack applications, full-stack solutions, and academic projects.',
+    'Production-oriented projects in data engineering, MLOps and full-stack development, each written up as problem, approach and result. ResearchBridge, Estate-Mind, Smart Inventory forecasting and more.',
   alternates: {
     canonical: '/projects',
   },

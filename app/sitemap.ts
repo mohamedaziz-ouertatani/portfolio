@@ -1,9 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { projectsData } from '@/lib/projects';
-
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  'https://mohamedaziz-ouertatani.vercel.app';
+import { SITE_URL } from '@/lib/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -14,8 +11,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/resume`, changeFrequency: 'monthly', priority: 0.6 },
   ];
 
+  // Slugs only: the numeric ids still resolve, but they are not the URLs we
+  // want indexed.
   const projectRoutes: MetadataRoute.Sitemap = projectsData.map((project) => ({
-    url: `${SITE_URL}/projects/${project.id}`,
+    url: `${SITE_URL}/projects/${project.slug}`,
     changeFrequency: 'monthly',
     priority: 0.5,
   }));

@@ -12,49 +12,48 @@ export function FilterBar({
   onFilterChange,
 }: FilterBarProps) {
   const toggleTechnology = (tech: string) => {
-    if (selectedTechnologies.includes(tech)) {
-      onFilterChange(selectedTechnologies.filter((t) => t !== tech));
-    } else {
-      onFilterChange([...selectedTechnologies, tech]);
-    }
-  };
-
-  const clearFilters = () => {
-    onFilterChange([]);
+    onFilterChange(
+      selectedTechnologies.includes(tech)
+        ? selectedTechnologies.filter((t) => t !== tech)
+        : [...selectedTechnologies, tech]
+    );
   };
 
   return (
-    <div className="mb-8">
-      <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-foreground">
-          Filter by Technology
-        </h3>
+    <div className="mb-10">
+      <div className="mb-4 flex items-center justify-between gap-4">
+        <h2 className="label-mono" id="filter-heading">
+          Filter by technology
+        </h2>
         {selectedTechnologies.length > 0 && (
           <button
-            onClick={clearFilters}
-            className="text-sm text-primary-700 hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500 dark:text-primary-400"
+            type="button"
+            onClick={() => onFilterChange([])}
+            className="font-mono text-[11px] uppercase tracking-[0.14em] text-accent transition-colors hover:text-accent-strong"
           >
-            Clear all ({selectedTechnologies.length})
+            Clear ({selectedTechnologies.length})
           </button>
         )}
       </div>
+
       <div
         className="flex flex-wrap gap-2"
         role="group"
-        aria-label="Technology filters"
+        aria-labelledby="filter-heading"
       >
         {allTechnologies.map((tech) => {
           const isSelected = selectedTechnologies.includes(tech);
           return (
             <button
               key={tech}
+              type="button"
               onClick={() => toggleTechnology(tech)}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 ${
-                isSelected
-                  ? 'bg-accent text-accent-foreground'
-                  : 'bg-muted text-muted-foreground hover:bg-border'
-              }`}
               aria-pressed={isSelected}
+              className={`rounded-sm border px-2.5 py-1 font-mono text-xs transition-colors ${
+                isSelected
+                  ? 'border-accent bg-accent text-accent-foreground'
+                  : 'border-border bg-background-elevated text-muted-foreground hover:border-border-strong hover:text-foreground'
+              }`}
             >
               {tech}
             </button>
