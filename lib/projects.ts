@@ -43,7 +43,7 @@ const projectsData: Project[] = [
     problem:
       'Researchers need a fast, trustworthy way to check novelty and find prior art without every claim risking fabrication from an LLM.',
     approach:
-      'Architected the full pipeline solo — literature ingestion from arXiv, Semantic Scholar, and Springer Nature; PostgreSQL + pgvector semantic retrieval; LLM-based knowledge extraction; and gap/opportunity detection. Every claim is tied to cited evidence, with categorical (non-fabricated) confidence scoring, loud/logged ingestion failures, and a free/open-source-first stack with LLM providers behind a replaceable interface.',
+      'Architected the full pipeline — literature ingestion from arXiv, Semantic Scholar, and Springer Nature; PostgreSQL + pgvector semantic retrieval; LLM-based knowledge extraction; and gap/opportunity detection. Every claim is tied to cited evidence, with categorical (non-fabricated) confidence scoring, loud/logged ingestion failures, and a free/open-source-first stack with LLM providers behind a replaceable interface.',
     result:
       'Shipped an end-to-end, evidence-grounded research assessment tool built and deployed solo, from ingestion to retrieval to reasoning.',
     technologies: ['Python', 'PostgreSQL', 'pgvector', 'LLM APIs', 'Docker'],
