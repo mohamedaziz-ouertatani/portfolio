@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Environment3D } from '@/components/three/Environment3D';
+import { HeroImage } from '@/components/three/HeroImage';
 import { EnvironmentScrim } from '@/components/three/EnvironmentScrim';
 import { ScrollRail } from '@/components/ui/ScrollRail';
 import { Hero } from '@/components/sections/Hero';
@@ -28,6 +29,8 @@ export default function Home() {
       <div className="fixed inset-0 z-0">
         <Environment3D />
       </div>
+
+      <HeroImage />
 
       <EnvironmentScrim />
 

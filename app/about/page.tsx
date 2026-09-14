@@ -95,7 +95,7 @@ export default function About() {
           </div>
           <div className="relative mx-auto h-48 w-48 shrink-0 overflow-hidden rounded border border-border md:h-56 md:w-56">
             <Image
-              src="/me.jpg"
+              src="/me2.jpg"
               alt="Mohamed Aziz Ouertatani"
               fill
               className="object-cover"
