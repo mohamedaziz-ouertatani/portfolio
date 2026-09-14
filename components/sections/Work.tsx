@@ -1,13 +1,45 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
-import { Chip } from '@/components/ui/Chip';
 import { Reveal } from '@/components/ui/Reveal';
-import { ProjectWorld } from '@/components/three/ProjectWorld';
-import { rankedProjects, projectHref } from '@/lib/projects';
+import { hasRealScreenshot, findProject, projectHref } from '@/lib/projects';
 
-const featured = rankedProjects.slice(0, 2);
-const rest = rankedProjects.slice(2, 5);
+// Curated by hand rather than derived from `priority`: this row order and
+// category pairing is specific to the homepage's five-project pitch, and
+// shouldn't shift just because the /projects ranking changes.
+const featured = [
+  {
+    slug: 'researchbridge',
+    title: 'ResearchBridge',
+    category: 'Research Intelligence / AI',
+  },
+  {
+    slug: 'estate-mind',
+    title: 'Estate-Mind',
+    category: 'Data Engineering / Data Science',
+  },
+  {
+    slug: 'smart-inventory',
+    title: 'Smart Inventory Forecasting',
+    category: 'Machine Learning / MLOps',
+  },
+  {
+    slug: 'mlops-pipeline',
+    title: 'MLOps Pipeline',
+    category: 'MLOps / Machine Learning',
+  },
+  {
+    slug: 'business-intelligence-dashboards',
+    title: 'Business Intelligence Dashboards',
+    category: 'Business Intelligence / Analytics',
+  },
+]
+  .map(({ slug, title, category }) => {
+    const project = findProject(slug);
+    return project ? { project, title, category } : null;
+  })
+  .filter((entry): entry is NonNullable<typeof entry> => entry !== null);
 
 export function Work() {
   return (
@@ -15,78 +47,71 @@ export function Work() {
       id="work"
       index="02"
       label="Work"
-      heading="What I build"
-      caption="Production-oriented systems in data engineering, MLOps and full-stack development — each one written up as problem, approach and result."
+      heading="Selected work"
+      caption="Five projects across research tooling, data engineering, and ML systems."
     >
-      <div className="grid gap-6 lg:grid-cols-2">
-        {featured.map((project, index) => (
-          <Reveal key={project.id} delay={index * 0.06}>
-            <Link
-              href={projectHref(project)}
-              className="bg-surface/70 group relative flex h-full flex-col overflow-hidden rounded-lg border border-border transition-colors duration-300 ease-cine hover:border-accent-dim"
-            >
-              {/* Each flagship carries its own miniature environment. */}
-              <div className="relative h-52 overflow-hidden border-b border-border bg-background-elevated">
-                <ProjectWorld slug={project.slug} />
-              </div>
+      <Reveal>
+        <ul className="border-y border-border">
+          {featured.map(({ project, title, category }, index) => {
+            const hasImage = hasRealScreenshot(project);
+            return (
+              <li
+                key={project.id}
+                className="group border-b border-border last:border-b-0"
+              >
+                <Link
+                  href={projectHref(project)}
+                  className="flex items-start gap-6 py-6 focus-visible:outline-none"
+                >
+                  <span className="mt-1 shrink-0 font-mono text-xs text-faint">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
 
-              <div className="flex flex-1 flex-col p-7">
-                <h3 className="text-xl font-semibold text-foreground transition-colors group-hover:text-accent">
-                  {project.title}
-                </h3>
-                {project.role && (
-                  <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.2em] text-faint">
-                    {project.role}
-                  </p>
-                )}
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                  {project.result ?? project.description}
-                </p>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-xl font-semibold text-foreground transition-colors duration-300 ease-cine group-hover:text-accent sm:text-2xl">
+                      {title}
+                    </h3>
 
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {project.technologies.slice(0, 5).map((tech) => (
-                    <Chip key={tech}>{tech}</Chip>
-                  ))}
-                </div>
+                    <div className="grid overflow-hidden transition-all duration-300 ease-cine [grid-template-rows:0fr] group-focus-within:[grid-template-rows:1fr] group-hover:[grid-template-rows:1fr]">
+                      <div className="min-h-0">
+                        <div className="flex items-start gap-4 pt-4">
+                          <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded-sm border border-border bg-background-elevated sm:h-24 sm:w-36">
+                            {hasImage ? (
+                              <Image
+                                src={project.images[0]}
+                                alt={`Screenshot from ${project.title}`}
+                                fill
+                                className="object-cover"
+                                sizes="150px"
+                              />
+                            ) : (
+                              <div className="grid-backdrop flex h-full items-center justify-center">
+                                <span className="label-mono text-[9px]">
+                                  No preview
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                          <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
+                            {project.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-                <span className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-accent">
-                  Read the case study
-                  <ArrowRight
-                    size={14}
-                    className="transition-transform duration-300 ease-cine group-hover:translate-x-1"
+                  <span className="mt-1 hidden shrink-0 whitespace-nowrap font-mono text-[11px] uppercase tracking-[0.14em] text-faint transition-colors duration-300 ease-cine group-hover:text-muted-foreground sm:block">
+                    {category}
+                  </span>
+                  <ArrowUpRight
+                    size={18}
+                    className="mt-1 shrink-0 text-faint transition-colors duration-300 ease-cine group-hover:text-accent"
                     aria-hidden="true"
                   />
-                </span>
-              </div>
-            </Link>
-          </Reveal>
-        ))}
-      </div>
-
-      <Reveal delay={0.1}>
-        <ul className="mt-6 divide-y divide-border border-y border-border">
-          {rest.map((project) => (
-            <li key={project.id}>
-              <Link
-                href={projectHref(project)}
-                className="group flex items-center justify-between gap-6 py-5 transition-colors hover:text-accent"
-              >
-                <span className="min-w-0">
-                  <span className="block truncate text-base font-medium text-foreground transition-colors group-hover:text-accent">
-                    {project.title}
-                  </span>
-                  <span className="mt-1 block truncate font-mono text-[11px] text-faint">
-                    {project.technologies.slice(0, 4).join(' · ')}
-                  </span>
-                </span>
-                <ArrowUpRight
-                  size={16}
-                  className="shrink-0 text-faint transition-colors group-hover:text-accent"
-                  aria-hidden="true"
-                />
-              </Link>
-            </li>
-          ))}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         <Link

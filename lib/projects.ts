@@ -34,7 +34,7 @@ export function hasRealScreenshot(project: Project): boolean {
 
 const projectsData: Project[] = [
   {
-    id: '12',
+    id: '1',
     slug: 'researchbridge',
     title: 'ResearchBridge — Research Intelligence Platform',
     description:
@@ -43,7 +43,7 @@ const projectsData: Project[] = [
     problem:
       'Researchers need a fast, trustworthy way to check novelty and find prior art without every claim risking fabrication from an LLM.',
     approach:
-      'Architected the full pipeline solo — literature ingestion from arXiv, Semantic Scholar, and Springer Nature; PostgreSQL + pgvector semantic retrieval; LLM-based knowledge extraction; and gap/opportunity detection. Every claim is tied to cited evidence, with categorical (non-fabricated) confidence scoring, loud/logged ingestion failures, and a free/open-source-first stack with LLM providers behind a replaceable interface.',
+      'Architected the full pipeline — literature ingestion from arXiv, Semantic Scholar, and Springer Nature; PostgreSQL + pgvector semantic retrieval; LLM-based knowledge extraction; and gap/opportunity detection. Every claim is tied to cited evidence, with categorical (non-fabricated) confidence scoring, loud/logged ingestion failures, and a free/open-source-first stack with LLM providers behind a replaceable interface.',
     result:
       'Shipped an end-to-end, evidence-grounded research assessment tool built and deployed solo, from ingestion to retrieval to reasoning.',
     technologies: ['Python', 'PostgreSQL', 'pgvector', 'LLM APIs', 'Docker'],
@@ -57,17 +57,11 @@ const projectsData: Project[] = [
     ],
     githubLink: 'https://github.com/mohamedaziz-ouertatani/ResearchBridge.git',
     liveDemoLink: '',
-    images: [
-      '/images/ResearchBridge/ResearchBridge1.png',
-      '/images/ResearchBridge/ResearchBridge2.png',
-      '/images/ResearchBridge/ResearchBridge3.png',
-      '/images/ResearchBridge/ResearchBridge4.png',
-      '/images/ResearchBridge/ResearchBridge5.png',
-    ],
-    priority: 110,
+    images: ['/images/ResearchBridge/project.png'],
+    priority: 100,
   },
   {
-    id: '1',
+    id: '2',
     slug: 'flock-off-ecommerce',
     title: 'FLOCK OFF E-Commerce Platform',
     description:
@@ -82,15 +76,11 @@ const projectsData: Project[] = [
     technologies: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Bootstrap'],
     githubLink: 'https://github.com/mohamedaziz-ouertatani/flock-off-ecommerce',
     liveDemoLink: '',
-    images: [
-      '/images/FLOCKOFF/flockoff3.png',
-      '/images/FLOCKOFF/flockoff1.png',
-      '/images/FLOCKOFF/flockoff2.png',
-    ],
-    priority: 20,
+    images: ['/images/FLOCKOFF/project.png'],
+    priority: 90,
   },
   {
-    id: '8',
+    id: '3',
     slug: 'fullstack-fastify-next',
     title: 'Full-Stack Web Application',
     description:
@@ -109,11 +99,11 @@ const projectsData: Project[] = [
     ],
     githubLink: '',
     liveDemoLink: '',
-    images: ['/images/Fastify/fastify.png'],
-    priority: 20,
+    images: ['/images/Fastify/project.png'],
+    priority: 80,
   },
   {
-    id: '6',
+    id: '4',
     slug: 'mlops-pipeline',
     title: 'ML Project – MLOps Pipeline',
     description:
@@ -135,7 +125,7 @@ const projectsData: Project[] = [
     ],
     githubLink: '',
     liveDemoLink: '',
-    images: ['/images/MLOpsProject/MLOps1.png'],
+    images: ['/images/MLOpsProject/project.png'],
     pipeline: [
       'scikit-learn training pipeline',
       'MLflow experiment tracking',
@@ -145,7 +135,7 @@ const projectsData: Project[] = [
     priority: 80,
   },
   {
-    id: '7',
+    id: '5',
     slug: 'business-intelligence-dashboards',
     title: 'Business Intelligence Dashboards',
     description:
@@ -158,11 +148,11 @@ const projectsData: Project[] = [
     technologies: ['Power BI', 'Power Query', 'Google Data Studio', 'EDA'],
     githubLink: '',
     liveDemoLink: '',
-    images: ['/images/BI_ImportExport/BI.png'],
-    priority: 70,
+    images: ['/images/BI_ImportExport/project.png'],
+    priority: 80,
   },
   {
-    id: '4',
+    id: '6',
     slug: 'share-and-care',
     title: 'Share and Care',
     description:
@@ -176,11 +166,11 @@ const projectsData: Project[] = [
     technologies: ['C++', 'Qt', 'Arduino'],
     githubLink: 'https://github.com/Projet-CPP/2a1_smart_share_and_care_center',
     liveDemoLink: '',
-    images: ['/images/ShareAndCare/shareandcare1.jpg'],
-    priority: 60,
+    images: ['/images/ShareAndCare/project.png'],
+    priority: 70,
   },
   {
-    id: '2',
+    id: '7',
     slug: 'washa',
     title: 'WASHA Website',
     description:
@@ -195,11 +185,11 @@ const projectsData: Project[] = [
     technologies: ['HTML', 'Bootstrap', 'PHP', 'Oracle'],
     githubLink: 'https://github.com/2A-22-23/project2223_2a1-2a1_mind-benders',
     liveDemoLink: '',
-    images: ['/images/WASHA/washa1.png'],
-    priority: 50,
+    images: ['/images/WASHA/project.png'],
+    priority: 70,
   },
   {
-    id: '3',
+    id: '8',
     slug: 'the-motherland',
     title: 'The Motherland',
     description:
@@ -213,11 +203,11 @@ const projectsData: Project[] = [
     technologies: ['C', 'SDL', 'Adobe Suite', 'Arduino'],
     githubLink: 'https://github.com/mohamedaziz-ouertatani/1A1-Achilles',
     liveDemoLink: '',
-    images: ['/images/TheMotherLand/motherland1.jpeg'],
-    priority: 40,
+    images: ['/images/TheMotherLand/project.png'],
+    priority: 70,
   },
   {
-    id: '5',
+    id: '9',
     slug: 'photocube-shop',
     title: 'PhotoCube Shop',
     description:
@@ -230,13 +220,13 @@ const projectsData: Project[] = [
     technologies: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Bootstrap'],
     githubLink: '',
     liveDemoLink: '',
-    images: ['/images/placeholder.png'],
-    priority: 30,
+    images: ['/images/placeholder.project.png'],
+    priority: 60,
   },
   {
-    id: '9',
+    id: '10',
     slug: 'data-analysis',
-    title: 'Data Analysis Projects',
+    title: 'Data Analysis Project',
     description:
       'Statistical analysis and hypothesis testing with reproducible reporting in R Markdown.',
     role: 'Data Analyst',
@@ -254,11 +244,11 @@ const projectsData: Project[] = [
     ],
     githubLink: '',
     liveDemoLink: '',
-    images: ['/images/DataAnalysis/DataAnalysis.png'],
-    priority: 70,
+    images: ['/images/DataAnalysis/project.png'],
+    priority: 80,
   },
   {
-    id: '10',
+    id: '11',
     slug: 'smart-inventory',
     title: 'Smart Inventory Forecasting & Replenishment Platform',
     description:
@@ -293,14 +283,11 @@ const projectsData: Project[] = [
     ],
     githubLink: 'https://github.com/mohamedaziz-ouertatani/smart_inventory', // add when repo is public
     liveDemoLink: '',
-    images: [
-      '/images/SmartInventory/architecture.png',
-      '/images/SmartInventory/mlflow_runs.png',
-    ],
-    priority: 95,
+    images: ['/images/SmartInventory/project.png'],
+    priority: 70,
   },
   {
-    id: '11',
+    id: '12',
     slug: 'estate-mind',
     title: 'Estate-Mind: Tunisian Real Estate Data Pipeline & Advanced EDA',
     description:
@@ -335,10 +322,7 @@ const projectsData: Project[] = [
     ],
     githubLink: 'https://github.com/mohamedaziz-ouertatani/estate-mind',
     liveDemoLink: '',
-    images: [
-      '/images/mind-estate/estateMind2.jpg',
-      '/images/mind-estate/Figure_1.png',
-    ],
+    images: ['/images/mind-estate/project.png'],
     priority: 100,
   },
   // Add other projects here...
