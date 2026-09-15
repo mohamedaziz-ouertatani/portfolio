@@ -34,7 +34,12 @@ export function Footer() {
         </div>
 
         <nav aria-label="Footer">
-          <h2 className="label-mono mb-4">Navigate</h2>
+          <h2 className="label-mono mb-4 flex items-center gap-2">
+            Navigate
+            <span className="hidden font-mono text-[11px] font-normal normal-case tracking-normal text-faint md:inline">
+              &#8984;K to search
+            </span>
+          </h2>
           <ul className="space-y-2 text-sm">
             {quickLinks.map((link) => (
               <li key={link.href}>

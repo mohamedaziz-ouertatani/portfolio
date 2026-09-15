@@ -4,6 +4,7 @@ import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { hasRealScreenshot, findProject, projectHref } from '@/lib/projects';
+import { ViewTransitionLink } from '@/components/ui/ViewTransitionLink';
 
 // Curated by hand rather than derived from `priority`: this row order and
 // category pairing is specific to the homepage's five-project pitch, and
@@ -59,7 +60,7 @@ export function Work() {
                 key={project.id}
                 className="group border-b border-border last:border-b-0"
               >
-                <Link
+                <ViewTransitionLink
                   href={projectHref(project)}
                   className="flex items-start gap-6 py-6 focus-visible:outline-none"
                 >
@@ -108,7 +109,7 @@ export function Work() {
                     className="mt-1 shrink-0 text-faint transition-colors duration-300 ease-cine group-hover:text-accent"
                     aria-hidden="true"
                   />
-                </Link>
+                </ViewTransitionLink>
               </li>
             );
           })}

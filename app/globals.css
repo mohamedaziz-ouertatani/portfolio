@@ -82,6 +82,14 @@
     }
   }
 
+  /* Cross-fade for browser-native view transitions, matching the site's
+     cinematic ease-out used elsewhere for reveals and camera motion. */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.35s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
   .custom-cursor-dot {
     width: 10px;
     height: 10px;

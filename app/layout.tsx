@@ -5,6 +5,7 @@ import './globals.css';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CustomCursor } from '@/components/ui/CustomCursor';
+import { CommandPalette } from '@/components/ui/CommandPalette';
 import { site, SITE_URL } from '@/lib/site';
 import { sameAs } from '@/lib/social';
 
@@ -134,6 +135,7 @@ export default function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} flex min-h-screen flex-col font-sans`}
       >
         <CustomCursor />
+        <CommandPalette />
         <Header />
         <main id="main-content" className="flex-1">
           {children}

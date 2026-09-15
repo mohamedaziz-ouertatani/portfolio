@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowRight, ExternalLink, Github } from 'lucide-react';
 import ProjectImagesZoom from '@/components/ProjectImagesZoom';
 import { ProjectPipeline } from '@/components/sections/ProjectPipeline';
 import { Chip } from '@/components/ui/Chip';
 import { SectionLabel } from '@/components/ui/SectionLabel';
+import { ViewTransitionLink } from '@/components/ui/ViewTransitionLink';
 import {
   findProject,
   hasRealScreenshot,
@@ -55,13 +55,13 @@ export default function ProjectDetails({ params }: { params: { id: string } }) {
 
   return (
     <article className="container mx-auto max-w-4xl px-4 pb-24 pt-32">
-      <Link
+      <ViewTransitionLink
         href="/projects"
         className="label-mono inline-flex items-center gap-2 transition-colors hover:text-accent"
       >
         <ArrowLeft size={14} aria-hidden="true" />
         Back to work
-      </Link>
+      </ViewTransitionLink>
 
       <header className="mt-10 border-b border-border pb-10">
         <h1 className="text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
@@ -75,6 +75,19 @@ export default function ProjectDetails({ params }: { params: { id: string } }) {
         <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
           {project.description}
         </p>
+
+        {project.metrics && project.metrics.length > 0 && (
+          <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-4">
+            {project.metrics.map((metric) => (
+              <div key={metric.label}>
+                <dt className="label-mono text-faint">{metric.label}</dt>
+                <dd className="mt-1 text-2xl font-semibold text-foreground">
+                  {metric.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        )}
 
         <div className="mt-8 flex flex-wrap gap-4">
           {project.githubLink && (
@@ -124,6 +137,46 @@ export default function ProjectDetails({ params }: { params: { id: string } }) {
         </section>
       )}
 
+      {project.keyDecisions && project.keyDecisions.length > 0 && (
+        <section className="mt-16" aria-labelledby="decisions-heading">
+          <SectionLabel className="mb-6">
+            <span id="decisions-heading">Key decisions</span>
+          </SectionLabel>
+          <div className="space-y-8">
+            {project.keyDecisions.map((entry) => (
+              <div key={entry.decision}>
+                <p className="text-base font-medium text-foreground">
+                  {entry.decision}
+                </p>
+                <p className="mt-2 text-lg leading-relaxed text-muted-foreground">
+                  {entry.why}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {project.challenges && project.challenges.length > 0 && (
+        <section className="mt-16" aria-labelledby="challenges-heading">
+          <SectionLabel className="mb-6">
+            <span id="challenges-heading">Challenges</span>
+          </SectionLabel>
+          <div className="space-y-8">
+            {project.challenges.map((entry) => (
+              <div key={entry.challenge}>
+                <p className="text-base font-medium text-foreground">
+                  {entry.challenge}
+                </p>
+                <p className="mt-2 text-lg leading-relaxed text-muted-foreground">
+                  {entry.resolution}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       <section className="mt-16">
         <SectionLabel className="mb-4">Stack</SectionLabel>
         <div className="flex flex-wrap gap-2">
@@ -137,14 +190,14 @@ export default function ProjectDetails({ params }: { params: { id: string } }) {
         aria-label="Project navigation"
         className="mt-20 flex items-center justify-between border-t border-border pt-10"
       >
-        <Link
+        <ViewTransitionLink
           href="/projects"
           className="label-mono inline-flex items-center gap-2 transition-colors hover:text-accent"
         >
           <ArrowLeft size={14} aria-hidden="true" />
           All work
-        </Link>
-        <Link
+        </ViewTransitionLink>
+        <ViewTransitionLink
           href={projectHref(next)}
           className="group inline-flex flex-col items-end text-right"
         >
@@ -153,7 +206,7 @@ export default function ProjectDetails({ params }: { params: { id: string } }) {
             {next.title}
             <ArrowRight size={14} aria-hidden="true" />
           </span>
-        </Link>
+        </ViewTransitionLink>
       </nav>
     </article>
   );
