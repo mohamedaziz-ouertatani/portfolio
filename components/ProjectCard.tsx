@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { ArrowRight, ExternalLink, Github } from 'lucide-react';
 import { hasRealScreenshot, projectHref, type Project } from '@/lib/projects';
 import { Chip } from '@/components/ui/Chip';
+import { ViewTransitionLink } from '@/components/ui/ViewTransitionLink';
 
 export interface ProjectCardProps {
   project: Project;
@@ -49,14 +49,14 @@ export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
 
       <div className="flex flex-1 flex-col p-6">
         <h3 className="text-lg font-semibold leading-snug text-foreground">
-          <Link
+          <ViewTransitionLink
             href={projectHref(project)}
             // Stretched link: the whole card is the target, while the nested
             // GitHub and demo links stay individually clickable above it.
             className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none group-hover:text-accent"
           >
             {project.title}
-          </Link>
+          </ViewTransitionLink>
         </h3>
 
         {project.role && (

@@ -19,6 +19,12 @@ export interface Project {
    * documented in this file.
    */
   pipeline?: string[];
+  /** Notable engineering decisions and the reasoning behind them. */
+  keyDecisions?: { decision: string; why: string }[];
+  /** Real obstacles hit during the build and how they were resolved. */
+  challenges?: { challenge: string; resolution: string }[];
+  /** Quantified outcomes, only where a real number exists. */
+  metrics?: { label: string; value: string }[];
   // Higher number = more important
   priority?: number;
 }

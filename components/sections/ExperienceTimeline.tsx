@@ -1,10 +1,75 @@
+'use client';
+
+import { useEffect, useRef } from 'react';
+import { useReducedMotion } from 'framer-motion';
 import { Section } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { Chip } from '@/components/ui/Chip';
 import { experiencesData } from '@/lib/experiences';
 import { educationData } from '@/lib/education';
+import { zones } from '@/lib/sections';
+import { environment, startEnvironmentTracking } from '@/lib/three/scrollStore';
+
+const EXPERIENCE_ZONE_INDEX = zones.findIndex(
+  (zone) => zone.id === 'experience'
+);
 
 export function ExperienceTimeline() {
+  const shouldReduceMotion = useReducedMotion();
+  const lineRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const dotRefs = useRef<(HTMLSpanElement | null)[]>([]);
+
+  useEffect(() => {
+    const count = dotRefs.current.length;
+
+    if (shouldReduceMotion) {
+      lineRefs.current.forEach((line) =>
+        line?.style.setProperty('transform', 'scaleY(1)')
+      );
+      dotRefs.current.forEach((dot) => dot?.classList.add('is-active'));
+      return;
+    }
+
+    const teardown = startEnvironmentTracking();
+    let frame = 0;
+
+    const render = () => {
+      frame = requestAnimationFrame(render);
+
+      const { activeZone, zoneProgress } = environment;
+      const progress =
+        activeZone > EXPERIENCE_ZONE_INDEX
+          ? 1
+          : activeZone < EXPERIENCE_ZONE_INDEX
+            ? 0
+            : zoneProgress;
+
+      lineRefs.current.forEach((line, index) => {
+        if (!line || count <= 1) return;
+        const segStart = index / (count - 1);
+        const segEnd = (index + 1) / (count - 1);
+        const segProgress = Math.min(
+          1,
+          Math.max(0, (progress - segStart) / (segEnd - segStart))
+        );
+        line.style.transform = `scaleY(${segProgress})`;
+      });
+
+      dotRefs.current.forEach((dot, index) => {
+        if (!dot) return;
+        const threshold = count > 1 ? index / (count - 1) : 0;
+        dot.classList.toggle('is-active', progress >= threshold);
+      });
+    };
+
+    frame = requestAnimationFrame(render);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      teardown();
+    };
+  }, [shouldReduceMotion]);
+
   return (
     <Section
       id="experience"
@@ -21,14 +86,25 @@ export function ExperienceTimeline() {
                 <div className="relative flex gap-6 pb-12 last:pb-0">
                   <div className="flex flex-col items-center">
                     <span
+                      ref={(el) => {
+                        dotRefs.current[index] = el;
+                      }}
                       aria-hidden="true"
-                      className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-accent"
+                      className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-border-strong transition-[background-color,transform] duration-300 [&.is-active]:scale-125 [&.is-active]:bg-accent"
                     />
                     {index < experiencesData.length - 1 && (
                       <span
                         aria-hidden="true"
-                        className="mt-2 w-px flex-1 bg-border"
-                      />
+                        className="relative mt-2 w-px flex-1 bg-border"
+                      >
+                        <span
+                          ref={(el) => {
+                            lineRefs.current[index] = el;
+                          }}
+                          aria-hidden="true"
+                          className="absolute inset-0 origin-top scale-y-0 bg-accent"
+                        />
+                      </span>
                     )}
                   </div>
 
