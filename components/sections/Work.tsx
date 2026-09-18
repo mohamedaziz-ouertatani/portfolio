@@ -7,7 +7,7 @@ import { hasRealScreenshot, findProject, projectHref } from '@/lib/projects';
 import { ViewTransitionLink } from '@/components/ui/ViewTransitionLink';
 
 // Curated by hand rather than derived from `priority`: this row order and
-// category pairing is specific to the homepage's five-project pitch, and
+// category pairing is specific to the homepage's six-project pitch, and
 // shouldn't shift just because the /projects ranking changes.
 const featured = [
   {
@@ -19,6 +19,11 @@ const featured = [
     slug: 'estate-mind',
     title: 'Estate-Mind',
     category: 'Data Engineering / Data Science',
+  },
+  {
+    slug: 'biflow',
+    title: 'BIFlow',
+    category: 'Multi-Agent Systems / BI',
   },
   {
     slug: 'smart-inventory',
@@ -49,7 +54,7 @@ export function Work() {
       index="02"
       label="Work"
       heading="Selected work"
-      caption="Five projects across research tooling, data engineering, and ML systems."
+      caption="Six projects across research tooling, data engineering, multi-agent systems, and ML."
     >
       <Reveal>
         <ul className="border-y border-border">

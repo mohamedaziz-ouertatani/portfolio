@@ -64,7 +64,7 @@ const projectsData: Project[] = [
     githubLink: 'https://github.com/mohamedaziz-ouertatani/ResearchBridge.git',
     liveDemoLink: '',
     images: ['/images/ResearchBridge/project.png'],
-    priority: 100,
+    priority: 95,
   },
   {
     id: '2',
@@ -329,6 +329,72 @@ const projectsData: Project[] = [
     githubLink: 'https://github.com/mohamedaziz-ouertatani/estate-mind',
     liveDemoLink: '',
     images: ['/images/mind-estate/project.png'],
+    priority: 95,
+  },
+  {
+    id: '13',
+    slug: 'biflow',
+    title: 'BIFlow — Multi-Agent BI Pipeline Automation',
+    description:
+      'Multi-agent system that automates the full Business Intelligence pipeline, from raw data to an interactive dashboard with KPIs and business insights, without manual intervention at each stage.',
+    role: 'Multi-Agent Architecture & KPI Logic (Team of 5)',
+    problem:
+      'Turning raw data into a trustworthy BI dashboard normally means manual profiling, cleaning, KPI definition and reporting at every stage, redone from scratch for each new business domain.',
+    approach:
+      'Built as a 5-person team project around a dedicated Orchestrator Agent coordinating six specialized agents: Data Profiler, Data Quality/ETL, KPI & Semantic Layer, BI Analyst, Dashboard Generator, and a BI Auditor/XAI agent for traceability and explainability. The pipeline is not hardcoded to one dataset: it runs on e-commerce (Olist), banking/transactions (Berka, Czech Bank PKDD’99) and telecom churn (IBM Telco) data, using a per-agent registry pattern of business-domain-keyed KPI, cleaning and ETL definitions, so a new domain means extending a registry rather than rewriting logic.',
+    result:
+      'One pipeline that carries three unrelated business domains from raw data to a dashboard with KPIs and insights, with an auditor agent making each result traceable and explainable.',
+    technologies: [
+      'Python',
+      'Pandas',
+      'Multi-Agent Orchestration',
+      'PostgreSQL',
+      'Plotly',
+      'Docker',
+      'REST APIs',
+      'Git',
+    ],
+    pipeline: [
+      'Raw business data',
+      'Orchestrator Agent coordinating the pipeline',
+      'Data Profiler',
+      'Data Quality / ETL',
+      'KPI & Semantic Layer',
+      'BI Analyst',
+      'Dashboard Generator',
+      'BI Auditor / XAI — traceability and explainability',
+    ],
+    keyDecisions: [
+      {
+        decision:
+          'Per-agent domain registries instead of a domain-adapter hierarchy',
+        why: 'Each agent keeps business-domain-keyed KPI, cleaning and ETL definitions in its own registry. Adding a domain means extending a registry rather than rewriting logic, and there is no centralized adapter hierarchy to keep in sync.',
+      },
+      {
+        decision: 'A dedicated Orchestrator Agent above six specialists',
+        why: 'Each stage of the BI pipeline has one agent responsible for it, and a single orchestrator coordinates them so the run needs no manual intervention between stages.',
+      },
+      {
+        decision: 'A separate BI Auditor / XAI agent',
+        why: 'Traceability and explainability are a stage of their own rather than an afterthought, so every KPI and insight can be traced back through the pipeline.',
+      },
+    ],
+    challenges: [
+      {
+        challenge:
+          'Profiling and KPIs on heterogeneous data, including a flat dataset with no calendar dimension',
+        resolution:
+          'The telecom churn data is flat and non-time-series, unlike the e-commerce and banking sources. The KPI and profiling logic was implemented to work across these differing structures instead of assuming a time axis.',
+      },
+    ],
+    metrics: [
+      { label: 'Business domains', value: '3' },
+      { label: 'Specialized agents', value: '6' },
+      { label: 'Team size', value: '2' },
+    ],
+    githubLink: 'https://github.com/mohamedaziz-ouertatani/BIFlow.git',
+    liveDemoLink: '',
+    images: ['/images/BIFlow/project.png'],
     priority: 100,
   },
   // Add other projects here...
