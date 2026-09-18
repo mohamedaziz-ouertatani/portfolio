@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-18T12:00:00.000Z",
+  "title": "Design System: Mohamed Aziz Ouertatani, Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "cobalt": {
+        "role": "primary",
+        "displayName": "Sidi Bou Said Cobalt",
+        "canonical": "#163E93",
+        "tonalRamp": [
+          "#0E285E",
+          "#102D6B",
+          "#123379",
+          "#143886",
+          "#163E93",
+          "#506EAE",
+          "#8B9FC9",
+          "#C5CFE4"
+        ]
+      },
+      "cobalt-deep": {
+        "role": "primary",
+        "displayName": "Deep Cobalt",
+        "canonical": "#0E2A6B",
+        "tonalRamp": [
+          "#091B44",
+          "#0A1F4E",
+          "#0B2258",
+          "#0D2661",
+          "#0E2A6B",
+          "#4A5F90",
+          "#8795B5",
+          "#C3CADA"
+        ]
+      },
+      "saffron": {
+        "role": "secondary",
+        "displayName": "Saffron Glaze",
+        "canonical": "#F0A81C",
+        "tonalRamp": [
+          "#9A6C12",
+          "#AF7B14",
+          "#C58A17",
+          "#DA9919",
+          "#F0A81C",
+          "#F4BE55",
+          "#F8D48E",
+          "#FBE9C6"
+        ]
+      },
+      "turquoise": {
+        "role": "secondary",
+        "displayName": "Kairouan Turquoise",
+        "canonical": "#12A79D",
+        "tonalRamp": [
+          "#0C6B64",
+          "#0D7A73",
+          "#0F8981",
+          "#10988F",
+          "#12A79D",
+          "#4DBDB6",
+          "#89D3CE",
+          "#C4E9E7"
+        ]
+      },
+      "turquoise-text": {
+        "role": "secondary",
+        "displayName": "Turquoise, text-safe",
+        "canonical": "#0B6E67",
+        "tonalRamp": [
+          "#074642",
+          "#08504B",
+          "#095A54",
+          "#0A645E",
+          "#0B6E67",
+          "#48928D",
+          "#85B7B3",
+          "#C2DBD9"
+        ]
+      },
+      "bisque": {
+        "role": "tertiary",
+        "displayName": "Bare Bisque",
+        "canonical": "#D9C7A8",
+        "tonalRamp": [
+          "#8B7F6C",
+          "#9E917B",
+          "#B2A38A",
+          "#C5B599",
+          "#D9C7A8",
+          "#E3D5BE",
+          "#ECE3D4",
+          "#F6F1E9"
+        ]
+      },
+      "plaster": {
+        "role": "neutral",
+        "displayName": "Lime-Wash Plaster",
+        "canonical": "#EFF1EA",
+        "tonalRamp": [
+          "#999A96",
+          "#AEB0AB",
+          "#C4C6C0",
+          "#D9DBD5",
+          "#EFF1EA",
+          "#F3F5EF",
+          "#F7F8F5",
+          "#FBFCFA"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink Navy",
+        "canonical": "#0B1533",
+        "tonalRamp": [
+          "#070D21",
+          "#080F25",
+          "#09112A",
+          "#0A132E",
+          "#0B1533",
+          "#485066",
+          "#858A99",
+          "#C2C5CC"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display-hero": {
+        "displayName": "Display Hero",
+        "purpose": "The name on the hero tile only."
+      },
+      "display": {
+        "displayName": "Display",
+        "purpose": "Section and page headings."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Tile titles and the availability statement."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Case-study tile titles, timeline job titles, education names."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Section captions and statement copy."
+      },
+      "body": { "displayName": "Body", "purpose": "Default reading copy." },
+      "ui": {
+        "displayName": "UI",
+        "purpose": "Buttons, nav links, filter and stack tiles."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Sub-block signage: filter group, footer columns, stack categories, spec rows. Never above a heading."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "ease-cine",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Exponential ease-out for all CSS reveals and hover motion; also the page view transition (0.3s). Same curve is exposed as ease-settle."
+      },
+      {
+        "name": "tile-turn-out",
+        "value": "0.2s cubic-bezier(0.4, 0, 1, 1)",
+        "purpose": "Front face of a Work tile narrows to an edge with flat scaleX."
+      },
+      {
+        "name": "tile-turn-in",
+        "value": "0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s",
+        "purpose": "Back face widens from the edge after the front has gone. No 3D by design."
+      },
+      {
+        "name": "hero-settle",
+        "value": "spring stiffness 210, damping 13, from y -26 and rotate -0.8deg, stagger 0.08s",
+        "purpose": "Hero tiles pressed onto the wall with a damped overshoot (Framer Motion)."
+      },
+      {
+        "name": "reveal-settle",
+        "value": "spring stiffness 220, damping 20, rise 22px, once, margin -80px",
+        "purpose": "Single entrance used for every section (Framer Motion Reveal). Reduced motion: 0.2s fade."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "2xl", "value": "1536px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Chamfered cobalt tile on plaster; inverts to saffron on a cobalt wall.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Contact</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: #163E93; color: #F5F6F1; font-size: 14px; line-height: 20px; font-weight: 600; text-decoration: none; clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px); transition: background-color 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-primary:hover { background: #0F2F73; } .ds-btn-primary:focus-visible { outline: 2px solid currentColor; outline-offset: -4px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Solid elevated plaster glaze with ink text; no drawn border, since chamfered corners would cut it.",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\">Download CV</a>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: #E6E9E0; color: #0B1533; font-size: 14px; line-height: 20px; font-weight: 600; text-decoration: none; clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px); transition: background-color 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-secondary:hover { background: #F4F6EF; } .ds-btn-secondary:focus-visible { outline: 2px solid currentColor; outline-offset: -4px; }"
+    },
+    {
+      "name": "Availability Tile",
+      "kind": "custom",
+      "refersTo": "availability-tile",
+      "description": "The truthful ask: warm saffron chamfered badge with an ink diamond.",
+      "html": "<span class=\"ds-avail\"><span class=\"ds-avail-mark\"></span>Available for PFE, Feb 2027, 6 mo</span>",
+      "css": ".ds-avail { display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px; background: #F0A81C; color: #0B1533; font-size: 14px; line-height: 20px; font-weight: 600; clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px); } .ds-avail-mark { width: 8px; height: 8px; background: #0B1533; transform: rotate(45deg); }"
+    },
+    {
+      "name": "Filter Tile",
+      "kind": "chip",
+      "refersTo": "filter-tile",
+      "description": "Interactive technology filter, cut as a small tile. Selected fills cobalt.",
+      "html": "<div style=\"display:flex;gap:8px\"><button class=\"ds-filter\" aria-pressed=\"false\">Python</button><button class=\"ds-filter ds-filter-on\" aria-pressed=\"true\">Docker</button></div>",
+      "css": ".ds-filter { padding: 6px 12px; border: 0; background: #E6E9E0; color: #3E4A66; font-family: inherit; font-weight: 600; font-size: 14px; line-height: 20px; cursor: pointer; clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px); transition: background-color 200ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms; } .ds-filter:hover { background: #C9CFC0; color: #0B1533; } .ds-filter-on { background: #163E93; color: #F5F6F1; } .ds-filter:focus-visible { outline: 2px solid #163E93; outline-offset: -4px; }"
+    },
+    {
+      "name": "Glazed Project Tile",
+      "kind": "card",
+      "refersTo": "project-tile-code-public",
+      "description": "Chamfered project tile. Cobalt glaze here: public code or demo. Bare bisque (see the unglazed variant) when there is no public link.",
+      "html": "<article class=\"ds-tile\"><h3>ResearchBridge</h3><p class=\"ds-tile-role\">Research Intelligence / AI</p><p class=\"ds-tile-body\">Semantic retrieval over cited research evidence.</p><p class=\"ds-tile-status\">Code is public</p></article>",
+      "css": ".ds-tile { display: flex; flex-direction: column; min-height: 240px; padding: 24px; background: #163E93; color: #F5F6F1; clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px); } .ds-tile h3 { margin: 0; font-weight: 800; font-size: 30px; line-height: 1.02; letter-spacing: -0.025em; } .ds-tile-role { margin: 4px 0 0; font-size: 14px; font-weight: 600; opacity: 0.8; } .ds-tile-body { margin: 12px 0 0; font-size: 16px; line-height: 1.35; opacity: 0.9; } .ds-tile-status { margin: auto 0 0; padding-top: 12px; font-size: 14px; font-weight: 600; }"
+    },
+    {
+      "name": "Unglazed Project Tile",
+      "kind": "card",
+      "refersTo": "project-tile-unlinked",
+      "description": "Bare bisque tile with ink text: a project with no public code or demo yet.",
+      "html": "<article class=\"ds-tile-bare\"><h3>MLOps Pipeline</h3><p class=\"ds-tile-bare-role\">MLOps / Machine Learning</p><p class=\"ds-tile-bare-status\">No public link yet</p></article>",
+      "css": ".ds-tile-bare { display: flex; flex-direction: column; min-height: 200px; padding: 24px; background: #D9C7A8; color: #0B1533; clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px); } .ds-tile-bare h3 { margin: 0; font-weight: 800; font-size: 30px; line-height: 1.02; letter-spacing: -0.025em; } .ds-tile-bare-role { margin: 4px 0 0; font-size: 14px; font-weight: 600; opacity: 0.8; } .ds-tile-bare-status { margin: auto 0 0; padding-top: 12px; font-size: 14px; font-weight: 600; }"
+    },
+    {
+      "name": "Stack Tile",
+      "kind": "chip",
+      "refersTo": "stack-tile",
+      "description": "Technology tile on the cobalt wall; the pointed tile glazes saffron and its neighbours lift to plaster.",
+      "html": "<div style=\"display:flex;gap:8px;padding:16px;background:#163E93\"><button class=\"ds-stack\">Fastify</button><button class=\"ds-stack ds-stack-active\">PostgreSQL</button><button class=\"ds-stack ds-stack-related\">Docker</button></div>",
+      "css": ".ds-stack { padding: 8px 14px; border: 0; background: #1B47A3; color: #F5F6F1; font-family: inherit; font-weight: 600; font-size: 14px; line-height: 20px; cursor: pointer; clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px); transition: background-color 200ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms, opacity 200ms; } .ds-stack:hover { background: #2150B3; } .ds-stack-active { background: #F0A81C; color: #0B1533; } .ds-stack-related { background: #F5F6F1; color: #0B1533; } .ds-stack:focus-visible { outline: 2px solid #F0A81C; outline-offset: -4px; }"
+    },
+    {
+      "name": "Site Header",
+      "kind": "nav",
+      "refersTo": "site-header",
+      "description": "Sticky deep-cobalt bar: star mark, display-weight name, muted mist links with saffron current state, CV tile, and the saffron star frieze beneath.",
+      "html": "<header class=\"ds-header\"><nav class=\"ds-header-row\"><a class=\"ds-brand\" href=\"#\"><svg width=\"22\" height=\"22\" viewBox=\"-10 -10 20 20\" fill=\"#F0A81C\" aria-hidden=\"true\"><path d=\"M0 -9.6 L2.6 -6.3 L6.8 -6.8 L6.3 -2.6 L9.6 0 L6.3 2.6 L6.8 6.8 L2.6 6.3 L0 9.6 L-2.6 6.3 L-6.8 6.8 L-6.3 2.6 L-9.6 0 L-6.3 -2.6 L-6.8 -6.8 L-2.6 -6.3 Z\"/></svg>Mohamed Aziz Ouertatani</a><ul class=\"ds-links\"><li><a href=\"#\" class=\"ds-current\">Home</a></li><li><a href=\"#\">Work</a></li><li><a href=\"#\">Stack</a></li><li><a href=\"#\">About</a></li></ul></nav><div class=\"ds-frieze\"></div></header>",
+      "css": ".ds-header { background: #0E2A6B; color: #F5F6F1; } .ds-header-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; } .ds-brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; letter-spacing: -0.025em; color: #F5F6F1; text-decoration: none; } .ds-brand:hover { color: #F0A81C; } .ds-links { display: flex; gap: 28px; margin: 0; padding: 0; list-style: none; } .ds-links a { font-size: 14px; font-weight: 600; color: #C6D2EE; text-decoration: none; text-underline-offset: 10px; transition: color 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-links a:hover { color: #F0A81C; } .ds-links a.ds-current { color: #F0A81C; text-decoration: underline; text-decoration-thickness: 2px; } .ds-frieze { height: 16px; background-color: #0E2A6B; background-image: url(\"data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2732%27 height=%2716%27 viewBox=%270 0 32 16%27%3E%3Cpath d=%27M16 1L17.3 4.86L20.95 3.05L19.14 6.7L23 8L19.14 9.3L20.95 12.95L17.3 11.14L16 15L14.7 11.14L11.05 12.95L12.86 9.3L9 8L12.86 6.7L11.05 3.05L14.7 4.86Z%27 fill=%27%23F0A81C%27/%3E%3C/svg%3E\"); background-size: 32px 16px; background-repeat: repeat-x; background-position: left center; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Zellige Wall",
+    "overview": "The site is a tile wall. Every project, tool, role and action is a precisely cut piece with a flat glaze, set into a grid with visible grout gaps. Two grounds carry the whole thing: lime-wash plaster (#EFF1EA) for reading, and Sidi Bou Said cobalt (#163E93) for the wall itself. Home alternates the two as full-bleed bands (cobalt hero, plaster Work, cobalt Stack, plaster Experience, plaster About, cobalt Contact), so the wall cuts across the page rather than sitting in a box. Depth comes only from color, grout lines and the chamfered silhouette. There are no shadows, no gradients and no glow anywhere.\n\nThe voice is confident and warm rather than technical: a heavy, slightly condensed display grotesque (Bricolage Grotesque) for names and titles, a clear humanist grotesque (Hanken Grotesk) for everything read. There is no monospace voice, no terminal or code-window styling. Color is used with a strict meaning: saffron is the warmest glaze and marks the truthful ask (availability, the email address, the hovered stack tile); turquoise is the secondary glaze for statements and stages; bare bisque means \"no public link yet\".\n\nDensity is moderate and tile-driven. Content sits in tiles or on generous plaster/cobalt bands with 80-112px vertical padding. The hero is the densest moment: a twelve-column, five-row tile wall.",
+    "keyCharacteristics": [
+      "Two grounds (plaster, cobalt) swapped by re-declaring the same semantic tokens, never by per-component overrides.",
+      "Every interactive or content block is a chamfered tile; corners are cut, never rounded.",
+      "Glazes are flat fills; body text never sits in glaze on plaster except in the inked-glaze pairs defined below.",
+      "Pattern fields (eight-point star tessellation) are the wall's texture, used only as full-bleed backgrounds and header/footer friezes.",
+      "Light color scheme only; there is no dark mode."
+    ],
+    "rules": [
+      {
+        "name": "The Same-Names Rule",
+        "body": "A zone changes its ground by re-declaring the semantic tokens (zone-cobalt, zone-plaster), and every component inside inherits the inversion. Do not fork a component per ground.",
+        "section": "colors"
+      },
+      {
+        "name": "The Glaze Follows Truth Rule",
+        "body": "Glaze is a claim. A project with a public repository or live demo is glazed in a color (cobalt, turquoise, saffron or deep); a project with neither is bare bisque. The two never blend, so the wall never claims more than the links behind it. The status line on each tile (\"Code is public\" / \"No public link yet\") is derived from the same data.",
+        "section": "colors"
+      },
+      {
+        "name": "The Glaze Is Fill Rule",
+        "body": "Glazes are fills. Text on plaster is ink or cobalt or text-safe turquoise; text on a glaze is ink or plaster-glaze, chosen per the pairing (cobalt and deep take plaster-glaze; turquoise, saffron, bisque and plaster take ink).",
+        "section": "colors"
+      },
+      {
+        "name": "The Lining Numerals Rule",
+        "body": "Numerals are lining; dates and metrics add tnum for tabular figures (timeline dates, metric values, spec rows).",
+        "section": "typography"
+      },
+      {
+        "name": "The Heading Carries Itself Rule",
+        "body": "A heading stands alone: no kicker, eyebrow, index number or category tag above it. The label style may head a sub-block or a list, never sit over a heading.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Shadow Rule",
+        "body": "Nothing casts a shadow or glows. State is shown by a glaze swap (hover fills, selected tiles), a scale, or an outline drawn inside the tile.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do cut every tile with the chamfer (14px for content tiles, 8px for buttons, filters, badges) and leave 12px to 14px of grout between neighbors.",
+      "Do put the reading on lime-wash plaster (#EFF1EA) and the wall on cobalt (#163E93); switch grounds by re-declaring tokens with zone-cobalt or zone-plaster.",
+      "Do pair text with its glaze: ink on turquoise, saffron, bisque and plaster glaze; plaster-glaze on cobalt and deep.",
+      "Do use text-safe turquoise (#0B6E67) whenever turquoise is read as text on plaster.",
+      "Do let a glaze reflect a real link: color for public code or demo, bare bisque for none.",
+      "Do draw focus as an inside outline in the tile's current color (saffron on cobalt walls).",
+      "Do keep h1-h3 in Bricolage Grotesque 800 and let the heading stand without anything above it.",
+      "Do use tabular numerals for dates, metrics and spec rows."
+    ],
+    "donts": [
+      "Don't add box shadows, gradients, blur, glow or backdrop effects; depth is color and grout.",
+      "Don't put a kicker, eyebrow, index number or category tag above a heading.",
+      "Don't use a monospace face or terminal styling; font-mono resolves to the body face.",
+      "Don't use the dark-mode, neon, grid-glow or 3D-scene developer-portfolio look; no WebGL, no custom cursor, no constellation.",
+      "Don't draw a border on a chamfered tile; the clip cuts it at the corners. Use a solid glaze or an inside outline.",
+      "Don't set turquoise (#12A79D) as text on plaster, or saffron as text on plaster; both fail as text and are fills only.",
+      "Don't glaze a project that has no public link, or leave a linked project bisque.",
+      "Don't replace the flat scaleX tile turn with a 3D flip."
+    ]
+  }
+}

@@ -1,140 +1,129 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { useReducedMotion } from 'framer-motion';
+import {
+  useMotionValueEvent,
+  useReducedMotion,
+  useScroll,
+} from 'framer-motion';
 import { Section } from '@/components/ui/Section';
 import { Reveal } from '@/components/ui/Reveal';
 import { Chip } from '@/components/ui/Chip';
+import { Star } from '@/components/ui/Star';
 import { experiencesData } from '@/lib/experiences';
 import { educationData } from '@/lib/education';
-import { zones } from '@/lib/sections';
-import { environment, startEnvironmentTracking } from '@/lib/three/scrollStore';
-
-const EXPERIENCE_ZONE_INDEX = zones.findIndex(
-  (zone) => zone.id === 'experience'
-);
 
 export function ExperienceTimeline() {
   const shouldReduceMotion = useReducedMotion();
+  const listRef = useRef<HTMLOListElement>(null);
   const lineRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const dotRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const count = experiencesData.length;
+
+  // Scroll progress through the list drives one fill per segment: the grout
+  // line between two entries fills as the reader travels between them.
+  const { scrollYProgress } = useScroll({
+    target: listRef,
+    offset: ['start 65%', 'end 55%'],
+  });
+
+  const paint = (progress: number) => {
+    lineRefs.current.forEach((line, index) => {
+      if (!line || count <= 1) return;
+      const segStart = index / (count - 1);
+      const segEnd = (index + 1) / (count - 1);
+      const segProgress = Math.min(
+        1,
+        Math.max(0, (progress - segStart) / (segEnd - segStart))
+      );
+      line.style.transform = `scaleY(${segProgress})`;
+    });
+    dotRefs.current.forEach((dot, index) => {
+      if (!dot) return;
+      const threshold = count > 1 ? index / (count - 1) : 0;
+      dot.classList.toggle('is-active', progress >= threshold - 0.001);
+    });
+  };
+
+  useMotionValueEvent(scrollYProgress, 'change', (value) => {
+    if (!shouldReduceMotion) paint(value);
+  });
 
   useEffect(() => {
-    const count = dotRefs.current.length;
-
-    if (shouldReduceMotion) {
-      lineRefs.current.forEach((line) =>
-        line?.style.setProperty('transform', 'scaleY(1)')
-      );
-      dotRefs.current.forEach((dot) => dot?.classList.add('is-active'));
-      return;
-    }
-
-    const teardown = startEnvironmentTracking();
-    let frame = 0;
-
-    const render = () => {
-      frame = requestAnimationFrame(render);
-
-      const { activeZone, zoneProgress } = environment;
-      const progress =
-        activeZone > EXPERIENCE_ZONE_INDEX
-          ? 1
-          : activeZone < EXPERIENCE_ZONE_INDEX
-            ? 0
-            : zoneProgress;
-
-      lineRefs.current.forEach((line, index) => {
-        if (!line || count <= 1) return;
-        const segStart = index / (count - 1);
-        const segEnd = (index + 1) / (count - 1);
-        const segProgress = Math.min(
-          1,
-          Math.max(0, (progress - segStart) / (segEnd - segStart))
-        );
-        line.style.transform = `scaleY(${segProgress})`;
-      });
-
-      dotRefs.current.forEach((dot, index) => {
-        if (!dot) return;
-        const threshold = count > 1 ? index / (count - 1) : 0;
-        dot.classList.toggle('is-active', progress >= threshold);
-      });
-    };
-
-    frame = requestAnimationFrame(render);
-
-    return () => {
-      cancelAnimationFrame(frame);
-      teardown();
-    };
+    // Reduced motion, and the first paint: show the finished timeline rather
+    // than an empty one.
+    paint(shouldReduceMotion ? 1 : scrollYProgress.get());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shouldReduceMotion]);
 
   return (
     <Section
       id="experience"
-      index="04"
-      label="Experience"
       heading="Where I applied it"
       caption="Three engineering roles across two companies, plus the degree they run alongside."
     >
       <div className="grid gap-16 lg:grid-cols-[2fr_1fr]">
-        <ol className="relative">
+        <ol ref={listRef} className="relative">
           {experiencesData.map((experience, index) => (
-            <li key={experience.jobTitle + experience.companyName}>
-              <Reveal delay={index * 0.05}>
-                <div className="relative flex gap-6 pb-12 last:pb-0">
+            <li
+              key={experience.jobTitle + experience.companyName}
+              className="pb-14 last:pb-0"
+            >
+              <Reveal>
+                <div className="relative flex gap-6">
                   <div className="flex flex-col items-center">
                     <span
                       ref={(el) => {
                         dotRefs.current[index] = el;
                       }}
                       aria-hidden="true"
-                      className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-border-strong transition-[background-color,transform] duration-300 [&.is-active]:scale-125 [&.is-active]:bg-accent"
-                    />
-                    {index < experiencesData.length - 1 && (
+                      className="mt-1 shrink-0 text-border-strong transition-colors duration-300 [&.is-active]:text-accent"
+                    >
+                      <Star size={26} />
+                    </span>
+                    {index < count - 1 && (
                       <span
                         aria-hidden="true"
-                        className="relative mt-2 w-px flex-1 bg-border"
+                        className="relative mt-2 w-[3px] flex-1 bg-border"
                       >
                         <span
                           ref={(el) => {
                             lineRefs.current[index] = el;
                           }}
-                          aria-hidden="true"
-                          className="absolute inset-0 origin-top scale-y-0 bg-accent"
+                          className="absolute inset-0 origin-top bg-accent"
+                          style={{ transform: 'scaleY(1)' }}
                         />
                       </span>
                     )}
                   </div>
 
-                  <div className="pb-2">
-                    <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-faint">
+                  <div className="min-w-0 pb-2">
+                    <p className="tnum text-sm font-bold text-accent">
                       {experience.date}
                     </p>
-                    <h3 className="mt-2 text-xl font-semibold text-foreground">
+                    <h3 className="mt-2 text-2xl font-extrabold leading-tight tracking-tight text-foreground sm:text-3xl">
                       {experience.jobTitle}
                     </h3>
-                    <p className="mt-1 text-sm font-medium text-accent">
+                    <p className="mt-1 text-lg font-semibold text-muted-foreground">
                       {experience.companyName}
                     </p>
 
-                    <ul className="mt-4 space-y-2">
+                    <ul className="mt-5 max-w-2xl space-y-2.5">
                       {experience.contributions.map((contribution) => (
                         <li
                           key={contribution}
-                          className="flex gap-3 text-sm leading-relaxed text-muted-foreground"
+                          className="flex gap-3 text-base leading-relaxed text-muted-foreground"
                         >
                           <span
                             aria-hidden="true"
-                            className="mt-2 h-px w-3 shrink-0 bg-border-strong"
+                            className="mt-[0.6rem] h-2 w-2 shrink-0 rotate-45 bg-glaze-turquoise"
                           />
                           {contribution}
                         </li>
                       ))}
                     </ul>
 
-                    <div className="mt-4 flex flex-wrap gap-2">
+                    <div className="mt-5 flex flex-wrap gap-2">
                       {experience.skills.map((skill) => (
                         <Chip key={skill}>{skill}</Chip>
                       ))}
@@ -147,20 +136,22 @@ export function ExperienceTimeline() {
         </ol>
 
         <Reveal delay={0.1}>
-          <h3 className="label-mono mb-6">Education</h3>
-          <div className="space-y-6">
-            {educationData.map((entry) => (
+          <h3 className="label mb-5">Education</h3>
+          <div className="space-y-3">
+            {educationData.map((entry, index) => (
               <div
                 key={entry.institution}
-                className="bg-surface/50 rounded-lg border border-border p-6"
+                className={`tile p-6 ${
+                  index === 0 ? 'glaze-cobalt' : 'glaze-turquoise'
+                }`}
               >
-                <h4 className="text-base font-semibold text-foreground">
+                <h4 className="font-display text-xl font-extrabold leading-tight">
                   {entry.url ? (
                     <a
                       href={entry.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="transition-colors hover:text-accent"
+                      className="underline decoration-2 underline-offset-4 hover:no-underline"
                     >
                       {entry.institution}
                     </a>
@@ -168,16 +159,10 @@ export function ExperienceTimeline() {
                     entry.institution
                   )}
                 </h4>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {entry.credential}
-                </p>
-                <p className="mt-1 font-mono text-[11px] text-faint">
-                  {entry.date}
-                </p>
+                <p className="mt-2 text-sm font-medium">{entry.credential}</p>
+                <p className="tnum mt-1 text-sm opacity-80">{entry.date}</p>
                 {entry.focus && (
-                  <p className="mt-3 text-sm text-muted-foreground">
-                    {entry.focus}
-                  </p>
+                  <p className="mt-3 text-sm opacity-90">{entry.focus}</p>
                 )}
               </div>
             ))}

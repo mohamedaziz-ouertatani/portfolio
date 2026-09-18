@@ -115,7 +115,7 @@ export function CommandPalette() {
           animate={{ opacity: 1 }}
           exit={shouldReduceMotion ? undefined : { opacity: 0 }}
           transition={{ duration: 0.15, ease: 'easeOut' }}
-          className="bg-background/70 fixed inset-0 z-[100] flex items-start justify-center px-4 pt-[15vh] backdrop-blur-sm"
+          className="fixed inset-0 z-[100] flex items-start justify-center bg-[rgb(11_21_51/0.6)] px-4 pt-[15vh]"
           onClick={() => setIsOpen(false)}
         >
           <motion.div
@@ -133,9 +133,9 @@ export function CommandPalette() {
                 : { opacity: 0, scale: 0.97, y: -8 }
             }
             transition={{ duration: 0.15, ease: 'easeOut' }}
-            className="w-full max-w-lg overflow-hidden rounded-xl border border-border bg-card shadow-2xl"
+            className="tile w-full max-w-lg overflow-hidden bg-surface"
           >
-            <div className="flex items-center gap-3 border-b border-border px-4 py-3">
+            <div className="flex items-center gap-3 border-b-2 border-border-strong px-5 py-4">
               <Search
                 size={16}
                 className="shrink-0 text-faint"
@@ -166,9 +166,7 @@ export function CommandPalette() {
 
                 return (
                   <li key={group}>
-                    <p className="px-4 pb-1 pt-2 font-mono text-[11px] uppercase tracking-[0.14em] text-faint">
-                      {group}
-                    </p>
+                    <p className="label px-5 pb-1 pt-3 text-faint">{group}</p>
                     <ul>
                       {groupResults.map((command) => {
                         renderIndex += 1;
@@ -183,10 +181,10 @@ export function CommandPalette() {
                               type="button"
                               onMouseEnter={() => setActiveIndex(renderIndex)}
                               onClick={() => navigate(command)}
-                              className={`block w-full px-4 py-2 text-left text-sm transition-colors ${
+                              className={`block w-full px-5 py-2.5 text-left text-sm transition-colors ${
                                 isActive
-                                  ? 'bg-accent/10 text-accent'
-                                  : 'text-muted-foreground hover:bg-surface'
+                                  ? 'bg-accent font-semibold text-accent-foreground'
+                                  : 'text-foreground hover:bg-surface-hover'
                               }`}
                             >
                               {command.label}

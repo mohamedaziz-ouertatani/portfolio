@@ -29,31 +29,28 @@ const INTERESTS = ['Muay Thai', 'Motorcycling', 'Fitness', 'Gaming'];
 
 export default function Resume() {
   return (
-    <main
-      id="main-content"
-      className="container mx-auto max-w-3xl px-4 pb-12 pt-32 print:py-8"
-    >
+    <div className="container mx-auto max-w-3xl px-4 pb-16 pt-12 print:py-8">
       {/* === Resume Hero (Name, Title, Portrait, Download/Contact) === */}
-      <section className="relative mb-8 flex flex-col-reverse items-center gap-6 overflow-hidden rounded-xl bg-card px-6 py-6 shadow-lg md:flex-row md:items-center md:justify-between print:bg-white print:shadow-none">
+      <section className="tile zone-cobalt mb-10 flex flex-col-reverse items-start gap-6 p-6 sm:p-8 md:flex-row md:items-center md:justify-between print:mb-6 print:bg-white print:p-0">
         {/* Headline and actions */}
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-card-foreground md:text-4xl">
+          <h1 className="text-4xl font-extrabold leading-[1] tracking-tight text-foreground md:text-5xl print:text-black">
             {site.name}
           </h1>
-          <div className="mt-1 text-base font-semibold text-primary-700 dark:text-primary-300 md:text-lg">
+          <div className="mt-3 text-base font-bold text-accent md:text-lg print:text-black">
             Final-Year Computer Science Engineering Student — Data Science
           </div>
-          <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground">
+          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground print:text-black">
             <a
               href={`mailto:${site.email}`}
-              className="transition-colors hover:text-accent hover:underline"
+              className="underline underline-offset-4 transition-colors hover:text-accent"
             >
               {site.email}
             </a>
             <span aria-hidden="true">&#183;</span>
             <a
               href={site.phoneHref}
-              className="transition-colors hover:text-accent hover:underline"
+              className="underline underline-offset-4 transition-colors hover:text-accent"
             >
               {site.phone}
             </a>
@@ -64,7 +61,7 @@ export default function Resume() {
               href={socialLink('linkedin').href}
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors hover:text-accent hover:underline"
+              className="underline underline-offset-4 transition-colors hover:text-accent"
             >
               LinkedIn
             </a>
@@ -73,7 +70,7 @@ export default function Resume() {
         </div>
         {/* Portrait */}
         <div className="mb-6 flex-shrink-0 md:mb-0 print:hidden">
-          <div className="relative h-[120px] w-[120px] overflow-hidden rounded-full border border-border">
+          <div className="tile tile-sm relative h-[120px] w-[120px] overflow-hidden">
             <Image
               src="/me3.png"
               alt="Mohamed Aziz Ouertatani"
@@ -85,11 +82,11 @@ export default function Resume() {
           </div>
         </div>
         {/* Download CV action */}
-        <div className="absolute right-0 top-0 flex-shrink-0 md:static print:hidden">
+        <div className="flex-shrink-0 print:hidden">
           <a
             href={site.cv}
             download
-            className="inline-block rounded-md bg-accent px-4 py-2 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent-strong"
+            className="tile tile-sm inline-block bg-accent px-5 py-3 text-sm font-bold text-accent-foreground transition-colors hover:bg-accent-strong"
           >
             Download CV
           </a>
@@ -98,7 +95,7 @@ export default function Resume() {
 
       {/* === Professional Summary === */}
       <section className="mb-10 print:mb-6">
-        <h2 className="mb-2 text-xl font-bold tracking-tight text-foreground">
+        <h2 className="mb-3 border-b-2 border-border pb-2 text-2xl font-extrabold tracking-tight text-foreground">
           Professional Summary
         </h2>
         <ul className="list-inside list-disc space-y-2 text-sm text-muted-foreground md:text-base">
@@ -109,7 +106,7 @@ export default function Resume() {
           </li>
           <li>
             Specialized in architecting{' '}
-            <span className="font-semibold text-primary-700">
+            <span className="font-bold text-accent">
               end-to-end data pipelines
             </span>{' '}
             and interactive analytics for business and real-world impact.
@@ -132,7 +129,7 @@ export default function Resume() {
 
       {/* === Experience === */}
       <section className="mb-10 print:mb-6">
-        <h2 className="mb-2 text-xl font-bold tracking-tight text-foreground">
+        <h2 className="mb-3 border-b-2 border-border pb-2 text-2xl font-extrabold tracking-tight text-foreground">
           Professional Experience
         </h2>
         <div className="space-y-6">
@@ -152,7 +149,7 @@ export default function Resume() {
 
       {/* === Education === */}
       <section className="mb-10 print:mb-6">
-        <h2 className="mb-2 text-xl font-bold tracking-tight text-foreground">
+        <h2 className="mb-3 border-b-2 border-border pb-2 text-2xl font-extrabold tracking-tight text-foreground">
           Education
         </h2>
         <div className="space-y-4">
@@ -173,7 +170,7 @@ export default function Resume() {
 
       {/* === Featured Projects === */}
       <section className="mb-10 print:mb-6">
-        <h2 className="mb-3 text-xl font-bold tracking-tight text-foreground">
+        <h2 className="mb-3 border-b-2 border-border pb-2 text-2xl font-extrabold tracking-tight text-foreground">
           Featured Projects
         </h2>
         <div className="grid gap-6 md:grid-cols-2">
@@ -194,7 +191,7 @@ export default function Resume() {
 
       {/* === Skills === */}
       <section className="mb-10 print:mb-6">
-        <h2 className="mb-2 text-xl font-bold tracking-tight text-foreground">
+        <h2 className="mb-3 border-b-2 border-border pb-2 text-2xl font-extrabold tracking-tight text-foreground">
           Skills & Technologies
         </h2>
         <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
@@ -206,7 +203,7 @@ export default function Resume() {
 
       {/* === Interests === */}
       <section className="mb-8">
-        <h2 className="mb-2 text-xl font-bold tracking-tight text-foreground">
+        <h2 className="mb-3 border-b-2 border-border pb-2 text-2xl font-extrabold tracking-tight text-foreground">
           Interests
         </h2>
         <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
@@ -215,7 +212,7 @@ export default function Resume() {
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
 }
 
@@ -235,15 +232,11 @@ function ResumeExperience({
   return (
     <div className="group">
       <div className="mb-1 flex flex-wrap items-center gap-2">
-        <span className="font-semibold text-foreground group-hover:text-primary-700">
-          {role}
-        </span>
-        <span className="text-primary-700 group-hover:underline dark:text-primary-400">
-          &#183; {company}
-        </span>
+        <span className="font-bold text-foreground">{role}</span>
+        <span className="font-semibold text-accent">&#183; {company}</span>
         <span className="text-sm text-muted-foreground">{date}</span>
       </div>
-      <ul className="ml-4 list-inside list-disc text-muted-foreground transition-all duration-200 group-hover:pl-2">
+      <ul className="ml-4 list-inside list-disc text-muted-foreground">
         {highlights.map((item, idx) => (
           <li key={idx} className="leading-tight">
             {item}
@@ -273,15 +266,15 @@ function ResumeProjectCard({
 }) {
   return (
     <div
-      className={`rounded-lg border border-border bg-muted p-4 text-card-foreground shadow transition-shadow duration-300 print:border print:bg-white print:text-black
-        ${animate ? 'ring-1 ring-accent hover:scale-[1.02] hover:shadow-md' : 'hover:scale-[1.01] hover:shadow-sm'}
-      `}
+      className={`tile tile-sm p-5 print:border print:bg-white print:text-black ${
+        animate ? 'bg-background-elevated' : 'bg-background-elevated'
+      }`}
     >
       <div className="mb-1 flex items-center justify-between">
         <span className="font-bold">{name}</span>
         {url && (
           <a
-            className="ml-3 text-xs text-primary-700 underline hover:text-primary-800 dark:text-primary-300"
+            className="ml-3 text-xs font-bold text-accent underline underline-offset-4 hover:no-underline"
             href={url}
             target="_blank"
             rel="noopener noreferrer"
@@ -290,11 +283,11 @@ function ResumeProjectCard({
           </a>
         )}
       </div>
-      <div className="mb-1 text-xs italic">{role}</div>
-      <div className="mb-2 text-sm">{description}</div>
-      <div className="mb-1 text-xs text-primary-700 dark:text-primary-400">
-        {stack}
+      <div className="mb-1 text-xs font-semibold uppercase tracking-[0.1em] text-muted-foreground">
+        {role}
       </div>
+      <div className="mb-2 text-sm">{description}</div>
+      <div className="mb-2 text-xs font-semibold text-accent">{stack}</div>
       <ul className="ml-4 list-disc text-sm text-muted-foreground print:text-black">
         <li>{impact}</li>
       </ul>
@@ -304,7 +297,7 @@ function ResumeProjectCard({
 
 function SkillBadge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="cursor-pointer rounded-full bg-muted px-3 py-1 font-medium shadow-sm transition-colors hover:bg-primary-50 dark:hover:bg-primary-900/20">
+    <span className="rounded-sm bg-background-elevated px-3 py-1 font-semibold text-foreground">
       {children}
     </span>
   );
@@ -312,7 +305,7 @@ function SkillBadge({ children }: { children: React.ReactNode }) {
 
 function InterestBadge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="cursor-pointer rounded-full border border-border px-3 py-1 transition-colors hover:bg-primary-50 dark:hover:bg-primary-900/10">
+    <span className="rounded-sm bg-background-elevated px-3 py-1 font-semibold text-foreground">
       {children}
     </span>
   );

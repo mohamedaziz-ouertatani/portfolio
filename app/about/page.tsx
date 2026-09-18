@@ -30,241 +30,227 @@ const TECH_TAGS = [
 
 export default function About() {
   return (
-    <div className="container mx-auto max-w-5xl px-4 pb-16 pt-32 md:pb-24 md:pt-40">
-      {/* Hero */}
-      <section className="mb-20 border-b border-border pb-16">
-        <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-start">
+    <>
+      {/* Masthead */}
+      <section className="zone-cobalt field-cobalt">
+        <div className="container mx-auto grid gap-10 px-4 py-14 md:py-20 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
-            <p className="mb-3 font-mono text-sm text-primary-700 dark:text-primary-400">
-              ~/about
-            </p>
-            <h1 className="mb-6 text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-              About Me
+            <h1 className="text-5xl font-extrabold leading-[1] tracking-tight text-foreground sm:text-6xl md:text-7xl">
+              About me
             </h1>
-            <AvailabilityBadge className="mb-6" />
-            <div className="space-y-4 text-lg leading-relaxed text-muted-foreground">
-              <p>
-                Final-year Computer Science Engineering student at{' '}
-                <a
-                  href="https://esprit.tn/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-semibold text-primary-700 hover:underline dark:text-primary-400"
-                >
-                  ESPRIT
-                </a>
-                , specializing in Data Science and production-grade MLOps. My
-                focus is on building systems that perform reliably beyond a
-                single successful run — models, pipelines, and APIs designed for
-                continuous, real-world use.
-              </p>
-              <p>
-                This is reflected in ML forecasting systems built on ETS/ARIMA
-                and tracked with MLflow, authenticated Fastify APIs implementing
-                JWT/RBAC, PostgreSQL-backed data warehousing, and Dockerized
-                pipelines feeding BI dashboards. Most recently, it includes a
-                solo-developed platform that retrieves and reasons over research
-                literature to produce cited, evidence-grounded assessments.
-              </p>
-              <p>
-                This experience extends to industry roles: developing Next.js
-                features at iTransform365 and React components at Swiver,
-                consistently delivering production-ready code from initial
-                prototype to final implementation.
-              </p>
-            </div>
-            <div className="mt-8 flex flex-wrap gap-2">
-              {TECH_TAGS.map((label) => (
-                <Chip key={label} className="text-sm">
-                  {label}
-                </Chip>
-              ))}
-            </div>
-            <div className="mt-6 flex flex-wrap items-center gap-3 font-mono text-xs">
-              <span className="font-semibold text-muted-foreground">lang:</span>
-              {languagesData.map(({ code, label }) => (
-                <span
-                  key={code}
-                  className="rounded-sm border border-border px-2 py-1 text-accent"
-                >
-                  {code}{' '}
-                  <span className="text-muted-foreground">· {label}</span>
-                </span>
-              ))}
-            </div>
+            <AvailabilityBadge className="mt-8" />
           </div>
-          <div className="relative mx-auto h-48 w-48 shrink-0 overflow-hidden rounded border border-border md:h-56 md:w-56">
+          <div className="tile relative mx-auto h-52 w-52 shrink-0 overflow-hidden bg-glaze-deep md:h-64 md:w-64">
             <Image
               src="/me2.jpg"
-              alt="Mohamed Aziz Ouertatani"
+              alt="Portrait of Mohamed Aziz Ouertatani"
               fill
-              className="object-cover"
-              sizes="224px"
+              className="object-cover object-[50%_25%]"
+              sizes="256px"
               priority
             />
           </div>
         </div>
       </section>
 
-      {/* Experience */}
-      <Reveal className="mb-24">
-        <SectionHeading index="01" title="Experience" />
-        <div className="space-y-6">
-          {experiencesData.map((experience, index) => (
-            <article
-              key={index}
-              className="rounded border border-border bg-card p-8 transition-colors hover:border-primary-600/50"
-            >
-              <header className="mb-6">
-                <h3 className="text-2xl font-bold text-foreground">
-                  {experience.jobTitle}
-                </h3>
-                <p className="mt-1 text-xl font-semibold text-card-foreground">
-                  {experience.companyName}
-                </p>
-                <p className="mt-1 font-mono text-sm text-primary-700 dark:text-primary-400">
+      <div className="container mx-auto max-w-5xl px-4 pb-16 pt-16 md:pb-24 md:pt-20">
+        {/* Bio */}
+        <section className="mb-24">
+          <div className="max-w-[68ch] space-y-5 text-lg leading-relaxed text-foreground">
+            <p>
+              Final-year Computer Science Engineering student at{' '}
+              <a
+                href="https://esprit.tn/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold text-accent underline decoration-2 underline-offset-4 hover:no-underline"
+              >
+                ESPRIT
+              </a>
+              , specializing in Data Science and production-grade MLOps. My
+              focus is on building systems that perform reliably beyond a single
+              successful run: models, pipelines, and APIs designed for
+              continuous, real-world use.
+            </p>
+            <p>
+              This is reflected in ML forecasting systems built on ETS/ARIMA and
+              tracked with MLflow, authenticated Fastify APIs implementing
+              JWT/RBAC, PostgreSQL-backed data warehousing, and Dockerized
+              pipelines feeding BI dashboards. Most recently, it includes a
+              solo-developed platform that retrieves and reasons over research
+              literature to produce cited, evidence-grounded assessments.
+            </p>
+            <p>
+              This experience extends to industry roles: developing Next.js
+              features at iTransform365 and React components at Swiver,
+              consistently delivering production-ready code from initial
+              prototype to final implementation.
+            </p>
+          </div>
+          <ul className="mt-8 flex flex-wrap gap-2">
+            {TECH_TAGS.map((label) => (
+              <li key={label}>
+                <Chip className="text-sm">{label}</Chip>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6 flex flex-wrap items-center gap-3 text-sm">
+            <span className="label">Languages</span>
+            {languagesData.map(({ code, label }) => (
+              <span key={code} className="font-semibold text-foreground">
+                {code}{' '}
+                <span className="font-medium text-muted-foreground">
+                  {label}
+                </span>
+              </span>
+            ))}
+          </p>
+        </section>
+
+        {/* Experience */}
+        <Reveal className="mb-24">
+          <h2 className="mb-10 text-4xl font-extrabold leading-[1.02] tracking-tight sm:text-5xl">
+            Experience
+          </h2>
+          <div className="space-y-12">
+            {experiencesData.map((experience) => (
+              <article
+                key={experience.jobTitle + experience.companyName}
+                className="grid gap-3 border-t-2 border-border pt-8 md:grid-cols-[12rem_1fr] md:gap-10"
+              >
+                <p className="tnum text-sm font-bold text-accent md:pt-2">
                   {experience.date}
                 </p>
-                <div className="mt-4 flex gap-4 text-sm">
-                  {experience.github && (
-                    <a
-                      href={experience.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-semibold text-primary-700 hover:underline dark:text-primary-400"
-                    >
-                      GitHub
-                    </a>
+                <div>
+                  <h3 className="text-2xl font-extrabold leading-tight tracking-tight">
+                    {experience.jobTitle}
+                  </h3>
+                  <p className="mt-1 text-lg font-semibold text-muted-foreground">
+                    {experience.companyName}
+                  </p>
+                  <div className="mt-3 flex gap-4 text-sm font-bold">
+                    {experience.github && (
+                      <a
+                        href={experience.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-accent underline decoration-2 underline-offset-4 hover:no-underline"
+                      >
+                        GitHub
+                      </a>
+                    )}
+                    {experience.demo && (
+                      <a
+                        href={experience.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-accent-2 underline decoration-2 underline-offset-4 hover:no-underline"
+                      >
+                        Demo
+                      </a>
+                    )}
+                  </div>
+                  {experience.description && (
+                    <p className="mt-4 max-w-[68ch] text-lg font-medium leading-relaxed text-foreground">
+                      {experience.description}
+                    </p>
                   )}
-                  {experience.demo && (
-                    <a
-                      href={experience.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-semibold text-green-600 hover:underline dark:text-green-400"
-                    >
-                      Demo
-                    </a>
-                  )}
+                  <ul className="mt-4 max-w-[68ch] space-y-2.5">
+                    {experience.contributions.map((contribution) => (
+                      <li
+                        key={contribution}
+                        className="flex gap-3 leading-relaxed text-muted-foreground"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="mt-[0.6rem] h-2 w-2 shrink-0 rotate-45 bg-glaze-turquoise"
+                        />
+                        {contribution}
+                      </li>
+                    ))}
+                  </ul>
+                  <ul className="mt-5 flex flex-wrap gap-2">
+                    {experience.skills.map((skill) => (
+                      <li key={skill}>
+                        <Chip>{skill}</Chip>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </header>
-              {experience.description && (
-                <p className="mb-6 text-lg font-semibold text-card-foreground">
-                  {experience.description}
-                </p>
-              )}
-              <ul className="mb-6 ml-6 list-disc space-y-3 text-muted-foreground">
-                {experience.contributions.map((contribution, idx) => (
-                  <li key={idx}>{contribution}</li>
-                ))}
-              </ul>
-              <div className="flex flex-wrap items-center gap-2">
-                {experience.skills.map((skill, idx) => (
-                  <Chip key={idx}>{skill}</Chip>
-                ))}
+              </article>
+            ))}
+          </div>
+        </Reveal>
+
+        {/* Skills & tools */}
+        <Reveal className="mb-24" delay={0.05}>
+          <h2 className="mb-10 text-4xl font-extrabold leading-[1.02] tracking-tight sm:text-5xl">
+            Skills &amp; tools
+          </h2>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {skillsData.map((category) => (
+              <div
+                key={category.key}
+                className="tile bg-background-elevated p-6"
+              >
+                <h3 className="label mb-4 !text-foreground">
+                  {category.label}
+                </h3>
+                <ul className="flex flex-wrap gap-x-3 gap-y-1.5 text-sm font-semibold text-foreground">
+                  {category.items.map((item) => (
+                    <li key={item.name}>{item.name}</li>
+                  ))}
+                </ul>
               </div>
-            </article>
-          ))}
-        </div>
-      </Reveal>
+            ))}
+          </div>
+        </Reveal>
 
-      {/* Skills & Tools */}
-      <Reveal className="mb-24" delay={0.05}>
-        <SectionHeading index="02" title="Skills & Tools" />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {skillsData.map((category) => (
-            <SkillCategoryCard
-              key={category.key}
-              title={category.label}
-              items={category.items}
-            />
-          ))}
-        </div>
-      </Reveal>
+        {/* What I'm looking for */}
+        <Reveal className="mb-24">
+          <div className="tile glaze-saffron p-8 md:p-12">
+            <h2 className="max-w-2xl font-display text-3xl font-extrabold leading-[1.05] tracking-tight sm:text-4xl">
+              Currently seeking a 6-month End-of-Studies Internship (PFE)
+              beginning February 2027.
+            </h2>
+            <p className="mt-5 max-w-[62ch] text-lg leading-relaxed">
+              In Data Engineering, MLOps, or Full-Stack Development, remote or
+              hybrid (Tunisia/EU). I perform best within product-driven teams,
+              translating raw data into reliable pipelines and dashboards, and
+              machine learning models into systems that perform consistently in
+              production.
+            </p>
+          </div>
+        </Reveal>
 
-      {/* Career Aspirations — compact closing note */}
-      <Reveal className="mb-24 rounded border border-border bg-muted p-8">
-        <p className="mb-2 font-mono text-xs uppercase tracking-wider text-primary-700 dark:text-primary-400">
-          $ status --seeking
-        </p>
-        <p className="mb-4 text-lg text-muted-foreground">
-          Currently seeking a{' '}
-          <strong className="text-foreground">
-            6-month End-of-Studies Internship (PFE) beginning February 2027
-          </strong>
-          , in Data Engineering, MLOps, or Full-Stack Development, remote or
-          hybrid (Tunisia/EU). I perform best within product-driven teams,
-          translating raw data into reliable pipelines and dashboards, and
-          machine learning models into systems that perform consistently in
-          production.
-        </p>
-        <AvailabilityBadge />
-      </Reveal>
-
-      {/* Credentials/Education */}
-      <Reveal>
-        <SectionHeading index="03" title="Credentials" />
-        <div className="grid gap-6 md:grid-cols-2">
-          <Card
-            title="Education"
-            content={educationData
-              .map(
-                (entry) =>
-                  `${entry.credential}. ${entry.institution} (${entry.date}).`
-              )
-              .join(' ')}
-          />
-          <Card
-            title="Certifications"
-            content={certificationsData
-              .map((cert) => `${cert.name} (${cert.issuer})`)
-              .join(', ')}
-          />
-        </div>
-      </Reveal>
-    </div>
-  );
-}
-
-/* ------ Helper Components ------ */
-
-function SectionHeading({ index, title }: { index: string; title: string }) {
-  return (
-    <div className="mb-10 flex items-baseline gap-3 border-b border-border pb-4">
-      <span className="font-mono text-sm text-muted-foreground">{index}</span>
-      <h2 className="text-3xl font-bold text-foreground">{title}</h2>
-    </div>
-  );
-}
-
-function SkillCategoryCard({
-  title,
-  items,
-}: {
-  title: string;
-  items: { name: string; level: number }[];
-}) {
-  return (
-    <div className="rounded border border-border bg-card p-6">
-      <h3 className="mb-4 font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground">
-        {title}
-      </h3>
-      <div className="flex flex-wrap gap-2">
-        {items.map((item) => (
-          <Chip key={item.name}>{item.name}</Chip>
-        ))}
+        {/* Credentials */}
+        <Reveal>
+          <h2 className="mb-10 text-4xl font-extrabold leading-[1.02] tracking-tight sm:text-5xl">
+            Credentials
+          </h2>
+          <div className="grid gap-3 md:grid-cols-2">
+            <div className="tile glaze-cobalt p-8">
+              <h3 className="label !text-[#c6d2ee]">Education</h3>
+              <p className="mt-4 leading-relaxed">
+                {educationData
+                  .map(
+                    (entry) =>
+                      `${entry.credential}. ${entry.institution} (${entry.date}).`
+                  )
+                  .join(' ')}
+              </p>
+            </div>
+            <div className="tile glaze-turquoise p-8">
+              <h3 className="label !text-glaze-ink">Certifications</h3>
+              <p className="mt-4 leading-relaxed">
+                {certificationsData
+                  .map((cert) => `${cert.name} (${cert.issuer})`)
+                  .join(', ')}
+              </p>
+            </div>
+          </div>
+        </Reveal>
       </div>
-    </div>
-  );
-}
-
-function Card({ title, content }: { title: string; content: string }) {
-  return (
-    <div className="bg-surface/50 rounded-lg border border-border p-6">
-      <h3 className="mb-3 font-mono text-xs uppercase tracking-[0.16em] text-accent">
-        {title}
-      </h3>
-      <p className="leading-relaxed text-muted-foreground">{content}</p>
-    </div>
+    </>
   );
 }

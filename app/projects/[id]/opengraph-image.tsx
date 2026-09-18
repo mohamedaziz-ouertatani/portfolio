@@ -26,9 +26,7 @@ export default function OpengraphImage({ params }: { params: { id: string } }) {
         flexDirection: 'column',
         justifyContent: 'space-between',
         padding: '80px',
-        backgroundColor: '#08090b',
-        backgroundImage:
-          'radial-gradient(circle at 78% 22%, rgba(69,217,232,0.16), transparent 55%)',
+        backgroundColor: '#163e93',
         fontFamily: 'sans-serif',
       }}
     >
@@ -39,12 +37,16 @@ export default function OpengraphImage({ params }: { params: { id: string } }) {
           gap: 10,
           fontSize: 28,
           fontWeight: 700,
-          letterSpacing: '0.2em',
-          color: '#edece8',
+          color: '#f5f6f1',
         }}
       >
+        <svg width="36" height="36" viewBox="-10 -10 20 20">
+          <path
+            d="M0 -9.6 L2.6 -6.3 L6.8 -6.8 L6.3 -2.6 L9.6 0 L6.3 2.6 L6.8 6.8 L2.6 6.3 L0 9.6 L-2.6 6.3 L-6.8 6.8 L-6.3 2.6 L-9.6 0 L-6.3 -2.6 L-6.8 -6.8 L-2.6 -6.3 Z"
+            fill="#f0a81c"
+          />
+        </svg>
         {site.shortName}
-        <span style={{ color: '#45d9e8' }}>.</span>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
@@ -53,7 +55,7 @@ export default function OpengraphImage({ params }: { params: { id: string } }) {
             fontSize: 22,
             letterSpacing: '0.18em',
             textTransform: 'uppercase',
-            color: '#45d9e8',
+            color: '#f0a81c',
           }}
         >
           {role}
@@ -63,14 +65,14 @@ export default function OpengraphImage({ params }: { params: { id: string } }) {
             fontSize: 68,
             fontWeight: 700,
             lineHeight: 1.1,
-            color: '#edece8',
+            color: '#f5f6f1',
             maxWidth: 980,
           }}
         >
           {title}
         </div>
         {stack && (
-          <div style={{ display: 'flex', fontSize: 24, color: '#8b939e' }}>
+          <div style={{ display: 'flex', fontSize: 24, color: '#c6d2ee' }}>
             {stack}
           </div>
         )}

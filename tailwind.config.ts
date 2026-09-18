@@ -5,11 +5,8 @@ const config: Config = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './lib/**/*.{ts,tsx}',
   ],
-  // The site is dark-only; `dark` is applied permanently in the root layout so
-  // that `dark:` utilities still resolve while the remaining pages are migrated
-  // onto the semantic tokens below.
-  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -50,26 +47,22 @@ const config: Config = {
           foreground: '#FFFFFF',
         },
         success: 'var(--color-success)',
-        // Signal-cyan ramp. `primary-400` is the accent itself, so the
-        // `dark:text-primary-400` utilities already in the codebase land on
-        // brand colour during the migration.
-        primary: {
-          50: '#ecfeff',
-          100: '#cffafe',
-          200: '#a5f3fc',
-          300: '#7fe9f3',
-          400: '#45d9e8',
-          500: '#22c3d4',
-          600: '#0e9db1',
-          700: '#10788c',
-          800: '#155e70',
-          900: '#164e5e',
-          950: '#083344',
+        glaze: {
+          cobalt: 'var(--glaze-cobalt)',
+          deep: 'var(--glaze-cobalt-deep)',
+          turquoise: 'var(--glaze-turquoise)',
+          saffron: 'var(--glaze-saffron)',
+          plaster: 'var(--glaze-plaster)',
+          bisque: 'var(--glaze-bisque)',
+          ink: 'var(--glaze-ink)',
         },
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-jetbrains-mono)', 'ui-monospace', 'monospace'],
+        sans: ['var(--font-body)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
+        // Remaining `font-mono` utilities render in the body face; the site
+        // has no monospace voice.
+        mono: ['var(--font-body)', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         xs: ['0.75rem', '1rem'],
@@ -90,18 +83,15 @@ const config: Config = {
         tightest: '-0.045em',
       },
       borderRadius: {
-        sm: '4px',
-        md: '8px',
-        lg: '14px',
-      },
-      boxShadow: {
-        sm: '0 1px 2px 0 rgb(0 0 0 / 0.4)',
-        md: '0 8px 30px -12px rgb(0 0 0 / 0.7)',
-        glow: '0 0 40px -8px var(--glow-accent)',
+        sm: '2px',
+        md: '4px',
+        lg: '6px',
       },
       transitionTimingFunction: {
-        // Cinematic ease-out used for reveals and camera-adjacent UI motion.
+        // Exponential ease-out for reveals and hover motion.
         cine: 'cubic-bezier(0.16, 1, 0.3, 1)',
+        // Tile settle for CSS motion: exponential ease-out (the damped overshoot lives in the Framer springs).
+        settle: 'cubic-bezier(0.16, 1, 0.3, 1)',
       },
     },
   },

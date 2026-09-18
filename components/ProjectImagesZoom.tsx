@@ -44,7 +44,7 @@ export default function ProjectImagesZoom({ images }: { images: string[] }) {
           <li key={img}>
             <button
               type="button"
-              className="group block w-full overflow-hidden rounded-md border border-border transition-colors hover:border-accent-dim"
+              className="tile tile-sm group block w-full overflow-hidden bg-background-elevated focus-visible:outline-none focus-visible:[outline-offset:-6px] focus-visible:[outline:3px_solid_var(--color-accent)]"
               onClick={(event) => {
                 triggerRef.current = event.currentTarget;
                 setOpenIndex(idx);
@@ -56,7 +56,7 @@ export default function ProjectImagesZoom({ images }: { images: string[] }) {
                 alt=""
                 width={600}
                 height={400}
-                className="h-auto w-full object-cover opacity-70 transition-opacity duration-500 ease-cine group-hover:opacity-100"
+                className="h-auto w-full object-cover transition-transform duration-500 ease-cine group-hover:scale-[1.02]"
               />
             </button>
           </li>
@@ -65,7 +65,7 @@ export default function ProjectImagesZoom({ images }: { images: string[] }) {
 
       {openIndex !== null && (
         <div
-          className="bg-background/90 fixed inset-0 z-[60] flex items-center justify-center p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-[rgb(11_21_51/0.88)] p-4"
           onClick={close}
           role="dialog"
           aria-modal="true"
@@ -78,7 +78,7 @@ export default function ProjectImagesZoom({ images }: { images: string[] }) {
             <button
               ref={closeButtonRef}
               type="button"
-              className="absolute -top-12 right-0 inline-flex items-center gap-2 rounded-md border border-border bg-surface px-3 py-1.5 font-mono text-xs uppercase tracking-[0.14em] text-foreground transition-colors hover:border-accent hover:text-accent"
+              className="tile tile-sm absolute -top-12 right-0 inline-flex items-center gap-2 bg-glaze-saffron px-4 py-2 text-sm font-bold text-glaze-ink transition-colors hover:bg-[#ffc247]"
               onClick={close}
             >
               <X size={14} aria-hidden="true" />
@@ -89,7 +89,7 @@ export default function ProjectImagesZoom({ images }: { images: string[] }) {
               alt={`Screenshot ${openIndex + 1} of ${images.length}`}
               width={1200}
               height={800}
-              className="h-auto max-h-[80vh] w-full rounded-md border border-border object-contain"
+              className="h-auto max-h-[80vh] w-full bg-glaze-plaster object-contain"
             />
           </div>
         </div>

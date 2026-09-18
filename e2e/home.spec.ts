@@ -21,10 +21,20 @@ test('homepage has title and primary navigation', async ({ page }) => {
   await expect(nav.getByRole('link', { name: /^work$/i })).toBeVisible();
 });
 
-test('site renders on the dark palette', async ({ page }) => {
+test('site renders on the plaster ground with the cobalt hero wall', async ({
+  page,
+}) => {
   await page.goto('/');
 
-  await expect(page.locator('html')).toHaveClass(/dark/);
+  const ground = await page
+    .locator('body')
+    .evaluate((el) => getComputedStyle(el).backgroundColor);
+  expect(ground).toBe('rgb(239, 241, 234)');
+
+  const hero = await page
+    .locator('#identity')
+    .evaluate((el) => getComputedStyle(el).backgroundColor);
+  expect(hero).toBe('rgb(22, 62, 147)');
 });
 
 test('hero content is present without any interaction', async ({ page }) => {

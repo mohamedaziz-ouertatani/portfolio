@@ -1,8 +1,4 @@
 import type { Metadata } from 'next';
-import { Environment3D } from '@/components/three/Environment3D';
-import { HeroImage } from '@/components/three/HeroImage';
-import { EnvironmentScrim } from '@/components/three/EnvironmentScrim';
-import { ScrollRail } from '@/components/ui/ScrollRail';
 import { Hero } from '@/components/sections/Hero';
 import { Work } from '@/components/sections/Work';
 import { Stack } from '@/components/sections/Stack';
@@ -17,33 +13,19 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
 };
 
+/**
+ * One wall, laid in bands: cobalt hero, plaster work, cobalt stack, plaster
+ * experience and about, cobalt close. Each section owns its ground.
+ */
 export default function Home() {
   return (
     <>
-      {/*
-        One canvas for the whole page rather than one per section: the camera
-        travels between zones as the reader scrolls, which is what makes the
-        page feel like a single environment. It is fixed, so it costs one
-        viewport of pixels no matter how long the document is.
-      */}
-      <div className="fixed inset-0 z-0">
-        <Environment3D />
-      </div>
-
-      <HeroImage />
-
-      <EnvironmentScrim />
-
-      <ScrollRail />
-
-      <div className="container relative z-10 mx-auto px-4">
-        <Hero />
-        <Work />
-        <Stack />
-        <ExperienceTimeline />
-        <AboutPreview />
-        <ContactCta />
-      </div>
+      <Hero />
+      <Work />
+      <Stack />
+      <ExperienceTimeline />
+      <AboutPreview />
+      <ContactCta />
     </>
   );
 }

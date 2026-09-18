@@ -1,23 +1,24 @@
 import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Bricolage_Grotesque, Hanken_Grotesk } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { CustomCursor } from '@/components/ui/CustomCursor';
 import { CommandPalette } from '@/components/ui/CommandPalette';
 import { site, SITE_URL } from '@/lib/site';
 import { sameAs } from '@/lib/social';
 
-const inter = Inter({
+// Display: cut, slightly condensed grotesque with a point of view. Text: a
+// clear humanist grotesque with real tabular numerals for dates and metrics.
+const display = Bricolage_Grotesque({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-display',
   display: 'swap',
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const body = Hanken_Grotesk({
   subsets: ['latin'],
-  variable: '--font-jetbrains-mono',
+  variable: '--font-body',
   display: 'swap',
 });
 
@@ -116,12 +117,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    // The site is dark-only: `dark` is set here rather than toggled at runtime.
-    <html lang="en" className="dark">
+    <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#08090B" />
+        <meta name="theme-color" content="#163E93" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
@@ -132,9 +132,8 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} flex min-h-screen flex-col font-sans`}
+        className={`${display.variable} ${body.variable} flex min-h-screen flex-col font-sans`}
       >
-        <CustomCursor />
         <CommandPalette />
         <Header />
         <main id="main-content" className="flex-1">

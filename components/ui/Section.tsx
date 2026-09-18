@@ -1,51 +1,48 @@
 import type { ReactNode } from 'react';
-import { SectionLabel } from './SectionLabel';
 
 interface SectionProps {
   id: string;
-  index: string;
-  label: string;
   heading: string;
   caption?: string;
   children: ReactNode;
+  /** Plaster reads; cobalt is the wall itself, set into the page as a band. */
+  tone?: 'plaster' | 'cobalt';
   className?: string;
 }
 
 /**
- * Shared shell for every zone: the monospace index, the heading and the
- * spacing rhythm are defined once so the page reads as one continuous
- * environment rather than a stack of separately designed pages.
+ * Shared shell for every zone. The heading carries its own weight, so there
+ * is no kicker or index above it. Each section owns its full-bleed ground and
+ * its own container, which is what lets cobalt bands cut across the page.
  */
 export function Section({
   id,
-  index,
-  label,
   heading,
   caption,
   children,
+  tone = 'plaster',
   className = '',
 }: SectionProps) {
   return (
     <section
       id={id}
       aria-labelledby={`${id}-heading`}
-      className={`py-24 md:py-32 ${className}`}
+      className={`${tone === 'cobalt' ? 'zone-cobalt field-deep' : ''} ${className}`}
     >
-      <SectionLabel index={index} className="mb-6">
-        {label}
-      </SectionLabel>
-      <h2
-        id={`${id}-heading`}
-        className="max-w-3xl text-3xl font-bold text-foreground sm:text-4xl md:text-5xl"
-      >
-        {heading}
-      </h2>
-      {caption && (
-        <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
-          {caption}
-        </p>
-      )}
-      <div className="mt-14">{children}</div>
+      <div className="container mx-auto px-4 py-20 md:py-28">
+        <h2
+          id={`${id}-heading`}
+          className="max-w-3xl text-4xl font-extrabold leading-[1.02] tracking-tight text-foreground sm:text-5xl md:text-6xl"
+        >
+          {heading}
+        </h2>
+        {caption && (
+          <p className="mt-5 max-w-2xl text-lg text-muted-foreground">
+            {caption}
+          </p>
+        )}
+        <div className="mt-12">{children}</div>
+      </div>
     </section>
   );
 }

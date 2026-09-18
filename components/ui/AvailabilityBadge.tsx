@@ -3,12 +3,9 @@ import { site } from '@/lib/site';
 export function AvailabilityBadge({ className = '' }: { className?: string }) {
   return (
     <span
-      className={`inline-flex items-center gap-2.5 rounded-full border border-accent-dim bg-background-elevated px-4 py-1.5 font-mono text-xs font-medium tracking-wide text-accent ${className}`}
+      className={`tile tile-sm inline-flex items-center gap-2.5 bg-glaze-saffron px-4 py-2 text-sm font-semibold text-glaze-ink ${className}`}
     >
-      <span className="relative flex h-1.5 w-1.5">
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
-        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent" />
-      </span>
+      <span aria-hidden="true" className="h-2 w-2 rotate-45 bg-glaze-ink" />
       {site.availability.label}
     </span>
   );

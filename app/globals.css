@@ -3,126 +3,265 @@
 @tailwind utilities;
 
 /*
- * Dark-only design system.
+ * Zellige Atelier.
  *
- * Depth is built from four near-black steps rather than from shadows: the page
- * ground is the darkest surface, panels sit above it, and borders do the rest.
- * One signal accent (cyan) carries interaction; the violet secondary is
- * reserved for the 3D layer and for distinguishing project worlds.
+ * The site is laid like a tile wall. Two grounds carry it: lime-wash plaster
+ * for reading, and Sidi Bou Said cobalt for the wall itself. Depth comes from
+ * grout lines and glaze colour, never from shadow or glow. Everything is a
+ * semantic token so a cobalt zone can re-declare the same names and every
+ * component inside it inherits the inverted palette for free.
  */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  /* Surfaces — darkest to lightest */
-  --color-background: #08090b;
-  --color-background-elevated: #0e1014;
-  --color-surface: #12151a;
-  --color-surface-hover: #171b21;
+  /* Plaster ground */
+  --color-background: #eff1ea;
+  --color-background-elevated: #e6e9e0;
+  --color-surface: #fafbf7;
+  --color-surface-hover: #f4f6ef;
 
-  /* Structure */
-  --color-border: #232830;
-  --color-border-strong: #333a45;
+  /* Grout */
+  --color-border: #c9cfc0;
+  --color-border-strong: #98a08f;
 
-  /* Text — warm off-white against a cool ground */
-  --color-foreground: #edece8;
-  --color-muted-foreground: #8b939e;
-  /* 4.8:1 on the page background. The previous value (#5c646e) measured
-     3.3:1 and failed WCAG AA for the small metadata text it is used on. */
-  --color-faint-foreground: #767e88;
+  /* Ink */
+  --color-foreground: #0b1533;
+  --color-muted-foreground: #3e4a66;
+  --color-faint-foreground: #5b6580;
 
-  /* Signal accent */
-  --color-accent: #45d9e8;
-  --color-accent-strong: #7fe9f3;
-  --color-accent-dim: #1c6b75;
-  --color-accent-foreground: #08090b;
+  /* Cobalt is the accent on plaster */
+  --color-accent: #163e93;
+  --color-accent-strong: #0f2f73;
+  --color-accent-dim: #c7d3ec;
+  --color-accent-foreground: #f5f6f1;
 
-  /* Secondary accent — 3D depth cues and Estate-Mind's identity */
-  --color-accent-2: #8b7cff;
-  --color-accent-2-dim: #3a3475;
+  /* Kairouan turquoise (text-safe depth) */
+  --color-accent-2: #0b6e67;
+  --color-accent-2-dim: #bfe6e2;
 
-  --color-destructive: #ff6b6b;
-  --color-success: #45e8a0;
+  --color-destructive: #b93a22;
+  --color-success: #0b6e67;
 
-  /* Atmosphere */
-  --grid-line: rgba(69, 217, 232, 0.055);
-  --glow-accent: rgba(69, 217, 232, 0.14);
+  /* Glazes: fills only, never body text on plaster */
+  --glaze-cobalt: #163e93;
+  --glaze-cobalt-deep: #0e2a6b;
+  --glaze-turquoise: #12a79d;
+  --glaze-saffron: #f0a81c;
+  --glaze-plaster: #f5f6f1;
+  --glaze-bisque: #d9c7a8;
+  --glaze-ink: #0b1533;
 }
 
 @layer base {
   html {
     @apply scroll-smooth;
-    /* The fixed header must not cover an anchored section heading. */
-    scroll-padding-top: 6rem;
+    scroll-padding-top: 5.5rem;
   }
 
   body {
     @apply bg-background font-sans text-foreground antialiased;
+    font-variant-numeric: lining-nums;
   }
 
-  /* Headings use tighter tracking than Inter's default at display sizes. */
   h1,
   h2,
   h3 {
-    @apply tracking-tight;
+    @apply font-display;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
   }
 
   *:focus-visible {
     @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-background;
   }
 
+  /* Browser surfaces carry the palette too. */
   ::selection {
-    background: var(--color-accent-dim);
-    color: var(--color-foreground);
+    background: var(--glaze-saffron);
+    color: var(--glaze-ink);
   }
 
-  @media (pointer: fine) {
-    .custom-cursor-active,
-    .custom-cursor-active * {
-      cursor: none;
-    }
+  html {
+    scrollbar-color: var(--color-border-strong) var(--color-background);
   }
 
-  /* Cross-fade for browser-native view transitions, matching the site's
-     cinematic ease-out used elsewhere for reveals and camera motion. */
+  input,
+  textarea {
+    caret-color: var(--glaze-cobalt);
+  }
+
+  a {
+    text-underline-offset: 0.22em;
+  }
+
   ::view-transition-old(root),
   ::view-transition-new(root) {
-    animation-duration: 0.35s;
+    animation-duration: 0.3s;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .custom-cursor-dot {
-    width: 10px;
-    height: 10px;
-    margin-left: -5px;
-    margin-top: -5px;
-    border-radius: 9999px;
-    background: #3b82f6;
-    box-shadow:
-      0 0 6px 2px rgba(59, 130, 246, 0.9),
-      0 0 24px 10px rgba(59, 130, 246, 0.35),
-      0 0 60px 26px rgba(59, 130, 246, 0.12);
-    transition: opacity 0.2s ease;
-    will-change: transform;
   }
 }
 
 @layer components {
+  /* The cobalt wall: same token names, inverted values. */
+  .zone-cobalt {
+    --color-background: #163e93;
+    --color-background-elevated: #123478;
+    --color-surface: #1b47a3;
+    --color-surface-hover: #2150b3;
+    --color-border: rgb(245 246 241 / 0.24);
+    --color-border-strong: rgb(245 246 241 / 0.5);
+    --color-foreground: #f5f6f1;
+    --color-muted-foreground: #c6d2ee;
+    --color-faint-foreground: #a9b9e0;
+    --color-accent: #f0a81c;
+    --color-accent-strong: #ffc247;
+    --color-accent-dim: #7a5a12;
+    --color-accent-foreground: #0b1533;
+    --color-accent-2: #7fded6;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+
+  /* A plaster tile set into a cobalt wall: the plaster tokens again. */
+  .zone-plaster {
+    --color-background: #eff1ea;
+    --color-background-elevated: #e6e9e0;
+    --color-surface: #fafbf7;
+    --color-surface-hover: #f4f6ef;
+    --color-border: #c9cfc0;
+    --color-border-strong: #98a08f;
+    --color-foreground: #0b1533;
+    --color-muted-foreground: #3e4a66;
+    --color-faint-foreground: #5b6580;
+    --color-accent: #163e93;
+    --color-accent-strong: #0f2f73;
+    --color-accent-foreground: #f5f6f1;
+    --color-accent-2: #0b6e67;
+    background-color: var(--glaze-plaster);
+    color: var(--color-foreground);
+  }
+
   .container {
     @apply mx-auto max-w-7xl;
   }
 
-  /* Small uppercase monospace label used for section indices and metadata. */
-  .label-mono {
-    @apply font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground;
+  /* Small-caps label: the wall's signage voice. */
+  .label {
+    @apply text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground;
   }
 
-  /* Faint technical grid, used behind quieter sections where there is no
-     WebGL canvas to provide depth. */
-  .grid-backdrop {
-    background-image:
-      linear-gradient(var(--grid-line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-    background-size: 64px 64px;
+  /* A tile is a cut piece: chamfered corners echo the octagram. */
+  .tile {
+    --cut: 14px;
+    clip-path: polygon(
+      var(--cut) 0,
+      calc(100% - var(--cut)) 0,
+      100% var(--cut),
+      100% calc(100% - var(--cut)),
+      calc(100% - var(--cut)) 100%,
+      var(--cut) 100%,
+      0 calc(100% - var(--cut)),
+      0 var(--cut)
+    );
+  }
+  .tile-sm {
+    --cut: 8px;
+  }
+
+  .glaze-plaster {
+    background: var(--glaze-plaster);
+    color: var(--glaze-ink);
+  }
+  .glaze-cobalt {
+    background: var(--glaze-cobalt);
+    color: var(--glaze-plaster);
+  }
+  .glaze-deep {
+    background: var(--glaze-cobalt-deep);
+    color: var(--glaze-plaster);
+  }
+  .glaze-turquoise {
+    background: var(--glaze-turquoise);
+    color: var(--glaze-ink);
+  }
+  .glaze-saffron {
+    background: var(--glaze-saffron);
+    color: var(--glaze-ink);
+  }
+  /* Unglazed: no public link yet. Bare terracotta with a hairline. */
+  .glaze-bisque {
+    background: var(--glaze-bisque);
+    color: var(--glaze-ink);
+  }
+
+  .field-cobalt {
+    background-color: #163e93;
+    background-image: url('/zellige-cobalt.svg');
+    background-size: 80px 80px;
+  }
+  .field-deep {
+    background-color: #0e2a6b;
+    background-image: url('/zellige-deep.svg');
+    background-size: 80px 80px;
+  }
+  .field-plaster {
+    background-color: #eff1ea;
+    background-image: url('/zellige-plaster.svg');
+    background-size: 80px 80px;
+  }
+
+  .frieze-saffron {
+    background: #0e2a6b url('/frieze-saffron.svg') repeat-x left center;
+    background-size: 32px 16px;
+  }
+  .frieze-turquoise {
+    background: #0e2a6b url('/frieze-turquoise.svg') repeat-x left center;
+    background-size: 32px 16px;
+  }
+
+  .tnum {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+}
+
+/*
+ * Tile turn: the front narrows to an edge, then the back widens from it with
+ * a damped overshoot. Flat scaleX rather than a 3D flip: no perspective, no
+ * backface-visibility, nothing for a compositor to trip over.
+ */
+@layer utilities {
+  .flip-front {
+    transform: scaleX(1);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 1, 1) 0.2s;
+  }
+  .flip-back {
+    transform: scaleX(0);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 1, 1);
+  }
+  @media (hover: hover) {
+    .flip-scene:hover .flip-front,
+    .flip-scene:focus-within .flip-front {
+      transform: scaleX(0);
+      transition: transform 0.2s cubic-bezier(0.4, 0, 1, 1);
+    }
+    .flip-scene:hover .flip-back,
+    .flip-scene:focus-within .flip-back {
+      transform: scaleX(1);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+    }
+  }
+}
+
+@media print {
+  .zone-cobalt,
+  .field-cobalt,
+  .field-deep,
+  .field-plaster {
+    background: none !important;
+    color: #000 !important;
   }
 }
 
