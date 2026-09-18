@@ -261,7 +261,7 @@
   .field-deep,
   .field-plaster {
     background: none !important;
-    color: #000 !important;
+    color: var(--glaze-ink) !important;
   }
 }
 

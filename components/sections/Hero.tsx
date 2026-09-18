@@ -47,7 +47,7 @@ export function Hero() {
           variants={wall}
           initial="hidden"
           animate="visible"
-          className="container mx-auto grid gap-3 px-4 py-6 sm:py-10 lg:min-h-[calc(100svh-5.5rem)] lg:grid-cols-12 lg:grid-rows-[repeat(5,minmax(92px,1fr))] lg:gap-3.5 lg:py-12"
+          className="container mx-auto grid gap-3 px-4 py-6 sm:py-10 lg:grid-cols-12 lg:grid-rows-[repeat(5,minmax(96px,auto))] lg:gap-3.5 lg:py-12"
         >
           {/* Name tile */}
           <motion.div

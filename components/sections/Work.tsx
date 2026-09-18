@@ -79,7 +79,7 @@ export function Work() {
 
             return (
               <li key={project.id} className={span}>
-                <Reveal delay={index * 0.05} className="h-full">
+                <Reveal from="above" delay={index * 0.07} className="h-full">
                   <ViewTransitionLink
                     href={projectHref(project)}
                     aria-label={`${title}: read the case study`}

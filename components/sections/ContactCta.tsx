@@ -18,7 +18,7 @@ export function ContactCta() {
       className="zone-cobalt field-cobalt"
     >
       <div className="container mx-auto px-4 py-24 md:py-32">
-        <Reveal>
+        <Reveal from="quiet">
           <h2
             id="contact-heading"
             className="max-w-4xl text-5xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-7xl sm:leading-[1.05] md:text-[6rem] md:leading-[1.05]"
@@ -29,7 +29,8 @@ export function ContactCta() {
           <p className="mt-8 max-w-xl text-lg text-muted-foreground">
             {site.availability.detail}
           </p>
-
+        </Reveal>
+        <Reveal from="above" delay={0.12} className="w-fit">
           <a
             href={`mailto:${site.email}`}
             className="tile mt-10 inline-flex items-center gap-4 bg-glaze-saffron px-6 py-5 font-display text-xl font-extrabold text-glaze-ink transition-colors hover:bg-[#ffc247] focus-visible:outline-none focus-visible:[outline-offset:-8px] focus-visible:[outline:3px_solid_var(--glaze-ink)] sm:px-8 sm:text-3xl"
@@ -37,7 +38,8 @@ export function ContactCta() {
             <Star size={28} className="shrink-0" />
             <span className="break-all">{site.email}</span>
           </a>
-
+        </Reveal>
+        <Reveal from="quiet" delay={0.2}>
           <ul className="mt-12 flex flex-wrap gap-x-8 gap-y-4">
             {socialLinks
               .filter((link) => link.id !== 'email')

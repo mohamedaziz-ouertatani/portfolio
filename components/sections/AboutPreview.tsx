@@ -7,7 +7,7 @@ import { Reveal } from '@/components/ui/Reveal';
 export function AboutPreview() {
   return (
     <Section id="about" heading="Who I am beyond the code">
-      <Reveal>
+      <Reveal from="quiet">
         <p className="max-w-4xl font-display text-2xl font-bold leading-[1.25] tracking-tight text-foreground sm:text-3xl md:text-4xl">
           I care about the part of engineering that happens after the demo
           works: the pipeline that still runs next month, the API that fails

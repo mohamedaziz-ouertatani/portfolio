@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Section } from '@/components/ui/Section';
+import { Reveal } from '@/components/ui/Reveal';
 import skillsData from '@/lib/skills';
 import { relatedSkills } from '@/lib/stackGraph';
 
@@ -27,8 +28,8 @@ export function Stack() {
       caption="The tools I actually reach for. Point at any one of them to see what it works with."
     >
       <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-        {skillsData.map((category) => (
-          <div key={category.key}>
+        {skillsData.map((category, index) => (
+          <Reveal key={category.key} from="pop" delay={index * 0.06}>
             <h3 className="label mb-4 !text-foreground">{category.label}</h3>
             <ul className="flex flex-wrap gap-2">
               {category.items.map((item) => {
@@ -70,7 +71,7 @@ export function Stack() {
                 );
               })}
             </ul>
-          </div>
+          </Reveal>
         ))}
       </div>
 

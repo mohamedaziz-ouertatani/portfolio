@@ -69,7 +69,7 @@ export function ExperienceTimeline() {
               key={experience.jobTitle + experience.companyName}
               className="pb-14 last:pb-0"
             >
-              <Reveal>
+              <Reveal from="left">
                 <div className="relative flex gap-6">
                   <div className="flex flex-col items-center">
                     <span
