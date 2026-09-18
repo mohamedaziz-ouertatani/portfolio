@@ -49,17 +49,70 @@ const projectsData: Project[] = [
     problem:
       'Researchers need a fast, trustworthy way to check novelty and find prior art without every claim risking fabrication from an LLM.',
     approach:
-      'Architected the full pipeline — literature ingestion from arXiv, Semantic Scholar, and Springer Nature; PostgreSQL + pgvector semantic retrieval; LLM-based knowledge extraction; and gap/opportunity detection. Every claim is tied to cited evidence, with categorical (non-fabricated) confidence scoring, loud/logged ingestion failures, and a free/open-source-first stack with LLM providers behind a replaceable interface.',
+      'Architected the full pipeline — literature ingestion from arXiv, Semantic Scholar, Springer Nature and CORE; PostgreSQL + pgvector semantic retrieval; LLM-based knowledge extraction; and gap/opportunity detection. Every claim is tied to cited evidence, with categorical (non-fabricated) confidence scoring, loud/logged ingestion failures, and a free/open-source-first stack with LLM providers behind a replaceable interface.',
     result:
       'Shipped an end-to-end, evidence-grounded research assessment tool built and deployed solo, from ingestion to retrieval to reasoning.',
-    technologies: ['Python', 'PostgreSQL', 'pgvector', 'LLM APIs', 'Docker'],
+    technologies: [
+      'Python',
+      'FastAPI',
+      'PostgreSQL',
+      'pgvector',
+      'sentence-transformers',
+      'Next.js',
+      'TypeScript',
+      'LLM APIs',
+      'Docker',
+    ],
     pipeline: [
       'Research idea or uploaded paper',
-      'Literature ingestion — arXiv, Semantic Scholar, Springer Nature',
+      'Literature ingestion — arXiv, Semantic Scholar, Springer Nature, CORE',
       'PostgreSQL + pgvector semantic retrieval',
       'LLM-based knowledge extraction',
       'Gap and opportunity detection',
       'Cited, evidence-grounded assessment',
+    ],
+    keyDecisions: [
+      {
+        decision: 'Tie every claim to cited evidence',
+        why: 'The point of the tool is a trustworthy novelty check, so an assessment is only as good as the papers behind it. Claims that cannot be traced to a source do not get made.',
+      },
+      {
+        decision: 'Categorical confidence scoring instead of invented numbers',
+        why: 'A fabricated percentage looks precise and is not. Coarse, categorical confidence stays honest about what the evidence supports.',
+      },
+      {
+        decision: 'Loud, logged ingestion failures',
+        why: 'A silent gap in the literature would quietly skew every novelty and gap result downstream, so a failed source is surfaced instead of skipped.',
+      },
+      {
+        decision: 'LLM providers behind a replaceable interface',
+        why: 'The stack is free and open-source first, and keeping providers behind one interface means the model can be swapped without touching ingestion or retrieval.',
+      },
+      {
+        decision: 'Compare four retrieval baselines before committing to one',
+        why: 'TF-IDF, BM25, embedding retrieval (all-MiniLM-L6-v2) and a hybrid of lexical and semantic are all implemented and evaluated against each other, so the retrieval choice rests on measurements rather than assumption.',
+      },
+      {
+        decision: 'Measure extraction against a hand-annotated benchmark',
+        why: 'A 40-paper annotated benchmark gives field-level precision, recall and F1 for each extractor, with per-domain packs and a warning that the samples are small.',
+      },
+      {
+        decision: 'Corpus Q&A returns verbatim quotes, never generated prose',
+        why: 'Answers are the grounded passages themselves. An optional, off-by-default local Ollama layer can summarise them, with citation markers validated against the real hits before display.',
+      },
+    ],
+    challenges: [
+      {
+        challenge:
+          'Springer Nature’s free tier rejects field-scoped queries and large pages',
+        resolution:
+          'Field-scoped queries and page sizes above 25 both returned 403 as a “premium feature”, verified against the live API. The connector defaults to a free-text query and a page size of 25.',
+      },
+    ],
+    metrics: [
+      { label: 'Literature sources', value: '4' },
+      { label: 'Retrieval baselines compared', value: '4' },
+      { label: 'Benchmark papers annotated', value: '40' },
     ],
     githubLink: 'https://github.com/mohamedaziz-ouertatani/ResearchBridge.git',
     liveDemoLink: '',
@@ -277,6 +330,9 @@ const projectsData: Project[] = [
       'Pandas',
       'NumPy',
       'JWT',
+      'Next.js',
+      'Metabase',
+      'GitHub Actions',
     ],
     pipeline: [
       'Data ingestion',
@@ -287,7 +343,46 @@ const projectsData: Project[] = [
       'PostgreSQL ops schemas',
       'Protected Fastify forecast APIs',
     ],
-    githubLink: 'https://github.com/mohamedaziz-ouertatani/smart_inventory', // add when repo is public
+    keyDecisions: [
+      {
+        decision: 'Rolling backtests to choose a model per SKU-location',
+        why: 'Seasonal Naive, ETS and ARIMA/SARIMA are each backtested over 26 weeks on every SKU-location, and the best is chosen by lowest WAPE with sMAPE as the tie-break, rather than picked by assumption.',
+      },
+      {
+        decision: 'Keep a seasonal-naive baseline in every comparison',
+        why: 'A statistical model only earns its place if it beats the simplest forecast, so the baseline is trained and scored alongside ETS and ARIMA.',
+      },
+      {
+        decision: 'Generate seeded synthetic demand data',
+        why: 'The pipeline runs end to end from a clean clone with no proprietary retail data, so anyone can reproduce ingestion, training and the API.',
+      },
+      {
+        decision: 'Run the whole pipeline in CI on every push',
+        why: 'GitHub Actions builds and type-checks the API, applies the migrations, runs the data pipeline on a small dataset and tests the protected endpoints.',
+      },
+      {
+        decision: 'Track every experiment in MLflow',
+        why: 'Reproducible pipelines were a stated requirement, and versioned runs make it possible to see why one model was selected over another.',
+      },
+      {
+        decision:
+          'Persist forecasts and accuracy metrics in PostgreSQL ops schemas',
+        why: 'Storing results next to the operational data lets replenishment recommendations be generated and audited from one source.',
+      },
+      {
+        decision: 'Serve forecasts through authenticated Fastify endpoints',
+        why: 'Forecasts are validated and exposed only through protected APIs, so consumers get checked results rather than raw model output.',
+      },
+    ],
+    metrics: [
+      {
+        label: 'Model families compared',
+        value: 'Seasonal Naive · ETS · ARIMA/SARIMA',
+      },
+      { label: 'Backtest window', value: '26 weeks' },
+      { label: 'Forecast horizon', value: '4 weeks' },
+    ],
+    githubLink: 'https://github.com/mohamedaziz-ouertatani/smart_inventory',
     liveDemoLink: '',
     images: ['/images/SmartInventory/project.png'],
     priority: 70,
@@ -313,18 +408,42 @@ const projectsData: Project[] = [
       'Plotly',
       'scikit-learn',
       'Jupyter Notebook',
+      'Web Scraping',
       'Data Cleaning',
       'Data Visualization',
       'Clustering',
       'EDA',
     ],
     pipeline: [
-      'Multi-source scraped listings',
+      'Scraped listings — Tayara.tn and Mubawab',
       'Loading and cleaning with pandas',
       'Location and price standardisation',
       'Feature extraction — type, bedrooms, listing age',
       'Cleaned artifacts',
       'Advanced EDA, visualisation and clustering',
+    ],
+    keyDecisions: [
+      {
+        decision: 'Standardise location and price before any analysis',
+        why: 'Listings came from several sources with inconsistent fields, so comparisons by region or price only mean something once those fields share one format.',
+      },
+      {
+        decision: 'Keep cleaned artifacts separate from the EDA notebooks',
+        why: 'The pipeline writes cleaned data once and the analysis reads from it, which keeps the results reproducible.',
+      },
+    ],
+    metrics: [
+      { label: 'Source platforms', value: '2' },
+      { label: 'Tayara listings scraped', value: '9,510' },
+      { label: 'Combined listings', value: '14,222' },
+    ],
+    challenges: [
+      {
+        challenge:
+          'Fragmented, unstructured listings from multiple sources with inconsistent fields',
+        resolution:
+          'Parsed and standardised location and price fields with pandas, and extracted features such as property type, bedrooms and listing age to give every source a common shape.',
+      },
     ],
     githubLink: 'https://github.com/mohamedaziz-ouertatani/estate-mind',
     liveDemoLink: '',
@@ -337,22 +456,25 @@ const projectsData: Project[] = [
     title: 'BIFlow — Multi-Agent BI Pipeline Automation',
     description:
       'Multi-agent system that automates the full Business Intelligence pipeline, from raw data to an interactive dashboard with KPIs and business insights, without manual intervention at each stage.',
-    role: 'Multi-Agent Architecture & KPI Logic (Team of 5)',
+    role: 'Multi-Agent Architecture & KPI Logic',
     problem:
       'Turning raw data into a trustworthy BI dashboard normally means manual profiling, cleaning, KPI definition and reporting at every stage, redone from scratch for each new business domain.',
     approach:
-      'Built as a 5-person team project around a dedicated Orchestrator Agent coordinating six specialized agents: Data Profiler, Data Quality/ETL, KPI & Semantic Layer, BI Analyst, Dashboard Generator, and a BI Auditor/XAI agent for traceability and explainability. The pipeline is not hardcoded to one dataset: it runs on e-commerce (Olist), banking/transactions (Berka, Czech Bank PKDD’99) and telecom churn (IBM Telco) data, using a per-agent registry pattern of business-domain-keyed KPI, cleaning and ETL definitions, so a new domain means extending a registry rather than rewriting logic.',
+      'Built as a 2-person team project around a dedicated Orchestrator Agent coordinating six specialized agents: Data Profiler, Data Quality/ETL, KPI & Semantic Layer, BI Analyst, Dashboard Generator, and a BI Auditor/XAI agent for traceability and explainability. The pipeline is not hardcoded to one dataset: it runs on e-commerce (Olist), banking/transactions (Berka, Czech Bank PKDD’99) and telecom churn (IBM Telco) data, using a per-agent registry pattern of business-domain-keyed KPI, cleaning and ETL definitions, so a new domain means extending a registry rather than rewriting logic. Agents never call each other: every hand-off is a validated Pydantic contract routed through the orchestrator. The Dashboard Generator serves a FastAPI JSON API to a Next.js “Audit Console” where each KPI traces back to its formula and the pipeline stage that produced it, and the Auditor also produces a PDF report.',
     result:
       'One pipeline that carries three unrelated business domains from raw data to a dashboard with KPIs and insights, with an auditor agent making each result traceable and explainable.',
     technologies: [
       'Python',
       'Pandas',
       'Multi-Agent Orchestration',
+      'Pydantic',
+      'FastAPI',
       'PostgreSQL',
-      'Plotly',
+      'Next.js',
+      'TypeScript',
+      'Recharts',
       'Docker',
-      'REST APIs',
-      'Git',
+      'GitHub Actions',
     ],
     pipeline: [
       'Raw business data',
@@ -375,6 +497,20 @@ const projectsData: Project[] = [
         why: 'Each stage of the BI pipeline has one agent responsible for it, and a single orchestrator coordinates them so the run needs no manual intervention between stages.',
       },
       {
+        decision:
+          'Agents talk only to the orchestrator, through Pydantic contracts',
+        why: 'Every hand-off is a validated model, so each agent can be tested and understood on its own and the contracts are the seam. When the domain field was missing from one contract, it was threaded through explicitly instead of hiding behind a default.',
+      },
+      {
+        decision: 'Postgres loading is opt-in in the library, on in the CLI',
+        why: 'Making it automatic would have tied every agent test to a live database. The CLI is the real-run entrypoint, so it loads into Postgres by default and offers --no-postgres to opt out.',
+      },
+      {
+        decision:
+          'Replace the Streamlit app with a JSON API and a Next.js frontend',
+        why: 'The dashboard agent now only serves a layout over HTTP, and the frontend owns rendering, polling and UI state.',
+      },
+      {
         decision: 'A separate BI Auditor / XAI agent',
         why: 'Traceability and explainability are a stage of their own rather than an afterthought, so every KPI and insight can be traced back through the pipeline.',
       },
@@ -386,11 +522,25 @@ const projectsData: Project[] = [
         resolution:
           'The telecom churn data is flat and non-time-series, unlike the e-commerce and banking sources. The KPI and profiling logic was implemented to work across these differing structures instead of assuming a time axis.',
       },
+      {
+        challenge:
+          'A false “-100% collapse” in every metric on the full dataset',
+        resolution:
+          'A single straggler Olist order dated September 2018 sat far after volume dropped to zero, so the last-two-months comparison read as a total collapse. Months with an order count below 20% of the busiest month are now excluded before picking the comparison window, a ratio rule that works on both the 500-order sample and the full dataset.',
+      },
+      {
+        challenge:
+          'The orchestrator container failed on its first real pipeline run',
+        resolution:
+          'It imports every agent in-process, so it needs their runtime dependencies too, not only its own. The transitive requirements were added to its image.',
+      },
     ],
     metrics: [
       { label: 'Business domains', value: '3' },
       { label: 'Specialized agents', value: '6' },
       { label: 'Team size', value: '2' },
+      { label: 'Olist orders processed', value: '~99k' },
+      { label: 'Full-dataset run time', value: '~9 s' },
     ],
     githubLink: 'https://github.com/mohamedaziz-ouertatani/BIFlow.git',
     liveDemoLink: '',
