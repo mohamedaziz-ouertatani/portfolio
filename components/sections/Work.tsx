@@ -13,45 +13,45 @@ import { glazeFor } from '@/lib/glaze';
 // because the /projects ranking changes.
 const featured = [
   {
-    slug: 'researchbridge',
-    title: 'ResearchBridge',
-    category: 'Research Intelligence / AI',
+    slug: 'dressme',
+    title: 'DressMe',
+    category: 'Computer Vision / LLM Agents',
     glaze: 'glaze-cobalt',
     span: 'row-span-2 lg:col-span-7 lg:row-span-4',
     showcase: true,
   },
   {
+    slug: 'researchbridge',
+    title: 'ResearchBridge',
+    category: 'Research Intelligence / AI',
+    glaze: 'glaze-turquoise',
+    span: 'row-span-2 lg:col-span-5 lg:row-span-2',
+  },
+  {
     slug: 'estate-mind',
     title: 'Estate-Mind',
     category: 'Data Engineering / Data Science',
-    glaze: 'glaze-turquoise',
+    glaze: 'glaze-saffron',
     span: 'row-span-2 lg:col-span-5 lg:row-span-2',
   },
   {
     slug: 'biflow',
     title: 'BIFlow',
     category: 'Multi-Agent Systems / BI',
-    glaze: 'glaze-saffron',
-    span: 'row-span-2 lg:col-span-5 lg:row-span-2',
+    glaze: 'glaze-deep',
+    span: 'row-span-2 lg:col-span-4 lg:row-span-2',
   },
   {
     slug: 'smart-inventory',
     title: 'Smart Inventory Forecasting',
     category: 'Machine Learning / MLOps',
-    glaze: 'glaze-deep',
+    glaze: 'glaze-turquoise',
     span: 'row-span-2 lg:col-span-4 lg:row-span-2',
   },
   {
     slug: 'mlops-pipeline',
     title: 'MLOps Pipeline',
     category: 'MLOps / Machine Learning',
-    glaze: 'glaze-turquoise',
-    span: 'row-span-2 lg:col-span-4 lg:row-span-2',
-  },
-  {
-    slug: 'business-intelligence-dashboards',
-    title: 'Business Intelligence Dashboards',
-    category: 'Business Intelligence / Analytics',
     glaze: 'glaze-saffron',
     span: 'row-span-2 lg:col-span-4 lg:row-span-2',
   },
@@ -67,7 +67,7 @@ export function Work() {
     <Section
       id="work"
       heading="Selected work"
-      caption="Six projects across research tooling, data engineering, multi-agent systems, and ML. Each one opens as a case study."
+      caption="Six projects across fashion AI, research tooling, data engineering, multi-agent systems, and ML. Each one opens as a case study."
     >
       <ul className="grid auto-rows-[120px] gap-3 lg:auto-rows-[130px] lg:grid-cols-12 lg:gap-3.5">
         {featured.map(
