@@ -2,12 +2,20 @@
 
 interface FilterBarProps {
   allTechnologies: string[];
+  /** How many listed projects use each technology. */
+  counts: Record<string, number>;
   selectedTechnologies: string[];
   onFilterChange: (technologies: string[]) => void;
 }
 
+/**
+ * Technology filters read as a frequency list, not a wall of boxes: each
+ * name carries the number of projects that use it, most used first. A
+ * selected technology is set in ink under the highlighter.
+ */
 export function FilterBar({
   allTechnologies,
+  counts,
   selectedTechnologies,
   onFilterChange,
 }: FilterBarProps) {
@@ -20,8 +28,8 @@ export function FilterBar({
   };
 
   return (
-    <div className="mb-10">
-      <div className="mb-4 flex items-center justify-between gap-4">
+    <div className="mb-10 border-t border-foreground pt-4">
+      <div className="mb-3 flex items-center justify-between gap-4">
         <h2 className="label" id="filter-heading">
           Filter by technology
         </h2>
@@ -29,7 +37,7 @@ export function FilterBar({
           <button
             type="button"
             onClick={() => onFilterChange([])}
-            className="text-sm font-bold text-accent underline decoration-2 underline-offset-4 transition-colors hover:text-accent-strong"
+            className="link text-sm font-medium"
           >
             Clear ({selectedTechnologies.length})
           </button>
@@ -37,7 +45,7 @@ export function FilterBar({
       </div>
 
       <div
-        className="flex flex-wrap gap-2"
+        className="flex flex-wrap gap-x-4 gap-y-1"
         role="group"
         aria-labelledby="filter-heading"
       >
@@ -49,13 +57,17 @@ export function FilterBar({
               type="button"
               onClick={() => toggleTechnology(tech)}
               aria-pressed={isSelected}
-              className={`tile tile-sm px-3 py-1.5 text-sm font-semibold transition-colors duration-200 ease-cine focus-visible:outline-none focus-visible:[outline-offset:-4px] focus-visible:[outline:2px_solid_var(--color-accent)] ${
+              aria-label={`${tech}, ${counts[tech]} ${counts[tech] === 1 ? 'project' : 'projects'}`}
+              className={`py-0.5 text-sm transition-colors duration-200 ease-cine ${
                 isSelected
-                  ? 'bg-accent text-accent-foreground'
-                  : 'bg-background-elevated text-muted-foreground hover:bg-border hover:text-foreground'
+                  ? 'font-medium text-foreground'
+                  : 'text-muted-foreground hover:text-foreground'
               }`}
             >
-              {tech}
+              <span className={isSelected ? 'mark' : ''}>{tech}</span>
+              <sup className="tnum ml-0.5 text-[0.6875rem] text-faint">
+                {counts[tech]}
+              </sup>
             </button>
           );
         })}

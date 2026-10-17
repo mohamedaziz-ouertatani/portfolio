@@ -26,7 +26,7 @@ export default function OpengraphImage({ params }: { params: { id: string } }) {
         flexDirection: 'column',
         justifyContent: 'space-between',
         padding: '80px',
-        backgroundColor: '#163e93',
+        backgroundColor: '#f6f7f7',
         fontFamily: 'sans-serif',
       }}
     >
@@ -34,17 +34,18 @@ export default function OpengraphImage({ params }: { params: { id: string } }) {
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 10,
+          gap: 16,
           fontSize: 28,
           fontWeight: 700,
-          color: '#f5f6f1',
+          color: '#14181c',
         }}
       >
-        <svg width="36" height="36" viewBox="-10 -10 20 20">
-          <path
-            d="M0 -9.6 L2.6 -6.3 L6.8 -6.8 L6.3 -2.6 L9.6 0 L6.3 2.6 L6.8 6.8 L2.6 6.3 L0 9.6 L-2.6 6.3 L-6.8 6.8 L-6.3 2.6 L-9.6 0 L-6.3 -2.6 L-6.8 -6.8 L-2.6 -6.3 Z"
-            fill="#f0a81c"
-          />
+        <svg width="68" height="12" viewBox="0 0 34 6">
+          <circle cx="3" cy="3" r="3" fill="#440154" />
+          <circle cx="10" cy="3" r="3" fill="#414487" />
+          <circle cx="17" cy="3" r="3" fill="#2a788e" />
+          <circle cx="24" cy="3" r="3" fill="#21918c" />
+          <circle cx="31" cy="3" r="3" fill="#22a884" />
         </svg>
         {site.shortName}
       </div>
@@ -55,7 +56,7 @@ export default function OpengraphImage({ params }: { params: { id: string } }) {
             fontSize: 22,
             letterSpacing: '0.18em',
             textTransform: 'uppercase',
-            color: '#f0a81c',
+            color: '#2a6589',
           }}
         >
           {role}
@@ -65,14 +66,14 @@ export default function OpengraphImage({ params }: { params: { id: string } }) {
             fontSize: 68,
             fontWeight: 700,
             lineHeight: 1.1,
-            color: '#f5f6f1',
+            color: '#14181c',
             maxWidth: 980,
           }}
         >
           {title}
         </div>
         {stack && (
-          <div style={{ display: 'flex', fontSize: 24, color: '#c6d2ee' }}>
+          <div style={{ display: 'flex', fontSize: 24, color: '#48515a' }}>
             {stack}
           </div>
         )}

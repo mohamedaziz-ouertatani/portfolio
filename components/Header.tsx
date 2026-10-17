@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Download, Menu, X } from 'lucide-react';
 import { Button } from './ui/Button';
-import { Star } from './ui/Star';
+import { PathMark } from './ui/PathMark';
 import { site } from '@/lib/site';
 
 const navItems = [
@@ -30,10 +30,10 @@ export function Header() {
     href.startsWith('/#') ? false : pathname === href;
 
   return (
-    <header className="zone-cobalt sticky top-0 z-50 w-full bg-glaze-deep print:hidden">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background print:hidden">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-glaze-saffron focus:px-4 focus:py-2 focus:text-glaze-ink"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-highlight focus:px-4 focus:py-2 focus:text-foreground"
       >
         Skip to content
       </a>
@@ -41,24 +41,24 @@ export function Header() {
       {/* The drawer lives inside this landmark so mobile visitors never get
           navigation links outside a nav element. */}
       <nav aria-label="Primary">
-        <div className="container mx-auto flex items-center justify-between px-4 py-3">
+        <div className="container mx-auto flex h-[4.25rem] items-center justify-between px-4 sm:px-6">
           <Link
             href="/"
-            className="inline-flex items-center gap-2.5 font-display text-lg font-bold tracking-tight text-foreground transition-colors hover:text-accent"
+            className="inline-flex items-center gap-3 font-display text-base font-semibold text-foreground transition-colors hover:text-accent"
           >
-            <Star size={22} className="text-glaze-saffron" />
+            <PathMark />
             {site.name}
           </Link>
 
-          <ul className="hidden items-center gap-7 md:flex">
+          <ul className="hidden items-center gap-6 md:flex">
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
                   aria-current={isActive(item.href) ? 'page' : undefined}
-                  className={`text-sm font-semibold underline-offset-[10px] transition-colors hover:text-accent ${
+                  className={`text-sm underline-offset-[0.5em] transition-colors hover:text-foreground ${
                     isActive(item.href)
-                      ? 'text-accent underline decoration-2'
+                      ? 'font-medium text-foreground underline decoration-1'
                       : 'text-muted-foreground'
                   }`}
                 >
@@ -71,7 +71,7 @@ export function Header() {
                 href={site.cv}
                 download
                 variant="secondary"
-                className="px-4 py-2"
+                className="!px-3.5 !py-1.5"
               >
                 <Download size={14} aria-hidden="true" />
                 CV
@@ -82,7 +82,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => setIsMenuOpen((open) => !open)}
-            className="p-2 text-foreground transition-colors hover:bg-surface md:hidden"
+            className="-mr-2 p-2 text-foreground transition-colors hover:bg-surface md:hidden"
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
@@ -92,25 +92,28 @@ export function Header() {
         </div>
 
         {isMenuOpen && (
-          <div id="mobile-menu" className="bg-glaze-deep md:hidden">
-            <ul className="container mx-auto space-y-1 px-4 pb-5 pt-2">
+          <div
+            id="mobile-menu"
+            className="border-t border-border bg-background md:hidden"
+          >
+            <ul className="container mx-auto px-4 pb-6 pt-2 sm:px-6">
               {navItems.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
                     onClick={() => setIsMenuOpen(false)}
                     aria-current={isActive(item.href) ? 'page' : undefined}
-                    className={`block px-4 py-3 font-display text-2xl font-bold transition-colors ${
+                    className={`block border-b border-border py-3 font-display text-xl font-medium transition-colors ${
                       isActive(item.href)
-                        ? 'bg-surface text-accent'
-                        : 'text-foreground hover:bg-surface'
+                        ? 'text-foreground underline decoration-1 underline-offset-[0.3em]'
+                        : 'text-muted-foreground hover:text-foreground'
                     }`}
                   >
                     {item.label}
                   </Link>
                 </li>
               ))}
-              <li className="pt-3">
+              <li className="pt-5">
                 <Button href={site.cv} download variant="secondary">
                   <Download size={16} aria-hidden="true" />
                   Download CV
@@ -120,7 +123,6 @@ export function Header() {
           </div>
         )}
       </nav>
-      <div aria-hidden="true" className="frieze-saffron h-4" />
     </header>
   );
 }

@@ -1,340 +1,306 @@
 ---
 name: Mohamed Aziz Ouertatani, Portfolio
-description: A portfolio laid like a zellige tile wall, in Sidi Bou Said cobalt and lime-wash plaster, cut in chamfered tiles with no shadows.
+description: A portfolio set as one statistical sheet in the Tufte data-ink school; cool white paper, graphite ink, hairline range frames, and viridis used only as data.
 colors:
-  cobalt: '#163E93'
-  cobalt-strong: '#0F2F73'
-  cobalt-deep: '#0E2A6B'
-  cobalt-wall-surface: '#1B47A3'
-  cobalt-dim: '#C7D3EC'
-  plaster: '#EFF1EA'
-  plaster-elevated: '#E6E9E0'
-  plaster-surface: '#FAFBF7'
-  plaster-glaze: '#F5F6F1'
-  grout: '#C9CFC0'
-  grout-strong: '#98A08F'
-  ink: '#0B1533'
-  ink-muted: '#3E4A66'
-  ink-faint: '#5B6580'
-  mist-on-cobalt: '#C6D2EE'
-  mist-faint-on-cobalt: '#A9B9E0'
-  turquoise: '#12A79D'
-  turquoise-text: '#0B6E67'
-  turquoise-light: '#7FDED6'
-  saffron: '#F0A81C'
-  saffron-bright: '#FFC247'
-  bisque: '#D9C7A8'
-  brick-red: '#B93A22'
+  sheet: '#f6f7f7'
+  sheet-band: '#eceeef'
+  paper-white: '#ffffff'
+  paper-hover: '#f0f2f3'
+  hairline: '#d5d9dc'
+  hairline-strong: '#9aa2a9'
+  graphite-ink: '#14181c'
+  ink-muted: '#48515a'
+  ink-faint: '#646d75'
+  viridis-blue: '#2a6589'
+  viridis-blue-deep: '#1b4a68'
+  stage-data: '#440154'
+  stage-analysis: '#414487'
+  stage-model: '#2a788e'
+  stage-serve: '#21918c'
+  stage-interface: '#1f9a7a'
+  highlighter-yellow: '#fde725'
 typography:
-  display-hero:
-    fontFamily: 'Bricolage Grotesque, system-ui, sans-serif'
-    fontSize: 'clamp(2.75rem, 8.6vw, 6rem)'
-    fontWeight: 800
-    lineHeight: 0.92
-    letterSpacing: '-0.035em'
   display:
-    fontFamily: 'Bricolage Grotesque, system-ui, sans-serif'
-    fontSize: '3.75rem'
-    fontWeight: 800
-    lineHeight: 1.02
-    letterSpacing: '-0.025em'
+    fontFamily: 'Archivo, system-ui, sans-serif'
+    fontSize: 'clamp(2.75rem, 4.3vw, 4.25rem)'
+    fontWeight: 600
+    lineHeight: 0.98
+    letterSpacing: '-0.022em'
+    fontVariation: "'wdth' 118"
   headline:
-    fontFamily: 'Bricolage Grotesque, system-ui, sans-serif'
-    fontSize: '1.875rem'
-    fontWeight: 800
-    lineHeight: 1.02
-    letterSpacing: '-0.025em'
+    fontFamily: 'Archivo, system-ui, sans-serif'
+    fontSize: '3rem'
+    fontWeight: 600
+    lineHeight: 1
+    letterSpacing: '-0.022em'
+    fontVariation: "'wdth' 118"
   title:
-    fontFamily: 'Bricolage Grotesque, system-ui, sans-serif'
+    fontFamily: 'Archivo, system-ui, sans-serif'
     fontSize: '1.5rem'
-    fontWeight: 800
-    lineHeight: 1.05
-    letterSpacing: '-0.025em'
-  lead:
-    fontFamily: 'Hanken Grotesk, system-ui, sans-serif'
-    fontSize: '1.125rem'
-    fontWeight: 400
-    lineHeight: 1.75
+    fontWeight: 600
+    lineHeight: 1.25
+    letterSpacing: '-0.022em'
+    fontVariation: "'wdth' 118"
   body:
-    fontFamily: 'Hanken Grotesk, system-ui, sans-serif'
+    fontFamily: 'Archivo, system-ui, sans-serif'
     fontSize: '1rem'
     fontWeight: 400
     lineHeight: 1.625
-  ui:
-    fontFamily: 'Hanken Grotesk, system-ui, sans-serif'
+    fontFeature: "'lnum'"
+  body-compact:
+    fontFamily: 'Archivo, system-ui, sans-serif'
+    fontSize: '0.9375rem'
+    fontWeight: 400
+    lineHeight: 1.625
+  caption:
+    fontFamily: 'Archivo, system-ui, sans-serif'
     fontSize: '0.875rem'
-    fontWeight: 600
-    lineHeight: 1.25rem
+    fontWeight: 400
+    lineHeight: 1.625
   label:
-    fontFamily: 'Hanken Grotesk, system-ui, sans-serif'
+    fontFamily: 'Archivo, system-ui, sans-serif'
     fontSize: '0.75rem'
-    fontWeight: 600
-    lineHeight: 1rem
-    letterSpacing: '0.12em'
+    fontWeight: 500
+    lineHeight: 1
+    letterSpacing: '0.08em'
+  figure-number:
+    fontFamily: 'Archivo, system-ui, sans-serif'
+    fontSize: '0.875rem'
+    fontWeight: 500
+    fontFeature: "'tnum', 'lnum'"
 rounded:
-  chip: '2px'
-  chamfer-sm: '8px'
-  chamfer: '14px'
+  sm: '1px'
+  md: '2px'
+  lg: '3px'
+  dot: '9999px'
 spacing:
-  grout-gap: '12px'
-  grout-gap-wide: '14px'
-  tile-padding: '24px'
-  tile-padding-lg: '40px'
-  band-y: '80px'
-  band-y-wide: '112px'
+  gutter: '16px'
+  gutter-sm: '24px'
+  column-gap: '40px'
+  section-top: '48px'
+  section-bottom: '112px'
 components:
   button-primary:
-    backgroundColor: '{colors.cobalt}'
-    textColor: '{colors.plaster-glaze}'
-    rounded: '{rounded.chamfer-sm}'
-    typography: '{typography.ui}'
-    padding: '12px 24px'
+    backgroundColor: '{colors.graphite-ink}'
+    textColor: '{colors.sheet}'
+    typography: '{typography.caption}'
+    rounded: '{rounded.sm}'
+    padding: '10px 20px'
   button-primary-hover:
-    backgroundColor: '{colors.cobalt-strong}'
-  button-primary-on-wall:
-    backgroundColor: '{colors.saffron}'
-    textColor: '{colors.ink}'
-  button-primary-on-wall-hover:
-    backgroundColor: '{colors.saffron-bright}'
+    backgroundColor: '{colors.viridis-blue-deep}'
+    textColor: '{colors.sheet}'
   button-secondary:
-    backgroundColor: '{colors.plaster-elevated}'
-    textColor: '{colors.ink}'
-    rounded: '{rounded.chamfer-sm}'
-    typography: '{typography.ui}'
-    padding: '12px 24px'
+    backgroundColor: 'transparent'
+    textColor: '{colors.graphite-ink}'
+    rounded: '{rounded.sm}'
+    padding: '10px 20px'
   button-secondary-hover:
-    backgroundColor: '{colors.plaster-surface}'
-  filter-tile:
-    backgroundColor: '{colors.plaster-elevated}'
-    textColor: '{colors.ink-muted}'
-    rounded: '{rounded.chamfer-sm}'
-    typography: '{typography.ui}'
-    padding: '6px 12px'
-  filter-tile-selected:
-    backgroundColor: '{colors.cobalt}'
-    textColor: '{colors.plaster-glaze}'
+    backgroundColor: '{colors.paper-white}'
+  button-ghost:
+    textColor: '{colors.viridis-blue}'
+    padding: '10px 0'
+  button-ghost-hover:
+    textColor: '{colors.viridis-blue-deep}'
   chip:
-    backgroundColor: '{colors.plaster-elevated}'
     textColor: '{colors.ink-muted}'
-    rounded: '{rounded.chip}'
-    padding: '4px 10px'
-  availability-tile:
-    backgroundColor: '{colors.saffron}'
-    textColor: '{colors.ink}'
-    rounded: '{rounded.chamfer-sm}'
-    padding: '8px 16px'
-  project-tile-code-public:
-    backgroundColor: '{colors.cobalt}'
-    textColor: '{colors.plaster-glaze}'
-    rounded: '{rounded.chamfer}'
-    padding: '24px'
-  project-tile-unlinked:
-    backgroundColor: '{colors.bisque}'
-    textColor: '{colors.ink}'
-    rounded: '{rounded.chamfer}'
-    padding: '24px'
-  stack-tile:
-    backgroundColor: '{colors.cobalt-wall-surface}'
-    textColor: '{colors.plaster-glaze}'
-    rounded: '{rounded.chamfer-sm}'
-    padding: '8px 14px'
-  stack-tile-active:
-    backgroundColor: '{colors.saffron}'
-    textColor: '{colors.ink}'
-  stack-tile-related:
-    backgroundColor: '{colors.plaster-glaze}'
-    textColor: '{colors.ink}'
-  site-header:
-    backgroundColor: '{colors.cobalt-deep}'
-    textColor: '{colors.plaster-glaze}'
-    padding: '12px 16px'
+    typography: '{typography.label}'
+    rounded: '{rounded.sm}'
+    padding: '2px 8px'
+  link:
+    textColor: '{colors.viridis-blue}'
+  link-hover:
+    textColor: '{colors.viridis-blue-deep}'
+  highlight-mark:
+    backgroundColor: '{colors.highlighter-yellow}'
+    textColor: '{colors.graphite-ink}'
+  header:
+    backgroundColor: '{colors.sheet}'
+    textColor: '{colors.graphite-ink}'
+    height: '68px'
+  command-palette:
+    backgroundColor: '{colors.paper-white}'
+    textColor: '{colors.graphite-ink}'
+    rounded: '{rounded.sm}'
+    width: '512px'
 ---
 
 # Design System: Mohamed Aziz Ouertatani, Portfolio
 
 ## Overview
 
-**Creative North Star: "The Zellige Wall"**
+**Creative North Star: "The Data-Ink Sheet"**
 
-The site is a tile wall. Every project, tool, role and action is a precisely cut piece with a flat glaze, set into a grid with visible grout gaps. Two grounds carry the whole thing: lime-wash plaster (#EFF1EA) for reading, and Sidi Bou Said cobalt (#163E93) for the wall itself. Home alternates the two as full-bleed bands (cobalt hero, plaster Work, cobalt Stack, plaster Experience, plaster About, cobalt Contact), so the wall cuts across the page rather than sitting in a box. Depth comes only from color, grout lines and the chamfered silhouette. There are no shadows, no gradients and no glow anywhere.
+The site reads as one rigorous statistical sheet in the Tufte school. Every claim is a figure, every group of projects a set of small multiples, and every mark on the page earns its ink. Cool white paper carries graphite type, hairline rules and range-frame axes; there are no cards, no panels, no fills and no shadows. Numbered figures ("Fig. 1", "Fig. 3", "Table 1") with sentence captions replace decorative section furniture.
 
-The voice is confident and warm rather than technical: a heavy, slightly condensed display grotesque (Bricolage Grotesque) for names and titles, a clear humanist grotesque (Hanken Grotesk) for everything read. There is no monospace voice, no terminal or code-window styling. Color is used with a strict meaning: saffron is the warmest glaze and marks the truthful ask (availability, the email address, the hovered stack tile); turquoise is the secondary glaze for statements and stages; bare bisque means "no public link yet".
+Colour is data. Viridis is the single ordered scale, and it encodes exactly one thing: the five stages of the data-to-product path (Data, Analysis, Model, Serve, Interface). Its yellow end is held back from the scale and used for the ask alone, as a highlighter behind ink. Links take the viridis blue. Everything else is graphite on paper.
 
-Density is moderate and tile-driven. Content sits in tiles or on generous plaster/cobalt bands with 80-112px vertical padding. The hero is the densest moment: a twelve-column, five-row tile wall.
+One family, Archivo, speaks in two widths: opened up on its width axis for display, normal for reading, with tabular figures wherever numbers align. Density is analytical rather than airy: margin totals, counts, ticks and labels sit close to the data they describe. The retired zellige tile wall (cobalt, plaster, saffron, chamfered tiles) and the dark neon developer portfolio are the confirmed anti-references; the scheme is light only.
 
 **Key Characteristics:**
 
-- Two grounds (plaster, cobalt) swapped by re-declaring the same semantic tokens, never by per-component overrides.
-- Every interactive or content block is a chamfered tile; corners are cut, never rounded.
-- Glazes are flat fills; body text never sits in glaze on plaster except in the inked-glaze pairs defined below.
-- Pattern fields (eight-point star tessellation) are the wall's texture, used only as full-bleed backgrounds and header/footer friezes.
-- Light color scheme only; there is no dark mode.
+- Flat paper and hairline rules; no fills, panels or shadows outside the command-palette overlay.
+- Viridis encodes the five path stages and nothing else; the yellow end is reserved for the ask.
+- Range-frame figures with margin totals, one total rule, and hover isolation that dims the rest to 25%.
+- Small multiples on one shared label grid.
+- Archivo only, with width (118% stretch) as the display voice and tabular figures for numbers.
+- Headings stand alone, opened by a rule, with a figure-style caption beside them.
 
 ## Colors
 
-A plaster-and-cobalt palette with two warm/cool glazes, ink-navy text, and one earth tone for the unglazed.
+A cool graphite-on-paper neutral field with one ordered data scale and one held-back highlighter.
 
 ### Primary
 
-- **Sidi Bou Said Cobalt** (#163E93): the accent on plaster (primary buttons, links, selected filter, active timeline segments, hero surname) and the ground of the cobalt zone, hero wall and contact wall. `zone-cobalt` re-declares its background here.
-- **Deep Cobalt** (#0E2A6B): the darkest wall. Header and footer ground, the `deep` project glaze, the pattern-field ground for cobalt bands, and the ground behind the friezes.
-- **Cobalt Strong** (#0F2F73): the hover state of cobalt on plaster.
+- **Viridis Blue** (viridis-blue): every text link, the hover tint of project titles, the focus outline (2px, 3px offset), and the input caret. Deepens to **Viridis Blue Deep** (viridis-blue-deep) on link hover and as the primary button's hover fill.
 
 ### Secondary
 
-- **Saffron Glaze** (#F0A81C): the accent inside cobalt zones (it replaces cobalt as `accent` there), the availability tile, the email tile, the hovered stack tile, the star mark, text selection and focus outlines on cobalt. Hover brightens to Bright Saffron (#FFC247). Ink text only.
-- **Kairouan Turquoise** (#12A79D): a fill glaze for the hero statement tile, project tiles and education tiles, with ink text. Never used as text on plaster.
-- **Turquoise, text-safe** (#0B6E67): the deeper turquoise for anything read on plaster (secondary accent, success). On cobalt it lifts to #7FDED6.
+- **The Five Stages** (stage-data, stage-analysis, stage-model, stage-serve, stage-interface): viridis sampled at 0, .2, .4, .5 and .6 for marks on white, in path order. The last stop is deepened from the sampled value so it holds 3:1 on the sheet. These fill the dots of Fig. 1, the stage strips on every project, and the five-dot PathMark beside the name in the header.
 
 ### Tertiary
 
-- **Bare Bisque** (#D9C7A8): the unglazed tile. It appears only on a project with no public code or demo, and carries no accent.
+- **Highlighter Yellow** (highlighter-yellow): the yellow end of viridis, removed from the scale and kept for the ask. It sits behind graphite ink as a highlighter band (12% to 88% of the line box): the availability line, the email address, a selected technology filter, the PFE window bar in Fig. 3, the skip link, and text selection. In print it drops to semibold ink.
 
 ### Neutral
 
-- **Lime-Wash Plaster** (#EFF1EA): the reading ground. Elevated wash #E6E9E0 (secondary buttons, chips, filter tiles at rest); surface #FAFBF7 (lifted plaster).
-- **Plaster Glaze** (#F5F6F1): the bright tile: the hero name tile, "Explore my work" tile, the plaster tile set into cobalt, and the light text on cobalt.
-- **Grout** (#C9CFC0, strong #98A08F): borders, dividers, the timeline track. On cobalt, grout becomes plaster at 24% and 50% alpha.
-- **Ink Navy** (#0B1533): all text on plaster and on saffron, turquoise, bisque and plaster glazes. Muted (#3E4A66) for captions and secondary copy; faint (#5B6580) for the smallest metadata.
-- **Mist on Cobalt** (#C6D2EE, faint #A9B9E0): muted and faint text inside cobalt zones.
-- **Brick Red** (#B93A22): destructive state, reserved.
+- **Sheet** (sheet): the page ground and the sticky header ground.
+- **Sheet Band** (sheet-band): the hover/focus band on a Fig. 1 row and the backing behind a loading screenshot. Never a resting panel.
+- **Paper White** (paper-white) and **Paper Hover** (paper-hover): the command-palette surface and its row hover; the secondary button's hover ground.
+- **Hairline** (hairline): rules between panels, rows, table lines and chip frames.
+- **Hairline Strong** (hairline-strong): secondary-button frames, empty-stage rings and dashes, timeline ticks in prose, the scrollbar thumb.
+- **Graphite Ink** (graphite-ink): all headings and primary text, the rule that opens each section, figure axes and total rules, the primary button fill.
+- **Ink Muted** (ink-muted) and **Ink Faint** (ink-faint): body/caption text and the quiet tier (labels, categories, margin units, year ticks).
 
 ### Named Rules
 
-**The Same-Names Rule.** A zone changes its ground by re-declaring the semantic tokens (`zone-cobalt`, `zone-plaster`), and every component inside inherits the inversion. Do not fork a component per ground.
+**The Colour Is Data Rule.** The stage colours appear only where they encode a stage of the data-to-product path. They never decorate a heading, a button, a divider or a background.
 
-**The Glaze Follows Truth Rule.** Glaze is a claim. A project with a public repository or live demo is glazed in a color (cobalt, turquoise, saffron or deep); a project with neither is bare bisque. The two never blend, so the wall never claims more than the links behind it. The status line on each tile ("Code is public" / "No public link yet") is derived from the same data.
-
-**The Glaze Is Fill Rule.** Glazes are fills. Text on plaster is ink or cobalt or text-safe turquoise; text on a glaze is ink or plaster-glaze, chosen per the pairing (cobalt and deep take plaster-glaze; turquoise, saffron, bisque and plaster take ink).
+**The Held-Back Yellow Rule.** The highlighter yellow marks the ask (and the visitor's own selection), always behind ink and never as text colour, a fill panel, or a second data value.
 
 ## Typography
 
-**Display Font:** Bricolage Grotesque (with system-ui, sans-serif), loaded through next/font as `--font-display`
-**Body Font:** Hanken Grotesk (with system-ui, sans-serif), loaded through next/font as `--font-body`
-**Label/Mono Font:** none. `font-mono` is aliased to the body face; the site has no monospace voice.
+**Display Font:** Archivo (with system-ui, sans-serif), width axis at 118%
+**Body Font:** Archivo (with system-ui, sans-serif), normal width
+**Label/Mono Font:** Archivo; there is no second family, and numbers use its tabular figures.
 
-**Character:** A cut, slightly condensed display face with a point of view against a calm humanist text face with true tabular numerals. h1-h3 are always the display face at weight 800 with balanced wrapping; body copy wraps with `text-wrap: pretty`.
+**Character:** One grotesque whose width is the voice: expanded and slightly tightened (-0.022em) for headings, normal and open for reading. It reads like a well-set statistical report, not an editorial magazine.
 
 ### Hierarchy
 
-- **Display Hero** (800, clamp(2.75rem, 8.6vw, 6rem), 0.92, -0.035em): the name on the hero tile; surname in cobalt.
-- **Display** (800, 2.25rem / 3rem / 3.75rem at base / sm / md, 1.02, -0.025em): section headings on home and pages ("Selected work", "How I build it"). The closing call to action scales to 5rem and 6rem.
-- **Headline** (800, 1.875rem, 1.02): project tile titles (1.5rem on small screens), the hero availability statement (2.25rem to 3rem), the featured showcase tile title (2.25rem, 3rem on 2xl).
-- **Title** (800, 1.5rem, 1.05): case-study tile titles, timeline job titles (1.5rem to 1.875rem), education tile names (1.25rem).
-- **Lead** (400, 1.125rem, 1.75rem): section captions in muted ink; the hero statement runs 1.125rem to 1.25rem at weight 500.
-- **Body** (400, 1rem, 1.625rem): default copy; line length capped near 62ch to 65ch in reading blocks.
-- **UI** (600, 0.875rem, 1.25rem): buttons, nav links, filter and stack tiles.
-- **Label** (600, 0.75rem, 0.12em tracking, uppercase, muted): the wall's signage voice for sub-blocks only: filter group title, footer column titles, stack category names, education title, and rows in a tile's spec back.
+- **Display** (600, clamp(2.5rem, 9.5vw, 4rem) on small screens, clamp(2.75rem, 4.3vw, 4.25rem) on large, 0.98): the name in the home hero only.
+- **Headline** (600, 3rem rising to 3.75rem at sm, 1 to 1.04): page titles on Work, case studies, About, Contact and Résumé.
+- **Section head** (600, 1.875rem rising to 2.25rem, 1.08): each home section heading, set in five columns beside its caption.
+- **Title** (600, 1.25rem rising to 1.5rem, tight): project titles in small multiples and the work index.
+- **Body** (400, 1rem, 1.625, max 52 to 62ch): reading text; 0.9375rem for project summaries and dense lists; 1.0625rem for long-form lead prose in case studies and About.
+- **Caption** (400, 0.875rem, relaxed, muted ink): figure captions, opened by the figure number in medium-weight graphite ("Fig. 1").
+- **Label** (500, 0.75rem, 0.08em, uppercase, faint ink): heads a sub-block or a table column (Path covered, Stack, Navigate, Filter by technology). It is itself the heading, never a kicker over another one.
+- **Margin figures** (0.6875rem to 0.7rem): filter counts as superscripts and the "of 5", "projects", "/ 8" margin units of Fig. 1.
+
+The off-ramp steps 0.6875, 0.7, 0.9375, 1.0625 and 1.75rem are intentional; the 1.75rem step sets the About preview pull statement.
 
 ### Named Rules
 
-**The Lining Numerals Rule.** Numerals are lining; dates and metrics add `tnum` for tabular figures (timeline dates, metric values, spec rows).
+**The Width Is Voice Rule.** Hierarchy comes from width, weight and size inside one family. No second typeface, no italics-as-display, no system display face.
 
-**The Heading Carries Itself Rule.** A heading stands alone: no kicker, eyebrow, index number or category tag above it. The label style may head a sub-block or a list, never sit over a heading.
+**The Tabular Figures Rule.** Any number that aligns with another number (totals, counts, metrics, dates, step numbers, year ticks) is set in tabular lining figures.
+
+**The No Kicker Rule.** Nothing sits above a heading: no eyebrow, no overline, no section number label. A hairline rule opens the section and the heading carries its own weight.
 
 ## Layout
 
-A single container (max-width 80rem, 16px side padding) inside full-bleed bands. Each section owns its ground and its own container, which is what lets cobalt bands cut across the page. Vertical rhythm is 80px (112px from md) on section bands and 96px (128px from md) on the closing wall; heading to content is 48px.
+A 12-column grid inside a 1280px (max-w-7xl) container with 16px gutters (24px from sm) and 40px column gaps. Home sections open with a full-width graphite rule, then a heading in columns 1 to 5 and a figure-style caption in columns 7 to 12; content follows 48 to 56px below. Section padding runs 40/80px (top/bottom) on small screens and 48/112px from md.
 
-Tiles sit on a 12-column grid with grout gaps of 12px (14px from lg). The hero is 12 columns by 5 rows (rows at least 92px, at least the viewport minus the 88px header on lg). The Work wall uses 120px auto rows (130px from lg) with a showcase tile spanning 7 columns by 4 rows and five smaller tiles of 5 and 4 columns by 2 rows. The Stack wall is a plain four-column grid of category groups (two at sm, one below) holding tile buttons in flowing rows. Experience is a 2:1 two-column layout (timeline, education tiles).
+The hero splits five columns of identity and ask from a seven-column (six at xl) figure, and fills the viewport below the 68px header on large screens.
 
-Below lg the wall collapses to a single column and tiles are reordered: name, availability, primary route, statement, portrait. Nothing is scaled down into a mini-wall; tiles stack at full width. Anchored scrolling reserves 5.5rem for the sticky header.
+**Small multiples.** Selected work is a 1/2/3-column list in which every panel is a six-row subgrid (title, field, summary, stage strip, reported numbers, status), so each slot aligns across the row. Panels are separated by hairlines between them, never boxed.
 
-## Elevation & Depth
+**Case studies.** Inventory comes first: path covered (stage strip), stack, and Table 1 of reported results. The write-up then runs as numbered steps (Architecture, Screens, Problem, Approach, Result, Key decisions, Challenges), each with its number and label in a three-column margin and prose in nine columns, ruled off from the step above. Numbering follows only the steps present.
 
-Flat by construction. There are no drop shadows, no gradients, no blur and no glow. Depth is created by the ground change (plaster to cobalt to deep), by 12px to 14px grout gaps, by the chamfered silhouette, and by the two-tone pattern fields, whose tiles are one step lighter or darker than the ground and edged with a 1.25px lighter line. The sticky header and footer sit on deep cobalt, closed off by a pattern frieze rather than a line or shadow.
+**Figures.** Fig. 1 is a matrix: rows are projects, columns are the five stages, dots where the project's stack covers a stage, a dash where it does not, margin totals on both axes, one graphite total rule, and no per-row rules. Fig. 3 is a range chart whose axis stops where the data stops, with ticks hanging from the axis and two-digit year labels.
 
 ### Named Rules
 
-**The No-Shadow Rule.** Nothing casts a shadow or glows. State is shown by a glaze swap (hover fills, selected tiles), a scale, or an outline drawn inside the tile.
+**The Range Frame Rule.** Axes and rules extend only as far as the data. Rows are separated by whitespace; a single total rule closes a figure; a band appears only on hover or focus.
+
+**The Isolate-and-Dim Rule.** Pointing at a row or column of a figure isolates it and dims everything else to 25% opacity over 300ms. Nothing else on the sheet uses opacity as state.
+
+## Elevation & Depth
+
+The sheet is flat. Depth is never conveyed; structure comes from hairline rules, the graphite section rule, and whitespace. Frames on buttons, chips and screenshots are drawn as 1px inset outlines, not borders or shadows. The one exception is the command palette, an overlay that must lift above the page.
+
+### Shadow Vocabulary
+
+- **Overlay lift** (`box-shadow: 0 0 0 1px var(--color-border-strong), 0 18px 48px -12px rgb(20 24 28 / 0.28)`): the command palette only.
+
+### Named Rules
+
+**The No Panels Rule.** No fills, panels or shadows at rest. If a group needs separating, use a hairline; if it needs emphasis, use ink weight or the highlighter.
 
 ## Shapes
 
-The form language is the cut tile. `tile` clips a block to an octagon by removing a 14px triangle from each corner (`tile-sm`: 8px, for buttons, badges, filter and stack tiles). The cut echoes the eight-point star at the heart of the pattern. Because a clip removes anything at the corners, borders are never drawn on tiles: a secondary button is a solid elevated glaze, and focus outlines are drawn inside the tile with a negative offset (2px on small tiles, 3px on large ones, in the tile's own current color; saffron on cobalt walls).
-
-The eight-point star (octagram) is the one ornament: a small inline mark for the brand, timeline nodes, status lines and the hero role. Timeline and list bullets are 8px diamonds (a square turned 45 degrees). Pattern art is a 80px star-and-cross tessellation (`field-cobalt`, `field-deep`, `field-plaster`) as full-bleed backgrounds, and a 32x16px star-and-diamond frieze (`frieze-saffron` under the header, `frieze-turquoise` above the footer), each 16px tall.
-
-Portraits and screenshots are cropped square-edged inside a tile's clip; no rounded image corners.
+Square, ruled geometry. Corners are effectively square (1px on buttons, chips and the palette; 2 to 3px is the ceiling). The only round forms are data marks: stage dots, status dots and the PathMark. Frames are 1px hairlines; the section-opening rule and figure total rules are 1px graphite. Bars in Fig. 3 are flat rectangles: a 3px graphite rule for the degree, 14px bars for roles, and the PFE window bar in highlighter yellow with a 1px ink frame.
 
 ## Components
 
 ### Buttons
 
-- **Shape:** chamfered small tile (8px cut), 12px 24px padding, 14px semibold text, icon at 16px before the label.
-- **Primary:** cobalt fill with plaster-glaze text on plaster; on a cobalt wall the accent inverts to saffron with ink text. Hover moves to Cobalt Strong (on plaster) or Bright Saffron (on cobalt).
-- **Secondary:** solid elevated plaster wash with ink text (on cobalt, the elevated wall tone), lifting to surface on hover. No drawn border.
-- **Ghost:** ink text with a 2px underline at 6px offset, hover fills the elevated wash.
-- **Focus:** a 2px inside outline in current color, offset -4px.
+Square, flat, ruled.
+
+- **Shape:** near-square corners (1px).
+- **Primary:** solid graphite with sheet-coloured text, 10px 20px, 0.875rem medium. The trailing arrow nudges 2px right on hover.
+- **Hover / Focus:** primary fills to Viridis Blue Deep over 200ms on the exponential ease-out (cubic-bezier(0.16, 1, 0.3, 1)); focus is the global 2px viridis-blue outline at 3px offset.
+- **Secondary:** transparent with a 1px inset Hairline Strong frame that turns graphite on hover, over a Paper White ground.
+- **Ghost:** a viridis-blue underlined link with a leading icon; the underline thickens from 1px to 2px on hover.
 
 ### Chips
 
-- **Style:** technology tag; elevated plaster wash, muted ink, 12px semibold text, 2px corner radius, 1px grout hairline.
-- **State:** static, non-interactive. Filtering uses the filter tiles instead.
+- **Style:** hairline-framed (1px inset), 0.75rem medium, muted ink, 2px 8px. Not interactive.
+- **State:** none. Filters are not chips (see Filter list).
 
-### Filter tiles
+### Filter list
 
-- **Style:** the interactive twin of a chip, cut as a small tile. At rest: elevated wash with muted ink text; hover deepens to grout. Selected: cobalt fill with plaster-glaze text (`aria-pressed`). A "Clear (n)" text button in cobalt appears once anything is selected.
+A frequency list rather than a wall of boxes: each technology name carries its project count as a faint tabular superscript, most used first. A selected technology is set in medium-weight ink under the highlighter.
 
-### Project Tiles
+### Cards / Containers
 
-- **Shape:** full 14px chamfer, 24px padding, glaze-filled, no border or shadow.
-- **Glaze:** assigned by position (cobalt, turquoise, saffron, deep) when the project has public code or a demo; bare bisque otherwise (see the Glaze Follows Truth Rule). Ink or plaster-glaze text follows the pairing.
-- **Content:** display title, role line, four-line result, up to five technology pills outlined in the tile's own ink, then Code / Demo links underlined at 2px and a "Case study" arrow. The whole tile is a stretched link; the Code and Demo links remain individually clickable.
-- **Hover:** the screenshot scales 1.03 over 500ms; the arrow moves 4px.
-
-### Work Wall Tile (signature)
-
-Home Work tiles turn to a second face on hover or focus (hover-capable devices only). The front is the glazed face: title, category, three-line description, and a star-marked status line. The back is a deep cobalt spec sheet ruled with plaster-24% dividers: Role, Stack, Numbers (tabular), and a saffron "Read the case study" line. The turn is a flat scaleX pair, not a 3D flip: the front narrows to an edge in 0.2s, then the back widens from it over 0.5s with an exponential ease-out. A saffron 3px inside outline marks keyboard focus.
-
-### Availability Tile
-
-Saffron chamfered tile with an ink diamond and the availability label, and its larger twin on the hero (display statement plus detail line). It is the warmest object on the wall and states the ask truthfully.
-
-### Stack Tiles
-
-- **Style:** every technology is a small tile button on the cobalt wall, grouped by a label heading. At rest: cobalt wall surface (#1B47A3) with plaster-glaze text. Pointing at or focusing one glazes it saffron and lifts its defensible neighbours to plaster-glaze while the rest dim to 40% opacity. A reserved line beneath the wall names the connections so the layout never shifts under the pointer.
+There are no cards. Project entries in the work index are table-like rows ruled by hairlines across 6/3/3 columns (summary, stage strip and links, screenshot). The title is a stretched link; Code and Demo stay individually clickable. Screenshots sit in a 16:10 frame with a 1px inset hairline.
 
 ### Navigation
 
-- **Style:** sticky deep cobalt header with the star mark and name in display 700 (1.125rem), 14px semibold links in muted mist, hover and current page in saffron with a 2px underline at 10px offset, a secondary CV button, and the saffron star frieze below. Mobile shows a menu button that opens a full-width drawer of 1.5rem display links on the same deep ground. A skip link turns into a saffron tile on focus. The footer mirrors it in deep cobalt with the turquoise frieze above, three columns, and a muted mist copyright.
+- **Header:** sticky, sheet ground, hairline bottom rule, 68px tall. PathMark plus the name in display width at left. Links are 0.875rem muted ink, darkening to graphite on hover; the current page is graphite medium with a 1px underline. A secondary CV button closes the row.
+- **Mobile:** a drawer within the nav landmark, items in display width at 1.25rem separated by hairlines.
+- **Skip link:** graphite on highlighter yellow.
 
-### Timeline
+### Stage Strip (signature)
 
-A vertical grout track (3px) of stars: each node is a border-strong star that turns cobalt when reached, and the segment between nodes fills cobalt as the reader scrolls. Bullets are turquoise diamonds; skill chips sit beneath. Reduced motion shows the finished timeline.
+Fig. 1's encoding at the size of a word: five positions on a hairline, a filled stage-colour dot (4.5px radius) where the project's stack covers that stage and a hairline ring (3px) where it does not, with optional faint labels beneath. It repeats on every project so projects compare as small multiples. Coverage is derived only from each project's listed technologies.
 
-### Motion
+### PathMark (signature)
 
-- **Settle:** hero tiles and Reveal are pressed into place with a Framer Motion spring (hero: stiffness 210, damping 13, from y -26 and -0.8deg with an 80ms stagger; Reveal: stiffness 220, damping 20, rise 22px, in view once at -80px margin, opacity from 0). The hero animates transform only, so text is painted before hydration.
-- **CSS:** exponential ease-out `cubic-bezier(0.16, 1, 0.3, 1)` for state changes (200ms color, 300ms arrow travel, 500ms image scale and tile back). The page view transition uses the same curve over 0.3s.
-- **No 3D:** the tile turn is flat scaleX by design, since a CSS 3D flip broke rendering. No perspective, no backface-visibility, no WebGL.
-- **Reduced motion:** durations collapse to near zero; Reveal falls back to a 0.2s fade; MotionConfig skips the hero transform.
+Five 3px-radius dots in viridis order, the brand mark beside the name.
+
+### Figure entrances
+
+Marks draw in once in CSS: dots scale from zero over 500ms, bars extend from the axis over 900ms, both on the exponential ease-out with staggered delays. First-viewport text is never animated, so the name paints before hydration; below the fold, text and tables ease in once from an 8px rise over 600ms, with nothing that springs or slides. Reduced motion reduces the reveal to a plain fade and collapses CSS animation and transition to near zero.
 
 ## Do's and Don'ts
 
 ### Do:
 
-- **Do** cut every tile with the chamfer (14px for content tiles, 8px for buttons, filters, badges) and leave 12px to 14px of grout between neighbors.
-- **Do** put the reading on lime-wash plaster (#EFF1EA) and the wall on cobalt (#163E93); switch grounds by re-declaring tokens with `zone-cobalt` or `zone-plaster`.
-- **Do** pair text with its glaze: ink on turquoise, saffron, bisque and plaster glaze; plaster-glaze on cobalt and deep.
-- **Do** use text-safe turquoise (#0B6E67) whenever turquoise is read as text on plaster.
-- **Do** let a glaze reflect a real link: color for public code or demo, bare bisque for none.
-- **Do** draw focus as an inside outline in the tile's current color (saffron on cobalt walls).
-- **Do** keep h1-h3 in Bricolage Grotesque 800 and let the heading stand without anything above it.
-- **Do** use tabular numerals for dates, metrics and spec rows.
+- **Do** encode the five path stages, and only them, with the stage colours, in path order.
+- **Do** put the ask under the highlighter: graphite ink on the yellow band, never yellow text.
+- **Do** number figures and tables and caption them with one sentence opened by "Fig. n" in medium graphite.
+- **Do** close figures with one graphite total rule and carry totals in the margins.
+- **Do** align every comparable slot of a set of projects on one shared subgrid.
+- **Do** set headings in Archivo at 118% width with -0.022em tracking, and every aligned number in tabular figures.
+- **Do** separate with 1px hairlines and whitespace.
 
 ### Don't:
 
-- **Don't** add box shadows, gradients, blur, glow or backdrop effects; depth is color and grout.
-- **Don't** put a kicker, eyebrow, index number or category tag above a heading.
-- **Don't** use a monospace face or terminal styling; `font-mono` resolves to the body face.
-- **Don't** use the dark-mode, neon, grid-glow or 3D-scene developer-portfolio look; no WebGL, no custom cursor, no constellation.
-- **Don't** draw a border on a chamfered tile; the clip cuts it at the corners. Use a solid glaze or an inside outline.
-- **Don't** set turquoise (#12A79D) as text on plaster, or saffron as text on plaster; both fail as text and are fills only.
-- **Don't** glaze a project that has no public link, or leave a linked project bisque.
-- **Don't** replace the flat scaleX tile turn with a 3D flip.
-
-## Known Limitations
-
-- Every tile is the same chamfer silhouette (one octagon cut, two sizes). There is no second tile shape, so long walls read as uniform.
-- `Reveal` is one entrance (rise with spring settle) applied to every section; sections do not have their own entrances.
-- Small technology tags (chips, project-tile pills) use a 2px corner radius rather than the chamfer, so they are not cut tiles like the filter tiles beside them.
+- **Don't** use fills, panels, cards or shadows at rest; the command palette's overlay lift is the only shadow.
+- **Don't** use a stage colour as decoration, or the highlighter yellow as a data value or a fill panel.
+- **Don't** place a kicker, eyebrow or overline above a heading.
+- **Don't** add per-row rules to a figure; the band appears only on hover or focus.
+- **Don't** introduce a second typeface or a dark scheme.
+- **Don't** round corners beyond 3px; round shapes are reserved for data marks.
+- **Don't** animate first-viewport text, or let anything spring or slide; figure marks draw in, and below-fold blocks only rise 8px once.

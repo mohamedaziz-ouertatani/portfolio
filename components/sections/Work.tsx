@@ -1,59 +1,39 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
-import { Reveal } from '@/components/ui/Reveal';
-import { Star } from '@/components/ui/Star';
+import { StageStrip } from '@/components/ui/StageStrip';
 import { ViewTransitionLink } from '@/components/ui/ViewTransitionLink';
-import { findProject, hasRealScreenshot, projectHref } from '@/lib/projects';
-import { glazeFor } from '@/lib/glaze';
+import { findProject, projectHref } from '@/lib/projects';
+import { stageCoverage } from '@/lib/stages';
 
-// Curated by hand rather than derived from `priority`: this order, span and
-// glaze pairing is specific to the homepage wall, and shouldn't shift just
-// because the /projects ranking changes.
+// Curated by hand rather than derived from `priority`: this order is specific
+// to the homepage plate and shouldn't shift with the /projects ranking.
 const featured = [
   {
     slug: 'dressme',
     title: 'DressMe',
     category: 'Computer Vision / LLM Agents',
-    glaze: 'glaze-cobalt',
-    span: 'row-span-2 lg:col-span-7 lg:row-span-4',
-    showcase: true,
   },
   {
     slug: 'researchbridge',
     title: 'ResearchBridge',
     category: 'Research Intelligence / AI',
-    glaze: 'glaze-turquoise',
-    span: 'row-span-2 lg:col-span-5 lg:row-span-2',
   },
   {
     slug: 'estate-mind',
     title: 'Estate-Mind',
     category: 'Data Engineering / Data Science',
-    glaze: 'glaze-saffron',
-    span: 'row-span-2 lg:col-span-5 lg:row-span-2',
   },
-  {
-    slug: 'biflow',
-    title: 'BIFlow',
-    category: 'Multi-Agent Systems / BI',
-    glaze: 'glaze-deep',
-    span: 'row-span-2 lg:col-span-4 lg:row-span-2',
-  },
+  { slug: 'biflow', title: 'BIFlow', category: 'Multi-Agent Systems / BI' },
   {
     slug: 'smart-inventory',
     title: 'Smart Inventory Forecasting',
     category: 'Machine Learning / MLOps',
-    glaze: 'glaze-turquoise',
-    span: 'row-span-2 lg:col-span-4 lg:row-span-2',
   },
   {
     slug: 'mlops-pipeline',
     title: 'MLOps Pipeline',
     category: 'MLOps / Machine Learning',
-    glaze: 'glaze-saffron',
-    span: 'row-span-2 lg:col-span-4 lg:row-span-2',
   },
 ]
   .map((entry) => {
@@ -62,6 +42,12 @@ const featured = [
   })
   .filter((entry): entry is NonNullable<typeof entry> => entry !== null);
 
+/**
+ * Small multiples: six panels in one frame on one label grid. Each panel is
+ * a six-row subgrid (title, field, summary, stage strip, reported numbers,
+ * status), so every slot lines up across a row and the eye compares projects
+ * instead of re-reading layouts. Panels are separated by hairlines, not boxed.
+ */
 export function Work() {
   return (
     <Section
@@ -69,119 +55,90 @@ export function Work() {
       heading="Selected work"
       caption="Six projects across fashion AI, research tooling, data engineering, multi-agent systems, and ML. Each one opens as a case study."
     >
-      <ul className="grid auto-rows-[120px] gap-3 lg:auto-rows-[130px] lg:grid-cols-12 lg:gap-3.5">
-        {featured.map(
-          ({ project, title, category, glaze, span, showcase }, index) => {
-            const glazed = project.githubLink || project.liveDemoLink;
-            const face = glazeFor(project, glaze);
-            const hasImage = hasRealScreenshot(project);
-            const isDarkFace = face === 'glaze-cobalt' || face === 'glaze-deep';
+      <ul className="grid border-b border-border md:grid-cols-2 lg:grid-cols-3">
+        {featured.map(({ project, title, category }) => {
+          const isPublic = Boolean(project.githubLink || project.liveDemoLink);
+          const metrics = project.metrics?.slice(0, 3) ?? [];
 
-            return (
-              <li key={project.id} className={span}>
-                <Reveal from="above" delay={index * 0.07} className="h-full">
-                  <ViewTransitionLink
-                    href={projectHref(project)}
-                    aria-label={`${title}: read the case study`}
-                    className="flip-scene tile relative block h-full after:pointer-events-none after:absolute after:inset-0 after:z-10 after:content-[''] focus-visible:outline-none focus-visible:after:[outline-offset:-10px] focus-visible:after:[outline:3px_solid_#f0a81c]"
-                  >
-                    <div className="relative h-full w-full">
-                      {/* Front: the glazed face */}
-                      <div
-                        className={`flip-front absolute inset-0 flex flex-col p-6 ${face}`}
-                      >
-                        <h3
-                          className={`font-display font-extrabold leading-[1.02] tracking-tight ${
-                            showcase
-                              ? 'max-w-[14ch] text-4xl 2xl:text-5xl'
-                              : 'text-2xl sm:text-3xl'
-                          }`}
-                        >
-                          {title}
-                        </h3>
-                        <p className="mt-1 text-sm font-semibold opacity-80">
-                          {category}
-                        </p>
-                        <p
-                          className={`mt-3 text-base leading-snug opacity-90 ${
-                            showcase
-                              ? 'line-clamp-4 max-w-[38ch] lg:max-w-[30ch]'
-                              : 'line-clamp-3 max-w-[46ch]'
-                          }`}
-                        >
-                          {project.description}
-                        </p>
-                        <p className="mt-auto flex items-center gap-2 pt-3 text-sm font-semibold">
-                          <Star
-                            size={16}
-                            className={
-                              glazed
-                                ? isDarkFace
-                                  ? 'text-glaze-saffron'
-                                  : 'text-glaze-cobalt'
-                                : 'opacity-40'
-                            }
-                          />
-                          {glazed ? 'Code is public' : 'No public link yet'}
-                        </p>
+          return (
+            <li
+              key={project.id}
+              className="group relative flex flex-col border-t border-border py-7 md:row-span-6 md:grid md:grid-rows-subgrid md:gap-y-0 md:px-6 lg:px-7 lg:[&:not(:nth-child(3n+1))]:border-l md:[&:nth-child(even)]:border-l lg:[&:nth-child(even)]:border-l-0"
+            >
+              <h3 className="text-xl font-semibold leading-tight text-foreground sm:text-2xl md:self-start">
+                <ViewTransitionLink
+                  href={projectHref(project)}
+                  className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none focus-visible:after:outline focus-visible:after:outline-2 focus-visible:after:outline-offset-[-2px] focus-visible:after:outline-accent group-hover:text-accent"
+                >
+                  {title}
+                </ViewTransitionLink>
+              </h3>
+              <p className="mt-1 text-sm text-faint">{category}</p>
 
-                        {showcase && hasImage && (
-                          <div className="absolute bottom-6 right-6 top-6 hidden w-[40%] overflow-hidden lg:block">
-                            <Image
-                              src={project.images[0]}
-                              alt={`Screenshot from ${project.title}`}
-                              fill
-                              sizes="30vw"
-                              className="object-cover object-top"
-                            />
-                          </div>
-                        )}
-                      </div>
+              <p className="mt-4 max-w-[48ch] text-[0.9375rem] leading-relaxed text-muted-foreground">
+                {project.description}
+              </p>
 
-                      {/* Back: the ruled spec */}
-                      <div className="flip-back glaze-deep absolute inset-0 flex flex-col p-6">
-                        <dl className="divide-y divide-[rgb(245_246_241/0.22)] text-sm">
-                          {project.role && (
-                            <div className="grid grid-cols-[5.5rem_1fr] gap-3 pb-2">
-                              <dt className="label !text-[#a9b9e0]">Role</dt>
-                              <dd>{project.role}</dd>
-                            </div>
-                          )}
-                          <div className="grid grid-cols-[5.5rem_1fr] gap-3 py-2">
-                            <dt className="label !text-[#a9b9e0]">Stack</dt>
-                            <dd className="line-clamp-2">
-                              {project.technologies.slice(0, 5).join(', ')}
-                            </dd>
-                          </div>
-                          {project.metrics && project.metrics.length > 0 && (
-                            <div className="grid grid-cols-[5.5rem_1fr] gap-3 py-2">
-                              <dt className="label !text-[#a9b9e0]">Numbers</dt>
-                              <dd className="tnum">
-                                {project.metrics
-                                  .slice(0, 3)
-                                  .map((m) => `${m.value} ${m.label}`)
-                                  .join(' · ')}
-                              </dd>
-                            </div>
-                          )}
-                        </dl>
-                        <p className="mt-auto flex items-center gap-2 font-display text-xl font-extrabold text-glaze-saffron">
-                          Read the case study
-                          <ArrowRight size={18} aria-hidden="true" />
-                        </p>
-                      </div>
+              <StageStrip
+                coverage={stageCoverage(project)}
+                showLabels
+                className="mt-6"
+              />
+
+              {metrics.length > 0 ? (
+                <dl className="mt-6 text-sm md:self-start">
+                  {metrics.map((metric) => (
+                    <div
+                      key={metric.label}
+                      className="flex items-baseline justify-between gap-4 border-t border-border py-1.5"
+                    >
+                      <dt className="text-muted-foreground">{metric.label}</dt>
+                      <dd className="tnum text-right font-medium text-foreground">
+                        {metric.value}
+                      </dd>
                     </div>
-                  </ViewTransitionLink>
-                </Reveal>
-              </li>
-            );
-          }
-        )}
+                  ))}
+                </dl>
+              ) : (
+                <dl className="mt-6 text-sm md:self-start">
+                  <div className="flex items-baseline justify-between gap-4 border-t border-border py-1.5">
+                    <dt className="text-muted-foreground">Role</dt>
+                    <dd className="text-right font-medium text-foreground">
+                      {project.role}
+                    </dd>
+                  </div>
+                </dl>
+              )}
+
+              <p className="mt-auto flex items-center justify-between gap-4 pt-6 text-sm md:self-end">
+                <span className="flex items-center gap-2 text-muted-foreground">
+                  <span
+                    aria-hidden="true"
+                    className={`h-1.5 w-1.5 rounded-full ${
+                      isPublic
+                        ? 'bg-foreground'
+                        : '[box-shadow:inset_0_0_0_1px_var(--color-border-strong)]'
+                    }`}
+                  />
+                  {isPublic ? 'Code is public' : 'No public link yet'}
+                </span>
+                <span className="inline-flex items-center gap-1.5 font-medium text-accent">
+                  Case study
+                  <ArrowRight
+                    size={14}
+                    aria-hidden="true"
+                    className="transition-transform duration-300 ease-cine group-hover:translate-x-1"
+                  />
+                </span>
+              </p>
+            </li>
+          );
+        })}
       </ul>
 
       <Link
         href="/projects"
-        className="mt-10 inline-flex items-center gap-2 text-base font-bold text-accent underline decoration-2 underline-offset-[6px] transition-colors hover:text-accent-strong"
+        className="link mt-8 inline-flex items-center gap-2 text-base font-medium"
       >
         All projects
         <ArrowRight size={16} aria-hidden="true" />

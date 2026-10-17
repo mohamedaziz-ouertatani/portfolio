@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Github, Linkedin, Mail, FileText } from 'lucide-react';
 import { site } from '@/lib/site';
 import { socialLinks } from '@/lib/social';
-import { Star } from '@/components/ui/Star';
+import { PathMark } from '@/components/ui/PathMark';
 
 const icons = {
   github: Github,
@@ -23,68 +23,69 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="zone-cobalt mt-auto bg-glaze-deep print:hidden">
-      <div aria-hidden="true" className="frieze-turquoise h-4" />
-      <div className="container mx-auto grid gap-10 px-4 py-14 md:grid-cols-3">
-        <div>
-          <p className="inline-flex items-center gap-2.5 font-display text-xl font-bold text-foreground">
-            <Star size={24} className="text-glaze-saffron" />
-            {site.name}
-          </p>
-          <p className="mt-3 text-sm text-muted-foreground">{site.role}</p>
-          <p className="text-sm text-muted-foreground">{site.location}</p>
-        </div>
+    <footer className="mt-auto print:hidden">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="grid gap-10 border-t border-border py-12 md:grid-cols-12">
+          <div className="md:col-span-5">
+            <p className="inline-flex items-center gap-3 font-display text-base font-semibold text-foreground">
+              <PathMark />
+              {site.name}
+            </p>
+            <p className="mt-3 text-sm text-muted-foreground">{site.role}</p>
+            <p className="text-sm text-muted-foreground">{site.location}</p>
+          </div>
 
-        <nav aria-label="Footer">
-          <h2 className="label mb-4">
-            Navigate
-            <span className="ml-3 hidden font-normal normal-case tracking-normal text-faint md:inline">
-              Ctrl / Cmd + K to search
-            </span>
-          </h2>
-          <ul className="space-y-2 text-sm">
-            {quickLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="text-foreground underline-offset-4 transition-colors hover:text-accent hover:underline"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div>
-          <h2 className="label mb-4">Connect</h2>
-          <ul className="space-y-2 text-sm">
-            {socialLinks.map((link) => {
-              const Icon = icons[link.id];
-              return (
-                <li key={link.id}>
-                  <a
+          <nav aria-label="Footer" className="md:col-span-3 md:col-start-7">
+            <h2 className="label mb-4">Navigate</h2>
+            <ul className="space-y-1.5 text-sm">
+              {quickLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
                     href={link.href}
-                    download={link.id === 'cv' || undefined}
-                    target={link.external ? '_blank' : undefined}
-                    rel={link.external ? 'noopener noreferrer' : undefined}
-                    className="inline-flex items-center gap-2.5 text-foreground underline-offset-4 transition-colors hover:text-accent hover:underline"
+                    className="text-foreground underline-offset-[0.24em] transition-colors hover:text-accent hover:underline"
                   >
-                    <Icon size={15} aria-hidden="true" />
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
-              );
-            })}
-          </ul>
-        </div>
-      </div>
+              ))}
+            </ul>
+            <p className="mt-4 hidden text-xs text-faint md:block">
+              Ctrl / Cmd + K to search
+            </p>
+          </nav>
 
-      <p className="border-t border-border">
-        <span className="container mx-auto block px-4 py-5 text-center text-xs text-faint">
+          <div className="md:col-span-3">
+            <h2 className="label mb-4">Connect</h2>
+            <ul className="space-y-1.5 text-sm">
+              {socialLinks.map((link) => {
+                const Icon = icons[link.id];
+                return (
+                  <li key={link.id}>
+                    <a
+                      href={link.href}
+                      download={link.id === 'cv' || undefined}
+                      target={link.external ? '_blank' : undefined}
+                      rel={link.external ? 'noopener noreferrer' : undefined}
+                      className="inline-flex items-center gap-2.5 text-foreground underline-offset-[0.24em] transition-colors hover:text-accent hover:underline"
+                    >
+                      <Icon
+                        size={14}
+                        aria-hidden="true"
+                        className="text-faint"
+                      />
+                      {link.label}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+
+        <p className="border-t border-border py-5 text-xs text-faint">
           © {currentYear} {site.name}
-        </span>
-      </p>
+        </p>
+      </div>
     </footer>
   );
 }

@@ -38,31 +38,26 @@ const config: Config = {
           dim: 'var(--color-accent-dim)',
           foreground: 'var(--color-accent-foreground)',
         },
-        secondary: {
-          DEFAULT: 'var(--color-accent-2)',
-          dim: 'var(--color-accent-2-dim)',
-        },
         destructive: {
           DEFAULT: 'var(--color-destructive)',
           foreground: '#FFFFFF',
         },
         success: 'var(--color-success)',
-        glaze: {
-          cobalt: 'var(--glaze-cobalt)',
-          deep: 'var(--glaze-cobalt-deep)',
-          turquoise: 'var(--glaze-turquoise)',
-          saffron: 'var(--glaze-saffron)',
-          plaster: 'var(--glaze-plaster)',
-          bisque: 'var(--glaze-bisque)',
-          ink: 'var(--glaze-ink)',
+        stage: {
+          0: 'var(--stage-0)',
+          1: 'var(--stage-1)',
+          2: 'var(--stage-2)',
+          3: 'var(--stage-3)',
+          4: 'var(--stage-4)',
         },
+        highlight: 'var(--highlight)',
       },
       fontFamily: {
-        sans: ['var(--font-body)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
-        // Remaining `font-mono` utilities render in the body face; the site
-        // has no monospace voice.
-        mono: ['var(--font-body)', 'system-ui', 'sans-serif'],
+        // One family, Archivo, with width as the voice: expanded for
+        // display, normal for reading. Tabular figures come from the same face.
+        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-sans)', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         xs: ['0.75rem', '1rem'],
@@ -83,15 +78,13 @@ const config: Config = {
         tightest: '-0.045em',
       },
       borderRadius: {
-        sm: '2px',
-        md: '4px',
-        lg: '6px',
+        sm: '1px',
+        md: '2px',
+        lg: '3px',
       },
       transitionTimingFunction: {
         // Exponential ease-out for reveals and hover motion.
         cine: 'cubic-bezier(0.16, 1, 0.3, 1)',
-        // Tile settle for CSS motion: exponential ease-out (the damped overshoot lives in the Framer springs).
-        settle: 'cubic-bezier(0.16, 1, 0.3, 1)',
       },
     },
   },

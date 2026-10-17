@@ -39,12 +39,12 @@ export default function ProjectImagesZoom({ images }: { images: string[] }) {
 
   return (
     <>
-      <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="grid gap-4 sm:grid-cols-2">
         {images.map((img, idx) => (
           <li key={img}>
             <button
               type="button"
-              className="tile tile-sm group block w-full overflow-hidden bg-background-elevated focus-visible:outline-none focus-visible:[outline-offset:-6px] focus-visible:[outline:3px_solid_var(--color-accent)]"
+              className="group block w-full overflow-hidden bg-background-elevated [box-shadow:inset_0_0_0_1px_var(--color-border)]"
               onClick={(event) => {
                 triggerRef.current = event.currentTarget;
                 setOpenIndex(idx);
@@ -56,7 +56,7 @@ export default function ProjectImagesZoom({ images }: { images: string[] }) {
                 alt=""
                 width={600}
                 height={400}
-                className="h-auto w-full object-cover transition-transform duration-500 ease-cine group-hover:scale-[1.02]"
+                className="h-auto w-full object-cover opacity-95 transition-opacity duration-300 ease-cine group-hover:opacity-100"
               />
             </button>
           </li>
@@ -65,7 +65,7 @@ export default function ProjectImagesZoom({ images }: { images: string[] }) {
 
       {openIndex !== null && (
         <div
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-[rgb(11_21_51/0.88)] p-4"
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-[rgb(20_24_28/0.9)] p-4"
           onClick={close}
           role="dialog"
           aria-modal="true"
@@ -78,7 +78,7 @@ export default function ProjectImagesZoom({ images }: { images: string[] }) {
             <button
               ref={closeButtonRef}
               type="button"
-              className="tile tile-sm absolute -top-12 right-0 inline-flex items-center gap-2 bg-glaze-saffron px-4 py-2 text-sm font-bold text-glaze-ink transition-colors hover:bg-[#ffc247]"
+              className="absolute -top-11 right-0 inline-flex items-center gap-2 rounded-sm bg-background px-3.5 py-1.5 text-sm font-medium text-foreground transition-colors hover:bg-surface"
               onClick={close}
             >
               <X size={14} aria-hidden="true" />
@@ -89,7 +89,7 @@ export default function ProjectImagesZoom({ images }: { images: string[] }) {
               alt={`Screenshot ${openIndex + 1} of ${images.length}`}
               width={1200}
               height={800}
-              className="h-auto max-h-[80vh] w-full bg-glaze-plaster object-contain"
+              className="h-auto max-h-[80vh] w-full bg-surface object-contain"
             />
           </div>
         </div>

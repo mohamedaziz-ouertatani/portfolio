@@ -5,43 +5,40 @@ interface SectionProps {
   heading: string;
   caption?: string;
   children: ReactNode;
-  /** Plaster reads; cobalt is the wall itself, set into the page as a band. */
-  tone?: 'plaster' | 'cobalt';
   className?: string;
 }
 
 /**
- * Shared shell for every zone. The heading carries its own weight, so there
- * is no kicker or index above it. Each section owns its full-bleed ground and
- * its own container, which is what lets cobalt bands cut across the page.
+ * Shared shell for every home section. A hairline rule opens it, the heading
+ * carries its own weight with nothing above it, and the caption reads like a
+ * figure caption: one sentence on what the section shows.
  */
 export function Section({
   id,
   heading,
   caption,
   children,
-  tone = 'plaster',
   className = '',
 }: SectionProps) {
   return (
-    <section
-      id={id}
-      aria-labelledby={`${id}-heading`}
-      className={`${tone === 'cobalt' ? 'zone-cobalt field-deep' : ''} ${className}`}
-    >
-      <div className="container mx-auto px-4 py-20 md:py-28">
-        <h2
-          id={`${id}-heading`}
-          className="max-w-3xl text-4xl font-extrabold leading-[1.02] tracking-tight text-foreground sm:text-5xl md:text-6xl"
-        >
-          {heading}
-        </h2>
-        {caption && (
-          <p className="mt-5 max-w-2xl text-lg text-muted-foreground">
-            {caption}
-          </p>
-        )}
-        <div className="mt-12">{children}</div>
+    <section id={id} aria-labelledby={`${id}-heading`} className={className}>
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="border-t border-foreground pb-20 pt-10 md:pb-28 md:pt-12">
+          <div className="grid gap-x-10 gap-y-4 lg:grid-cols-12">
+            <h2
+              id={`${id}-heading`}
+              className="text-3xl font-semibold leading-[1.08] text-foreground sm:text-4xl lg:col-span-5"
+            >
+              {heading}
+            </h2>
+            {caption && (
+              <p className="max-w-[60ch] text-base leading-relaxed text-muted-foreground lg:col-span-6 lg:col-start-7 lg:pt-1.5">
+                {caption}
+              </p>
+            )}
+          </div>
+          <div className="mt-12 md:mt-14">{children}</div>
+        </div>
       </div>
     </section>
   );
