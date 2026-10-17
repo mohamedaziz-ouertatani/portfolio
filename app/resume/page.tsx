@@ -29,28 +29,28 @@ const INTERESTS = ['Muay Thai', 'Motorcycling', 'Fitness', 'Gaming'];
 
 export default function Resume() {
   return (
-    <div className="container mx-auto max-w-3xl px-4 pb-16 pt-12 print:py-8">
+    <div className="container mx-auto max-w-3xl px-4 pb-16 pt-12 sm:px-6 print:py-8">
       {/* === Resume Hero (Name, Title, Portrait, Download/Contact) === */}
-      <section className="tile zone-cobalt mb-10 flex flex-col-reverse items-start gap-6 p-6 sm:p-8 md:flex-row md:items-center md:justify-between print:mb-6 print:bg-white print:p-0">
+      <section className="mb-10 flex flex-col-reverse items-start gap-6 border-b-2 border-foreground pb-8 md:flex-row md:items-center md:justify-between print:mb-6 print:pb-4">
         {/* Headline and actions */}
         <div>
-          <h1 className="text-4xl font-extrabold leading-[1] tracking-tight text-foreground md:text-5xl print:text-black">
+          <h1 className="font-display text-4xl font-semibold leading-[1] text-foreground md:text-5xl print:text-black">
             {site.name}
           </h1>
-          <div className="mt-3 text-base font-bold text-accent md:text-lg print:text-black">
+          <div className="mt-3 text-base font-medium text-foreground md:text-lg print:text-black">
             Final-Year Computer Science Engineering Student — Data Science
           </div>
           <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground print:text-black">
             <a
               href={`mailto:${site.email}`}
-              className="underline underline-offset-4 transition-colors hover:text-accent"
+              className="underline decoration-1 underline-offset-[0.24em] transition-colors hover:text-accent"
             >
               {site.email}
             </a>
             <span aria-hidden="true">&#183;</span>
             <a
               href={site.phoneHref}
-              className="underline underline-offset-4 transition-colors hover:text-accent"
+              className="underline decoration-1 underline-offset-[0.24em] transition-colors hover:text-accent"
             >
               {site.phone}
             </a>
@@ -61,7 +61,7 @@ export default function Resume() {
               href={socialLink('linkedin').href}
               target="_blank"
               rel="noopener noreferrer"
-              className="underline underline-offset-4 transition-colors hover:text-accent"
+              className="underline decoration-1 underline-offset-[0.24em] transition-colors hover:text-accent"
             >
               LinkedIn
             </a>
@@ -70,7 +70,7 @@ export default function Resume() {
         </div>
         {/* Portrait */}
         <div className="mb-6 flex-shrink-0 md:mb-0 print:hidden">
-          <div className="tile tile-sm relative h-[120px] w-[120px] overflow-hidden">
+          <div className="relative h-[120px] w-[96px] overflow-hidden bg-background-elevated">
             <Image
               src="/me3.png"
               alt="Mohamed Aziz Ouertatani"
@@ -86,7 +86,7 @@ export default function Resume() {
           <a
             href={site.cv}
             download
-            className="tile tile-sm inline-block bg-accent px-5 py-3 text-sm font-bold text-accent-foreground transition-colors hover:bg-accent-strong"
+            className="inline-block rounded-sm bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-colors hover:bg-accent-strong"
           >
             Download CV
           </a>
@@ -95,7 +95,7 @@ export default function Resume() {
 
       {/* === Professional Summary === */}
       <section className="mb-10 print:mb-6">
-        <h2 className="mb-3 border-b-2 border-border pb-2 text-2xl font-extrabold tracking-tight text-foreground">
+        <h2 className="mb-4 border-b border-border pb-2 text-xl font-semibold text-foreground">
           Professional Summary
         </h2>
         <ul className="list-inside list-disc space-y-2 text-sm text-muted-foreground md:text-base">
@@ -106,7 +106,7 @@ export default function Resume() {
           </li>
           <li>
             Specialized in architecting{' '}
-            <span className="font-bold text-accent">
+            <span className="font-medium text-foreground">
               end-to-end data pipelines
             </span>{' '}
             and interactive analytics for business and real-world impact.
@@ -129,7 +129,7 @@ export default function Resume() {
 
       {/* === Experience === */}
       <section className="mb-10 print:mb-6">
-        <h2 className="mb-3 border-b-2 border-border pb-2 text-2xl font-extrabold tracking-tight text-foreground">
+        <h2 className="mb-4 border-b border-border pb-2 text-xl font-semibold text-foreground">
           Professional Experience
         </h2>
         <div className="space-y-6">
@@ -149,7 +149,7 @@ export default function Resume() {
 
       {/* === Education === */}
       <section className="mb-10 print:mb-6">
-        <h2 className="mb-3 border-b-2 border-border pb-2 text-2xl font-extrabold tracking-tight text-foreground">
+        <h2 className="mb-4 border-b border-border pb-2 text-xl font-semibold text-foreground">
           Education
         </h2>
         <div className="space-y-4">
@@ -170,7 +170,7 @@ export default function Resume() {
 
       {/* === Featured Projects === */}
       <section className="mb-10 print:mb-6">
-        <h2 className="mb-3 border-b-2 border-border pb-2 text-2xl font-extrabold tracking-tight text-foreground">
+        <h2 className="mb-4 border-b border-border pb-2 text-xl font-semibold text-foreground">
           Featured Projects
         </h2>
         <div className="grid gap-6 md:grid-cols-2">
@@ -191,10 +191,10 @@ export default function Resume() {
 
       {/* === Skills === */}
       <section className="mb-10 print:mb-6">
-        <h2 className="mb-3 border-b-2 border-border pb-2 text-2xl font-extrabold tracking-tight text-foreground">
+        <h2 className="mb-4 border-b border-border pb-2 text-xl font-semibold text-foreground">
           Skills & Technologies
         </h2>
-        <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
+        <div className="flex flex-wrap gap-1.5 text-sm text-muted-foreground">
           {allSkills.map((skill) => (
             <SkillBadge key={skill.name}>{skill.name}</SkillBadge>
           ))}
@@ -203,10 +203,10 @@ export default function Resume() {
 
       {/* === Interests === */}
       <section className="mb-8">
-        <h2 className="mb-3 border-b-2 border-border pb-2 text-2xl font-extrabold tracking-tight text-foreground">
+        <h2 className="mb-4 border-b border-border pb-2 text-xl font-semibold text-foreground">
           Interests
         </h2>
-        <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
+        <div className="flex flex-wrap gap-1.5 text-sm text-muted-foreground">
           {INTERESTS.map((interest) => (
             <InterestBadge key={interest}>{interest}</InterestBadge>
           ))}
@@ -232,9 +232,9 @@ function ResumeExperience({
   return (
     <div className="group">
       <div className="mb-1 flex flex-wrap items-center gap-2">
-        <span className="font-bold text-foreground">{role}</span>
-        <span className="font-semibold text-accent">&#183; {company}</span>
-        <span className="text-sm text-muted-foreground">{date}</span>
+        <span className="font-semibold text-foreground">{role}</span>
+        <span className="text-muted-foreground">&#183; {company}</span>
+        <span className="tnum text-sm text-faint">{date}</span>
       </div>
       <ul className="ml-4 list-inside list-disc text-muted-foreground">
         {highlights.map((item, idx) => (
@@ -266,15 +266,15 @@ function ResumeProjectCard({
 }) {
   return (
     <div
-      className={`tile tile-sm p-5 print:border print:bg-white print:text-black ${
-        animate ? 'bg-background-elevated' : 'bg-background-elevated'
+      className={`border-t border-border pt-4 print:text-black ${
+        animate ? '' : ''
       }`}
     >
       <div className="mb-1 flex items-center justify-between">
-        <span className="font-bold">{name}</span>
+        <span className="font-semibold">{name}</span>
         {url && (
           <a
-            className="ml-3 text-xs font-bold text-accent underline underline-offset-4 hover:no-underline"
+            className="link ml-3 shrink-0 text-xs"
             href={url}
             target="_blank"
             rel="noopener noreferrer"
@@ -283,11 +283,9 @@ function ResumeProjectCard({
           </a>
         )}
       </div>
-      <div className="mb-1 text-xs font-semibold uppercase tracking-[0.1em] text-muted-foreground">
-        {role}
-      </div>
-      <div className="mb-2 text-sm">{description}</div>
-      <div className="mb-2 text-xs font-semibold text-accent">{stack}</div>
+      <div className="mb-2 text-xs text-faint">{role}</div>
+      <div className="mb-2 text-sm text-muted-foreground">{description}</div>
+      <div className="mb-2 text-xs text-faint">{stack}</div>
       <ul className="ml-4 list-disc text-sm text-muted-foreground print:text-black">
         <li>{impact}</li>
       </ul>
@@ -297,7 +295,7 @@ function ResumeProjectCard({
 
 function SkillBadge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="rounded-sm bg-background-elevated px-3 py-1 font-semibold text-foreground">
+    <span className="rounded-sm px-2 py-0.5 text-foreground [box-shadow:inset_0_0_0_1px_var(--color-border)]">
       {children}
     </span>
   );
@@ -305,7 +303,7 @@ function SkillBadge({ children }: { children: React.ReactNode }) {
 
 function InterestBadge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="rounded-sm bg-background-elevated px-3 py-1 font-semibold text-foreground">
+    <span className="rounded-sm px-2 py-0.5 text-foreground [box-shadow:inset_0_0_0_1px_var(--color-border)]">
       {children}
     </span>
   );

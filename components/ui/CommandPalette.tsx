@@ -115,7 +115,7 @@ export function CommandPalette() {
           animate={{ opacity: 1 }}
           exit={shouldReduceMotion ? undefined : { opacity: 0 }}
           transition={{ duration: 0.15, ease: 'easeOut' }}
-          className="fixed inset-0 z-[100] flex items-start justify-center bg-[rgb(11_21_51/0.6)] px-4 pt-[15vh]"
+          className="fixed inset-0 z-[100] flex items-start justify-center bg-[rgb(20_24_28/0.45)] px-4 pt-[15vh]"
           onClick={() => setIsOpen(false)}
         >
           <motion.div
@@ -133,9 +133,9 @@ export function CommandPalette() {
                 : { opacity: 0, scale: 0.97, y: -8 }
             }
             transition={{ duration: 0.15, ease: 'easeOut' }}
-            className="tile w-full max-w-lg overflow-hidden bg-surface"
+            className="w-full max-w-lg overflow-hidden rounded-sm bg-surface [box-shadow:0_0_0_1px_var(--color-border-strong),0_18px_48px_-12px_rgb(20_24_28/0.28)]"
           >
-            <div className="flex items-center gap-3 border-b-2 border-border-strong px-5 py-4">
+            <div className="flex items-center gap-3 border-b border-border px-5 py-4">
               <Search
                 size={16}
                 className="shrink-0 text-faint"
@@ -183,7 +183,7 @@ export function CommandPalette() {
                               onClick={() => navigate(command)}
                               className={`block w-full px-5 py-2.5 text-left text-sm transition-colors ${
                                 isActive
-                                  ? 'bg-accent font-semibold text-accent-foreground'
+                                  ? 'bg-background-elevated font-medium text-foreground'
                                   : 'text-foreground hover:bg-surface-hover'
                               }`}
                             >

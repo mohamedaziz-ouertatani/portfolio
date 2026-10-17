@@ -1,194 +1,405 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-18T12:00:00.000Z",
+  "generatedAt": "2026-10-17T13:47:47+00:00",
   "title": "Design System: Mohamed Aziz Ouertatani, Portfolio",
   "extensions": {
     "colorMeta": {
-      "cobalt": {
+      "sheet": {
+        "role": "neutral",
+        "displayName": "Sheet",
+        "cssVar": "--color-background",
+        "canonical": "#f6f7f7",
+        "oklch": "oklch(97.5% 0.001 197.1)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242525",
+          "#414242",
+          "#606161",
+          "#818282",
+          "#a4a5a5",
+          "#c8c9c9",
+          "#eeefef"
+        ]
+      },
+      "sheet-band": {
+        "role": "neutral",
+        "displayName": "Sheet Band",
+        "cssVar": "--color-background-elevated",
+        "canonical": "#eceeef",
+        "oklch": "oklch(94.8% 0.003 228.8)",
+        "tonalRamp": [
+          "#0a0b0c",
+          "#242526",
+          "#414243",
+          "#606162",
+          "#818383",
+          "#a3a5a6",
+          "#c7c9ca",
+          "#edeff0"
+        ]
+      },
+      "paper-white": {
+        "role": "neutral",
+        "displayName": "Paper White",
+        "cssVar": "--color-surface",
+        "canonical": "#ffffff",
+        "oklch": "oklch(100.0% 0.000 89.9)",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#252525",
+          "#424242",
+          "#616161",
+          "#828282",
+          "#a5a5a5",
+          "#c9c9c9",
+          "#eeeeee"
+        ]
+      },
+      "paper-hover": {
+        "role": "neutral",
+        "displayName": "Paper Hover",
+        "cssVar": "--color-surface-hover",
+        "canonical": "#f0f2f3",
+        "oklch": "oklch(96.0% 0.003 228.8)",
+        "tonalRamp": [
+          "#0a0b0c",
+          "#242526",
+          "#414243",
+          "#606162",
+          "#818383",
+          "#a3a5a6",
+          "#c7c9ca",
+          "#edeff0"
+        ]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "cssVar": "--color-border",
+        "canonical": "#d5d9dc",
+        "oklch": "oklch(88.3% 0.006 239.8)",
+        "tonalRamp": [
+          "#090c0d",
+          "#222528",
+          "#3f4245",
+          "#5e6264",
+          "#7f8386",
+          "#a2a6a8",
+          "#c6cacd",
+          "#ebeff2"
+        ]
+      },
+      "hairline-strong": {
+        "role": "neutral",
+        "displayName": "Hairline Strong",
+        "cssVar": "--color-border-strong",
+        "canonical": "#9aa2a9",
+        "oklch": "oklch(70.8% 0.014 244.3)",
+        "tonalRamp": [
+          "#070c11",
+          "#20262b",
+          "#3c4349",
+          "#5b6269",
+          "#7c838a",
+          "#9ea6ad",
+          "#c2cad2",
+          "#e7f0f7"
+        ]
+      },
+      "graphite-ink": {
+        "role": "neutral",
+        "displayName": "Graphite Ink",
+        "cssVar": "--color-foreground",
+        "canonical": "#14181c",
+        "oklch": "oklch(20.7% 0.010 248.3)",
+        "tonalRamp": [
+          "#080c0f",
+          "#21262a",
+          "#3e4347",
+          "#5d6267",
+          "#7e8388",
+          "#a0a6ab",
+          "#c4cacf",
+          "#e9eff5"
+        ]
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Ink Muted",
+        "cssVar": "--color-muted-foreground",
+        "canonical": "#48515a",
+        "oklch": "oklch(43.0% 0.019 248.3)",
+        "tonalRamp": [
+          "#050c13",
+          "#1e262e",
+          "#3a434c",
+          "#59626c",
+          "#7a848d",
+          "#9ca6b1",
+          "#c0cbd5",
+          "#e5f0fb"
+        ]
+      },
+      "ink-faint": {
+        "role": "neutral",
+        "displayName": "Ink Faint",
+        "cssVar": "--color-faint-foreground",
+        "canonical": "#646d75",
+        "oklch": "oklch(53.0% 0.017 244.9)",
+        "tonalRamp": [
+          "#060c12",
+          "#1e262d",
+          "#3b434a",
+          "#5a626a",
+          "#7a848c",
+          "#9da6af",
+          "#c1cbd4",
+          "#e6f0f9"
+        ]
+      },
+      "viridis-blue": {
         "role": "primary",
-        "displayName": "Sidi Bou Said Cobalt",
-        "canonical": "#163E93",
+        "displayName": "Viridis Blue",
+        "cssVar": "--color-accent",
+        "canonical": "#2a6589",
+        "oklch": "oklch(48.5% 0.084 238.7)",
         "tonalRamp": [
-          "#0E285E",
-          "#102D6B",
-          "#123379",
-          "#143886",
-          "#163E93",
-          "#506EAE",
-          "#8B9FC9",
-          "#C5CFE4"
+          "#010d16",
+          "#07283b",
+          "#124765",
+          "#2d678c",
+          "#4f89af",
+          "#72add4",
+          "#9ed0f3",
+          "#d1f4ff"
         ]
       },
-      "cobalt-deep": {
+      "viridis-blue-deep": {
         "role": "primary",
-        "displayName": "Deep Cobalt",
-        "canonical": "#0E2A6B",
+        "displayName": "Viridis Blue Deep",
+        "cssVar": "--color-accent-strong",
+        "canonical": "#1b4a68",
+        "oklch": "oklch(39.2% 0.072 240.3)",
         "tonalRamp": [
-          "#091B44",
-          "#0A1F4E",
-          "#0B2258",
-          "#0D2661",
-          "#0E2A6B",
-          "#4A5F90",
-          "#8795B5",
-          "#C3CADA"
+          "#030c15",
+          "#0e2838",
+          "#1e4660",
+          "#386686",
+          "#5a88a9",
+          "#7cabce",
+          "#a6cfed",
+          "#d6f3ff"
         ]
       },
-      "saffron": {
+      "stage-data": {
         "role": "secondary",
-        "displayName": "Saffron Glaze",
-        "canonical": "#F0A81C",
+        "displayName": "Stage 0, Data (viridis 0)",
+        "cssVar": "--stage-0",
+        "canonical": "#440154",
+        "oklch": "oklch(28.5% 0.137 318.1)",
         "tonalRamp": [
-          "#9A6C12",
-          "#AF7B14",
-          "#C58A17",
-          "#DA9919",
-          "#F0A81C",
-          "#F4BE55",
-          "#F8D48E",
-          "#FBE9C6"
+          "#130418",
+          "#35143f",
+          "#5c286a",
+          "#814492",
+          "#a465b7",
+          "#c988dc",
+          "#e9b1fa",
+          "#ffdeff"
         ]
       },
-      "turquoise": {
+      "stage-analysis": {
         "role": "secondary",
-        "displayName": "Kairouan Turquoise",
-        "canonical": "#12A79D",
+        "displayName": "Stage 1, Analysis (viridis .2)",
+        "cssVar": "--stage-1",
+        "canonical": "#414487",
+        "oklch": "oklch(41.9% 0.110 278.6)",
         "tonalRamp": [
-          "#0C6B64",
-          "#0D7A73",
-          "#0F8981",
-          "#10988F",
-          "#12A79D",
-          "#4DBDB6",
-          "#89D3CE",
-          "#C4E9E7"
+          "#08091b",
+          "#1e2045",
+          "#383a74",
+          "#54599e",
+          "#747bc3",
+          "#969ee9",
+          "#bbc3ff",
+          "#e4ebff"
         ]
       },
-      "turquoise-text": {
+      "stage-model": {
         "role": "secondary",
-        "displayName": "Turquoise, text-safe",
-        "canonical": "#0B6E67",
+        "displayName": "Stage 2, Model (viridis .4)",
+        "cssVar": "--stage-2",
+        "canonical": "#2a788e",
+        "oklch": "oklch(53.5% 0.082 220.2)",
         "tonalRamp": [
-          "#074642",
-          "#08504B",
-          "#095A54",
-          "#0A645E",
-          "#0B6E67",
-          "#48928D",
-          "#85B7B3",
-          "#C2DBD9"
+          "#000e13",
+          "#002a36",
+          "#004a5c",
+          "#1a6c81",
+          "#428ea4",
+          "#67b1c9",
+          "#96d4e9",
+          "#ccf7ff"
         ]
       },
-      "bisque": {
+      "stage-serve": {
+        "role": "secondary",
+        "displayName": "Stage 3, Serve (viridis .5)",
+        "cssVar": "--stage-3",
+        "canonical": "#21918c",
+        "oklch": "oklch(59.6% 0.095 190.3)",
+        "tonalRamp": [
+          "#000f0e",
+          "#002e2b",
+          "#004f4c",
+          "#00726d",
+          "#26948f",
+          "#52b8b2",
+          "#88dad5",
+          "#c4fbf7"
+        ]
+      },
+      "stage-interface": {
+        "role": "secondary",
+        "displayName": "Stage 4, Interface (viridis .6, deepened for 3:1)",
+        "cssVar": "--stage-4",
+        "canonical": "#1f9a7a",
+        "oklch": "oklch(61.4% 0.114 170.1)",
+        "tonalRamp": [
+          "#001009",
+          "#002f20",
+          "#00523a",
+          "#007557",
+          "#1b9878",
+          "#4cbc9a",
+          "#85dec0",
+          "#c3fee8"
+        ]
+      },
+      "highlighter-yellow": {
         "role": "tertiary",
-        "displayName": "Bare Bisque",
-        "canonical": "#D9C7A8",
+        "displayName": "Highlighter Yellow",
+        "cssVar": "--highlight",
+        "canonical": "#fde725",
+        "oklch": "oklch(91.8% 0.186 102.1)",
         "tonalRamp": [
-          "#8B7F6C",
-          "#9E917B",
-          "#B2A38A",
-          "#C5B599",
-          "#D9C7A8",
-          "#E3D5BE",
-          "#ECE3D4",
-          "#F6F1E9"
-        ]
-      },
-      "plaster": {
-        "role": "neutral",
-        "displayName": "Lime-Wash Plaster",
-        "canonical": "#EFF1EA",
-        "tonalRamp": [
-          "#999A96",
-          "#AEB0AB",
-          "#C4C6C0",
-          "#D9DBD5",
-          "#EFF1EA",
-          "#F3F5EF",
-          "#F7F8F5",
-          "#FBFCFA"
-        ]
-      },
-      "ink": {
-        "role": "neutral",
-        "displayName": "Ink Navy",
-        "canonical": "#0B1533",
-        "tonalRamp": [
-          "#070D21",
-          "#080F25",
-          "#09112A",
-          "#0A132E",
-          "#0B1533",
-          "#485066",
-          "#858A99",
-          "#C2C5CC"
+          "#110b00",
+          "#312400",
+          "#554000",
+          "#786000",
+          "#9a8300",
+          "#bda700",
+          "#decc3a",
+          "#fdf29b"
         ]
       }
     },
     "typographyMeta": {
-      "display-hero": {
-        "displayName": "Display Hero",
-        "purpose": "The name on the hero tile only."
-      },
       "display": {
         "displayName": "Display",
-        "purpose": "Section and page headings."
+        "purpose": "The name in the home hero only; Archivo at 118% width. Small screens clamp(2.5rem, 9.5vw, 4rem).",
+        "cssClass": "font-display"
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Tile titles and the availability statement."
+        "purpose": "Page titles; 3rem rising to 3.75rem at sm (case-study title 2.25rem to 3rem)."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Case-study tile titles, timeline job titles, education names."
+        "purpose": "Project titles in small multiples and the work index; 1.25rem rising to 1.5rem."
       },
-      "lead": {
-        "displayName": "Lead",
-        "purpose": "Section captions and statement copy."
+      "body": {
+        "displayName": "Body",
+        "purpose": "Reading text, 52 to 62ch; 1.0625rem for long-form lead prose."
       },
-      "body": { "displayName": "Body", "purpose": "Default reading copy." },
-      "ui": {
-        "displayName": "UI",
-        "purpose": "Buttons, nav links, filter and stack tiles."
+      "body-compact": {
+        "displayName": "Body compact",
+        "purpose": "Project summaries and dense lists."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Figure captions opened by the figure number in medium graphite."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Sub-block signage: filter group, footer columns, stack categories, spec rows. Never above a heading."
+        "purpose": "Uppercase faint head of a sub-block or table column; itself a heading, never a kicker."
+      },
+      "figure-number": {
+        "displayName": "Figure numbers",
+        "purpose": "Totals, counts, metrics, step numbers and ticks in tabular lining figures."
       }
     },
-    "shadows": [],
+    "shadows": [
+      {
+        "name": "overlay-lift",
+        "value": "0 0 0 1px var(--color-border-strong), 0 18px 48px -12px rgb(20 24 28 / 0.28)",
+        "purpose": "Command palette only; nothing else on the sheet is lifted."
+      },
+      {
+        "name": "hairline-frame",
+        "value": "inset 0 0 0 1px var(--color-border)",
+        "purpose": "Chip and screenshot frames (a drawn rule, not depth)."
+      },
+      {
+        "name": "hairline-frame-strong",
+        "value": "inset 0 0 0 1px var(--color-border-strong)",
+        "purpose": "Secondary button frame; turns graphite on hover."
+      }
+    ],
     "motion": [
       {
         "name": "ease-cine",
         "value": "cubic-bezier(0.16, 1, 0.3, 1)",
-        "purpose": "Exponential ease-out for all CSS reveals and hover motion; also the page view transition (0.3s). Same curve is exposed as ease-settle."
+        "purpose": "Exponential ease-out for every reveal, hover and view transition."
       },
       {
-        "name": "tile-turn-out",
-        "value": "0.2s cubic-bezier(0.4, 0, 1, 1)",
-        "purpose": "Front face of a Work tile narrows to an edge with flat scaleX."
+        "name": "dot-in",
+        "value": "scale 0 to 1, 500ms ease-cine, staggered",
+        "purpose": "Fig. 1 dots landing."
       },
       {
-        "name": "tile-turn-in",
-        "value": "0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s",
-        "purpose": "Back face widens from the edge after the front has gone. No 3D by design."
+        "name": "bar-in",
+        "value": "scaleX 0 to 1 from the left, 900ms ease-cine, staggered",
+        "purpose": "Fig. 3 bars extending from the axis."
       },
       {
-        "name": "hero-settle",
-        "value": "spring stiffness 210, damping 13, from y -26 and rotate -0.8deg, stagger 0.08s",
-        "purpose": "Hero tiles pressed onto the wall with a damped overshoot (Framer Motion)."
+        "name": "isolate-dim",
+        "value": "opacity 0.25, 300ms ease-cine",
+        "purpose": "Figure hover/focus isolation of a row or column."
       },
       {
-        "name": "reveal-settle",
-        "value": "spring stiffness 220, damping 20, rise 22px, once, margin -80px",
-        "purpose": "Single entrance used for every section (Framer Motion Reveal). Reduced motion: 0.2s fade."
+        "name": "reveal",
+        "value": "opacity 0 to 1, translateY 8px to 0, 600ms ease-cine, once",
+        "purpose": "Below-fold text and tables; plain 200ms fade under reduced motion."
+      },
+      {
+        "name": "hover",
+        "value": "200ms ease-cine",
+        "purpose": "Colour, frame and underline-thickness changes."
+      },
+      {
+        "name": "view-transition",
+        "value": "250ms ease-cine",
+        "purpose": "Route cross-fade."
       }
     ],
     "breakpoints": [
-      { "name": "sm", "value": "640px" },
-      { "name": "md", "value": "768px" },
-      { "name": "lg", "value": "1024px" },
-      { "name": "2xl", "value": "1536px" }
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
     ]
   },
   "components": [
@@ -196,128 +407,153 @@
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Chamfered cobalt tile on plaster; inverts to saffron on a cobalt wall.",
-      "html": "<a class=\"ds-btn-primary\" href=\"#\">Contact</a>",
-      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: #163E93; color: #F5F6F1; font-size: 14px; line-height: 20px; font-weight: 600; text-decoration: none; clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px); transition: background-color 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-primary:hover { background: #0F2F73; } .ds-btn-primary:focus-visible { outline: 2px solid currentColor; outline-offset: -4px; }"
+      "description": "Solid graphite action; one per action group (Explore my work).",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Explore my work <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></a>",
+      "css": ".ds-btn-primary { font-family: var(--font-sans), Archivo, system-ui, sans-serif; display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 1px; background: var(--color-foreground, #14181c); color: var(--color-background, #f6f7f7); font-size: 0.875rem; line-height: 1.25rem; font-weight: 500; text-decoration: none; transition: background-color 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-primary svg { transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-primary:hover { background: var(--color-accent-strong, #1b4a68); } .ds-btn-primary:hover svg { transform: translateX(2px); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-accent, #2a6589); outline-offset: 3px; }"
     },
     {
       "name": "Secondary Button",
       "kind": "button",
       "refersTo": "button-secondary",
-      "description": "Solid elevated plaster glaze with ink text; no drawn border, since chamfered corners would cut it.",
-      "html": "<a class=\"ds-btn-secondary\" href=\"#\">Download CV</a>",
-      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: #E6E9E0; color: #0B1533; font-size: 14px; line-height: 20px; font-weight: 600; text-decoration: none; clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px); transition: background-color 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-secondary:hover { background: #F4F6EF; } .ds-btn-secondary:focus-visible { outline: 2px solid currentColor; outline-offset: -4px; }"
+      "description": "Hairline-framed action (Download CV).",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"/><path d=\"m7 10 5 5 5-5\"/><path d=\"M12 15V3\"/></svg>Download CV</a>",
+      "css": ".ds-btn-secondary { font-family: var(--font-sans), Archivo, system-ui, sans-serif; display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 1px; background: transparent; color: var(--color-foreground, #14181c); font-size: 0.875rem; line-height: 1.25rem; font-weight: 500; text-decoration: none; box-shadow: inset 0 0 0 1px var(--color-border-strong, #9aa2a9); transition: background-color 200ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-secondary:hover { background: var(--color-surface, #ffffff); box-shadow: inset 0 0 0 1px var(--color-foreground, #14181c); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--color-accent, #2a6589); outline-offset: 3px; }"
     },
     {
-      "name": "Availability Tile",
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Underlined viridis-blue link with a leading icon (Contact).",
+      "html": "<a class=\"ds-btn-ghost\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect width=\"20\" height=\"16\" x=\"2\" y=\"4\" rx=\"2\"/><path d=\"m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7\"/></svg>Contact</a>",
+      "css": ".ds-btn-ghost { font-family: var(--font-sans), Archivo, system-ui, sans-serif; display: inline-flex; align-items: center; gap: 8px; padding: 10px 0; font-size: 0.875rem; font-weight: 500; color: var(--color-accent, #2a6589); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.24em; transition: color 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-ghost:hover { color: var(--color-accent-strong, #1b4a68); text-decoration-thickness: 2px; } .ds-btn-ghost:focus-visible { outline: 2px solid var(--color-accent, #2a6589); outline-offset: 3px; }"
+    },
+    {
+      "name": "Highlight Mark",
       "kind": "custom",
-      "refersTo": "availability-tile",
-      "description": "The truthful ask: warm saffron chamfered badge with an ink diamond.",
-      "html": "<span class=\"ds-avail\"><span class=\"ds-avail-mark\"></span>Available for PFE, Feb 2027, 6 mo</span>",
-      "css": ".ds-avail { display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px; background: #F0A81C; color: #0B1533; font-size: 14px; line-height: 20px; font-weight: 600; clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px); } .ds-avail-mark { width: 8px; height: 8px; background: #0B1533; transform: rotate(45deg); }"
+      "refersTo": "highlight-mark",
+      "description": "The ask under the highlighter: graphite ink on the held-back viridis yellow.",
+      "html": "<p class=\"ds-ask\"><span class=\"ds-mark\">Available for a PFE, February 2027</span></p>",
+      "css": ".ds-ask { font-family: var(--font-sans), Archivo, system-ui, sans-serif; font-size: 1.125rem; font-weight: 600; line-height: 1.375; color: var(--color-foreground, #14181c); margin: 0; } .ds-mark { background: linear-gradient(transparent 12%, var(--highlight, #fde725) 12%, var(--highlight, #fde725) 88%, transparent 88%); color: var(--color-foreground, #14181c); -webkit-box-decoration-break: clone; box-decoration-break: clone; padding-inline: 0.18em; }"
     },
     {
-      "name": "Filter Tile",
+      "name": "Chip",
       "kind": "chip",
-      "refersTo": "filter-tile",
-      "description": "Interactive technology filter, cut as a small tile. Selected fills cobalt.",
-      "html": "<div style=\"display:flex;gap:8px\"><button class=\"ds-filter\" aria-pressed=\"false\">Python</button><button class=\"ds-filter ds-filter-on\" aria-pressed=\"true\">Docker</button></div>",
-      "css": ".ds-filter { padding: 6px 12px; border: 0; background: #E6E9E0; color: #3E4A66; font-family: inherit; font-weight: 600; font-size: 14px; line-height: 20px; cursor: pointer; clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px); transition: background-color 200ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms; } .ds-filter:hover { background: #C9CFC0; color: #0B1533; } .ds-filter-on { background: #163E93; color: #F5F6F1; } .ds-filter:focus-visible { outline: 2px solid #163E93; outline-offset: -4px; }"
+      "refersTo": "chip",
+      "description": "Hairline-framed, non-interactive technology tag.",
+      "html": "<span class=\"ds-chip\">PostgreSQL</span> <span class=\"ds-chip\">MLflow</span>",
+      "css": ".ds-chip { font-family: var(--font-sans), Archivo, system-ui, sans-serif; display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 1px; font-size: 0.75rem; line-height: 1rem; font-weight: 500; color: var(--color-muted-foreground, #48515a); box-shadow: inset 0 0 0 1px var(--color-border, #d5d9dc); }"
     },
     {
-      "name": "Glazed Project Tile",
-      "kind": "card",
-      "refersTo": "project-tile-code-public",
-      "description": "Chamfered project tile. Cobalt glaze here: public code or demo. Bare bisque (see the unglazed variant) when there is no public link.",
-      "html": "<article class=\"ds-tile\"><h3>ResearchBridge</h3><p class=\"ds-tile-role\">Research Intelligence / AI</p><p class=\"ds-tile-body\">Semantic retrieval over cited research evidence.</p><p class=\"ds-tile-status\">Code is public</p></article>",
-      "css": ".ds-tile { display: flex; flex-direction: column; min-height: 240px; padding: 24px; background: #163E93; color: #F5F6F1; clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px); } .ds-tile h3 { margin: 0; font-weight: 800; font-size: 30px; line-height: 1.02; letter-spacing: -0.025em; } .ds-tile-role { margin: 4px 0 0; font-size: 14px; font-weight: 600; opacity: 0.8; } .ds-tile-body { margin: 12px 0 0; font-size: 16px; line-height: 1.35; opacity: 0.9; } .ds-tile-status { margin: auto 0 0; padding-top: 12px; font-size: 14px; font-weight: 600; }"
-    },
-    {
-      "name": "Unglazed Project Tile",
-      "kind": "card",
-      "refersTo": "project-tile-unlinked",
-      "description": "Bare bisque tile with ink text: a project with no public code or demo yet.",
-      "html": "<article class=\"ds-tile-bare\"><h3>MLOps Pipeline</h3><p class=\"ds-tile-bare-role\">MLOps / Machine Learning</p><p class=\"ds-tile-bare-status\">No public link yet</p></article>",
-      "css": ".ds-tile-bare { display: flex; flex-direction: column; min-height: 200px; padding: 24px; background: #D9C7A8; color: #0B1533; clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% calc(100% - 14px), calc(100% - 14px) 100%, 14px 100%, 0 calc(100% - 14px), 0 14px); } .ds-tile-bare h3 { margin: 0; font-weight: 800; font-size: 30px; line-height: 1.02; letter-spacing: -0.025em; } .ds-tile-bare-role { margin: 4px 0 0; font-size: 14px; font-weight: 600; opacity: 0.8; } .ds-tile-bare-status { margin: auto 0 0; padding-top: 12px; font-size: 14px; font-weight: 600; }"
-    },
-    {
-      "name": "Stack Tile",
+      "name": "Filter List",
       "kind": "chip",
-      "refersTo": "stack-tile",
-      "description": "Technology tile on the cobalt wall; the pointed tile glazes saffron and its neighbours lift to plaster.",
-      "html": "<div style=\"display:flex;gap:8px;padding:16px;background:#163E93\"><button class=\"ds-stack\">Fastify</button><button class=\"ds-stack ds-stack-active\">PostgreSQL</button><button class=\"ds-stack ds-stack-related\">Docker</button></div>",
-      "css": ".ds-stack { padding: 8px 14px; border: 0; background: #1B47A3; color: #F5F6F1; font-family: inherit; font-weight: 600; font-size: 14px; line-height: 20px; cursor: pointer; clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px); transition: background-color 200ms cubic-bezier(0.16, 1, 0.3, 1), color 200ms, opacity 200ms; } .ds-stack:hover { background: #2150B3; } .ds-stack-active { background: #F0A81C; color: #0B1533; } .ds-stack-related { background: #F5F6F1; color: #0B1533; } .ds-stack:focus-visible { outline: 2px solid #F0A81C; outline-offset: -4px; }"
+      "refersTo": "highlight-mark",
+      "description": "Technologies as a frequency list with tabular counts; the selected one sits under the highlighter.",
+      "html": "<div class=\"ds-filter\"><button type=\"button\" class=\"ds-filter-item is-on\" aria-pressed=\"true\"><span class=\"ds-mark\">Python</span><sup>6</sup></button><button type=\"button\" class=\"ds-filter-item\" aria-pressed=\"false\"><span>Docker</span><sup>4</sup></button><button type=\"button\" class=\"ds-filter-item\" aria-pressed=\"false\"><span>Next.js</span><sup>3</sup></button></div>",
+      "css": ".ds-filter { font-family: var(--font-sans), Archivo, system-ui, sans-serif; display: flex; flex-wrap: wrap; gap: 4px 16px; border-top: 1px solid var(--color-foreground, #14181c); padding-top: 16px; } .ds-filter-item { font: inherit; background: none; border: 0; padding: 2px 0; font-size: 0.875rem; color: var(--color-muted-foreground, #48515a); cursor: pointer; transition: color 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-filter-item:hover { color: var(--color-foreground, #14181c); } .ds-filter-item.is-on { font-weight: 500; color: var(--color-foreground, #14181c); } .ds-filter-item sup { margin-left: 2px; font-size: 0.6875rem; color: var(--color-faint-foreground, #646d75); font-variant-numeric: tabular-nums lining-nums; } .ds-filter-item:focus-visible { outline: 2px solid var(--color-accent, #2a6589); outline-offset: 3px; } .ds-mark { background: linear-gradient(transparent 12%, var(--highlight, #fde725) 12%, var(--highlight, #fde725) 88%, transparent 88%); color: var(--color-foreground, #14181c); -webkit-box-decoration-break: clone; box-decoration-break: clone; padding-inline: 0.18em; }"
     },
     {
-      "name": "Site Header",
+      "name": "Header Navigation",
       "kind": "nav",
-      "refersTo": "site-header",
-      "description": "Sticky deep-cobalt bar: star mark, display-weight name, muted mist links with saffron current state, CV tile, and the saffron star frieze beneath.",
-      "html": "<header class=\"ds-header\"><nav class=\"ds-header-row\"><a class=\"ds-brand\" href=\"#\"><svg width=\"22\" height=\"22\" viewBox=\"-10 -10 20 20\" fill=\"#F0A81C\" aria-hidden=\"true\"><path d=\"M0 -9.6 L2.6 -6.3 L6.8 -6.8 L6.3 -2.6 L9.6 0 L6.3 2.6 L6.8 6.8 L2.6 6.3 L0 9.6 L-2.6 6.3 L-6.8 6.8 L-6.3 2.6 L-9.6 0 L-6.3 -2.6 L-6.8 -6.8 L-2.6 -6.3 Z\"/></svg>Mohamed Aziz Ouertatani</a><ul class=\"ds-links\"><li><a href=\"#\" class=\"ds-current\">Home</a></li><li><a href=\"#\">Work</a></li><li><a href=\"#\">Stack</a></li><li><a href=\"#\">About</a></li></ul></nav><div class=\"ds-frieze\"></div></header>",
-      "css": ".ds-header { background: #0E2A6B; color: #F5F6F1; } .ds-header-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; } .ds-brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; letter-spacing: -0.025em; color: #F5F6F1; text-decoration: none; } .ds-brand:hover { color: #F0A81C; } .ds-links { display: flex; gap: 28px; margin: 0; padding: 0; list-style: none; } .ds-links a { font-size: 14px; font-weight: 600; color: #C6D2EE; text-decoration: none; text-underline-offset: 10px; transition: color 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-links a:hover { color: #F0A81C; } .ds-links a.ds-current { color: #F0A81C; text-decoration: underline; text-decoration-thickness: 2px; } .ds-frieze { height: 16px; background-color: #0E2A6B; background-image: url(\"data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2732%27 height=%2716%27 viewBox=%270 0 32 16%27%3E%3Cpath d=%27M16 1L17.3 4.86L20.95 3.05L19.14 6.7L23 8L19.14 9.3L20.95 12.95L17.3 11.14L16 15L14.7 11.14L11.05 12.95L12.86 9.3L9 8L12.86 6.7L11.05 3.05L14.7 4.86Z%27 fill=%27%23F0A81C%27/%3E%3C/svg%3E\"); background-size: 32px 16px; background-repeat: repeat-x; background-position: left center; }"
+      "refersTo": "header",
+      "description": "Sticky sheet header: PathMark and name in display width, muted links, current page underlined.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-brand\" href=\"#\"><svg viewBox=\"0 0 34 6\" width=\"34\" height=\"6\" aria-hidden=\"true\"><circle cx=\"3\" cy=\"3\" r=\"3\" fill=\"var(--stage-0, #440154)\"/><circle cx=\"10\" cy=\"3\" r=\"3\" fill=\"var(--stage-1, #414487)\"/><circle cx=\"17\" cy=\"3\" r=\"3\" fill=\"var(--stage-2, #2a788e)\"/><circle cx=\"24\" cy=\"3\" r=\"3\" fill=\"var(--stage-3, #21918c)\"/><circle cx=\"31\" cy=\"3\" r=\"3\" fill=\"var(--stage-4, #1f9a7a)\"/></svg>Mohamed Aziz Ouertatani</a><ul><li><a href=\"#\" aria-current=\"page\">Home</a></li><li><a href=\"#\">Work</a></li><li><a href=\"#\">Stack</a></li><li><a href=\"#\">About</a></li><li><a href=\"#\">Contact</a></li></ul></nav>",
+      "css": ".ds-nav { font-family: var(--font-sans), Archivo, system-ui, sans-serif; display: flex; align-items: center; justify-content: space-between; height: 68px; padding: 0 24px; background: var(--color-background, #f6f7f7); border-bottom: 1px solid var(--color-border, #d5d9dc); } .ds-nav-brand { display: inline-flex; align-items: center; gap: 12px; font-size: 1rem; font-weight: 600; font-stretch: 118%; letter-spacing: -0.022em; color: var(--color-foreground, #14181c); text-decoration: none; transition: color 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-nav-brand:hover { color: var(--color-accent, #2a6589); } .ds-nav ul { display: flex; gap: 24px; list-style: none; margin: 0; padding: 0; } .ds-nav ul a { font-size: 0.875rem; color: var(--color-muted-foreground, #48515a); text-decoration: none; text-underline-offset: 0.5em; transition: color 200ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-nav ul a:hover { color: var(--color-foreground, #14181c); } .ds-nav ul a[aria-current=page] { font-weight: 500; color: var(--color-foreground, #14181c); text-decoration: underline; text-decoration-thickness: 1px; } .ds-nav a:focus-visible { outline: 2px solid var(--color-accent, #2a6589); outline-offset: 3px; }"
+    },
+    {
+      "name": "Stage Strip",
+      "kind": "custom",
+      "refersTo": "stage-strip",
+      "description": "Fig. 1's encoding at word size: filled stage dot where covered, hairline ring where not.",
+      "html": "<div class=\"ds-strip\"><svg viewBox=\"0 0 92 12\" width=\"92\" height=\"12\" role=\"img\" aria-label=\"Covers data, model, serve\"><line x1=\"6\" x2=\"86\" y1=\"6\" y2=\"6\" stroke=\"var(--color-border, #d5d9dc)\"/><circle cx=\"6\" cy=\"6\" r=\"4.5\" fill=\"var(--stage-0, #440154)\"/><circle cx=\"26\" cy=\"6\" r=\"3\" fill=\"var(--color-background, #f6f7f7)\" stroke=\"var(--color-border-strong, #9aa2a9)\"/><circle cx=\"46\" cy=\"6\" r=\"4.5\" fill=\"var(--stage-2, #2a788e)\"/><circle cx=\"66\" cy=\"6\" r=\"4.5\" fill=\"var(--stage-3, #21918c)\"/><circle cx=\"86\" cy=\"6\" r=\"3\" fill=\"var(--color-background, #f6f7f7)\" stroke=\"var(--color-border-strong, #9aa2a9)\"/></svg><p>Data · Model · Serve</p></div>",
+      "css": ".ds-strip { font-family: var(--font-sans), Archivo, system-ui, sans-serif; } .ds-strip svg { display: block; overflow: visible; } .ds-strip p { margin: 6px 0 0; font-size: 0.75rem; line-height: 1rem; color: var(--color-faint-foreground, #646d75); }"
+    },
+    {
+      "name": "Figure Caption",
+      "kind": "custom",
+      "refersTo": "caption",
+      "description": "Numbered figure caption: figure number in medium graphite, sentence in muted ink.",
+      "html": "<figcaption class=\"ds-caption\"><span>Fig. 1</span> Stages of the data-to-product path covered by eight projects, read from each project's own stack.</figcaption>",
+      "css": ".ds-caption { font-family: var(--font-sans), Archivo, system-ui, sans-serif; max-width: 56ch; font-size: 0.875rem; line-height: 1.625; color: var(--color-muted-foreground, #48515a); } .ds-caption span { font-weight: 500; color: var(--color-foreground, #14181c); }"
+    },
+    {
+      "name": "Command Palette",
+      "kind": "custom",
+      "refersTo": "command-palette",
+      "description": "The only lifted surface on the sheet.",
+      "html": "<div class=\"ds-palette\"><p class=\"ds-palette-group\">Pages</p><a class=\"ds-palette-row\" href=\"#\">Work</a><a class=\"ds-palette-row\" href=\"#\">Résumé</a></div>",
+      "css": ".ds-palette { font-family: var(--font-sans), Archivo, system-ui, sans-serif; width: 100%; max-width: 512px; overflow: hidden; border-radius: 1px; background: var(--color-surface, #ffffff); box-shadow: 0 0 0 1px var(--color-border-strong, #9aa2a9), 0 18px 48px -12px rgb(20 24 28 / 0.28); padding-bottom: 8px; } .ds-palette-group { margin: 0; padding: 12px 20px 4px; font-size: 0.75rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-faint-foreground, #646d75); } .ds-palette-row { display: block; padding: 10px 20px; font-size: 0.875rem; color: var(--color-foreground, #14181c); text-decoration: none; } .ds-palette-row:hover { background: var(--color-surface-hover, #f0f2f3); } .ds-palette-row:focus-visible { outline: 2px solid var(--color-accent, #2a6589); outline-offset: -2px; }"
     }
   ],
   "narrative": {
-    "northStar": "The Zellige Wall",
-    "overview": "The site is a tile wall. Every project, tool, role and action is a precisely cut piece with a flat glaze, set into a grid with visible grout gaps. Two grounds carry the whole thing: lime-wash plaster (#EFF1EA) for reading, and Sidi Bou Said cobalt (#163E93) for the wall itself. Home alternates the two as full-bleed bands (cobalt hero, plaster Work, cobalt Stack, plaster Experience, plaster About, cobalt Contact), so the wall cuts across the page rather than sitting in a box. Depth comes only from color, grout lines and the chamfered silhouette. There are no shadows, no gradients and no glow anywhere.\n\nThe voice is confident and warm rather than technical: a heavy, slightly condensed display grotesque (Bricolage Grotesque) for names and titles, a clear humanist grotesque (Hanken Grotesk) for everything read. There is no monospace voice, no terminal or code-window styling. Color is used with a strict meaning: saffron is the warmest glaze and marks the truthful ask (availability, the email address, the hovered stack tile); turquoise is the secondary glaze for statements and stages; bare bisque means \"no public link yet\".\n\nDensity is moderate and tile-driven. Content sits in tiles or on generous plaster/cobalt bands with 80-112px vertical padding. The hero is the densest moment: a twelve-column, five-row tile wall.",
+    "northStar": "The Data-Ink Sheet",
+    "overview": "The site reads as one rigorous statistical sheet in the Tufte school. Every claim is a figure, every group of projects a set of small multiples, and every mark on the page earns its ink. Cool white paper carries graphite type, hairline rules and range-frame axes; there are no cards, no panels, no fills and no shadows. Numbered figures (\"Fig. 1\", \"Fig. 3\", \"Table 1\") with sentence captions replace decorative section furniture.\n\nColour is data. Viridis is the single ordered scale, and it encodes exactly one thing: the five stages of the data-to-product path (Data, Analysis, Model, Serve, Interface). Its yellow end is held back from the scale and used for the ask alone, as a highlighter behind ink. Links take the viridis blue. Everything else is graphite on paper.\n\nOne family, Archivo, speaks in two widths: opened up on its width axis for display, normal for reading, with tabular figures wherever numbers align. Density is analytical rather than airy: margin totals, counts, ticks and labels sit close to the data they describe. The retired zellige tile wall (cobalt, plaster, saffron, chamfered tiles) and the dark neon developer portfolio are the confirmed anti-references; the scheme is light only.",
     "keyCharacteristics": [
-      "Two grounds (plaster, cobalt) swapped by re-declaring the same semantic tokens, never by per-component overrides.",
-      "Every interactive or content block is a chamfered tile; corners are cut, never rounded.",
-      "Glazes are flat fills; body text never sits in glaze on plaster except in the inked-glaze pairs defined below.",
-      "Pattern fields (eight-point star tessellation) are the wall's texture, used only as full-bleed backgrounds and header/footer friezes.",
-      "Light color scheme only; there is no dark mode."
+      "Flat paper and hairline rules; no fills, panels or shadows outside the command-palette overlay.",
+      "Viridis encodes the five path stages and nothing else; the yellow end is reserved for the ask.",
+      "Range-frame figures with margin totals, one total rule, and hover isolation that dims the rest to 25%.",
+      "Small multiples on one shared label grid.",
+      "Archivo only, with width (118% stretch) as the display voice and tabular figures for numbers.",
+      "Headings stand alone, opened by a rule, with a figure-style caption beside them."
     ],
     "rules": [
       {
-        "name": "The Same-Names Rule",
-        "body": "A zone changes its ground by re-declaring the semantic tokens (zone-cobalt, zone-plaster), and every component inside inherits the inversion. Do not fork a component per ground.",
+        "name": "The Colour Is Data Rule",
+        "body": "The stage colours appear only where they encode a stage of the data-to-product path. They never decorate a heading, a button, a divider or a background.",
         "section": "colors"
       },
       {
-        "name": "The Glaze Follows Truth Rule",
-        "body": "Glaze is a claim. A project with a public repository or live demo is glazed in a color (cobalt, turquoise, saffron or deep); a project with neither is bare bisque. The two never blend, so the wall never claims more than the links behind it. The status line on each tile (\"Code is public\" / \"No public link yet\") is derived from the same data.",
+        "name": "The Held-Back Yellow Rule",
+        "body": "The highlighter yellow marks the ask (and the visitor's own selection), always behind ink and never as text colour, a fill panel, or a second data value.",
         "section": "colors"
       },
       {
-        "name": "The Glaze Is Fill Rule",
-        "body": "Glazes are fills. Text on plaster is ink or cobalt or text-safe turquoise; text on a glaze is ink or plaster-glaze, chosen per the pairing (cobalt and deep take plaster-glaze; turquoise, saffron, bisque and plaster take ink).",
-        "section": "colors"
-      },
-      {
-        "name": "The Lining Numerals Rule",
-        "body": "Numerals are lining; dates and metrics add tnum for tabular figures (timeline dates, metric values, spec rows).",
+        "name": "The Width Is Voice Rule",
+        "body": "Hierarchy comes from width, weight and size inside one family. No second typeface, no italics-as-display, no system display face.",
         "section": "typography"
       },
       {
-        "name": "The Heading Carries Itself Rule",
-        "body": "A heading stands alone: no kicker, eyebrow, index number or category tag above it. The label style may head a sub-block or a list, never sit over a heading.",
+        "name": "The Tabular Figures Rule",
+        "body": "Any number that aligns with another number (totals, counts, metrics, dates, step numbers, year ticks) is set in tabular lining figures.",
         "section": "typography"
       },
       {
-        "name": "The No-Shadow Rule",
-        "body": "Nothing casts a shadow or glows. State is shown by a glaze swap (hover fills, selected tiles), a scale, or an outline drawn inside the tile.",
+        "name": "The No Kicker Rule",
+        "body": "Nothing sits above a heading: no eyebrow, no overline, no section number label. A hairline rule opens the section and the heading carries its own weight.",
+        "section": "typography"
+      },
+      {
+        "name": "The Range Frame Rule",
+        "body": "Axes and rules extend only as far as the data. Rows are separated by whitespace; a single total rule closes a figure; a band appears only on hover or focus.",
+        "section": "layout"
+      },
+      {
+        "name": "The Isolate-and-Dim Rule",
+        "body": "Pointing at a row or column of a figure isolates it and dims everything else to 25% opacity over 300ms. Nothing else on the sheet uses opacity as state.",
+        "section": "layout"
+      },
+      {
+        "name": "The No Panels Rule",
+        "body": "No fills, panels or shadows at rest. If a group needs separating, use a hairline; if it needs emphasis, use ink weight or the highlighter.",
         "section": "elevation"
       }
     ],
     "dos": [
-      "Do cut every tile with the chamfer (14px for content tiles, 8px for buttons, filters, badges) and leave 12px to 14px of grout between neighbors.",
-      "Do put the reading on lime-wash plaster (#EFF1EA) and the wall on cobalt (#163E93); switch grounds by re-declaring tokens with zone-cobalt or zone-plaster.",
-      "Do pair text with its glaze: ink on turquoise, saffron, bisque and plaster glaze; plaster-glaze on cobalt and deep.",
-      "Do use text-safe turquoise (#0B6E67) whenever turquoise is read as text on plaster.",
-      "Do let a glaze reflect a real link: color for public code or demo, bare bisque for none.",
-      "Do draw focus as an inside outline in the tile's current color (saffron on cobalt walls).",
-      "Do keep h1-h3 in Bricolage Grotesque 800 and let the heading stand without anything above it.",
-      "Do use tabular numerals for dates, metrics and spec rows."
+      "**Do** encode the five path stages, and only them, with the stage colours, in path order.",
+      "**Do** put the ask under the highlighter: graphite ink on the yellow band, never yellow text.",
+      "**Do** number figures and tables and caption them with one sentence opened by \"Fig. n\" in medium graphite.",
+      "**Do** close figures with one graphite total rule and carry totals in the margins.",
+      "**Do** align every comparable slot of a set of projects on one shared subgrid.",
+      "**Do** set headings in Archivo at 118% width with -0.022em tracking, and every aligned number in tabular figures.",
+      "**Do** separate with 1px hairlines and whitespace."
     ],
     "donts": [
-      "Don't add box shadows, gradients, blur, glow or backdrop effects; depth is color and grout.",
-      "Don't put a kicker, eyebrow, index number or category tag above a heading.",
-      "Don't use a monospace face or terminal styling; font-mono resolves to the body face.",
-      "Don't use the dark-mode, neon, grid-glow or 3D-scene developer-portfolio look; no WebGL, no custom cursor, no constellation.",
-      "Don't draw a border on a chamfered tile; the clip cuts it at the corners. Use a solid glaze or an inside outline.",
-      "Don't set turquoise (#12A79D) as text on plaster, or saffron as text on plaster; both fail as text and are fills only.",
-      "Don't glaze a project that has no public link, or leave a linked project bisque.",
-      "Don't replace the flat scaleX tile turn with a 3D flip."
+      "**Don't** use fills, panels, cards or shadows at rest; the command palette's overlay lift is the only shadow.",
+      "**Don't** use a stage colour as decoration, or the highlighter yellow as a data value or a fill panel.",
+      "**Don't** place a kicker, eyebrow or overline above a heading.",
+      "**Don't** add per-row rules to a figure; the band appears only on hover or focus.",
+      "**Don't** introduce a second typeface or a dark scheme.",
+      "**Don't** round corners beyond 3px; round shapes are reserved for data marks.",
+      "**Don't** animate first-viewport text, or let anything spring or slide; figure marks draw in, and below-fold blocks only rise 8px once."
     ]
   }
 }

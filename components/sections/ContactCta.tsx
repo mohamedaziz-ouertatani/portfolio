@@ -1,46 +1,42 @@
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { Reveal } from '@/components/ui/Reveal';
-import { Star } from '@/components/ui/Star';
 import { site } from '@/lib/site';
 import { socialLinks } from '@/lib/social';
 
 /**
- * The exit. The wall closes in cobalt: the email address is set large and
- * visible rather than hidden behind an interaction, and every other route out
- * is a plain link.
+ * The close. A heavier rule, the line at display size, and the email address
+ * set large and visible rather than hidden behind an interaction, with the
+ * highlighter under it: the ask and the way to answer it, side by side.
  */
 export function ContactCta() {
   return (
-    <section
-      id="contact"
-      aria-labelledby="contact-heading"
-      className="zone-cobalt field-cobalt"
-    >
-      <div className="container mx-auto px-4 py-24 md:py-32">
-        <Reveal from="quiet">
-          <h2
-            id="contact-heading"
-            className="max-w-4xl text-5xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-7xl sm:leading-[1.05] md:text-[6rem] md:leading-[1.05]"
-          >
-            Let&apos;s build something useful.
-          </h2>
+    <section id="contact" aria-labelledby="contact-heading">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="border-t-2 border-foreground pb-24 pt-14 md:pb-32 md:pt-20">
+          <Reveal>
+            <h2
+              id="contact-heading"
+              className="max-w-4xl font-display text-[clamp(2.5rem,6vw,4.75rem)] font-semibold leading-[1.02] text-foreground"
+            >
+              Let&apos;s build something useful.
+            </h2>
 
-          <p className="mt-8 max-w-xl text-lg text-muted-foreground">
-            {site.availability.detail}
-          </p>
-        </Reveal>
-        <Reveal from="above" delay={0.12} className="w-fit">
+            <p className="mt-6 max-w-[56ch] text-lg leading-relaxed text-muted-foreground">
+              {site.availability.detail}
+            </p>
+          </Reveal>
+
           <a
             href={`mailto:${site.email}`}
-            className="tile mt-10 inline-flex items-center gap-4 bg-glaze-saffron px-6 py-5 font-display text-xl font-extrabold text-glaze-ink transition-colors hover:bg-[#ffc247] focus-visible:outline-none focus-visible:[outline-offset:-8px] focus-visible:[outline:3px_solid_var(--glaze-ink)] sm:px-8 sm:text-3xl"
+            className="group mt-10 inline-block max-w-full font-display text-[clamp(1.25rem,3.4vw,2.5rem)] font-medium leading-tight text-foreground"
           >
-            <Star size={28} className="shrink-0" />
-            <span className="break-all">{site.email}</span>
+            <span className="mark break-all decoration-1 underline-offset-[0.2em] group-hover:underline">
+              {site.email}
+            </span>
           </a>
-        </Reveal>
-        <Reveal from="quiet" delay={0.2}>
-          <ul className="mt-12 flex flex-wrap gap-x-8 gap-y-4">
+
+          <ul className="mt-12 flex flex-wrap gap-x-8 gap-y-3 border-t border-border pt-6">
             {socialLinks
               .filter((link) => link.id !== 'email')
               .map((link) => (
@@ -50,27 +46,24 @@ export function ContactCta() {
                     download={link.id === 'cv' || undefined}
                     target={link.external ? '_blank' : undefined}
                     rel={link.external ? 'noopener noreferrer' : undefined}
-                    className="group inline-flex items-center gap-2 text-base font-bold text-foreground underline decoration-2 underline-offset-[6px] transition-colors hover:text-accent"
+                    className="link group inline-flex items-center gap-1.5 text-base font-medium"
                   >
                     {link.label}
                     <ArrowUpRight
-                      size={16}
-                      className="transition-transform duration-300 ease-settle group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                      size={15}
+                      className="transition-transform duration-300 ease-cine group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                       aria-hidden="true"
                     />
                   </a>
                 </li>
               ))}
             <li>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 text-base font-bold text-foreground underline decoration-2 underline-offset-[6px] transition-colors hover:text-accent"
-              >
+              <Link href="/contact" className="link text-base font-medium">
                 All ways to reach me
               </Link>
             </li>
           </ul>
-        </Reveal>
+        </div>
       </div>
     </section>
   );

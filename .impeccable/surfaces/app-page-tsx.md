@@ -14,22 +14,22 @@ related_targets:
 
 # Surface brief: whole-site redesign (home, work, project case studies, resume, about, contact)
 
-Mode: Experience. Scope: whole site; content, routes and behaviour unchanged. The 3D/WebGL layer, custom cursor and constellation are retired (the old dark/cyan/grid world is the anti-reference).
+Mode: Experience. Scope: whole site; all copy, content, routes and behaviour unchanged. The zellige tile wall (cobalt/plaster/saffron, chamfered tiles, star patterns) is retired and is now the anti-reference, as is the dark/neon developer portfolio.
 
-Audience and job: recruiters and hiring managers for a Feb 2027 PFE; reach a case study, the résumé or the email within seconds. Proof is real projects only.
+Audience and job: recruiters and hiring managers for a Feb 2027 PFE; they should read "rigorous analyst" in five seconds and reach a case study, the résumé or the email quickly. Proof is real projects only. Light scheme only.
 
-Unresolved: none blocking. Status marks derive only from real data (public repo or demo vs "no public link yet").
+Unresolved: none blocking. Stage coverage in the figures is derived from each project's real stack/pipeline data, never invented.
 
 ## Direction contract
 
-THESIS: A portfolio laid like a zellige wall: a few precisely cut, glazed pieces, each a real project, stage or tool, fitted into one whole. Refuses the dark-mode, neon, grid-glow, 3D-scene developer portfolio.
+THESIS: The portfolio as one rigorous statistical sheet in the Tufte data-ink school: every claim is a figure, every panel a small multiple. Refuses the card-deck portfolio, the dark neon dev look, and cream-plus-serif editorial.
 
-OWN-WORLD: Sidi Bou Said cobalt (#163E93) fields against lime-wash plaster (#EFF1EA), ink-navy type, Kairouan turquoise and saffron glazes, bare bisque for the unglazed. Eight-point star-and-cross tile pattern, grout-line gaps, chamfered cut corners, no shadows, no gradients. Bricolage Grotesque display, Hanken Grotesk text.
+OWN-WORLD: Cool white (#F6F7F7) sheet, graphite ink (#14181C), hairline range-frame axes and rules, no fills or shadows. Viridis is the single ordered data scale (#440154, #31688E, #21918C, #FDE725 held for the ask); links in viridis blue. Archivo throughout, width as voice (expanded display, normal text), tabular figures. Numbered figures with captions and margin notes.
 
-STORY: The visitor sees one person who owns data work end to end, that he is available for the Feb 2027 PFE, and opens a case study, the résumé or the email.
+STORY: The visitor sees one analyst who owns the whole data-to-product path, proven across real projects, available Feb 2027, and opens a case study, the résumé or the email.
 
-FIRST VIEWPORT: Cobalt star-pattern wall. A plaster name tile (cols 1-8, rows 1-3, display type up to 6rem), a saffron availability tile top right, portrait tile, turquoise statement tile, and three action tiles (Explore my work primary). Tiles settle in with damped overshoot.
+FIRST VIEWPORT: Left five columns: name in expanded Archivo, role, the availability line marked with the yellow datum, Explore work (primary), résumé, email. Right seven columns: "Fig. 1" dot matrix, rows = eight projects, columns = the five path stages (transposed from the first sketch because eight project names cannot serve as column heads at 375px or in seven columns), viridis dots where covered, margin totals on both axes, one total rule and no per-row rules (a band appears only on hover/focus), caption beneath. Hovering a column or row isolates it, rest dims to 25%.
 
-FORM: Zellige Atelier, assigned candidate 4 of 7 (Sidi Bou Said doors and tilework). Seed key 90560faf.
+FORM: The Data-Ink Sheet (Tufte statistical graphics), candidate 3 of 7. Raises: isolate-and-dim (detector), numbered case-study steps with inventory first (bricks), one label grid across all project panels (sneaker). Seed key 0794b88c.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance

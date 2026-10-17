@@ -12,17 +12,18 @@ interface ButtonProps {
   className?: string;
 }
 
-// Buttons are cut pieces too: chamfered corners, flat glaze, no shadow.
+// Square, flat, ruled: a primary action is solid ink, a secondary one is a
+// hairline frame, and a ghost is a link with an icon.
 const base =
-  'tile tile-sm group inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold transition-colors duration-200 ease-cine focus-visible:outline-none focus-visible:ring-0 focus-visible:[outline:2px_solid_currentColor] focus-visible:[outline-offset:-4px]';
+  'group inline-flex items-center gap-2 rounded-sm py-2.5 text-sm font-medium transition-colors duration-200 ease-cine';
 
 const variants: Record<Variant, string> = {
-  primary: 'bg-accent text-accent-foreground hover:bg-accent-strong',
-  // A solid glaze rather than a drawn border: an inset border is cut off by
-  // the chamfered corners.
-  secondary: 'bg-background-elevated text-foreground hover:bg-surface-hover',
+  primary:
+    'px-5 bg-foreground text-background hover:bg-accent-strong [&_svg]:transition-transform [&_svg]:duration-300 [&_svg]:ease-cine hover:[&_svg:last-child]:translate-x-0.5',
+  secondary:
+    'px-5 text-foreground [box-shadow:inset_0_0_0_1px_var(--color-border-strong)] hover:bg-surface hover:[box-shadow:inset_0_0_0_1px_var(--color-foreground)]',
   ghost:
-    'text-foreground underline decoration-2 underline-offset-[6px] hover:bg-background-elevated',
+    'text-accent underline decoration-1 underline-offset-[0.24em] hover:text-accent-strong hover:decoration-2',
 };
 
 export function Button({

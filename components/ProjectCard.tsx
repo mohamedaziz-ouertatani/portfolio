@@ -1,89 +1,61 @@
 import Image from 'next/image';
 import { ArrowRight, ExternalLink, Github } from 'lucide-react';
 import { hasRealScreenshot, projectHref, type Project } from '@/lib/projects';
-import { glazeFor } from '@/lib/glaze';
+import { stageCoverage } from '@/lib/stages';
+import { StageStrip } from '@/components/ui/StageStrip';
 import { ViewTransitionLink } from '@/components/ui/ViewTransitionLink';
 
 export interface ProjectCardProps {
   project: Project;
   isFeatured?: boolean;
-  /** Position in the listing; picks the glaze so neighbours differ. */
-  index?: number;
 }
 
-const glazes = [
-  'glaze-cobalt',
-  'glaze-turquoise',
-  'glaze-saffron',
-  'glaze-deep',
-];
-
-/** Outlined in the tile's own ink, so it reads on every glaze. */
-const outlined =
-  'rounded-sm px-2 py-0.5 text-xs font-semibold [box-shadow:inset_0_0_0_1.5px_currentColor]';
-
-export function ProjectCard({
-  project,
-  isFeatured = false,
-  index = 0,
-}: ProjectCardProps) {
+/**
+ * One row of the work index. Every row carries the same columns (summary,
+ * stage strip, links, screen) so the index reads like a table of results.
+ * The title is a stretched link; Code and Demo stay individually clickable.
+ */
+export function ProjectCard({ project, isFeatured = false }: ProjectCardProps) {
   const hasImage = hasRealScreenshot(project);
-  const glazed = Boolean(project.githubLink || project.liveDemoLink);
-  const face = glazeFor(project, glazes[index % glazes.length]);
+  const isPublic = Boolean(project.githubLink || project.liveDemoLink);
 
   return (
-    <article
-      className={`tile group relative flex h-full flex-col ${face} [&_a:focus-visible]:outline-none`}
-    >
-      {hasImage && (
-        <div className="relative h-44 w-full shrink-0 overflow-hidden">
-          <Image
-            src={project.images[0]}
-            alt={`Screenshot from ${project.title}`}
-            fill
-            className="object-cover object-top transition-transform duration-500 ease-cine group-hover:scale-[1.03]"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-        </div>
-      )}
-
-      <div className="flex flex-1 flex-col p-6">
-        <h3 className="font-display text-2xl font-extrabold leading-[1.05] tracking-tight">
+    <article className="group relative grid gap-x-10 gap-y-5 border-t border-border py-8 lg:grid-cols-12">
+      <div className="lg:col-span-6">
+        <h3 className="text-xl font-semibold leading-tight text-foreground sm:text-2xl">
           <ViewTransitionLink
             href={projectHref(project)}
-            // Stretched link: the whole tile is the target, while the nested
-            // GitHub and demo links stay individually clickable above it.
-            className="after:absolute after:inset-0 after:content-[''] focus-visible:after:[outline-offset:-8px] focus-visible:after:[outline:3px_solid_currentColor]"
+            className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none focus-visible:after:outline focus-visible:after:outline-2 focus-visible:after:outline-offset-2 focus-visible:after:outline-accent group-hover:text-accent"
           >
             {project.title}
           </ViewTransitionLink>
         </h3>
 
         {project.role && (
-          <p className="mt-2 text-xs font-bold uppercase tracking-[0.12em] opacity-80">
+          <p className="mt-1 text-sm text-faint">
             {isFeatured ? `Featured · ${project.role}` : project.role}
           </p>
         )}
 
-        <p className="mt-4 line-clamp-4 text-base leading-snug opacity-90">
+        <p className="mt-4 line-clamp-4 max-w-[62ch] text-[0.9375rem] leading-relaxed text-muted-foreground">
           {project.result ?? project.description}
         </p>
 
-        <ul className="mt-5 flex flex-wrap gap-2">
-          {project.technologies.slice(0, 5).map((tech) => (
-            <li key={tech} className={outlined}>
-              {tech}
-            </li>
-          ))}
-        </ul>
+        <p className="mt-4 text-sm text-faint">
+          {project.technologies.slice(0, 6).join(' · ')}
+        </p>
+      </div>
 
-        <div className="relative z-10 mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 pt-6 text-sm font-bold">
+      <div className="flex flex-col gap-5 lg:col-span-3">
+        <StageStrip coverage={stageCoverage(project)} showLabels />
+
+        <div className="relative z-10 mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
           {project.githubLink && (
             <a
               href={project.githubLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 underline decoration-2 underline-offset-4 hover:no-underline"
+              className="link inline-flex items-center gap-1.5"
             >
               <Github size={14} aria-hidden="true" />
               Code
@@ -94,23 +66,37 @@ export function ProjectCard({
               href={project.liveDemoLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 underline decoration-2 underline-offset-4 hover:no-underline"
+              className="link inline-flex items-center gap-1.5"
             >
               <ExternalLink size={14} aria-hidden="true" />
               Demo
             </a>
           )}
-          {!glazed && <span className="opacity-80">No public link yet</span>}
+          {!isPublic && <span className="text-faint">No public link yet</span>}
 
-          <span className="ml-auto inline-flex items-center gap-1.5">
+          <span className="inline-flex items-center gap-1.5 font-medium text-accent">
             Case study
             <ArrowRight
               size={14}
-              className="transition-transform duration-300 ease-settle group-hover:translate-x-1"
+              className="transition-transform duration-300 ease-cine group-hover:translate-x-1"
               aria-hidden="true"
             />
           </span>
         </div>
+      </div>
+
+      <div className="hidden lg:col-span-3 lg:block">
+        {hasImage && (
+          <div className="relative aspect-[16/10] overflow-hidden bg-background-elevated [box-shadow:inset_0_0_0_1px_var(--color-border)]">
+            <Image
+              src={project.images[0]}
+              alt={`Screenshot from ${project.title}`}
+              fill
+              className="object-cover object-top"
+              sizes="(min-width: 1024px) 22vw, 0px"
+            />
+          </div>
+        )}
       </div>
     </article>
   );

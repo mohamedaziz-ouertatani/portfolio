@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Bricolage_Grotesque, Hanken_Grotesk } from 'next/font/google';
+import { Archivo } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 import { Header } from '@/components/Header';
@@ -8,17 +8,12 @@ import { CommandPalette } from '@/components/ui/CommandPalette';
 import { site, SITE_URL } from '@/lib/site';
 import { sameAs } from '@/lib/social';
 
-// Display: cut, slightly condensed grotesque with a point of view. Text: a
-// clear humanist grotesque with real tabular numerals for dates and metrics.
-const display = Bricolage_Grotesque({
+// One grotesque with a width axis: expanded for display, normal for reading,
+// with tabular figures for dates, metrics and figure labels.
+const archivo = Archivo({
   subsets: ['latin'],
-  variable: '--font-display',
-  display: 'swap',
-});
-
-const body = Hanken_Grotesk({
-  subsets: ['latin'],
-  variable: '--font-body',
+  axes: ['wdth'],
+  variable: '--font-sans',
   display: 'swap',
 });
 
@@ -121,7 +116,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#163E93" />
+        <meta name="theme-color" content="#F6F7F7" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
@@ -132,7 +127,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${display.variable} ${body.variable} flex min-h-screen flex-col font-sans`}
+        className={`${archivo.variable} flex min-h-screen flex-col font-sans`}
       >
         <CommandPalette />
         <Header />

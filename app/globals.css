@@ -3,69 +3,70 @@
 @tailwind utilities;
 
 /*
- * Zellige Atelier.
+ * The Data-Ink Sheet.
  *
- * The site is laid like a tile wall. Two grounds carry it: lime-wash plaster
- * for reading, and Sidi Bou Said cobalt for the wall itself. Depth comes from
- * grout lines and glaze colour, never from shadow or glow. Everything is a
- * semantic token so a cobalt zone can re-declare the same names and every
- * component inside it inherits the inverted palette for free.
+ * The site reads as one statistical sheet: cool white paper, graphite ink,
+ * hairline rules and range-frame axes, and no fills, panels or shadows.
+ * Colour is data. Viridis is the single ordered scale, used for the five
+ * stages of the data-to-product path; its yellow end is held back for the
+ * one thing a recruiter must not miss, the availability, where it works as a
+ * highlighter behind ink.
  */
 :root {
   color-scheme: light;
 
-  /* Plaster ground */
-  --color-background: #eff1ea;
-  --color-background-elevated: #e6e9e0;
-  --color-surface: #fafbf7;
-  --color-surface-hover: #f4f6ef;
+  /* Paper */
+  --color-background: #f6f7f7;
+  --color-background-elevated: #eceeef;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f0f2f3;
 
-  /* Grout */
-  --color-border: #c9cfc0;
-  --color-border-strong: #98a08f;
+  /* Rules and axes */
+  --color-border: #d5d9dc;
+  --color-border-strong: #9aa2a9;
 
   /* Ink */
-  --color-foreground: #0b1533;
-  --color-muted-foreground: #3e4a66;
-  --color-faint-foreground: #5b6580;
+  --color-foreground: #14181c;
+  --color-muted-foreground: #48515a;
+  --color-faint-foreground: #646d75;
 
-  /* Cobalt is the accent on plaster */
-  --color-accent: #163e93;
-  --color-accent-strong: #0f2f73;
-  --color-accent-dim: #c7d3ec;
-  --color-accent-foreground: #f5f6f1;
+  /* Links and interactive marks: the viridis blue */
+  --color-accent: #2a6589;
+  --color-accent-strong: #1b4a68;
+  --color-accent-dim: #d6e3ec;
+  --color-accent-foreground: #ffffff;
 
-  /* Kairouan turquoise (text-safe depth) */
-  --color-accent-2: #0b6e67;
-  --color-accent-2-dim: #bfe6e2;
+  --color-destructive: #a3302a;
+  --color-success: #1e7f6e;
 
-  --color-destructive: #b93a22;
-  --color-success: #0b6e67;
+  /* Viridis, sampled for marks on white (0, .2, .4, .5, .6); the last
+     stop is deepened to hold 3:1 on the sheet. */
+  --stage-0: #440154;
+  --stage-1: #414487;
+  --stage-2: #2a788e;
+  --stage-3: #21918c;
+  --stage-4: #1f9a7a;
 
-  /* Glazes: fills only, never body text on plaster */
-  --glaze-cobalt: #163e93;
-  --glaze-cobalt-deep: #0e2a6b;
-  --glaze-turquoise: #12a79d;
-  --glaze-saffron: #f0a81c;
-  --glaze-plaster: #f5f6f1;
-  --glaze-bisque: #d9c7a8;
-  --glaze-ink: #0b1533;
+  /* The held-back end of the scale: highlighter behind ink only */
+  --highlight: #fde725;
 }
 
 @layer base {
   html {
     @apply scroll-smooth;
-    scroll-padding-top: 5.5rem;
+    scroll-padding-top: 5rem;
   }
 
   body {
     @apply bg-background font-sans text-foreground antialiased;
     font-variant-numeric: lining-nums;
+    font-size: 1rem;
   }
 
   h1,
   h2,
-  h3 {
+  h3,
+  h4 {
     @apply font-display;
     text-wrap: balance;
   }
@@ -75,13 +76,14 @@
   }
 
   *:focus-visible {
-    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-background;
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
   }
 
   /* Browser surfaces carry the palette too. */
   ::selection {
-    background: var(--glaze-saffron);
-    color: var(--glaze-ink);
+    background: var(--highlight);
+    color: var(--color-foreground);
   }
 
   html {
@@ -90,136 +92,53 @@
 
   input,
   textarea {
-    caret-color: var(--glaze-cobalt);
+    caret-color: var(--color-accent);
   }
 
   a {
-    text-underline-offset: 0.22em;
+    text-underline-offset: 0.24em;
+    text-decoration-thickness: 1px;
   }
 
   ::view-transition-old(root),
   ::view-transition-new(root) {
-    animation-duration: 0.3s;
+    animation-duration: 0.25s;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
 }
 
 @layer components {
-  /* The cobalt wall: same token names, inverted values. */
-  .zone-cobalt {
-    --color-background: #163e93;
-    --color-background-elevated: #123478;
-    --color-surface: #1b47a3;
-    --color-surface-hover: #2150b3;
-    --color-border: rgb(245 246 241 / 0.24);
-    --color-border-strong: rgb(245 246 241 / 0.5);
-    --color-foreground: #f5f6f1;
-    --color-muted-foreground: #c6d2ee;
-    --color-faint-foreground: #a9b9e0;
-    --color-accent: #f0a81c;
-    --color-accent-strong: #ffc247;
-    --color-accent-dim: #7a5a12;
-    --color-accent-foreground: #0b1533;
-    --color-accent-2: #7fded6;
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-  }
-
-  /* A plaster tile set into a cobalt wall: the plaster tokens again. */
-  .zone-plaster {
-    --color-background: #eff1ea;
-    --color-background-elevated: #e6e9e0;
-    --color-surface: #fafbf7;
-    --color-surface-hover: #f4f6ef;
-    --color-border: #c9cfc0;
-    --color-border-strong: #98a08f;
-    --color-foreground: #0b1533;
-    --color-muted-foreground: #3e4a66;
-    --color-faint-foreground: #5b6580;
-    --color-accent: #163e93;
-    --color-accent-strong: #0f2f73;
-    --color-accent-foreground: #f5f6f1;
-    --color-accent-2: #0b6e67;
-    background-color: var(--glaze-plaster);
-    color: var(--color-foreground);
-  }
-
   .container {
     @apply mx-auto max-w-7xl;
   }
 
-  /* Small-caps label: the wall's signage voice. */
+  /* A label heads a sub-block or a table column, never a heading. */
   .label {
-    @apply text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground;
+    @apply text-xs font-medium uppercase tracking-[0.08em] text-faint;
   }
 
-  /* A tile is a cut piece: chamfered corners echo the octagram. */
-  .tile {
-    --cut: 14px;
-    clip-path: polygon(
-      var(--cut) 0,
-      calc(100% - var(--cut)) 0,
-      100% var(--cut),
-      100% calc(100% - var(--cut)),
-      calc(100% - var(--cut)) 100%,
-      var(--cut) 100%,
-      0 calc(100% - var(--cut)),
-      0 var(--cut)
+  /* Figure captions: "Fig. n" in ink, the sentence in muted ink. */
+  .caption {
+    @apply text-sm leading-relaxed text-muted-foreground;
+  }
+
+  /* The highlighter: the yellow end of viridis behind ink. */
+  .mark {
+    background: linear-gradient(
+      transparent 12%,
+      var(--highlight) 12%,
+      var(--highlight) 88%,
+      transparent 88%
     );
-  }
-  .tile-sm {
-    --cut: 8px;
-  }
-
-  .glaze-plaster {
-    background: var(--glaze-plaster);
-    color: var(--glaze-ink);
-  }
-  .glaze-cobalt {
-    background: var(--glaze-cobalt);
-    color: var(--glaze-plaster);
-  }
-  .glaze-deep {
-    background: var(--glaze-cobalt-deep);
-    color: var(--glaze-plaster);
-  }
-  .glaze-turquoise {
-    background: var(--glaze-turquoise);
-    color: var(--glaze-ink);
-  }
-  .glaze-saffron {
-    background: var(--glaze-saffron);
-    color: var(--glaze-ink);
-  }
-  /* Unglazed: no public link yet. Bare terracotta with a hairline. */
-  .glaze-bisque {
-    background: var(--glaze-bisque);
-    color: var(--glaze-ink);
+    color: var(--color-foreground);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding-inline: 0.18em;
   }
 
-  .field-cobalt {
-    background-color: #163e93;
-    background-image: url('/zellige-cobalt.svg');
-    background-size: 80px 80px;
-  }
-  .field-deep {
-    background-color: #0e2a6b;
-    background-image: url('/zellige-deep.svg');
-    background-size: 80px 80px;
-  }
-  .field-plaster {
-    background-color: #eff1ea;
-    background-image: url('/zellige-plaster.svg');
-    background-size: 80px 80px;
-  }
-
-  .frieze-saffron {
-    background: #0e2a6b url('/frieze-saffron.svg') repeat-x left center;
-    background-size: 32px 16px;
-  }
-  .frieze-turquoise {
-    background: #0e2a6b url('/frieze-turquoise.svg') repeat-x left center;
-    background-size: 32px 16px;
+  /* Text link: viridis blue, hairline underline that thickens on hover. */
+  .link {
+    @apply text-accent underline decoration-1 underline-offset-[0.24em] transition-[color,text-decoration-thickness] duration-200 ease-cine hover:text-accent-strong hover:decoration-2;
   }
 
   .tnum {
@@ -227,41 +146,45 @@
   }
 }
 
-/*
- * Tile turn: the front narrows to an edge, then the back widens from it with
- * a damped overshoot. Flat scaleX rather than a 3D flip: no perspective, no
- * backface-visibility, nothing for a compositor to trip over.
- */
-@layer utilities {
-  .flip-front {
-    transform: scaleX(1);
-    transition: transform 0.2s cubic-bezier(0.4, 0, 1, 1) 0.2s;
+/* Figure marks draw in once: dots land, bars extend from the axis. */
+@keyframes dot-in {
+  from {
+    transform: scale(0);
   }
-  .flip-back {
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes bar-in {
+  from {
     transform: scaleX(0);
-    transition: transform 0.2s cubic-bezier(0.4, 0, 1, 1);
   }
-  @media (hover: hover) {
-    .flip-scene:hover .flip-front,
-    .flip-scene:focus-within .flip-front {
-      transform: scaleX(0);
-      transition: transform 0.2s cubic-bezier(0.4, 0, 1, 1);
-    }
-    .flip-scene:hover .flip-back,
-    .flip-scene:focus-within .flip-back {
-      transform: scaleX(1);
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
-    }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@layer utilities {
+  /* Display voice: Archivo opened up on its width axis. */
+  .font-display {
+    font-stretch: 118%;
+    letter-spacing: -0.022em;
+  }
+  .dot-in {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: dot-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .bar-in {
+    transform-origin: left center;
+    animation: bar-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 }
 
 @media print {
-  .zone-cobalt,
-  .field-cobalt,
-  .field-deep,
-  .field-plaster {
-    background: none !important;
-    color: var(--glaze-ink) !important;
+  .mark {
+    background: none;
+    font-weight: 600;
   }
 }
 
@@ -270,6 +193,7 @@
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;

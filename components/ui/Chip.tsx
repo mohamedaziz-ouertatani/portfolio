@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-/** A small cut tile: a technology or tag. */
+/** A technology or tag: hairline-framed, quiet, not interactive. */
 export function Chip({
   children,
   className = '',
@@ -10,7 +10,7 @@ export function Chip({
 }) {
   return (
     <span
-      className={`inline-flex items-center rounded-sm bg-background-elevated px-2.5 py-1 text-xs font-semibold text-muted-foreground [box-shadow:inset_0_0_0_1px_var(--color-border)] ${className}`}
+      className={`inline-flex items-center rounded-sm px-2 py-0.5 text-xs font-medium text-muted-foreground [box-shadow:inset_0_0_0_1px_var(--color-border)] ${className}`}
     >
       {children}
     </span>

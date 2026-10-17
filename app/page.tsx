@@ -14,8 +14,9 @@ export const metadata: Metadata = {
 };
 
 /**
- * One wall, laid in bands: cobalt hero, plaster work, cobalt stack, plaster
- * experience and about, cobalt close. Each section owns its ground.
+ * One sheet, read top to bottom: Fig. 1 with the identity, the work as small
+ * multiples, the stack as a table, the career as a range chart, a quiet
+ * about, and a ruled close.
  */
 export default function Home() {
   return (
